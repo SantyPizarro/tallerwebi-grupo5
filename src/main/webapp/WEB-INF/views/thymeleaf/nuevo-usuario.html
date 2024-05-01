@@ -10,39 +10,81 @@
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
 
   <!-- custom style -->
-  <link rel="stylesheet" th:href="@{/css/main.css}"/>
+  <link rel="stylesheet" th:href="@{/css/registro.css}"/>
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">UNLAM</a>
-</nav>
 
 <main role="main" class="container">
 
-  <div class = "container">
+  <div class="container contenedor">
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-      <form action="#" th:action="@{/registrarme}" method="POST" th:object="${usuario}">
-        <h3 class="form-signin-heading">Nuevo Usuario</h3>
-        <hr class="colorgraph"><br>
 
-        <input th:field="*{email}" id="email" class="form-control" required/>
-        <input th:field="*{password}" type="password" id="password" class="form-control" required/>
+      <form action="#" th:action="@{/registrarme}" method="POST" th:object="${usuario}" class="needs-validation" novalidate>
+        <div class="contenedor-titulo">
+          <h3 class="form-signin-heading">Registrarse</h3>
+          <hr class="colorgraph">
+        </div>
 
-        <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit">Registrarme</button>
-        <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
-        </p>
+        <br>
+        <div class="contenedor-formulario">
+           <div class="input-group rellenar">
+             <label for="nombre" class="input-group-text">Nombre</label>
+             <input  type="text" aria-label="nombre" class="form-control" name="nombre" id="nombre" required> <!-- agregar th en los campos -->
+             <div class="invalid-feedback">
+               Por favor coloca tu nombre.
+             </div>
+          </div>
+
+          <div class="input-group rellenar">
+              <label for="apellido" class="input-group-text">Apellido</label>
+              <input  type="text" aria-label="apellido" class="form-control" name="apellido" id="apellido" required> <!-- agregar th en los campos -->
+              <div class="invalid-feedback">
+               Por favor coloca tu apellido.
+              </div>
+          </div>
+
+          <div class="input-group rellenar">
+            <label class="input-group-text" id="inputGroup-sizing-sm">Email</label>
+            <input th:field="*{email}" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+            <div class="invalid-feedback">
+             Por favor coloca tu email.
+           </div>
+          </div>
+
+          <div class="input-group rellenar">
+            <label for="Contrasenia" class="input-group-text">Contrasenia</label>
+            <input th:field="*{password}" type="password" id="Contrasenia" name="Contrasenia" class="form-control" required>
+            <div class="invalid-feedback">
+              Por favor completa la contrasenia.
+            </div>
+          </div>
+
+         <div class="input-group rellenar">
+           <label for="repetirContra" class="input-group-text">Repetir contrasenia</label>
+           <input  type="password" id="repetirContra" name="repetirContra" class="form-control" required>
+            <div class="invalid-feedback">
+             Por favor completa el campo.
+            </div>
+         </div>
+        </div>
+
+        <div class="div-boton">
+            <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit">Registrarme</button>
+            <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
+            </p>
+        </div>
       </form>
 
     </div>
   </div>
-
 </main>
 <!-- /.container -->
 
 <!-- Boostrap core js -->
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/registro.js}"></script>
 </body>
 </html>

@@ -1,0 +1,22 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.contenedor{
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor-titulo{
+    background-color: rgb(236, 232, 232);
+}
+
+.rellenar{
+    padding-bottom: 5%;
+}
+
+.div-boton{
+    float: right;
+}

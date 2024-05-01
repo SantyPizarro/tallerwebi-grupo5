@@ -16,4 +16,3 @@
         }, false)
     })
 })()
-console.log("forro")

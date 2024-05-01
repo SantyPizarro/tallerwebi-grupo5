@@ -13,7 +13,10 @@
     background-color: rgb(236, 232, 232);
 }
 
-.contenedor-formulario{
-    display: grid;
-    grid-template-columns: auto auto;
+.rellenar{
+    padding-bottom: 5%;
+}
+
+.div-boton{
+    float: right;
 }

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Taller Web I</title>
+
+    <!-- Boostrap core css -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+
+    <!-- custom style -->
+    <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/headerPerfil.css}"/>
+
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Lista de deseos</a></li>
+                <li><a href="#">Favoritos</a></li>
+                <li><a href="#">Amigos</a></li>
+                <li><a href="#">Planes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <section class="primero">
+
+        <div class="contenedor">
+            <div>
+             <div class="avatar-perfil">
+                <img th:src="@{/images/mifoto2.jpg}" alt="img">
+                <a href="#" class="cambiar-foto">
+                <i class="fas fa-camera"></i>
+                    <span>Cambiar foto</span>
+                </a>
+            </div>
+             <div class="nombre">
+            <h2>Tomas Pezzano</h2>
+            </div>
+            </div>
+            <div class="descripcion">
+                <h4>descripcion:</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam beatae distinctio dolore esse, ex iure labore magnam maiores modi nostrum
+                    officiis optio qui sit tempore unde veritatis vitae voluptatum..</p>
+                <div class="preferencias">
+                    <span class="etiqueta">Accion</span>
+                    <span class="etiqueta">Horror</span>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="contenedor-plan">
+                <div class="plan-titulo">
+                    <h3>Mi plan</h3>
+                    <p>Free</p>
+                </div>
+                <div class="beneficios">
+                    <ul>
+                        <li>ningun beneficio</li>
+                        <li>Cuenta normal</li>
+                        <li>sin descuentos</li>
+                    </ul>
+                </div>
+                <div class="plan">
+                    <button><a href="#">Mejorar plan</a></button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="historial-compra">
+            <h2 class="titulo-historial">Historial de compra</h2>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">orden</th>
+                    <th scope="col">nombre del libro</th>
+                    <th scope="col">fecha de compra</th>
+                    <th scope="col">precio</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Don Quijote de la Mancha</td>
+                    <td>15/08/2023</td>
+                    <td>$9.99</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>El principito</td>
+                    <td>11/02/2022</td>
+                    <td>$7.99</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>El hobbit</td>
+                    <td>19/02/2024</td>
+                    <td>$12.99</td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+<!-- Boostrap core js -->
+<script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

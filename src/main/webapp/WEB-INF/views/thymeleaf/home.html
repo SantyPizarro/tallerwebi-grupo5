@@ -1,35 +1,103 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <title>Taller Web I</title>
-
-  <!-- Boostrap core css -->
-  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
-
-  <!-- custom style -->
-  <link rel="stylesheet" th:href="@{/css/main.css}"/>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
 </head>
-
 <body>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#">UNLAM</a>
-</nav>
-
-<main role="main" class="container">
-  <div class = "container">
-    <h1>Bienvenidos a Taller Web 1</h1>
-
-    <a href="login.html" class="btn btn-lg btn-primary btn-block">Volver</a>
-  </div>
-</main>
-<!-- /.container -->
-
-<!-- Boostrap core js -->
-<script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+    <header>
+        <div class="top-section">
+            <div class="logo">
+                <img th:src="@{/images/logo.png}" alt="Logo">
+            </div>
+            <div class="nav-links">
+                <div class="login">
+                    <span>Iniciar sesión</span>
+                    <img th:src="@{/images/iconos/user-circle.svg}" alt="Iniciar sesión">
+                </div>
+                <div class="cart">
+                    <span>Carrito</span>
+                    <img th:src="@{/images/iconos/cart.svg}" alt="Carrito">
+                </div>
+            </div>
+        </div>
+        <div class="bottom-section">
+            <div class="nav-and-search">
+                <div class="nav-menu">
+                    <div><a href="libro.html">Libros</a></div>
+                    <div><a href="#">Catálogo</a></div>
+                    <div><a href="#">Contacto</a></div>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Buscar...">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="hero-slider">
+            <div><img th:src="@{/images/hero1.jpg}" alt="Imagen 1"></div>
+            <div><img th:src="@{/images/hero2.jpg}" alt="Imagen 2"></div>
+            <div><img th:src="@{/images/hero3.jpg}" alt="Imagen 3"></div>
+        </div>
+        <div class="book-slider">
+            <div class="book-card">
+                <img th:src="@{/images/libros/libro7.jpg}" alt="Libro 1">
+                <div class="book-card-content">
+                    <h3 class="book-title">Título del Libro 1</h3>
+                    <p class="book-price">$19.99</p>
+                    <div class="book-buttons">
+                        <button>Detalles</button>
+                        <button>Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.book-slider').slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
+                responsive: [
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                    {
+                        breakpoint: 576,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+            $('.hero-slider').slick({
+                dots: true,
+                infinite: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear',
+                autoplay: true,
+                autoplaySpeed: 2000
+            });
+        });
+    </script>
 </body>
 </html>

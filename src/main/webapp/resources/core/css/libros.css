@@ -150,7 +150,6 @@
     display: inline-block;
     width: 20px;
     height: 20px;
-    background-image: url('ruta-a-icono.png');
     background-size: cover;
     cursor: pointer;
 }

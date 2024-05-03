@@ -1,0 +1,195 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.primero{
+    display: flex;
+    justify-content: space-around;
+}
+
+.contenedor {
+    position: relative;
+    background-color: #000000;
+    color: #FFFFFF;
+    border-radius: 2rem;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    padding: 20px;
+    margin-top: 3.5rem;
+}
+
+.contenedor .avatar-perfil {
+    position :relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 230px;
+    height: 230px;
+    background-color: #D9DCF1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 8px solid #FFFFFF;
+    box-shadow: 0 0 12px 2px rgba(0, 0, 0, .2);
+}
+
+.contenedor .cambiar-foto {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, .5);
+    height: 57%;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    text-decoration: none;
+    transform: translateY(50%);
+    opacity: 0;
+    transition: all ease-in 200ms;
+}
+.contenedor .cambiar-foto i {
+    margin-bottom: .5rem;
+    font-size: 2rem;
+}
+.contenedor .avatar-perfil:hover .cambiar-foto {
+    transform: translateY(0);
+    opacity: 1;
+}
+.nombre{
+    margin-top: 1rem;
+}
+
+.descripcion{
+    margin-left: 2rem;
+}
+
+.preferencias{
+    position: absolute;
+    display: flex;
+    bottom: 10%;
+    right: 10%;
+    gap: 1rem;
+}
+
+.preferencias .etiqueta{
+    background-color: #1F23E0;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+}
+
+
+.contenedor-plan {
+    width: 20%;
+    height: 20%;
+    padding: 1rem;
+    background-color: burlywood;
+    color: #000000;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 3.5rem;
+}
+
+.plan-titulo {
+    background-color: #000000;
+    color: #FFFFFF;
+    padding: 10px;
+    border-radius: 5px 5px 0 0;
+}
+
+.plan-titulo h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.plan-titulo p {
+    margin: 5px 0 0;
+    font-size: 18px;
+}
+
+.beneficios{
+    margin-top: 0.5rem;
+}
+
+.plan ul {
+    list-style-type: none;
+    padding: 0;
+    color: #000000;
+
+}
+
+.plan ul li {
+    padding: 5px 0;
+}
+
+.plan button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #1F23E0;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.plan button:hover {
+    background-color: #000000;
+}
+
+/* Estilos para el enlace dentro del botón */
+.plan button a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.historial-compra{
+    margin-top: 4rem;
+}
+
+.titulo-historial{
+    margin-bottom: 1rem;
+}
+
+.table{
+    background-color: #aeaaaa;
+}
+
+@media only screen and (max-width: 1270px) {
+    .contenedor {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .descripcion {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .preferencias {
+        position: static;
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    .nombre{
+        text-align: center;
+    }
+
+    .primero{
+        flex-direction: column;
+    }
+
+    .contenedor-plan{
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

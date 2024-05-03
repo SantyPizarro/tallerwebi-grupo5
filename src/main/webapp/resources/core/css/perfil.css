@@ -160,6 +160,10 @@
     background-color: #aeaaaa;
 }
 
+footer{
+    background-color: black;
+}
+
 @media only screen and (max-width: 1270px) {
     .contenedor {
         width: 90%;

@@ -68,3 +68,18 @@
 .contenedor-nav-footer a:hover{
     color: #1877f2;
 }
+
+@media only screen and (max-width: 500px) {
+
+    .contenedor-nav-footer{
+        gap: 1.5rem;
+    }
+
+    .contenedor-nav-footer a{
+        font-size: 0.9rem;
+    }
+
+    .copyright{
+        font-size: 0.66rem;
+    }
+}

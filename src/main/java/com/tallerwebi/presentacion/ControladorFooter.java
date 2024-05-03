@@ -11,4 +11,8 @@ public class ControladorFooter {
     public ModelAndView footer(){
         return new ModelAndView("footer");
     }
+    @GetMapping("/header")
+    public ModelAndView header(){
+        return new ModelAndView("header");
+    }
 }

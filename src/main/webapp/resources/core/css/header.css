@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.contenedor-header{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+    background-color: #121482;
+}
+
+.logotipo img{
+    border-radius: 50%;
+}
+
+.contenedor-nav-header{
+    display: flex;
+    gap: 4rem;
+    list-style: none;
+}
+
+.contenedor-nav-header li a{
+    color: #FFFFFF;
+}
+
+ .material-symbols-outlined {
+     color: #FFFFFF;
+     font-variation-settings:
+             'FILL' 0,
+             'wght' 400,
+             'GRAD' 0,
+             'opsz' 24
+ }

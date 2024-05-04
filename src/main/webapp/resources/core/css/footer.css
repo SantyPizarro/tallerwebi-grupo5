@@ -1,0 +1,85 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.contenedor-lista-redes{
+    display: flex;
+    flex-direction:row;
+    align-content: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+.contenedor-nav-footer{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    gap: 3rem;
+    list-style: none;
+    margin:1rem 0;
+}
+
+.copyright{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    gap: 1rem;
+    color: #FFFFFF;
+}
+
+.contenedor-nav-footer a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.contenedor-footer{
+    background-color: black;
+    padding: 1rem;
+}
+
+.instagram:hover{
+    background: rgb(222,253,29);
+    background: linear-gradient(52deg, rgba(222,253,29,1) 0%, rgba(180,58,58,1) 32%, rgba(145,69,252,1) 76%);
+}
+
+.facebook:hover{
+    background-color: #1877f2
+}
+
+.contenedor-lista-redes li{
+    height: 40px;
+    width: 40px;
+    margin-bottom: 5px;
+    border-radius: 20px
+}
+
+.contenedor-lista-redes li a{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenedor-nav-footer a:hover{
+    color: #1877f2;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .contenedor-nav-footer{
+        gap: 1.5rem;
+    }
+
+    .contenedor-nav-footer a{
+        font-size: 0.9rem;
+    }
+
+    .copyright{
+        font-size: 0.66rem;
+    }
+}

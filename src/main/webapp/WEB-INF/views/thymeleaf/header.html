@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+
+
+</head>
+<body>
+<div class="contenedor-header">
+
+
+    <div class="logotipo">
+        <img th:src="@{/images/logo.png}" width="60px" height="60px" alt="logo">
+    </div>
+
+    <div>
+        <nav>
+            <ul class="contenedor-nav-header">
+                <li><a href="home.html" target="_top">Home</a></li>
+                <li><a href="catalogo.html" target="_top">Catalogo</a></li>
+                <li><a href="contacto.html" target="_top">Contacto</a></li>
+                <li><a href="planes.html" target="_top">Planes</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="contenedor-usuario">
+
+        <span class="material-symbols-outlined">
+            local_mall
+        </span>
+
+        <span class="material-symbols-outlined">
+            person
+        </span>
+    </div>
+
+</div>
+
+<div class="contenedor-navegador">
+
+    <nav class="navbar bg-body-tertiary">
+        <form class="container-fluid">
+            <div class="input-group">
+                <input type="text" class="form-control input-group-text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+
+                <button type="submit" class="buscar">
+                    <span class="material-symbols-outlined" id="lupita">
+                        search
+                    </span>
+                </button>
+            </div>
+        </form>
+    </nav>
+
+</div>
+
+</body>
+</html>

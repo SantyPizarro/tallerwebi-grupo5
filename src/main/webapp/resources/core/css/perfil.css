@@ -83,6 +83,16 @@
     padding: 0.2rem 0.5rem 0.2rem 0.5rem;
 }
 
+.configuracion{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    background-color: #121482;
+}
+
 
 .contenedor-plan {
     width: 20%;

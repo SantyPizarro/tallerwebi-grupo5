@@ -47,6 +47,14 @@
           </div>
 
           <div class="input-group rellenar">
+              <label for="nombreUsuario" class="input-group-text">Nombre de usuario</label>
+              <input  type="text" aria-label="apellido" class="form-control" name="nombreUsuario" id="nombreUsuario" required> <!-- agregar th en los campos -->
+              <div class="invalid-feedback">
+                  Por favor coloca el nombre de usuario.
+              </div>
+          </div>
+
+          <div class="input-group rellenar">
             <label class="input-group-text" id="inputGroup-sizing-sm">Email</label>
             <input th:field="*{email}" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
             <div class="invalid-feedback">

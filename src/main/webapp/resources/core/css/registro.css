@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 .contenedor{
     display: flex;
     justify-content: center;
@@ -20,3 +21,4 @@
 .div-boton{
     float: right;
 }
+

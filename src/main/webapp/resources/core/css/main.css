@@ -1,19 +1,31 @@
-body {
-  padding-top: 5rem;
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
-.starter-template {
+
+body{
+    background-image: url("../images/fondo-nuevo-usuario.jpg");
+}
+
+.starter-template{
   padding: 3rem 1.5rem;
   text-align: center;
 }
 
-h1{
-	color:#0000FF;
-}
-
-h2{
-	color:#FF0000;
+.contenedor{
+    display: flex;
+    justify-content: center;
 }
 
 .navbar-brand{
     margin:0 2rem;
+}
+
+.boton-login{
+    float: right;
+}
+
+.boton-register{
+    float: right;
 }

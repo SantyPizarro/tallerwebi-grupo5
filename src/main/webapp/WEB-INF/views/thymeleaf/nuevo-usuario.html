@@ -20,7 +20,7 @@
 <main role="main" class="container">
 
   <div class="container contenedor">
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 contenedor-grande">
 
       <form action="#" th:action="@{/registrarme}" method="POST" th:object="${usuario}" class="needs-validation" novalidate>
         <div class="contenedor-titulo">
@@ -43,6 +43,14 @@
               <input  type="text" aria-label="apellido" class="form-control" name="apellido" id="apellido" required> <!-- agregar th en los campos -->
               <div class="invalid-feedback">
                Por favor coloca tu apellido.
+              </div>
+          </div>
+
+          <div class="input-group rellenar">
+              <label for="nombreUsuario" class="input-group-text">Nombre de usuario</label>
+              <input  type="text" aria-label="apellido" class="form-control" name="nombreUsuario" id="nombreUsuario" required> <!-- agregar th en los campos -->
+              <div class="invalid-feedback">
+                  Por favor coloca el nombre de usuario.
               </div>
           </div>
 

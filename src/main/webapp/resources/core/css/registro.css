@@ -4,14 +4,15 @@
     box-sizing: border-box;
 }
 
+body{
+background-image: url("../images/fondo-nuevo-usuario.jpg");
+}
+
 .contenedor{
     display: flex;
     justify-content: center;
 }
 
-.contenedor-titulo{
-    background-color: rgb(236, 232, 232);
-}
 
 .rellenar{
     padding-bottom: 5%;
@@ -20,3 +21,10 @@
 .div-boton{
     float: right;
 }
+
+.contenedor-grande{
+    background-color: #cdcdcd;
+    padding: 2.5rem;
+
+}
+

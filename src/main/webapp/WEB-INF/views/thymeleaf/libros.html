@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Libros</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/libros.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+
+</head>
+<body>
+<header>
+    <iframe src="header.html" width="100%" height="100%"></iframe>
+</header>
+<main class="contenedor">
+    <aside class="filtros">
+        <form>
+            <label for="editorial">Editorial:</label>
+            <select id="editorial" name="editorial">
+                <option value="editorial1">Editorial 1</option>
+                <option value="editorial2">Editorial 2</option>
+            </select>
+            <label for="precio-min">Precio mínimo:</label>
+            <input type="number" id="precio-min" name="precio-min" placeholder="Precio mínimo">
+            <label for="precio-max">Precio máximo</label>
+            <input type="number" id="precio-max" name="precio-max" placeholder="Precio máximo">
+            <button type="submit">Filtrar</button>
+        </form>
+        <div class="menu-categorias">
+            <ul>
+                <li>
+                    <a href="#">Artes</a>
+                    <span class="icono-toggle"></span>
+                    <ul>
+                        <li><a href="#">Pintura</a></li>
+                        <li><a href="#">Escultura</a></li>
+                        <li><a href="#">Dibujo</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Ciencias</a>
+                    <span class="icono-toggle"></span>
+                    <ul>
+                        <li><a href="#">Biología</a></li>
+                        <li><a href="#">Química</a></li>
+                        <li><a href="#">Física</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Literatura</a>
+                    <span class="icono-toggle"></span>
+                    <ul>
+                        <li><a href="#">Poesía</a></li>
+                        <li><a href="#">Novela</a></li>
+                        <li><a href="#">Ensayo</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </aside>
+        <section class="libros">
+            <div class="tarjeta-libro">
+                <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
+                <div class="contenido-tarjeta-libro">
+                    <h3 class="titulo-libro">Título del Libro 1</h3>
+                    <p class="precio-libro">$20000</p>
+                    <div class="botones-libro">
+                        <button>Detalles</button>
+                        <button>Comprar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tarjeta-libro">
+                <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
+                <div class="contenido-tarjeta-libro">
+                    <h3 class="titulo-libro">Título del Libro 1</h3>
+                    <p class="precio-libro">$20000</p>
+                    <div class="botones-libro">
+                        <button>Detalles</button>
+                        <button>Comprar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tarjeta-libro">
+                <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
+                <div class="contenido-tarjeta-libro">
+                    <h3 class="titulo-libro">Título del Libro 1</h3>
+                    <p class="precio-libro">$20000</p>
+                    <div class="botones-libro">
+                        <button>Detalles</button>
+                        <button>Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+</main>
+<footer>
+    <iframe src="footer.html" width="100%" height="100%"></iframe>
+</footer>
+
+<script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

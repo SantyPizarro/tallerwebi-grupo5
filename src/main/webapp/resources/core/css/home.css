@@ -1,0 +1,85 @@
+*{
+    color: #121481;
+}
+
+#carousel-hero img{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#carousel-hero{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+
+#carousel-libros{
+    padding: 10px;
+}
+
+.h3{
+    padding: 10px;
+}
+
+
+.tarjeta-libro {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.tarjeta-libro:last-child {
+    margin-right: 0;
+}
+
+.tarjeta-libro img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.contenido-tarjeta-libro {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.titulo-libro {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.precio-libro {
+    margin: 0;
+    color: #121481;
+}
+
+.botones-libro {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.botones-libro button {
+    padding: 10px 20px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #121481;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.botones-libro button:hover {
+    background-color: #0056b3;
+}
+

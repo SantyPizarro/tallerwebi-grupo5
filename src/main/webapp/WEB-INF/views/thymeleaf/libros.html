@@ -60,7 +60,6 @@
             </ul>
         </div>
     </aside>
-    <section class="owl-carousel owl-theme">
         <section class="libros">
             <div class="tarjeta-libro">
                 <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
@@ -96,27 +95,12 @@
                 </div>
             </div>
         </section>
-    </section>
 </main>
 <footer>
     <iframe src="footer.html" width="100%" height="100%"></iframe>
 </footer>
-<script type="text/javascript" th:src="@{/js/jquery-1.11.0.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/jquery-migrate.1.2.1.min.js}"></script>
-<!-- Owl Carousel JavaScript -->
-<script type="text/javascript" th:src="@{/js/owl.carousel.js}"></script>
 
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
-<script th:inline="javascript">
-    $(document).ready(function(){
-        $('.owl-carousel').owlCarousel({
-            loop:true,
-            margin:10,
-            items:3,
-            nav: true,
-            dots: false
-        });
-    });
-</script>
+
 </body>
 </html>

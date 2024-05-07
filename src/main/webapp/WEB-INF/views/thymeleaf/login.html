@@ -10,7 +10,7 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
 
     <!-- custom style -->
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
 
 </head>
 
@@ -39,17 +39,19 @@
                         Por favor coloca tu email.
                     </div>
                 </div>
+                <div class="centrar-botones">
+                    <div class="boton-login">
+                        <button id="btn-login" class="btn btn-lg btn-primary btn-block boton-login" Type="Submit" >Login</button>
+                    </div>
 
-                <div class="boton-login">
-                    <button id="btn-login" class="btn btn-lg btn-primary btn-block boton-login" Type="Submit" >Login</button>
+                    <div class="boton-register">
+                        <a id="ir-a-registrarme" href="nuevo-usuario">Registrarme</a>
+                    </div>
+
+                    <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
+                    </p>
                 </div>
-
-                <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
-                </p>
             </form>
-            <div class="boton-register">
-                <a id="ir-a-registrarme" href="nuevo-usuario">Registrarme</a>
-            </div>
 
         </div>
     </div>

@@ -7,6 +7,7 @@
 .primero{
     display: flex;
     justify-content: space-around;
+    margin-bottom: 3rem;
 }
 
 .contenedor {
@@ -158,21 +159,32 @@
     text-decoration: none;
 }
 
-.historial-compra{
-    margin-top: 4rem;
-}
-
-.titulo-historial{
-    margin-bottom: 1rem;
-}
-
-.table{
-    background-color: #aeaaaa;
-}
 
 footer{
     background-color: black;
 }
+
+.contenedor-tabla{
+    gap: 6rem;
+}
+
+
+.mis-libros{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.detalle-tarjetas{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mis-amigos{
+    display: flex;
+    justify-content: space-evenly;
+}
+
 
 @media only screen and (max-width: 1270px) {
     .contenedor {

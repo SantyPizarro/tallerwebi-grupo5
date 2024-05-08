@@ -15,4 +15,7 @@ public class ControladorFooter {
     public ModelAndView header(){
         return new ModelAndView("header");
     }
+    @GetMapping("/comprar")
+    public ModelAndView comprar(){return new ModelAndView("comprar");}
+
 }

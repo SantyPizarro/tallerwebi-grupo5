@@ -1,1 +1,2 @@
 INSERT INTO Usuario(id, email, password, rol, activo) VALUES(null, 'test@unlam.edu.ar', 'test', 'ADMIN', true);
+INSERT INTO Libro(id, titulo, autor, editorial, fechaPublicacion) VALUES(null, 'El Principito', 'Antoine de Saint-Exupéry', 'Reynal', '06-04-1943');

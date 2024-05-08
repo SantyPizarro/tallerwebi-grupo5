@@ -164,6 +164,10 @@ footer{
     background-color: black;
 }
 
+.tablas{
+    margin: 1rem 0;
+}
+
 .contenedor-tabla{
     gap: 6rem;
 }
@@ -183,6 +187,20 @@ footer{
 .mis-amigos{
     display: flex;
     justify-content: space-evenly;
+}
+
+.favoritos{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.lista-de-deseados{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ocultar{
+    display: none;
 }
 
 

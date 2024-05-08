@@ -1,8 +1,10 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.DatosRegistro;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.excepcion.NoCoincideContrasenia;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,22 @@ public class ServicioLoginImpl implements ServicioLogin {
         }
         repositorioUsuario.guardar(usuario);
     }
+
+
+    /*
+    @Override
+    public Boolean validarContrasenia(DatosRegistro datosRegistro) throws NoCoincideContrasenia {
+        Boolean contraseniaCoincide = false;
+        if(datosRegistro.getContrasenia().equals(datosRegistro.getContraseniaDuplicada())){
+            contraseniaCoincide=true;
+        }else{
+            throw new NoCoincideContrasenia();
+        }
+
+        return contraseniaCoincide;
+    }*/
+
+
 
 }
 

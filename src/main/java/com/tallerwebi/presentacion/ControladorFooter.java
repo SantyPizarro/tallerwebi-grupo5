@@ -8,14 +8,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class ControladorFooter {
 
     @GetMapping("/footer")
-    public ModelAndView footer(){
+    public ModelAndView footer() {
         return new ModelAndView("footer");
     }
+
     @GetMapping("/header")
-    public ModelAndView header(){
+    public ModelAndView header() {
         return new ModelAndView("header");
     }
-    @GetMapping("/comprar")
-    public ModelAndView comprar(){return new ModelAndView("comprar");}
-
 }

@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #121481;
+}
+
+.caja {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.contenido-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.formulario-container {
+    flex-grow: 1;
+    margin-right: 10px;
+    height: 100%;
+}
+
+.formulario-container form {
+    width: 100%;
+}
+.formulario-container form * {
+    padding: 6px;
+}
+
+.formulario-container form label,
+.formulario-container form input,
+.formulario-container form textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.formulario-container form .form-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mapa {
+    width: calc(50% - 10px);
+    margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .contenido-container {
+        flex-direction: column;
+    }
+
+    .formulario-container,
+    .mapa {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.button {
+    width: 30%;
+    padding: 10px 20px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #121481;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}

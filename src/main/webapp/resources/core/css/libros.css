@@ -135,6 +135,10 @@
     background-color: #0056b3;
 }
 
+footer{
+    background-color: #000000;
+}
+
 @media screen and (max-width: 768px) {
     .libros {
         flex: 2;

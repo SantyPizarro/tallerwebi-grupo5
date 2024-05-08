@@ -1,14 +1,13 @@
-package com.tallerwebi.dominio.excepcion;
+package com.tallerwebi.dominio;
 
-import com.tallerwebi.dominio.Libro;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+
 public interface CompraLibroService {
 
     List<Libro> obtenerLibros();
     Double sumarSubtotal(String titulo);
-
+    Double sumarNumeros(Integer numero1, Integer numero2);
 }

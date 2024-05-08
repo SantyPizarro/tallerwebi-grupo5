@@ -5,7 +5,7 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
-    <link rel="stylesheet" th:href="@{/css/header.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header-busqueda.css}"/>
 
 
 </head>
@@ -49,6 +49,24 @@
         </a>
 
     </div>
+
+</div>
+
+<div class="contenedor-navegador">
+
+    <nav class="navbar bg-body-tertiary">
+        <form action="/buscar" class="container-fluid">
+            <div class="input-group">
+                <input type="text" class="form-control input-group-text" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+
+                <button type="submit" class="buscar">
+                    <span class="material-symbols-outlined" id="lupita">
+                        search
+                    </span>
+                </button>
+            </div>
+        </form>
+    </nav>
 
 </div>
 

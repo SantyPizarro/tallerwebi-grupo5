@@ -13,4 +13,9 @@ public class ControladorLibros {
         return new ModelAndView("libros");
     }
 
+    @GetMapping("/detalle-libro")
+    public ModelAndView mostrarDetalleLibro() {
+
+        return new ModelAndView("detalle-libro");
+    }
 }

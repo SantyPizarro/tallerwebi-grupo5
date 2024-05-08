@@ -61,6 +61,18 @@
     align-content: flex-start;
 }
 
+.comprar button{
+    text-decoration: none;
+    color: #FFFFFF;
+    width: 100%;
+}
+
+.detalles button{
+    text-decoration: none;
+    color: #FFFFFF;
+    width: 100%;
+}
+
 .tarjeta-libro {
     width: calc(20% - 20px);
     max-width: 300px;

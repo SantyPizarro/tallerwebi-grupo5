@@ -10,33 +10,49 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
 
     <!-- custom style -->
-    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
 
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Iniciar Sesion</a>
-</nav>
-
 <main role="main" class="container">
 
-    <div class = "container">
-        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div class = "contenedor">
+        <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 contenedor-grande">
             <form action="#" th:action="@{/validar-login}" method="POST" th:object="${datosLogin}">
-                <h3 class="form-signin-heading">Taller Web I</h3>
+                <h3 class="form-signin-heading">Iniciar Sesion</h3>
                 <hr class="colorgraph"><br>
 
-                <input th:field="*{email}" id="email" type="email" class="form-control" required/>
-                <input th:field="*{password}" type="password" id="password" class="form-control" required/>
+                <div class="input-group rellenar">
+                    <label class="input-group-text" id="inputGroup-sizing-sm">Email</label>
+                    <input th:field="*{email}" id="email" type="email" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                    <div class="invalid-feedback">
+                        Por favor coloca tu email.
+                    </div>
+                </div>
 
-                <button id="btn-login" class="btn btn-lg btn-primary btn-block" Type="Submit">Login</button>
+                <div class="input-group rellenar">
+                    <label class="input-group-text" id="inputGroup-sizing-sm">Contraseña</label>
+                    <input th:field="*{password}" id="password" type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" required>
+                    <div class="invalid-feedback">
+                        Por favor coloca tu email.
+                    </div>
+                </div>
+                <div class="centrar-botones">
+                    <div class="boton-login">
+                        <button id="btn-login" class="btn btn-lg btn-primary btn-block boton-login" Type="Submit" >Login</button>
+                    </div>
 
-                <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
-                </p>
+                    <div class="boton-register">
+                        <a id="ir-a-registrarme" href="nuevo-usuario">Registrarme</a>
+                    </div>
+
+                    <p th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
+                    </p>
+                </div>
             </form>
-            <a id="ir-a-registrarme" href="nuevo-usuario">Registrarme</a>
+
         </div>
     </div>
 </main>

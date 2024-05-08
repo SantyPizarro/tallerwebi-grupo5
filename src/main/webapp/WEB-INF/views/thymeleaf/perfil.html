@@ -10,6 +10,9 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
 
     <!-- custom style -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
     <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
 
     <link rel="stylesheet" th:href="@{/css/headerPerfil.css}"/>
@@ -83,44 +86,148 @@
 
         </section>
 
-        <section class="historial-compra">
-            <h2 class="titulo-historial">Historial de compra</h2>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">orden</th>
-                    <th scope="col">nombre del libro</th>
-                    <th scope="col">fecha de compra</th>
-                    <th scope="col">precio</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Don Quijote de la Mancha</td>
-                    <td>15/08/2023</td>
-                    <td>$9.99</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>El principito</td>
-                    <td>11/02/2022</td>
-                    <td>$7.99</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>El hobbit</td>
-                    <td>19/02/2024</td>
-                    <td>$12.99</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>El hobbit</td>
-                    <td>19/02/2024</td>
-                    <td>$12.99</td>
-                </tr>
-                </tbody>
-            </table>
+        <ul class="nav justify-content-center contenedor-tabla">
+            <li class="nav-item">
+                <p>Mis libros</p>
+            </li>
+            <li class="nav-item">
+                <p>Amigos</p>
+            </li>
+            <li class="nav-item">
+                <p>Favoritos</p>
+            </li>
+            <li class="nav-item">
+                <p>Lista de Deseados</p>
+            </li>
+            <li class="nav-item">
+                <p>Factura</p>
+            </li>
+        </ul>
+
+        <section class="tablas">
+
+            <div class="mis-libros">
+                <div class="card" style="width: 18rem;">
+                    <img th:src="@{/images/elprincipito.webp}" class="card-img-top" alt="libro">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title">El principito</h5>
+                        <a href="#" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <img th:src="@{/images/martin-fierro.jpg}" class="card-img-top" alt="libro">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title">Martin Fierro</h5>
+                        <a href="#" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <img th:src="@{/images/elchico.jpg}" class="card-img-top" alt="libro">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title">El Pollo Pepe</h5>
+                        <a href="#" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <img th:src="@{/images/lasombra.webp}" class="card-img-top" alt="libro">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title">La Sombra del Viento</h5>
+                        <a href="#" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <img th:src="@{/images/eljardin.jpg}" class="card-img-top" alt="libro">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title">El jardin Secreto</h5>
+                        <a href="#" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="mis-amigos ocultar">
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img th:src="@{/images/amigo1.jpg}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Juan Carlos</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                            </div>
+                            <span class="material-symbols-outlined">
+                                start
+                            </span>
+
+                            <span class="material-symbols-outlined">
+                                sync_alt
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img th:src="@{/images/amigo2.webp}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Justin Holiday</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                            </div>
+
+                            <span class="material-symbols-outlined">
+                                start
+                            </span>
+
+                            <span class="material-symbols-outlined">
+                                sync_alt
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img th:src="@{/images/amigo3.jpeg}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Julieta Sullivan</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                            </div>
+                            <span class="material-symbols-outlined">
+                                start
+                            </span>
+
+                            <span class="material-symbols-outlined">
+                                sync_alt
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <table></table>
+
+            <table></table>
+
+            <table></table>
+
         </section>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

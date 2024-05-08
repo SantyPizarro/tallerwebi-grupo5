@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url("../images/fondo-nuevo-usuario.jpg");
+}
+
+.starter-template{
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.contenedor{
+    display: flex;
+    justify-content: center;
+}
+
+.navbar-brand{
+    margin:0 2rem;
+}
+
+.centrar-botones{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contenedor-grande{
+    background-color: #cdcdcd;
+    padding: 2.5rem;
+}
+
+.rellenar{
+    padding-bottom: 3%;
+}

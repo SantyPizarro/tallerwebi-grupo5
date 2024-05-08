@@ -84,3 +84,36 @@
 .contenedor-navegador{
     background-color: #121482;
 }
+
+@media only screen and (max-width: 425px) {
+    .logotipo img{
+        width: 25px;
+        height: 25px;
+    }
+
+    .material-symbols-outlined {
+        color: #FFFFFF;
+        font-size: 20px;
+        font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24
+    }
+
+    .nav {
+        --bs-nav-link-padding-x: 0.3rem;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+
+    .nav-link{
+        font-size: 0.7rem;
+    }
+
+    .input-group-text {
+        padding: 0.1rem 7rem;
+    }
+
+}

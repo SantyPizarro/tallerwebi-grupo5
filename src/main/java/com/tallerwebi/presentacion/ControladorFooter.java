@@ -11,6 +11,10 @@ public class ControladorFooter {
     public ModelAndView footer(){
         return new ModelAndView("footer");
     }
+    @GetMapping("/header-busqueda")
+    public ModelAndView headerBusqueda(){
+        return new ModelAndView("header-busqueda");
+    }
     @GetMapping("/header")
     public ModelAndView header(){
         return new ModelAndView("header");

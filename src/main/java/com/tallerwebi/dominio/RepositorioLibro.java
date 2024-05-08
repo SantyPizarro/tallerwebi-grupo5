@@ -5,6 +5,6 @@ import java.util.List;
 public interface RepositorioLibro {
 
     Libro buscarLibro(String titulo);
-    List<Libro> buscarPorTituloOAutor(String titulo);
+    List<Libro> buscarPorTituloOAutor(String titulo, String Autor);
 
 }

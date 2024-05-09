@@ -49,6 +49,10 @@
     margin-left: 10px;
 }
 
+footer{
+    background-color: #000000;
+}
+
 @media (max-width: 768px) {
     .contenido-container {
         flex-direction: column;

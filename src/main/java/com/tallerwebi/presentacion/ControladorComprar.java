@@ -43,12 +43,12 @@ public class ControladorComprar {
 
 
     //ESTO ES UNA PRUEBA {BORRAR}
-   /* @GetMapping("/comprar/{numero1}/{numero2}")
+    @GetMapping("/comprar/{numero1}/{numero2}")
     public ModelAndView comprar(@PathVariable Integer numero1, @PathVariable Integer numero2) {
         ModelMap model = new ModelMap();
         model.put("subtotal", libroService.sumarNumeros(numero1, numero2));
         return new ModelAndView("comprar", model);
-    }*/
+    }
 
 }
 

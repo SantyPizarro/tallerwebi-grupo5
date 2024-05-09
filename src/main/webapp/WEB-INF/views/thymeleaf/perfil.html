@@ -15,25 +15,14 @@
 
     <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
 
-    <link rel="stylesheet" th:href="@{/css/headerPerfil.css}"/>
-
-    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
-
+    <div th:replace="header_footer::head"></div>
 
 </head>
 <body>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Lista de deseos</a></li>
-                <li><a href="#">Favoritos</a></li>
-                <li><a href="#">Amigos</a></li>
-                <li><a href="#">Planes</a></li>
-            </ul>
-        </nav>
-    </header>
+<header th:replace="header_footer :: header">
+
+</header>
 
     <main>
 
@@ -337,9 +326,9 @@
         </div>
     </main>
 
-    <footer>
-        <iframe src="footer.html" width="100%" height="100%"></iframe>
-    </footer>
+<footer th:replace="header_footer :: footer">
+
+</footer>
 <!-- Boostrap core js -->
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 </body>

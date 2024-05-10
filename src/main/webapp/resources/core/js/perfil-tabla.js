@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function() {
+    mostrarContenido('misLibros');
+});
+
 function mostrarContenido(opcion) {
     let contenidoHTML = '';
     const misLibros = [

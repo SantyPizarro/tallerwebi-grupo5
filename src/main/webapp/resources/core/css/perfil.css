@@ -165,42 +165,12 @@ footer{
 }
 
 .tablas{
+    display: flex;
     margin: 1rem 0;
 }
 
 .contenedor-tabla{
     gap: 6rem;
-}
-
-
-.mis-libros{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.detalle-tarjetas{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.mis-amigos{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.favoritos{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.lista-de-deseados{
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.ocultar{
-    display: none;
 }
 
 

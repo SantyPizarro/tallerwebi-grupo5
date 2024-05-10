@@ -75,199 +75,16 @@
 
         </section>
 
-        <ul class="nav justify-content-center contenedor-tabla">
-            <li class="nav-item">
-                <p>Mis libros</p>
-            </li>
-            <li class="nav-item">
-                <p>Amigos</p>
-            </li>
-            <li class="nav-item">
-                <p>Favoritos</p>
-            </li>
-            <li class="nav-item">
-                <p>Lista de Deseados</p>
-            </li>
-            <li class="nav-item">
-                <p>Factura</p>
-            </li>
-        </ul>
 
-        <section class="tablas">
-
-            <div class="mis-libros">
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/elprincipito.webp}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El principito</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/martin-fierro.jpg}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">Martin Fierro</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/elchico.jpg}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El Pollo Pepe</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/lasombra.webp}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">La Sombra del Viento</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/eljardin.jpg}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El jardin Secreto</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-            </div>
+        <div id="menu" class="nav justify-content-center contenedor-tabla">
+            <button onclick="mostrarContenido('misLibros')">Mis Libros</button>
+            <button onclick="mostrarContenido('amigos')"> Mis Amigos</button>
+            <button onclick="mostrarContenido('favoritos')">Libros Favoritos</button>
+            <button onclick="mostrarContenido('deseados')">Libros Deseados</button>
+        </div>
 
 
-
-            <div class="mis-amigos ocultar">
-
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img th:src="@{/images/amigo1.jpg}" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Juan Carlos</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                            </div>
-                            <span class="material-symbols-outlined">
-                                start
-                            </span>
-
-                            <span class="material-symbols-outlined">
-                                sync_alt
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img th:src="@{/images/amigo2.webp}" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Justin Holiday</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                            </div>
-
-                            <span class="material-symbols-outlined">
-                                start
-                            </span>
-
-                            <span class="material-symbols-outlined">
-                                sync_alt
-                            </span>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card mb-3" style="max-width: 540px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img th:src="@{/images/amigo3.jpeg}" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Julieta Sullivan</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
-                            </div>
-                            <span class="material-symbols-outlined">
-                                start
-                            </span>
-
-                            <span class="material-symbols-outlined">
-                                sync_alt
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="favoritos ocultar">
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/elprincipito.webp}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El principito</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/eljardin.jpg}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El jardin Secreto</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="lista-de-deseados ocultar">
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/donquijote.webp}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El principito</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/donquijote.webp}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El principito</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/donquijote.webp}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El principito</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-                <div class="card" style="width: 18rem;">
-                    <img th:src="@{/images/donquijote.webp}" class="card-img-top" alt="libro">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">El principito</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>
-
-            </div>
-
-            <table></table>
+        <section class="tablas" id="contenido"> <!-- NO OLVIDAR HACER TABLA DE FACTURA / PAGOS -->
 
         </section>
 
@@ -331,5 +148,6 @@
 </footer>
 <!-- Boostrap core js -->
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/perfil-tabla.js}"></script>
 </body>
 </html>

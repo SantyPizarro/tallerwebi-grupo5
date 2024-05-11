@@ -20,11 +20,10 @@ public class Libro{
     public Libro(){
 
     }
-    public Libro(String titulo, double precio, String editorial, String ruta) {
+    public Libro(String titulo, double precio, String editorial) {
         this.titulo = titulo;
         this.precio = precio;
         this.editorial = editorial;
-        this.ruta = ruta;
     }
 
     public Long getId() {
@@ -74,4 +73,8 @@ public class Libro{
     public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
+
+    public String getRuta(){ return ruta;}
+
+    public void setRuta(String ruta){ this.ruta = ruta; }
 }

@@ -60,7 +60,7 @@ function mostrarContenido(opcion) {
     const librosDeseados = [
         {
             titulo: "Don Quijote",
-            imagen: "images/donquijote.webp"
+            imagen: "images/donquijote.jpg"
         }
     ];
 

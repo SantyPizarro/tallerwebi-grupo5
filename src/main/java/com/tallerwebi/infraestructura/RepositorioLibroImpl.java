@@ -11,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@Transactional
 public class RepositorioLibroImpl implements RepositorioLibro {
 
 
@@ -43,5 +44,12 @@ public class RepositorioLibroImpl implements RepositorioLibro {
                 .setParameter("titulo", "%" + titulo + "%")
                 .setParameter("autor", "%" + autor + "%")
                 .getResultList();
+    }
+
+    @Override
+    public List<Libro> obtenerTodosLosLibros() {
+
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("FROM Libro", Libro.class).getResultList();
     }
 }

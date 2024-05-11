@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+
 .primero{
     display: flex;
     justify-content: space-around;
@@ -167,12 +168,20 @@ footer{
 .tablas{
     display: flex;
     margin: 1rem 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .contenedor-tabla{
-    gap: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
+.gray{
+    background-color: #def7ff;
+    padding: 3rem;
+}
 
 @media only screen and (max-width: 1270px) {
     .contenedor {

@@ -57,6 +57,8 @@ function mostrarContenido(opcion) {
         }
     ];
 
+
+
     const librosDeseados = [
         {
             titulo: "Don Quijote",
@@ -64,6 +66,21 @@ function mostrarContenido(opcion) {
         }
     ];
 
+
+    const facturas = [
+        {
+            titulo: "El principito",
+            precio: "$5.99"
+        },
+        {
+            titulo: "Martin Fierro",
+            precio: "$8.99"
+        },
+        {
+            titulo: "El jardin Secreto",
+            precio: "$10.99"
+        }
+    ];
     switch (opcion) {
         case 'misLibros':
             contenidoHTML = misLibros.map(libro =>
@@ -116,6 +133,17 @@ function mostrarContenido(opcion) {
                     <div class="card-body detalle-tarjetas">
                         <h5 class="card-title">${deseado.titulo}</h5>
                         <a href="#" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>`
+            ).join('');
+            break;
+
+        case 'facturas':
+            contenidoHTML = facturas.map(factura =>
+                `<div class="card" style="width: 18rem;">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title">${factura.titulo}</h5>
+                        <p class="precio">${factura.precio}</p>
                     </div>
                 </div>`
             ).join('');

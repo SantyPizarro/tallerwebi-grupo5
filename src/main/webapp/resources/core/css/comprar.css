@@ -28,7 +28,7 @@ footer{
 }
 
 .confirmacion-compra input[type="text"] {
-    width: 100%; /* Ajuste de ancho */
+    width: 100%;
     padding: 8px;
     margin-bottom: 10px;
 }
@@ -40,4 +40,30 @@ footer{
 .confirmacion-compra .btn-primary {
     font-size: 16px;
     padding: 10px 20px;
+}
+
+
+.input-label {
+    color: #999;
+    z-index: 1;
+}
+
+.input-field {
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.input-field:focus {
+    border-color: #007bff;
+}
+
+#showInput {
+    cursor: pointer;
+    color: #007bff;
+}
+
+.hidden {
+    display: none;
 }

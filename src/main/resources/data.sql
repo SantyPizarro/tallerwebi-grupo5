@@ -1,6 +1,6 @@
 INSERT INTO Usuario(id, email, password, rol, activo) VALUES(null, 'test@unlam.edu.ar', 'test', 'ADMIN', true);
 INSERT INTO Libro(id, titulo, autor, editorial, fechaPublicacion, precio, ruta) VALUES
-                                                                                    (NULL, 'El Principio', 'Stephen Hawking', 'Planeta', '01-01-1988', 10000, '/spring/images/libros/elprincipito.jpg'),
+                                                                                    (NULL, 'El Principito', 'Stephen Hawking', 'Planeta', '01-01-1988', 10000, '/spring/images/libros/elprincipito.jpg'),
                                                                                     (NULL, 'Don Quijote de la Mancha', 'Miguel de Cervantes', 'Anaya', '01-01-1605', 10000, '/spring/images/libros/donquijote.jpg'),
                                                                                     (NULL, 'Martín Fierro', 'José Hernández', 'Losada', '01-01-1872', 10000, '/spring/images/libros/martinfierro.jpg'),
                                                                                     (NULL, 'El Fantasma de Canterville', 'Oscar Wilde', 'Alianza Editorial', '01-01-1887', 10000, '/spring/images/libros/elfantasma.jpg'),

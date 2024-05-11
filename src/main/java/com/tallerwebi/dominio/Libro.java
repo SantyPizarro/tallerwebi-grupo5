@@ -15,14 +15,16 @@ public class Libro{
     private String editorial;
     private String fechaPublicacion;
     private Double precio;
+    private String ruta;
 
     public Libro(){
 
     }
-    public Libro(String titulo, double precio, String editorial) {
+    public Libro(String titulo, double precio, String editorial, String ruta) {
         this.titulo = titulo;
         this.precio = precio;
         this.editorial = editorial;
+        this.ruta = ruta;
     }
 
     public Long getId() {

@@ -25,7 +25,6 @@
 }
 
 .contenedor .avatar-perfil {
-    position :relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -38,31 +37,6 @@
     box-shadow: 0 0 12px 2px rgba(0, 0, 0, .2);
 }
 
-.contenedor .cambiar-foto {
-    position: absolute;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background-color: rgba(0, 0, 0, .5);
-    height: 57%;
-    bottom: 0;
-    left: 0;
-    color: #fff;
-    text-decoration: none;
-    transform: translateY(50%);
-    opacity: 0;
-    transition: all ease-in 200ms;
-}
-.contenedor .cambiar-foto i {
-    margin-bottom: .5rem;
-    font-size: 2rem;
-}
-.contenedor .avatar-perfil:hover .cambiar-foto {
-    transform: translateY(0);
-    opacity: 1;
-}
 .nombre{
     margin-top: 1rem;
 }
@@ -167,20 +141,33 @@ footer{
 
 .tablas{
     display: flex;
-    margin: 1rem 0;
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.contenedor-tabla{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
 
-.gray{
+
+.lightblue{
     background-color: #def7ff;
     padding: 3rem;
+}
+
+.listadesordenada{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-tabs .nav-link.active {
+    color: #000000 !important;
+    border-left-color: #1F23E0 !important;
+    border-top-color: #1F23E0 !important;
+    border-right-color: #1F23E0 !important;
+    background-color: #def7ff !important;
+}
+
+.nav-tabs{
+    border-color: #1F23E0 !important;
 }
 
 @media only screen and (max-width: 1270px) {

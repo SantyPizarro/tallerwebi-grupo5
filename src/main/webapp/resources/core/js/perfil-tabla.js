@@ -69,16 +69,22 @@ function mostrarContenido(opcion) {
 
     const facturas = [
         {
+            orden: "1",
             titulo: "El principito",
-            precio: "$5.99"
+            precio: "$5.99",
+            fecha:  "20/12/2023"
         },
         {
+            orden: "2",
             titulo: "Martin Fierro",
-            precio: "$8.99"
+            precio: "$6.99",
+            fecha:  "10/4/2024"
         },
         {
+            orden:"3",
             titulo: "El jardin Secreto",
-            precio: "$10.99"
+            precio: "$10.99",
+            fecha: "12/2/2024"
         }
     ];
     switch (opcion) {
@@ -139,18 +145,50 @@ function mostrarContenido(opcion) {
             break;
 
         case 'facturas':
-            contenidoHTML = facturas.map(factura =>
-                `<div class="card" style="width: 18rem;">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">${factura.titulo}</h5>
-                        <p class="precio">${factura.precio}</p>
-                    </div>
-                </div>`
-            ).join('');
+            contenidoHTML = `<table class="table">
+                        <thead>
+                            <tr>
+                                <th>Orden</th>
+                                <th>titulo</th>
+                                <th>Precio</th>
+                                <th>Fecha de Compra</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+            facturas.forEach(factura => {
+                contenidoHTML += `<tr>
+                            <td>${factura.orden}</td>
+                            <td>${factura.titulo}</td>
+                            <td>${factura.precio}</td>
+                            <td>${factura.fecha}</td>
+
+                        </tr>`;
+            });
+            contenidoHTML += `</tbody>
+                    </table>`;
             break;
+
         default:
             contenidoHTML = 'Opción no válida';
     }
 
     document.getElementById('contenido').innerHTML = contenidoHTML;
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    var navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach(function(link) {
+        link.addEventListener('click', function(event) {
+
+            navLinks.forEach(function(link) {
+                link.classList.remove('active');
+            });
+
+
+            event.target.classList.add('active');
+        });
+    });
+});

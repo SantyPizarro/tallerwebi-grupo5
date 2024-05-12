@@ -10,10 +10,10 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
 
     <!-- custom style -->
-
+    <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
+
 
     <div th:replace="header_footer::head"></div>
 
@@ -32,10 +32,7 @@
             <div>
              <div class="avatar-perfil">
                 <img th:src="@{/images/mifoto2.jpg}" alt="img">
-                <a href="#" class="cambiar-foto">
-                <i class="fas fa-camera"></i>
-                    <span>Cambiar foto</span>
-                </a>
+
             </div>
              <div class="nombre">
             <h2>Tomas Pezzano</h2>
@@ -75,17 +72,30 @@
 
         </section>
 
-    <div class="gray">
-        <div id="menu" class="nav contenedor-tabla">
-            <button onclick="mostrarContenido('misLibros')">Mis Libros</button>
-            <button onclick="mostrarContenido('amigos')"> Mis Amigos</button>
-            <button onclick="mostrarContenido('favoritos')">Libras Favoritos</button>
-            <button onclick="mostrarContenido('deseados')">Libros Deseados</button>
-            <button onclick="mostrarContenido('facturas')">Historial de Compras</button>
-        </div>
 
 
-        <section class="tablas" id="contenido"> <!-- NO OLVIDAR HACER TABLA DE FACTURA / PAGOS -->
+
+    <div>
+
+        <ul class="nav nav-tabs listadesordenada">
+            <li class="nav-item">
+                <a class="nav-link active  "href="#" onclick="mostrarContenido('misLibros')">Mis Libros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#" onclick="mostrarContenido('amigos')">Mis Amigos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#" onclick="mostrarContenido('favoritos')">Libros Favoritos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#" onclick="mostrarContenido('deseados')">Libros Deseados</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="#" onclick="mostrarContenido('facturas')">Historial de Compras</a>
+            </li>
+        </ul>
+
+        <section class="tablas lightblue" id="contenido">
 
         </section>
     </div>

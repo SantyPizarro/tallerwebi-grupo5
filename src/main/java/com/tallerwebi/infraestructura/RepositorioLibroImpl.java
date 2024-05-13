@@ -51,7 +51,7 @@ public class RepositorioLibroImpl implements RepositorioLibro {
     public List<Libro> obtenerTodosLosLibros() {
 
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Libro", Libro.class).getResultList();
+        return session.createQuery("SELECT DISTINCT l FROM Libro l", Libro.class).getResultList();
     }
 
     @Override
@@ -68,6 +68,19 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         Query query = session.createQuery(hql);
         query.setParameter("editorial", editorial);
         return query.getResultList();
+
         }
+
+    @Override
+    public List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo) {
+
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM Libro WHERE precio BETWEEN :min AND :max";
+        Query query = session.createQuery(hql);
+        query.setParameter("min", precioMinimo);
+        query.setParameter("max", precioMaximo);
+        return query.getResultList();
+
+    }
 
 }

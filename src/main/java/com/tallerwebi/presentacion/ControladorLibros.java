@@ -20,16 +20,12 @@ public class ControladorLibros {
         this.servicioLibro = servicioLibro;
     }
 
-
     @GetMapping("/libros")
     public ModelAndView mostrarLibros() {
         ModelAndView modelAndView = new ModelAndView("libros");
         modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
         return modelAndView;
     }
-
-
-
 
     @GetMapping("/filtrar-libros")
     public ModelAndView mostrarLibrosPorEditorial(@RequestParam("editorial") String editorial) {
@@ -41,6 +37,14 @@ public class ControladorLibros {
 
     }
 
+    @GetMapping("/filtrar-precio")
+    public ModelAndView mostrarLibrosPorPrecio(@RequestParam("precio-min") double precioMinimo, @RequestParam("precio-max") double precioMaximo){
+        List<Libro> librosFiltrados = servicioLibro.filtrarPorPrecio(precioMinimo, precioMaximo);
+        ModelAndView modelAndView = new ModelAndView("libros-precio");
+        modelAndView.addObject("librosFiltrados", librosFiltrados);
+        modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
+        return modelAndView;
+    }
 
     @GetMapping("/detalle-libro")
     public ModelAndView mostrarDetalleLibro() {

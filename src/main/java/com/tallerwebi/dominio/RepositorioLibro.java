@@ -9,5 +9,6 @@ public interface RepositorioLibro {
     List<Libro> obtenerTodosLosLibros();
     List<Libro> obtenerEditoriales();
     List<Libro> filtrarPorEditoral(String editorial);
+    List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo);
 
 }

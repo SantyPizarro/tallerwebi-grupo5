@@ -38,7 +38,7 @@ public class ControladorLibros {
         modelAndView.addObject("librosFiltrados", librosFiltrados);
         modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
         return modelAndView;
-        
+
     }
 
 

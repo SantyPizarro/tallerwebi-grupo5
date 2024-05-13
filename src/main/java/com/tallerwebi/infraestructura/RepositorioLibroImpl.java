@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -52,4 +53,21 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("FROM Libro", Libro.class).getResultList();
     }
+
+    @Override
+    public List<Libro> obtenerEditoriales(){
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("SELECT DISTINCT libro.editorial FROM Libro libro", Libro.class).getResultList();
+    }
+
+    @Override
+    public List<Libro> filtrarPorEditoral(String editorial) {
+
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM Libro WHERE editorial = :editorial";
+        Query query = session.createQuery(hql);
+        query.setParameter("editorial", editorial);
+        return query.getResultList();
+        }
+
 }

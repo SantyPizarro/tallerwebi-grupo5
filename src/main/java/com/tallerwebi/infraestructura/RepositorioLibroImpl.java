@@ -24,27 +24,12 @@ public class RepositorioLibroImpl implements RepositorioLibro {
     }
 
     @Override
-    public Libro buscarLibro(String titulo) {
+    public List<Libro> buscarPorTitulo(String titulo) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Libro WHERE titulo = :titulo", Libro.class)
-                .setParameter("titulo", titulo)
-                .uniqueResult();
-    }
-
-    @Override
-    public List<Libro> buscarPorTituloOAutor(String titulo, String autor) {
-        Session session = sessionFactory.getCurrentSession();
-        String query = "FROM Libro WHERE 1=1";
-        if (titulo != null && !titulo.isEmpty()) {
-            query += " AND titulo LIKE :titulo";
-        }
-        if (autor != null && !autor.isEmpty()) {
-            query += " AND autor LIKE :autor";
-        }
-        return session.createQuery(query, Libro.class)
-                .setParameter("titulo", "%" + titulo + "%")
-                .setParameter("autor", "%" + autor + "%")
-                .getResultList();
+        String hql = "FROM Libro WHERE LOWER(titulo) LIKE LOWER(:titulo)";
+        Query query = session.createQuery(hql);
+        query.setParameter("titulo", "%" + titulo.toLowerCase() + "%");
+        return query.getResultList();
     }
 
     @Override

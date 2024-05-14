@@ -1,8 +1,21 @@
 package com.tallerwebi.dominio;
 
+import org.springframework.stereotype.Service;
 import java.util.List;
 
-public interface ServicioBarraBusqueda {
-    List<Libro> buscarPorTituloOAutor(String titulo, String autor);
+@Service
+public class ServicioBarraBusqueda{
+
+
+
+    public ServicioBarraBusqueda(RepositorioLibro repositorioLibro) {
+        this.repositorioLibro = repositorioLibro;
+    }
+
+    private final RepositorioLibro repositorioLibro;
+
+    public List<Libro> buscarPorTitulo(String titulo) {
+        return repositorioLibro.buscarPorTitulo(titulo);
+    }
 
 }

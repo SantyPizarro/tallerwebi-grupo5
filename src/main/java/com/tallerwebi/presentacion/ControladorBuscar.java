@@ -13,14 +13,17 @@ import java.util.List;
 @Controller
 public class ControladorBuscar {
 
+    private final ServicioBarraBusqueda servicioBarraBusqueda;
 
     @Autowired
-    private ServicioBarraBusqueda servicioBarraBusqueda;
+    public ControladorBuscar(ServicioBarraBusqueda servicioBarraBusqueda) {
+        this.servicioBarraBusqueda = servicioBarraBusqueda;
+    }
 
     @GetMapping("buscar-libro")
     public ModelAndView buscarLibro(@RequestParam("titulo") String titulo) {
-        ModelAndView modelAndView = new ModelAndView("header-busqueda-resultado");
-        List<Libro> librosEncontrados = servicioBarraBusqueda.buscarPorTituloOAutor(titulo, null);
+        ModelAndView modelAndView = new ModelAndView("libros-buscar");
+        List<Libro> librosEncontrados = servicioBarraBusqueda.buscarPorTitulo(titulo);
         modelAndView.addObject("librosEncontrados", librosEncontrados);
         return modelAndView;
     }

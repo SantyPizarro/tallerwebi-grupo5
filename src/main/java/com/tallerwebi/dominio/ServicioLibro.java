@@ -19,4 +19,16 @@ public class ServicioLibro {
     public List<Libro> obtenerTodosLosLibros(){
         return repositorioLibro.obtenerTodosLosLibros();
     }
+
+    public List<Libro> obtenerEditoriales(){
+        return repositorioLibro.obtenerEditoriales();
+    }
+
+    public List<Libro> filtrarPorEditorial(String editorial){
+        return repositorioLibro.filtrarPorEditoral(editorial);
+    }
+
+    public List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo){
+        return repositorioLibro.filtrarPorPrecio(precioMinimo, precioMaximo);
+    }
 }

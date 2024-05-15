@@ -65,19 +65,19 @@
             </ul>
         </div>
     </aside>
-        <section class="libros">
-            <div th:each="libro : ${libros}" class="tarjeta-libro">
-                <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="">
-                <div class="contenido-tarjeta-libro">
-                    <h3 class="titulo-libro" th:text="${libro.titulo}">Título del Libro</h3>
-                    <p class="precio-libro" th:text="${libro.precio}">$</p>
-                    <div class="botones-libro">
-                        <a th:href="@{/detalle-libro.html}" class="detalles"><button>Detalles</button></a>
-                        <a th:href="@{/comprar}" class="comprar"><button>Comprar</button></a>
-                    </div>
+    <section class="libros">
+        <div th:each="libro : ${librosEncontrados}" class="tarjeta-libro">
+            <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="">
+            <div class="contenido-tarjeta-libro">
+                <h3 class="titulo-libro" th:text="${libro.titulo}">Título del Libro</h3>
+                <p class="precio-libro" th:text="${libro.precio}">$</p>
+                <div class="botones-libro">
+                    <a th:href="@{/detalle-libro.html}" class="detalles"><button>Detalles</button></a>
+                    <a th:href="@{/comprar}" class="comprar"><button>Comprar</button></a>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 </main>
 <footer th:replace="header_footer :: footer">
 

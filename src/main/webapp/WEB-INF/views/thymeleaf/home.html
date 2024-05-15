@@ -37,61 +37,17 @@
   <h3>Libros Destacados:</h3>
 
     <section class="libros owl-carousel owl-theme" id="carousel-libros">
-    <div class="tarjeta-libro">
-      <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
-      <div class="contenido-tarjeta-libro">
-        <h3 class="titulo-libro">Título del Libro 1</h3>
-        <p class="precio-libro">$20000</p>
-        <div class="botones-libro">
-          <a th:href="@{/detalle-libro.html}" class="detalles"><button>Detalles</button></a>
-          <a class="comprar boton-compra"><button>Comprar</button></a>
-        </div>
-      </div>
-    </div>
-    <div class="tarjeta-libro">
-      <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
-      <div class="contenido-tarjeta-libro">
-        <h3 class="titulo-libro">Título del Libro 1</h3>
-        <p class="precio-libro">$20000</p>
-        <div class="botones-libro">
-          <a th:href="@{/detalle-libro.html}" class="detalles"><button>Detalles</button></a>
-          <a class="comprar boton-compra"><button>Comprar</button></a>
-        </div>
-      </div>
-    </div>
-    <div class="tarjeta-libro">
-      <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
-      <div class="contenido-tarjeta-libro">
-        <h3 class="titulo-libro">Título del Libro 1</h3>
-        <p class="precio-libro">$20000</p>
-        <div class="botones-libro">
-          <a th:href="@{/detalle-libro.html}" class="detalles"><button>Detalles</button></a>
-          <a class="comprar boton-compra"><button>Comprar</button></a>
-        </div>
-      </div>
-    </div>
-      <div class="tarjeta-libro">
-        <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
+      <div th:each="libro : ${libros}" class="tarjeta-libro">
+        <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="">
         <div class="contenido-tarjeta-libro">
-          <h3 class="titulo-libro">Título del Libro 1</h3>
-          <p class="precio-libro">$20000</p>
+          <h3 class="titulo-libro" th:text="${libro.titulo}">Título del Libro</h3>
+          <p class="precio-libro" th:text="${libro.precio}">$</p>
           <div class="botones-libro">
             <a th:href="@{/detalle-libro.html}" class="detalles"><button>Detalles</button></a>
-            <a class="comprar boton-compra"><button>Comprar</button></a>
+            <a th:href="@{/comprar}" class="comprar"><button>Comprar</button></a>
           </div>
         </div>
-      </div>
-      <div class="tarjeta-libro">
-        <img th:src="@{/images/prueba.jpg}" alt="Libro 1">
-        <div class="contenido-tarjeta-libro">
-          <h3 class="titulo-libro">Título del Libro 1</h3>
-          <p class="precio-libro">$20000</p>
-          <div class="botones-libro">
-            <a th:href="@{/detalle-libro.html}" class="detalles"><button>Detalles</button></a>
-            <a class="comprar boton-compra"><button>Comprar</button></a>
-          </div>
-        </div>
-      </div>
+    </div>
   </section>
 </main>
 
@@ -104,8 +60,6 @@
 <script type="text/javascript" th:src="@{/js/jquery-migrate.1.2.1.min.js}"></script>
 <!-- Owl Carousel JavaScript -->
 <script type="text/javascript" th:src="@{/js/owl.carousel.js}"></script>
-
-<script th:src="@{/js/carrito.js}"></script>
 
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 <script th:inline="javascript">
@@ -127,10 +81,10 @@
           items:1
         },
         600:{
-          items:2
+          items:3
         },
         1000:{
-          items:3
+          items:4
         }
       }
     });

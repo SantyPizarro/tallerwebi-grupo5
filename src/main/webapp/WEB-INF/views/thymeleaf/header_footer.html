@@ -73,16 +73,16 @@
             <nav class="contenedor-nav-header">
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="home.html" target="_top">Home</a>
+                        <a class="nav-link active" aria-current="page" href="home.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="libros.html" target="_top">Catalogo</a>
+                        <a class="nav-link" href="libros.html">Catalogo</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contacto.html" target="_top">Contacto</a>
+                        <a class="nav-link" href="contacto.html">Contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="planes.html" target="_top">Planes</a>
+                        <a class="nav-link" href="planes.html">Planes</a>
                     </li>
                 </ul>
             </nav>
@@ -90,12 +90,16 @@
 
         <div class="contenedor-usuario">
 
-            <a href="comprar.html" target="_top">
+            <a href="comprar.html" class="position-relative">
         <span class="material-symbols-outlined">
             local_mall
         </span>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="numero">
+                0
+                <span class="visually-hidden">unread messages</span>
+            </span>
             </a>
-            <a href="perfil.html" target="_top">
+            <a href="perfil.html">
              <span class="material-symbols-outlined">
                 person
              </span>
@@ -151,5 +155,7 @@
         <p> Defensa de las y los consumidores.</p>
     </div>
 </div>
+
+<script th:src="@{/js/carrito.js}"></script>
 </body>
 </html>

@@ -1,5 +1,7 @@
-package com.tallerwebi.dominio;
+package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.CompraLibroService;
+import com.tallerwebi.dominio.Libro;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;

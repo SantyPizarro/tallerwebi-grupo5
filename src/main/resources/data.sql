@@ -1,4 +1,4 @@
-INSERT INTO Usuario(id, email, password, rol, activo) VALUES(null, 'test@unlam.edu.ar', 'test', 'ADMIN', true);
+INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2) VALUES(null, 'test@unlam.edu.ar', 'test', 'ADMIN', true,'Me llamo Tomas y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte','Tomas Pezzano','ficcion','deporte');
 INSERT INTO Libro(id, titulo, autor, editorial, fechaPublicacion, precio, ruta) VALUES
                                                                                     (NULL, 'El Principito', 'Stephen Hawking', 'Planeta', '01-01-1988', 5500, '/spring/images/libros/elprincipito.jpg'),
                                                                                     (NULL, 'Don Quijote de la Mancha', 'Miguel de Cervantes', 'Anaya', '01-01-1605', 8000, '/spring/images/libros/donquijote.jpg'),

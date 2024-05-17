@@ -8,6 +8,9 @@ footer{
     background-color: black;
 }
 
+.navegador-detalle{
+    margin-top: 4rem;
+}
 .contenedor{
     display: flex;
     width: 80%;

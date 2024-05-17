@@ -16,6 +16,9 @@ public class Libro{
     private String fechaPublicacion;
     private Double precio;
     private String ruta;
+    private String descripcion;
+    private String genero;
+
 
     public Libro(){
 
@@ -24,6 +27,32 @@ public class Libro{
         this.titulo = titulo;
         this.precio = precio;
         this.editorial = editorial;
+    }
+
+    public Libro(String titulo, String autor, String editorial, String fechaPublicacion, Double precio, String descripcion, String genero) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.editorial = editorial;
+        this.fechaPublicacion = fechaPublicacion;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.genero = genero;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
     }
 
     public Long getId() {

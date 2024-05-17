@@ -1,5 +1,5 @@
 *{
-    color: #121481;
+
 }
 
 #carousel-hero img{
@@ -19,8 +19,12 @@
 
 .h3{
     padding: 10px;
+
 }
 
+.colorLetra{
+    color: #121481;
+}
 
 .tarjeta-libro {
     max-width: 300px;

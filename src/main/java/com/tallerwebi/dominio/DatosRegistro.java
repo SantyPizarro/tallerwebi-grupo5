@@ -6,19 +6,19 @@ public class DatosRegistro {
     private String apellido;
     private String nombre_usuario;
     private String email;
-    private String contrasenia;
+    private String password;
     private String contraseniaDuplicada;
 
     public DatosRegistro() {
 
     }
 
-    public DatosRegistro(String nombre, String apellido, String nombre_usuario, String email, String contrasenia, String contraseniaDuplicada) {
+    public DatosRegistro(String nombre, String apellido, String nombre_usuario, String email, String password, String contraseniaDuplicada) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nombre_usuario = nombre_usuario;
         this.email = email;
-        this.contrasenia = contrasenia;
+        this.password = password;
         this.contraseniaDuplicada = contraseniaDuplicada;
     }
 
@@ -30,12 +30,12 @@ public class DatosRegistro {
         this.contraseniaDuplicada = contraseniaDuplicada;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
+    public String getPassword() {
+        return password;
     }
 
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getEmail() {

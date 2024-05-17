@@ -25,8 +25,8 @@ public class PerfilServiceImpl implements PerfilService {
         repositorioUsuario.modificar(usuario);
     }
 
-    public Usuario buscarUsuario(String email, String password) {
-        return repositorioUsuario.buscarUsuario(email,password);
+    public Usuario buscarUsuario(String email) {
+        return repositorioUsuario.buscarUsuario(email);
     }
 
     @Override

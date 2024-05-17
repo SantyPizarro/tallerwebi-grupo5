@@ -1,7 +1,10 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.DatosLogin;
+import com.tallerwebi.dominio.DatosRegistro;
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.excepcion.NoCoincideContrasenia;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +25,7 @@ public class ControladorLoginTest {
 	private HttpServletRequest requestMock;
 	private HttpSession sessionMock;
 	private ServicioLogin servicioLoginMock;
-
+	private DatosRegistro datosRegistroMock;
 
 	@BeforeEach
 	public void init(){
@@ -33,12 +36,13 @@ public class ControladorLoginTest {
 		sessionMock = mock(HttpSession.class);
 		servicioLoginMock = mock(ServicioLogin.class);
 		controladorLogin = new ControladorLogin(servicioLoginMock);
+		datosRegistroMock = mock(DatosRegistro.class);
 	}
 
 	@Test
 	public void loginConUsuarioYPasswordInorrectosDeberiaLlevarALoginNuevamente(){
 		// preparacion
-		when(servicioLoginMock.consultarUsuario(anyString(), anyString())).thenReturn(null);
+		when(servicioLoginMock.consultarUsuario(anyString())).thenReturn(null);
 
 		// ejecucion
 		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock, requestMock);
@@ -56,7 +60,7 @@ public class ControladorLoginTest {
 		when(usuarioEncontradoMock.getRol()).thenReturn("ADMIN");
 
 		when(requestMock.getSession()).thenReturn(sessionMock);
-		when(servicioLoginMock.consultarUsuario(anyString(), anyString())).thenReturn(usuarioEncontradoMock);
+		when(servicioLoginMock.consultarUsuario(anyString())).thenReturn(usuarioEncontradoMock);
 		
 		// ejecucion
 		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock, requestMock);
@@ -67,23 +71,23 @@ public class ControladorLoginTest {
 	}
 
 	@Test
-	public void registrameSiUsuarioNoExisteDeberiaCrearUsuarioYVolverAlLogin() throws UsuarioExistente {
+	public void registrameSiUsuarioNoExisteDeberiaCrearUsuarioYVolverAlLogin() throws UsuarioExistente, NoCoincideContrasenia {
 
 		// ejecucion
-		ModelAndView modelAndView = controladorLogin.registrarme(usuarioMock);
+		ModelAndView modelAndView = controladorLogin.registrarme(datosRegistroMock);
 
 		// validacion
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
-		verify(servicioLoginMock, times(1)).registrar(usuarioMock);
+		verify(servicioLoginMock, times(1)).registrar(datosRegistroMock);
 	}
 
 	@Test
-	public void registrarmeSiUsuarioExisteDeberiaVolverAFormularioYMostrarError() throws UsuarioExistente {
+	public void registrarmeSiUsuarioExisteDeberiaVolverAFormularioYMostrarError() throws UsuarioExistente, NoCoincideContrasenia {
 		// preparacion
-		doThrow(UsuarioExistente.class).when(servicioLoginMock).registrar(usuarioMock);
+		doThrow(UsuarioExistente.class).when(servicioLoginMock).registrar(datosRegistroMock);
 
 		// ejecucion
-		ModelAndView modelAndView = controladorLogin.registrarme(usuarioMock);
+		ModelAndView modelAndView = controladorLogin.registrarme(datosRegistroMock);
 
 		// validacion
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("nuevo-usuario"));
@@ -91,12 +95,12 @@ public class ControladorLoginTest {
 	}
 
 	@Test
-	public void errorEnRegistrarmeDeberiaVolverAFormularioYMostrarError() throws UsuarioExistente {
+	public void errorEnRegistrarmeDeberiaVolverAFormularioYMostrarError() throws UsuarioExistente, NoCoincideContrasenia {
 		// preparacion
-		doThrow(RuntimeException.class).when(servicioLoginMock).registrar(usuarioMock);
+		doThrow(RuntimeException.class).when(servicioLoginMock).registrar(datosRegistroMock);
 
 		// ejecucion
-		ModelAndView modelAndView = controladorLogin.registrarme(usuarioMock);
+		ModelAndView modelAndView = controladorLogin.registrarme(datosRegistroMock);
 
 		// validacion
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("nuevo-usuario"));

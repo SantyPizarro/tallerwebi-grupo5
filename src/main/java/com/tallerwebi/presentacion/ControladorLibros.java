@@ -4,7 +4,11 @@ import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.ServicioLibro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,9 +50,25 @@ public class ControladorLibros {
         return modelAndView;
     }
 
-    @GetMapping("/detalle-libro")
-    public ModelAndView mostrarDetalleLibro() {
+//    @PostMapping("/detalle-libro")
+//    public ModelAndView mostrarDetalleLibro(@ModelAttribute("libro") Libro libro) {
+//        Libro libroMostrar = servicioLibro.mostrarDetalleLibro(libro);
+//
+//        ModelMap modelo = new ModelMap();
+//        modelo.put("libro",libroMostrar);
+//
+//        return new ModelAndView("detalle-libro", modelo);
+//    }
 
-        return new ModelAndView("detalle-libro");
+    @PostMapping("/detalle-libro")
+    public String detalleLibro(@RequestParam("titulo") String titulo, Model model) {
+        Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+        if (libro != null) {
+            model.addAttribute("libro", libro);
+            return "detalle-libro";
+        } else {
+            // Manejar el caso en que no se encuentre el libro
+            return "error";
+        }
     }
 }

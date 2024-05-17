@@ -2,8 +2,10 @@ package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.RepositorioLibro;
+import com.tallerwebi.dominio.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,6 +32,13 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         Query query = session.createQuery(hql);
         query.setParameter("titulo", "%" + titulo.toLowerCase() + "%");
         return query.getResultList();
+    }
+
+    @Override
+    public Libro buscarUnLibroPorSuTitulo(String titulo){
+        return (Libro) sessionFactory.getCurrentSession().createCriteria(Libro.class)
+                .add(Restrictions.eq("titulo", titulo))
+                .uniqueResult();
     }
 
     @Override

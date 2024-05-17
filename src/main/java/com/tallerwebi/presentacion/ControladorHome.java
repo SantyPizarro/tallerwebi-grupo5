@@ -1,5 +1,6 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.Libro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,9 @@ public class ControladorHome {
     public ModelAndView mostrarHome() {
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
+        Libro libro = new Libro();
+        libro.setTitulo("El principito");
+        modelAndView.addObject("libro", libro);
         return modelAndView;
     }
 }

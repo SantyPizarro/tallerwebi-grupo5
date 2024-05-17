@@ -24,7 +24,7 @@ public class ControladorPerfil {
     @GetMapping("/perfil")
     public ModelAndView mostrarPerfil() {
 
-        Usuario usuario = perfilService.buscarUsuario("test@unlam.edu.ar", "test");
+        Usuario usuario = perfilService.buscarUsuario("test@unlam.edu.ar");
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
 
@@ -33,7 +33,7 @@ public class ControladorPerfil {
 
     @PostMapping("/perfil/editar")
     public String editarDescripcion(@ModelAttribute("usuario") Usuario usuario) {
-        Usuario usuarioExistente = perfilService.buscarUsuario("test@unlam.edu.ar", "test");
+        Usuario usuarioExistente = perfilService.buscarUsuario("test@unlam.edu.ar");
         perfilService.editarDescripcionPerfil(usuario.getDescripcion(), usuarioExistente);
 
         return "redirect:/perfil";
@@ -42,7 +42,7 @@ public class ControladorPerfil {
 
     @PostMapping("/perfil/editarPerfil")
     public String editarPerfil(@ModelAttribute("usuario") Usuario usuario) {
-        Usuario usuarioExistente = perfilService.buscarUsuario("test@unlam.edu.ar", "test");
+        Usuario usuarioExistente = perfilService.buscarUsuario("test@unlam.edu.ar");
         perfilService.editarUsuario(usuario, usuarioExistente);
 
         return "redirect:/perfil";

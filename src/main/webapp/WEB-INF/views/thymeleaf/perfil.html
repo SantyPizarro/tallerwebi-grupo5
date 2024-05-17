@@ -24,27 +24,26 @@
 
 </header>
 
-    <main>
+<main>
 
-        <section class="primero">
+    <section class="primero">
 
         <div class="contenedor">
             <div>
-             <div class="avatar-perfil">
-                <img th:src="@{/images/mifoto2.jpg}" alt="img">
+                <div class="avatar-perfil">
+                    <img th:src="@{/images/mifoto2.jpg}" alt="img">
 
-            </div>
-             <div class="nombre">
-            <h2>Tomas Pezzano</h2>
-            </div>
+                </div>
+                <div class="nombre">
+                    <h2 th:text="${usuario.getNombreDeUsuario()}"></h2>
+                </div>
             </div>
             <div class="descripcion">
                 <h4>descripcion:</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aperiam beatae distinctio dolore esse, ex iure labore magnam maiores modi nostrum
-                    officiis optio qui sit tempore unde veritatis vitae voluptatum..</p>
+                <p  th:text="${usuario.getDescripcion()}"></p>
                 <div class="preferencias">
-                    <span class="etiqueta">Accion</span>
-                    <span class="etiqueta">Horror</span>
+                    <span class="etiqueta" th:text="${usuario.getGeneroFav1()}"></span>
+                    <span class="etiqueta" th:text="${usuario.getGeneroFav2()}"></span>
                 </div>
                 <button type="button" class="btn btn-primary configuracion" data-bs-toggle="modal" data-bs-target="#exampleModal">
                     editar
@@ -53,24 +52,24 @@
         </div>
 
 
-            <div class="contenedor-plan">
-                <div class="plan-titulo">
-                    <h3>Mi plan</h3>
-                    <p>Free</p>
-                </div>
-                <div class="beneficios">
-                    <ul>
-                        <li>ningun beneficio</li>
-                        <li>Cuenta normal</li>
-                        <li>sin descuentos</li>
-                    </ul>
-                </div>
-                <div class="plan">
-                    <button><a href="#">Mejorar plan</a></button>
-                </div>
+        <div class="contenedor-plan">
+            <div class="plan-titulo">
+                <h3>Mi plan</h3>
+                <p>Free</p>
             </div>
+            <div class="beneficios">
+                <ul>
+                    <li>ningun beneficio</li>
+                    <li>Cuenta normal</li>
+                    <li>sin descuentos</li>
+                </ul>
+            </div>
+            <div class="plan">
+                <button><a href="#">Mejorar plan</a></button>
+            </div>
+        </div>
 
-        </section>
+    </section>
 
 
 
@@ -99,60 +98,60 @@
 
         </section>
     </div>
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Editar perfil</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="" method="post">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar perfil</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form  th:action="@{/perfil/editarPerfil}" method="post" th:object="${usuario}">
 
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Selecciona tu foto de perfil</label>
-                                <input class="form-control" type="file" id="formFile">
-                            </div>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Selecciona tu foto de perfil</label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="nombre">nombre</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                            </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="nombre">nombre</span>
+                            <input th:field="*{nombreDeUsuario}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
 
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="descripcion">descripcion</span>
-                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                            </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="descripcion">descripcion</span>
+                            <input th:field="*{descripcion}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
 
 
-                            <select class="form-select" aria-label="Default select example" name="generos" id="generos">
-                                <option value="1" disabled selected>seleccione un genero</option>
-                                <option value="horror">horror</option>
-                                <option value="accion">accion</option>
-                                <option value="ficcion">ficcion</option>
-                                <option value="deporte">deporte</option>
-                            </select>
-                            <br>
-                            <select class="form-select" aria-label="Default select example" name="generos2" id="generos2">
-                                <option value="1" disabled selected>seleccione un genero</option>
-                                <option value="horror">horror</option>
-                                <option value="accion">accion</option>
-                                <option value="ficcion">ficcion</option>
-                                <option value="deporte">deporte</option>
-                            </select>
+                        <select th:field="*{generoFav1}" class="form-select" aria-label="Default select example" name="generos" id="generos">
+                            <option value="1" disabled selected>seleccione un genero</option>
+                            <option value="horror">horror</option>
+                            <option value="accion">accion</option>
+                            <option value="ficcion">ficcion</option>
+                            <option value="deporte">deporte</option>
+                        </select>
+                        <br>
+                        <select th:field="*{generoFav2}" class="form-select" aria-label="Default select example" name="generos2" id="generos2">
+                            <option value="1" disabled selected>seleccione un genero</option>
+                            <option value="horror">horror</option>
+                            <option value="accion">accion</option>
+                            <option value="ficcion">ficcion</option>
+                            <option value="deporte">deporte</option>
+                        </select>
 
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </form>
-
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
 
                 </div>
+
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
 <footer th:replace="header_footer :: footer">
 

@@ -13,8 +13,63 @@ public class Usuario {
     private Long id;
     private String email;
     private String password;
+    private String descripcion;
     private String rol;
     private Boolean activo = false;
+    private String nombre;
+    private String apellido;
+    private String nombreDeUsuario;
+    private String generoFav1;
+    private String generoFav2;
+
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getNombreDeUsuario() {
+        return nombreDeUsuario;
+    }
+
+    public void setNombreDeUsuario(String nombreDeUsuario) {
+        this.nombreDeUsuario = nombreDeUsuario;
+    }
+
+    public String getGeneroFav1() {
+        return generoFav1;
+    }
+
+    public void setGeneroFav1(String generoFav1) {
+        this.generoFav1 = generoFav1;
+    }
+
+    public String getGeneroFav2() {
+        return generoFav2;
+    }
+
+    public void setGeneroFav2(String generoFav2) {
+        this.generoFav2 = generoFav2;
+    }
 
     public Long getId() {
         return id;

@@ -76,7 +76,10 @@
                             <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
                             <a  class="detalles"><button type="submit">Detalles</button></a>
                         </form>
-                        <a class="comprar boton-compra"><button>Comprar</button></a>
+                        <form accept-charset="UTF-8" th:action="@{/carrito}" method="post">
+                            <input type="hidden" th:name="id" th:value="${libro.id}">
+                            <a  class="comprar boton-compra"><button type="submit">Comprar</button></a>
+                        </form>
                     </div>
                 </div>
             </div>

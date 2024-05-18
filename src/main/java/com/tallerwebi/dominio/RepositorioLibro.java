@@ -11,4 +11,5 @@ public interface RepositorioLibro {
     List<Libro> filtrarPorEditoral(String editorial);
     List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo);
 
+    Libro buscarLibroPorId(Long id);
 }

@@ -1,9 +1,6 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Libro{
@@ -19,6 +16,8 @@ public class Libro{
     private String descripcion;
     private String genero;
 
+//    @ManyToOne
+//    private Carrito carrito;
 
     public Libro(){
 

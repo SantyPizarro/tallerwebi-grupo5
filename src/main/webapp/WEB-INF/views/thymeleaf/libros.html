@@ -76,7 +76,7 @@
                             <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
                             <a  class="detalles"><button type="submit">Detalles</button></a>
                         </form>
-                        <a th:href="@{/comprar}" class="comprar"><button>Comprar</button></a>
+                        <a class="comprar boton-compra"><button>Comprar</button></a>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
 
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/libros.js}"></script>
-
+<script type="text/javascript" th:src="@{/js/carrito.js}"></script>
 
 </body>
 </html>

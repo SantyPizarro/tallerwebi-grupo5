@@ -1,12 +1,23 @@
-const incrementButtons = document.querySelectorAll('.boton-compra');
-const numeroDiv = document.getElementById('numero');
+document.addEventListener('DOMContentLoaded', () => {
+    const incrementButtons = document.querySelectorAll('.boton-compra');
+    const numeroDiv = document.querySelector('.numero');
 
-incrementButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        let numeroActual = parseInt(numeroDiv.textContent);
+    // Cargar el valor almacenado en localStorage
+    let numeroActual = sessionStorage.getItem('numero');
+    if (numeroActual === null) {
+        numeroActual = 0;
+    } else {
+        numeroActual = parseInt(numeroActual);
+    }
+    numeroDiv.textContent = numeroActual;
 
-        numeroActual++;
+    incrementButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            numeroActual++;
+            numeroDiv.textContent = numeroActual;
 
-        numeroDiv.textContent = numeroActual;
+            // Guardar el nuevo valor en localStorage
+            sessionStorage.setItem('numero', numeroActual);
+        });
     });
 });

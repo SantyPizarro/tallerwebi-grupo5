@@ -22,9 +22,6 @@ public class ControladorHome {
     public ModelAndView mostrarHome() {
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
-        Libro libro = new Libro();
-        libro.setTitulo("El principito");
-        modelAndView.addObject("libro", libro);
         return modelAndView;
     }
 }

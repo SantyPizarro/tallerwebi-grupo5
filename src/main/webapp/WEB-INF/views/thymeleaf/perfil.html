@@ -31,7 +31,7 @@
         <div class="contenedor">
             <div>
                 <div class="avatar-perfil">
-                    <img th:src="@{/images/mifoto2.jpg}" alt="img">
+                    <img th:src="@{'/images/'+${usuario.foto}}" th:alt="${usuario.foto}">
 
                 </div>
                 <div class="nombre">
@@ -106,11 +106,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form accept-charset="utf-8" th:action="@{/perfil/editarPerfil}" method="post" th:object="${usuario}">
+                    <form accept-charset="utf-8" th:action="@{/perfil/editarPerfilCompleto}" method="post" th:object="${usuario}" enctype="multipart/form-data">
+                        <input type="hidden" th:field="*{id}" />
 
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Selecciona tu foto de perfil</label>
-                            <input class="form-control" type="file" id="formFile">
+                            <input class="form-control" type="file" id="formFile" name="file">
                         </div>
 
                         <div class="input-group mb-3">
@@ -139,6 +140,7 @@
                             <option value="ficcion">ficcion</option>
                             <option value="deporte">deporte</option>
                         </select>
+
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

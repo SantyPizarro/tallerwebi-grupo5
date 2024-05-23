@@ -14,7 +14,6 @@ public class Libro{
     private String autor;
     private String editorial;
     private String fechaPublicacion;
-    private String fechaAgregado;
     private Double precio;
     private String ruta;
     private String descripcion;

@@ -26,7 +26,7 @@
                 </option>
             </select>
         </form>
-        <form id="filtrar-precio" th:action="@{/filtrar-precio}" method="get">
+        <form>
             <label for="precio-min">Precio mínimo:</label>
             <input type="number" id="precio-min" name="precio-min" placeholder="Precio mínimo">
             <label for="precio-max">Precio máximo</label>
@@ -66,7 +66,7 @@
         </div>
     </aside>
     <section class="libros">
-        <div th:each="libro : ${librosEncontrados}" class="tarjeta-libro">
+        <div th:each="libro : ${librosFiltrados}" class="tarjeta-libro">
             <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="">
             <div class="contenido-tarjeta-libro">
                 <h3 class="titulo-libro" th:text="${libro.titulo}">Título del Libro</h3>

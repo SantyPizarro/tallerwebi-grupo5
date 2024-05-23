@@ -77,13 +77,4 @@ public class RepositorioLibroImpl implements RepositorioLibro {
 
     }
 
-    @Override
-    public List<Libro> ordenarPorFechaAgregado(String fechaAgregado) {
-
-        Session session = sessionFactory.getCurrentSession();
-        String hql = "FROM Libro ORDER BY STR_TO_DATE(fechaAgregado, '%Y-%m-%d') DESC";
-        Query query = session.createQuery(hql);
-        return query.getResultList();
-
-    }
 }

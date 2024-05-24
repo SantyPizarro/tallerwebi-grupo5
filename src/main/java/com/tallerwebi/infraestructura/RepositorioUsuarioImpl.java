@@ -22,12 +22,11 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     }
 
     @Override
-    public Usuario buscarUsuario(String email, String password) {
+    public Usuario buscarUsuario(String email) {
 
         final Session session = sessionFactory.getCurrentSession();
         return (Usuario) session.createCriteria(Usuario.class)
                 .add(Restrictions.eq("email", email))
-                .add(Restrictions.eq("password", password))
                 .uniqueResult();
     }
 

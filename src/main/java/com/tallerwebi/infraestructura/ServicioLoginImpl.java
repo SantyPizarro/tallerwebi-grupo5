@@ -23,34 +23,32 @@ public class ServicioLoginImpl implements ServicioLogin {
     }
 
     @Override
-    public Usuario consultarUsuario (String email, String password) {
-        return repositorioUsuario.buscarUsuario(email, password);
+    public Usuario consultarUsuario (String email) {
+        return repositorioUsuario.buscarUsuario(email);
     }
 
     @Override
-    public void registrar(Usuario usuario) throws UsuarioExistente {
-        Usuario usuarioEncontrado = repositorioUsuario.buscarUsuario(usuario.getEmail(), usuario.getPassword());
+    public void registrar(DatosRegistro datosRegistro) throws UsuarioExistente, NoCoincideContrasenia {
+        Usuario usuarioEncontrado = repositorioUsuario.buscarUsuario(datosRegistro.getEmail());
+        Usuario usuario = new Usuario();
         if(usuarioEncontrado != null){
             throw new UsuarioExistente();
+        } else {
+            if (datosRegistro.getPassword().equals(datosRegistro.getContraseniaDuplicada())) {
+                usuario.setEmail(datosRegistro.getEmail());
+                usuario.setPassword(datosRegistro.getPassword());
+                usuario.setNombre(datosRegistro.getNombre());
+                usuario.setApellido(datosRegistro.getApellido());
+                usuario.setNombreDeUsuario(datosRegistro.getNombre_usuario());
+                usuario.setDescripcion("Me llamo " + datosRegistro.getNombre() + " y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte");
+                usuario.setGeneroFav1("Ficcion");
+                usuario.setGeneroFav2("Deporte");
+                repositorioUsuario.guardar(usuario);
+            } else {
+                throw new NoCoincideContrasenia();
+            }
         }
-        repositorioUsuario.guardar(usuario);
     }
-
-
-    /*
-    @Override
-    public Boolean validarContrasenia(DatosRegistro datosRegistro) throws NoCoincideContrasenia {
-        Boolean contraseniaCoincide = false;
-        if(datosRegistro.getContrasenia().equals(datosRegistro.getContraseniaDuplicada())){
-            contraseniaCoincide=true;
-        }else{
-            throw new NoCoincideContrasenia();
-        }
-
-        return contraseniaCoincide;
-    }*/
-
-
 
 }
 

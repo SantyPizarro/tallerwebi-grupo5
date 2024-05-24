@@ -31,4 +31,12 @@ public class ServicioLibro {
     public List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo){
         return repositorioLibro.filtrarPorPrecio(precioMinimo, precioMaximo);
     }
+
+    public List<Libro> ordenarPorFechaAgregado(String fechaAgregado){
+        return repositorioLibro.ordenarPorFechaAgregado(fechaAgregado);
+    }
+
+    public Libro mostrarDetalleLibro(String titulo){
+        return repositorioLibro.buscarUnLibroPorSuTitulo(titulo);
+    }
 }

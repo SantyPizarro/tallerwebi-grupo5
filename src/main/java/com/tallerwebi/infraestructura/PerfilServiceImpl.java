@@ -24,8 +24,10 @@ public class PerfilServiceImpl implements PerfilService {
     }
 
 
+
     public Usuario buscarUsuario(String email, String password) {
-        return repositorioUsuario.buscarUsuario(email, password);
+        return repositorioUsuario.buscarUsuarioPassword(email, password);
+
     }
 
     public Usuario buscarUsuarioPorId(Long id) {

@@ -12,12 +12,10 @@
 
 </header>
 <main>
-<div class="caja">
-    <h1 class="colorLetra">Contacto:</h1>
-    <h1 class="colorLetra">Horarios de Atención: 12:00 AM - 18:00 PM</h1>
-</div>
+
     <div class="contenido-container">
         <div class="formulario-container">
+            <h1 class="colorLetra">Contacto:</h1>
             <h2 class="colorLetra">Formulario de Atención</h2>
             <form action="#" method="post">
                 <div class="form-group">
@@ -37,16 +35,17 @@
                 <input class="button" type="submit" value="Enviar">
             </form>
         </div>
-
-    <div class="mapa">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6556.7694651969305!2d-58.59913227198888!3d-34.74590005099665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc55c195d0043%3A0xabd642dab72e5028!2sPlaza%20de%20la%20Familia!5e0!3m2!1ses-419!2sar!4v1715207532342!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div class="contenedor-atencion">
+            <h1 class="colorLetra">Horarios de Atención: 12:00 AM - 18:00 PM</h1>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6556.7694651969305!2d-58.59913227198888!3d-34.74590005099665!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc55c195d0043%3A0xabd642dab72e5028!2sPlaza%20de%20la%20Familia!5e0!3m2!1ses-419!2sar!4v1715207532342!5m2!1ses-419!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
     </div>
-</div>
+
 </main>
 <footer th:replace="header_footer :: footer">
 
 </footer>
-
+<script type="text/javascript" th:src="@{/js/carrito.js}"></script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 </body>
 </html>

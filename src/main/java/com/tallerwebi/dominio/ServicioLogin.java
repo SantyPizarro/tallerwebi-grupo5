@@ -5,8 +5,8 @@ import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 
 public interface ServicioLogin {
 
-    Usuario consultarUsuario(String email, String password);
-    void registrar(Usuario usuario) throws UsuarioExistente;
-    /*Boolean validarContrasenia(DatosRegistro datosRegistro) throws NoCoincideContrasenia;*/
+    Usuario consultarUsuario(String email);
+    void registrar(DatosRegistro datosRegistro) throws UsuarioExistente, NoCoincideContrasenia;
+
 
 }

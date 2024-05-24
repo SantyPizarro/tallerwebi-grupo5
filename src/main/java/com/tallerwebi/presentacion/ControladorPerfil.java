@@ -32,13 +32,12 @@ public class ControladorPerfil {
     @GetMapping("/perfil")
     public ModelAndView mostrarPerfil() {
 
-        Usuario usuario = perfilService.buscarUsuario("test@unlam.edu.ar", "test");
+        Usuario usuario = perfilService.buscarUsuario("test@unlam.edu.ar","test");
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
 
         return new ModelAndView("perfil", model);
     }
-
 
 
     @PostMapping("/perfil/editarPerfilCompleto")
@@ -63,8 +62,10 @@ public class ControladorPerfil {
             return "redirect:/login";
         }
 
+
         return "redirect:/perfil";
     }
+
 
 
 

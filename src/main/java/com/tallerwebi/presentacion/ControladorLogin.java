@@ -1,5 +1,6 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.DatosLogin;
 import com.tallerwebi.dominio.DatosRegistro;
 import com.tallerwebi.dominio.ServicioLogin;
 import com.tallerwebi.dominio.Usuario;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -38,7 +38,7 @@ public class ControladorLogin {
     public ModelAndView validarLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin, HttpServletRequest request) {
         ModelMap model = new ModelMap();
 
-        Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
+        Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail());
         if (usuarioBuscado != null) {
             request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
             return new ModelAndView("redirect:/home");
@@ -53,12 +53,15 @@ public class ControladorLogin {
 
 
     @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
-    public ModelAndView registrarme(@ModelAttribute("usuario") Usuario usuario) {
+    public ModelAndView registrarme(@ModelAttribute("datosRegistro") DatosRegistro datosRegistro) {
         ModelMap model = new ModelMap();
         try{
-            servicioLogin.registrar(usuario);
+            servicioLogin.registrar(datosRegistro);
         } catch (UsuarioExistente e){
             model.put("error", "El usuario ya existe");
+            return new ModelAndView("nuevo-usuario", model);
+        } catch (NoCoincideContrasenia e) {
+            model.put("error", "Las contraseñas no coinciden");
             return new ModelAndView("nuevo-usuario", model);
         } catch (Exception e){
             model.put("error", "Error al registrar el nuevo usuario");
@@ -70,7 +73,7 @@ public class ControladorLogin {
     @RequestMapping(path = "/nuevo-usuario", method = RequestMethod.GET)
     public ModelAndView nuevoUsuario() {
         ModelMap model = new ModelMap();
-        model.put("usuario", new Usuario());
+        model.put("datosRegistro", new DatosRegistro());
         return new ModelAndView("nuevo-usuario", model);
     }
 

@@ -1,7 +1,6 @@
 package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.PerfilService;
-import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,15 +19,14 @@ public class ControladorPerfil {
 
 
     private PerfilService perfilService;
-    private RepositorioUsuario repositorioUsuario;
+
 
 
 
     @Autowired
-    public ControladorPerfil(PerfilService perfilService,RepositorioUsuario repositorioUsuario) {
+    public ControladorPerfil(PerfilService perfilService) {
         this.perfilService = perfilService;
 
-        this.repositorioUsuario = repositorioUsuario;
     }
 
     @GetMapping("/perfil")
@@ -41,22 +39,6 @@ public class ControladorPerfil {
         return new ModelAndView("perfil", model);
     }
 
-    /*@PostMapping("/perfil/editar")
-    public String editarDescripcion(@ModelAttribute("usuario") Usuario usuario) {
-        Usuario usuarioExistente = perfilService.buscarUsuario("test@unlam.edu.ar", "test");
-        perfilService.editarDescripcionPerfil(usuario.getDescripcion(), usuarioExistente);
-
-        return "redirect:/perfil";
-    }*/
-
-/*
-    @PostMapping("/perfil/editarPerfil")
-    public String editarPerfil(@ModelAttribute("usuario") Usuario usuario) {
-        Usuario usuarioExistente = perfilService.buscarUsuario("test@unlam.edu.ar", "test");
-        perfilService.editarUsuario(usuario, usuarioExistente);
-
-        return "redirect:/perfil";
-    }*/
 
 
     @PostMapping("/perfil/editarPerfilCompleto")
@@ -85,48 +67,7 @@ public class ControladorPerfil {
     }
 
 
-/*
-    @PostMapping("/perfil/editarFoto")
-    @Transactional
-    public String editarFoto(@RequestParam(name = "file", required = false) MultipartFile foto,
-                             @RequestParam(name = "id") Long id,
-                             RedirectAttributes flash) {
-        Usuario usuario = repositorioUsuario.buscarPorId(id); // Cargar usuario desde la base de datos usando el ID
 
-        if (usuario == null) {
-            // Manejar el caso donde el usuario no se encuentra
-            flash.addFlashAttribute("error", "Usuario no encontrado");
-            return "redirect:/perfil";
-        }
-
-        if (!foto.isEmpty()) {
-            try {
-                // Obtener la ruta del directorio actual y construir la ruta absoluta
-                String currentDir = System.getProperty("user.dir");
-                String imagesDir = currentDir + "/src/main/webapp/resources/core/images/";
-
-                // Crear los directorios si no existen
-                Path rutaAbsoluta = Paths.get(imagesDir + foto.getOriginalFilename());
-                Files.createDirectories(rutaAbsoluta.getParent());
-
-                // Escribir el archivo
-                byte[] bytes = foto.getBytes();
-                Files.write(rutaAbsoluta, bytes);
-
-                // Actualizar la información del usuario
-                usuario.setFoto(foto.getOriginalFilename());
-                repositorioUsuario.modificar(usuario);
-
-                flash.addFlashAttribute("success", "Usuario modificado");
-            } catch (Exception e) {
-                e.printStackTrace(); // Log de la excepción para depuración
-                flash.addFlashAttribute("error", "Error al guardar la foto: " + e.getMessage());
-                return "redirect:/login";
-            }
-        }
-
-        return "redirect:/perfil";
-    }*/
 
 
 }

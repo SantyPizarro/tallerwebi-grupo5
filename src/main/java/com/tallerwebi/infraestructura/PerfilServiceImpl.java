@@ -23,11 +23,6 @@ public class PerfilServiceImpl implements PerfilService {
         this.repositorioUsuario = repositorioUsuario;
     }
 
-    /*@Override
-    public void editarDescripcionPerfil(String descripcion, Usuario usuario) {
-        usuario.setDescripcion(descripcion);
-        repositorioUsuario.modificar(usuario);
-    }*/
 
     public Usuario buscarUsuario(String email, String password) {
         return repositorioUsuario.buscarUsuario(email, password);
@@ -37,15 +32,7 @@ public class PerfilServiceImpl implements PerfilService {
         return repositorioUsuario.buscarPorId(id);
     }
 
-    /*@Override
-    public void editarUsuario(Usuario usuario, Usuario usuario2) {
-        usuario2.setDescripcion(usuario.getDescripcion());
-        usuario2.setNombreDeUsuario(usuario.getNombreDeUsuario());
-        usuario2.setGeneroFav1(usuario.getGeneroFav1());
-        usuario2.setGeneroFav2(usuario.getGeneroFav2());
 
-        repositorioUsuario.modificar(usuario2);
-    }*/
 
 
     @Override

@@ -16,9 +16,6 @@ public class Libro{
     private String descripcion;
     private String genero;
 
-//    @ManyToOne
-//    private Carrito carrito;
-
     public Libro(){
 
     }

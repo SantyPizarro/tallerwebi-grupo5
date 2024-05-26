@@ -33,7 +33,7 @@ public class ControladorCarrito {
     @GetMapping("/mostrar-carrito")
     public ModelAndView mostrarLibrosComprados(HttpServletRequest request){
         HttpSession sesion = request.getSession();
-        Carrito carrito = (Carrito) sesion.getAttribute("carrito");
+        Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
 
         List<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
         ModelMap modelo = new ModelMap();
@@ -45,11 +45,11 @@ public class ControladorCarrito {
     public ModelAndView guardarLibros(@RequestParam("id") Long id, HttpServletRequest request) {
 
         HttpSession sesion = request.getSession();
-        Carrito carrito = (Carrito) sesion.getAttribute("carrito");
+        Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
 
         if(carrito == null){
             carrito = new Carrito();
-            sesion.setAttribute("carrito", carrito);
+            sesion.setAttribute("CARRITO", carrito);
         }
 
         try {

@@ -4,16 +4,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+
 public class Carrito {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
-
-    @OneToMany
     private List<Libro> libros;
-
-    @OneToOne
     private Usuario usuario;
 
     public Carrito() {

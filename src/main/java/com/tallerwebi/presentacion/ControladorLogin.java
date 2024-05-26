@@ -1,9 +1,6 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.DatosLogin;
-import com.tallerwebi.dominio.DatosRegistro;
-import com.tallerwebi.dominio.ServicioLogin;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.NoCoincideContrasenia;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +18,7 @@ import javax.servlet.http.HttpSession;
 public class ControladorLogin {
 
     private ServicioLogin servicioLogin;
+    Carrito carrito;
 
     @Autowired
     public ControladorLogin(ServicioLogin servicioLogin){
@@ -41,7 +39,9 @@ public class ControladorLogin {
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail());
         if (usuarioBuscado != null) {
-            request.getSession();
+            HttpSession sesion = request.getSession();
+            carrito = new Carrito();
+            sesion.setAttribute("CARRITO", carrito);
            // request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
             return new ModelAndView("redirect:/home");
         } else {
@@ -54,12 +54,11 @@ public class ControladorLogin {
     @RequestMapping(path = "/cerrar-sesion")
     public ModelAndView cerrarSesion(HttpServletRequest request){
         HttpSession sesion = request.getSession();
+        sesion.removeAttribute("CARRITO");
         sesion.invalidate();
-
         ModelMap modelo = new ModelMap();
         modelo.put("datosLogin", new DatosLogin());
         return new ModelAndView("login", modelo);
-
 
     }
 

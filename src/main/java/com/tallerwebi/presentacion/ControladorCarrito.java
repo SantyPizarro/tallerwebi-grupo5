@@ -1,5 +1,6 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.Carrito;
 import com.tallerwebi.dominio.CarritoService;
 import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.ServicioLibro;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -26,10 +29,31 @@ public class ControladorCarrito {
     public ControladorCarrito(CarritoService carritoService) {
         this.carritoService = carritoService;
     }
+
+    @GetMapping("/mostrar-carrito")
+    public ModelAndView mostrarLibrosComprados(HttpServletRequest request){
+        HttpSession sesion = request.getSession();
+        Carrito carrito = (Carrito) sesion.getAttribute("carrito");
+
+        List<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
+        ModelMap modelo = new ModelMap();
+        modelo.addAttribute("librosComprados", librosComprados);
+        return new ModelAndView ("comprar", modelo);
+    }
+
     @PostMapping("/carrito")
-    public ModelAndView guardarLibros(@RequestParam("id") Long id) {
+    public ModelAndView guardarLibros(@RequestParam("id") Long id, HttpServletRequest request) {
+
+        HttpSession sesion = request.getSession();
+        Carrito carrito = (Carrito) sesion.getAttribute("carrito");
+
+        if(carrito == null){
+            carrito = new Carrito();
+            sesion.setAttribute("carrito", carrito);
+        }
+
         try {
-            carritoService.agregarLibrosAlCarrito(id);
+            carritoService.agregarLibrosAlCarrito(id, carrito);
         } catch (LibroNoAgregado e) {
             ModelAndView modelAndView = new ModelAndView("home");
             modelAndView.addObject("error", "No se pudo agregar el libro al carrito. Por favor, inténtelo de nuevo más tarde.");
@@ -38,11 +62,4 @@ public class ControladorCarrito {
         return new ModelAndView("redirect:/home");
     }
 
-    @GetMapping("/mostrar-carrito")
-    public ModelAndView mostrarLibrosComprados(){
-        List<Libro> librosComprados = carritoService.obtenerLibrosComprados();
-        ModelMap modelo = new ModelMap();
-        modelo.addAttribute("librosComprados", librosComprados);
-        return new ModelAndView ("comprar", modelo);
-    }
 }

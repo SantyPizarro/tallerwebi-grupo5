@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface CarritoService {
 
-    void agregarLibrosAlCarrito(Long id) throws LibroNoAgregado;
+    void agregarLibrosAlCarrito(Long id, Carrito carrito) throws LibroNoAgregado;
 
-    List <Libro> obtenerLibrosComprados();
+    List <Libro> obtenerLibrosComprados(Carrito carrito);
 }

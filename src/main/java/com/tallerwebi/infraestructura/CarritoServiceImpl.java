@@ -18,18 +18,19 @@ import java.util.List;
 public class CarritoServiceImpl implements CarritoService {
 
     private RepositorioLibro repositorioLibro;
-    private Carrito carrito;
+
 
 
 
     @Autowired
     public CarritoServiceImpl(RepositorioLibro repositorioLibro){
         this.repositorioLibro = repositorioLibro;
-        carrito = new Carrito();
+
     }
 
     @Override
-    public void agregarLibrosAlCarrito(Long id) throws LibroNoAgregado {
+    public void agregarLibrosAlCarrito(Long id, Carrito carrito) throws LibroNoAgregado {
+
         Libro libroEncontrado = buscarLibroPorId(id);
 
         if(libroEncontrado != null){
@@ -41,7 +42,7 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     @Override
-    public List<Libro> obtenerLibrosComprados() {
+    public List<Libro> obtenerLibrosComprados(Carrito carrito) {
         return carrito.getLibros();
     }
 

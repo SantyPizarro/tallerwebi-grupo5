@@ -36,8 +36,11 @@ public class ControladorCarrito {
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
 
         List<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
+
         ModelMap modelo = new ModelMap();
         modelo.addAttribute("librosComprados", librosComprados);
+        modelo.addAttribute("subtotal", carritoService.obtenerSubtotal(carrito));
+
         return new ModelAndView ("comprar", modelo);
     }
 

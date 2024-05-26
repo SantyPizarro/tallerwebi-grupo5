@@ -46,6 +46,17 @@ public class CarritoServiceImpl implements CarritoService {
         return carrito.getLibros();
     }
 
+    @Override
+    public Double obtenerSubtotal(Carrito carrito) {
+        Double subtotal = 0.0;
+        List<Libro> libros = obtenerLibrosComprados(carrito);
+        for (Libro precioLibro : libros) {
+            subtotal += precioLibro.getPrecio();
+        }
+
+        return subtotal;
+    }
+
     private Libro buscarLibroPorId(Long id) {
         return repositorioLibro.buscarLibroPorId(id);
     }

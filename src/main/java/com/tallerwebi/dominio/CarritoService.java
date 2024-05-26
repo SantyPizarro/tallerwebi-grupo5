@@ -11,4 +11,7 @@ public interface CarritoService {
     void agregarLibrosAlCarrito(Long id, Carrito carrito) throws LibroNoAgregado;
 
     List <Libro> obtenerLibrosComprados(Carrito carrito);
+
+    Double obtenerSubtotal(Carrito carrito);
+
 }

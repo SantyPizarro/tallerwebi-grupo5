@@ -1,8 +1,15 @@
 package com.tallerwebi.dominio;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public interface PerfilService {
 
-    void editarDescripcionPerfil(String descripcion,Usuario usuario);
-    Usuario buscarUsuario(String email);
-    void editarUsuario(Usuario usuario,Usuario usuario2);
+
+
+    Usuario buscarUsuario(String email,String password);
+    void editarPerfilCompleto(Usuario usuarioExistente, Usuario usuario, MultipartFile foto);
+    Usuario buscarUsuarioPorId(Long id);
+
+
+
 }

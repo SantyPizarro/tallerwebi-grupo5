@@ -32,7 +32,7 @@
             </div>
             <div class="col-md-4">
                 <div class="confirmacion-compra">
-                    <p>Subtotal: $<span th:text="${subtotal}">0.00</span></p>
+                    <p>Subtotal: $<span th:text="${subtotal}"></span></p>
                     <p id="showInput" style="cursor: pointer; color: #007bff;">¿Tiene un cupón de descuento?</p>
                     <form th:action="@{/comprar}" method="get">
                         <div id="inputContainer" class="hidden">

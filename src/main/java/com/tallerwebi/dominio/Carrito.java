@@ -35,4 +35,7 @@ public class Carrito {
         this.libros = libros;
     }
 
+    public void limpiar() {
+        this.libros.clear();
+    }
 }

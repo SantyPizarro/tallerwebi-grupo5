@@ -13,20 +13,25 @@ import java.util.List;
 public class CompraLibroServiceImpl implements CompraLibroService {
 
     private RepositorioCompra repositorioCompra;
+    private RepositorioProductosCompra repositorioProductosCompra;
 
     @Autowired
-    public CompraLibroServiceImpl (RepositorioCompra repositorioCompra){
+    public CompraLibroServiceImpl (RepositorioCompra repositorioCompra, RepositorioProductosCompra repositorioProductosCompra){
         this.repositorioCompra = repositorioCompra;
+        this.repositorioProductosCompra = repositorioProductosCompra;
     }
 
     @Override
     public void registrarCompra(Usuario usuario, Carrito carrito) {
         Compra compra = new Compra(usuario);
+        repositorioCompra.crearCompra(compra);
         List <Libro> librosComprados = carrito.getLibros();
 
         for(Libro libros : librosComprados){
             ProductosCompra productos = new ProductosCompra(compra);
             productos.setLibro(libros);
+            repositorioProductosCompra.crearProducto(productos);
+
         }
 
     }

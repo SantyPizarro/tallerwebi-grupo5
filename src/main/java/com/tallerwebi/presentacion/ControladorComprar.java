@@ -37,6 +37,7 @@ public class ControladorComprar {
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         compraLibroService.registrarCompra(usuario, carrito);
+        carrito.limpiar();
 
         return new ModelAndView("home");
 

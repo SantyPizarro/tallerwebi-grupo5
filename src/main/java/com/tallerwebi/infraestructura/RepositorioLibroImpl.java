@@ -9,7 +9,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
+import org.hibernate.query.Query;
+
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -63,7 +64,7 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         query.setParameter("editorial", editorial);
         return query.getResultList();
 
-        }
+    }
 
     @Override
     public List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo) {
@@ -75,6 +76,15 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         query.setParameter("max", precioMaximo);
         return query.getResultList();
 
+    }
+
+    @Override
+    public Libro buscarLibroPorId(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM Libro WHERE id = :id";
+        Query<Libro> query = session.createQuery(hql, Libro.class);
+        query.setParameter("id", id);
+        return query.uniqueResult();
     }
 
 }

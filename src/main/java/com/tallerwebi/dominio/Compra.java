@@ -15,4 +15,12 @@ public class Compra {
 
     private LocalDate fechaDeCompra;
 
+    public Compra(Usuario usuario) {
+        this.usuario = usuario;
+        this.fechaDeCompra = LocalDate.now();
+    }
+
+    public Compra() {
+
+    }
 }

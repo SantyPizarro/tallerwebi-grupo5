@@ -1,6 +1,9 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.Carrito;
 import com.tallerwebi.dominio.CompraLibroService;
+import com.tallerwebi.dominio.Usuario;
+import net.bytebuddy.asm.Advice;
 import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,35 +24,22 @@ import java.util.List;
 public class ControladorComprar {
 
 
-    private CompraLibroService libroService;
+    private CompraLibroService compraLibroService;
 
-
-    public ControladorComprar(CompraLibroService libroService) {
-        this.libroService = libroService;
+    @Autowired
+    public ControladorComprar (CompraLibroService compraLibroService) {
+       this.compraLibroService = compraLibroService;
     }
 
     @GetMapping("/comprar")
-    public ModelAndView comprar() {
-        ModelMap model = new ModelMap();
-        model.put("subtotal",9.99);
+    public ModelAndView comprar(HttpServletRequest request) {
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
+        Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
+        compraLibroService.registrarCompra(usuario, carrito);
 
-        return new ModelAndView("comprar",model);
-    }
+        return new ModelAndView("home");
 
-    @GetMapping("/comprar/{titulo}")
-    public ModelAndView comprar(@PathVariable String titulo) {
-        ModelMap model = new ModelMap();
-        model.put("subtotal", libroService.sumarSubtotal(titulo));
-        return new ModelAndView("comprar", model);
-    }
-
-
-    //ESTO ES UNA PRUEBA {BORRAR}
-    @GetMapping("/comprar/{numero1}/{numero2}")
-    public ModelAndView comprar(@PathVariable Integer numero1, @PathVariable Integer numero2) {
-        ModelMap model = new ModelMap();
-        model.put("subtotal", libroService.sumarNumeros(numero1, numero2));
-        return new ModelAndView("comprar", model);
     }
 
 }

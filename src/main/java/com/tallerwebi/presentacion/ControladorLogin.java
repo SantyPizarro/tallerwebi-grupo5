@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 public class ControladorLogin {
 
     private ServicioLogin servicioLogin;
-    Carrito carrito;
+
 
     @Autowired
     public ControladorLogin(ServicioLogin servicioLogin){
@@ -36,12 +36,12 @@ public class ControladorLogin {
     @RequestMapping(path = "/validar-login", method = RequestMethod.POST)
     public ModelAndView validarLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin, HttpServletRequest request) {
         ModelMap model = new ModelMap();
-
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail());
         if (usuarioBuscado != null) {
             HttpSession sesion = request.getSession();
-            carrito = new Carrito();
+            Carrito carrito = new Carrito();
             sesion.setAttribute("CARRITO", carrito);
+            sesion.setAttribute("USUARIO", usuarioBuscado);
            // request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
             return new ModelAndView("redirect:/home");
         } else {

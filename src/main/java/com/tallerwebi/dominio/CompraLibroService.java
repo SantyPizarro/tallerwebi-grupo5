@@ -6,8 +6,5 @@ import java.util.List;
 
 
 public interface CompraLibroService {
-
-    List<Libro> obtenerLibros();
-    Double sumarSubtotal(String titulo);
-    Double sumarNumeros(Integer numero1, Integer numero2);
+    void registrarCompra(Usuario usuario, Carrito carrito);
 }

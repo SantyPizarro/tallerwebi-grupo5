@@ -12,4 +12,24 @@ public class ProductosCompra {
     @ManyToOne
     private Compra compra;
 
+    @OneToOne
+    private Libro libro;
+
+    private Double precioProducto;
+
+    public ProductosCompra(Compra compra){
+        this.compra = compra;
+    }
+
+    public ProductosCompra() {
+
+    }
+
+    public Libro getLibro() {
+        return libro;
+    }
+
+    public void setLibro(Libro libro) {
+        this.libro = libro;
+    }
 }

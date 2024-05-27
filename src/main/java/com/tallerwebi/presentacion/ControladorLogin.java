@@ -50,7 +50,6 @@ public class ControladorLogin {
         return new ModelAndView("login", model);
     }
 
-
     @RequestMapping(path = "/cerrar-sesion")
     public ModelAndView cerrarSesion(HttpServletRequest request){
         HttpSession sesion = request.getSession();
@@ -61,9 +60,6 @@ public class ControladorLogin {
         return new ModelAndView("login", modelo);
 
     }
-
-
-
 
     @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
     public ModelAndView registrarme(@ModelAttribute("datosRegistro") DatosRegistro datosRegistro) {

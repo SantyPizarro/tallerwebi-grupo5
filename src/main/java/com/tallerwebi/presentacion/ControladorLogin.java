@@ -1,9 +1,6 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.DatosLogin;
-import com.tallerwebi.dominio.DatosRegistro;
-import com.tallerwebi.dominio.ServicioLogin;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.NoCoincideContrasenia;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class ControladorLogin {
 
     private ServicioLogin servicioLogin;
+
 
     @Autowired
     public ControladorLogin(ServicioLogin servicioLogin){
@@ -37,10 +36,13 @@ public class ControladorLogin {
     @RequestMapping(path = "/validar-login", method = RequestMethod.POST)
     public ModelAndView validarLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin, HttpServletRequest request) {
         ModelMap model = new ModelMap();
-
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail());
         if (usuarioBuscado != null) {
-            request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
+            HttpSession sesion = request.getSession();
+            Carrito carrito = new Carrito();
+            sesion.setAttribute("CARRITO", carrito);
+            sesion.setAttribute("USUARIO", usuarioBuscado);
+           // request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
             return new ModelAndView("redirect:/home");
         } else {
             model.put("error", "Usuario o clave incorrecta");
@@ -48,9 +50,16 @@ public class ControladorLogin {
         return new ModelAndView("login", model);
     }
 
+    @RequestMapping(path = "/cerrar-sesion")
+    public ModelAndView cerrarSesion(HttpServletRequest request){
+        HttpSession sesion = request.getSession();
+        sesion.removeAttribute("CARRITO");
+        sesion.invalidate();
+        ModelMap modelo = new ModelMap();
+        modelo.put("datosLogin", new DatosLogin());
+        return new ModelAndView("login", modelo);
 
-
-
+    }
 
     @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
     public ModelAndView registrarme(@ModelAttribute("datosRegistro") DatosRegistro datosRegistro) {

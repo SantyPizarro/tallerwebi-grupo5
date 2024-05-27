@@ -28,7 +28,7 @@ public class ControladorComprar {
 
     @Autowired
     public ControladorComprar (CompraLibroService compraLibroService) {
-       this.compraLibroService = compraLibroService;
+        this.compraLibroService = compraLibroService;
     }
 
     @GetMapping("/comprar")
@@ -44,5 +44,3 @@ public class ControladorComprar {
     }
 
 }
-
-

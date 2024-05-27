@@ -21,7 +21,15 @@ public class Usuario {
     private String nombreDeUsuario;
     private String generoFav1;
     private String generoFav2;
+    private String foto;
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 
     public String getDescripcion() {
         return descripcion;

@@ -37,6 +37,11 @@
     box-shadow: 0 0 12px 2px rgba(0, 0, 0, .2);
 }
 
+.contenedor .avatar-perfil img {
+    width: 200%;
+    height: 100%;
+}
+
 .nombre{
     margin-top: 1rem;
 }

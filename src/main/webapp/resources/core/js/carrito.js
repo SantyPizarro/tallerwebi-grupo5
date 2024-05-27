@@ -1,3 +1,8 @@
+document.getElementById('showInput').addEventListener('click', function () {
+    document.getElementById('inputContainer').classList.toggle('hidden');
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const incrementButtons = document.querySelectorAll('.boton-compra');
     const numeroDiv = document.querySelector('.numero');

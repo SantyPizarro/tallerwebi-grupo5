@@ -39,8 +39,7 @@ public class ControladorComprar {
         compraLibroService.registrarCompra(usuario, carrito);
         carrito.limpiar();
 
-        return new ModelAndView("home");
-
+        return new ModelAndView("redirect:/home");
     }
 
 }

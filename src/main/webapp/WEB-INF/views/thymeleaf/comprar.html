@@ -5,59 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" th:href="@{/css/comprar.css}"/>
     <title>Comprar</title>
-    <!-- Boostrap core css -->
+    <!-- Bootstrap core css -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
     <div th:replace="header_footer :: head"></div>
-
 </head>
-
-
 <body>
-
-    <header th:replace="header_footer :: header"></header>
-
+<header th:replace="header_footer :: header"></header>
 <main>
     <div class="container">
-        <div class="row justify-content-end">
+        <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card mb-3">
+                <div class="card mb-3" th:each="libro : ${librosComprados}">
                     <div class="row g-0">
                         <div class="col-md-4">
-                            <img th:src="@{/images/elprincipito.webp}" class="img-fluid rounded-start" alt="...">
+                            <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}"
+                                 class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-                                <h5 class="card-title">El principito</h5>
-                                <p class="card-text">Precio: $5,99</p>
-                                <p class="card-text"><small class="text-body-secondary">Editorial: Edelvives</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img th:src="@{/images/lasombra.webp}" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">La sombra</h5>
-                                <p class="card-text">Precio: $5,99</p>
-                                <p class="card-text"><small class="text-body-secondary">Editorial: Edelvives</small></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-3">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img th:src="@{/images/martin-fierro.jpg}" class="img-fluid rounded-start" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Martin Fierro</h5>
-                                <p class="card-text">Precio: $5,99</p>
-                                <p class="card-text"><small class="text-body-secondary">Editorial: Edelvives</small></p>
+                                <h5 class="card-title" th:text="${libro.titulo}">Título del Libro</h5>
+                                <p class="card-text" th:text="${libro.precio}">$ Precio del Libro</p>
                             </div>
                         </div>
                     </div>
@@ -65,18 +32,15 @@
             </div>
             <div class="col-md-4">
                 <div class="confirmacion-compra">
-                    <p>Subtotal: $<span th:text="${subtotal}"></span>;</p>
-
-                    <p id="showInput" style="cursor: pointer; color: #007bff;">Tiene un cupón de descuento?</p>
+                    <p>Subtotal: $<span th:text="${subtotal}"></span></p>
+                    <p id="showInput" style="cursor: pointer; color: #007bff;">¿Tiene un cupón de descuento?</p>
+                    <div id="inputContainer" class="hidden">
+                        <input type="text" id="couponInput" name="codigo" class="input-field form-control">
+                        <label for="couponInput" class="input-label">Cupón de Descuento</label>
+                    </div>
+                    <p>Total: $<span th:text="${total}">0.00</span></p>
 
                     <form th:action="@{/comprar}" method="get">
-                        <div id="inputContainer" class="hidden">
-                            <input type="text" id="couponInput" name="codigo" class="input-field">
-                            <label for="couponInput" class="input-label">Cupón de Descuento</label>
-                        </div>
-
-                        <p>Total: <!-- Aquí se mostrará el total --></p>
-
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             <input type="submit" class="btn btn-primary" value="Confirmar compra">
                         </div>
@@ -86,11 +50,7 @@
         </div>
     </div>
 </main>
-
-<footer th:replace="header_footer :: footer">
-
-</footer>
-
+<footer th:replace="header_footer :: footer"></footer>
 <script type="text/javascript" th:src="@{/js/compra.js}"></script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/carrito.js}"></script>

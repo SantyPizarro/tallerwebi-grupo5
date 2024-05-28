@@ -20,23 +20,23 @@ public class ServicioLibro {
         return repositorioLibro.obtenerTodosLosLibros();
     }
 
-    public List<String> obtenerEditoriales(){
+    public List<Libro> obtenerEditoriales(){
         return repositorioLibro.obtenerEditoriales();
     }
 
-    public List<Libro> ordenarPorFechaAgregado(String fechaAgregado){
-        return repositorioLibro.ordenarPorFechaAgregado(fechaAgregado);
+    public List<Libro> filtrarPorEditorial(String editorial){
+        return repositorioLibro.filtrarPorEditoral(editorial);
     }
+
+    public List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo){
+        return repositorioLibro.filtrarPorPrecio(precioMinimo, precioMaximo);
+    }
+
+   /* public List<Libro> ordenarPorFechaAgregado(String fechaAgregado){
+        return repositorioLibro.ordenarPorFechaAgregado(fechaAgregado);
+    }*/
 
     public Libro mostrarDetalleLibro(String titulo){
         return repositorioLibro.buscarUnLibroPorSuTitulo(titulo);
-    }
-
-    public List<Libro> filtrarLibros(String editorial, Double precioMinimo, Double precioMaximo, String genero){
-        return repositorioLibro.filtrarLibros(editorial, precioMinimo,precioMaximo, genero);
-    }
-
-    public List<String> obtenerGeneros(){
-        return repositorioLibro.obtenerGeneros();
     }
 }

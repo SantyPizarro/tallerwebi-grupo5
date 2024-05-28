@@ -8,6 +8,9 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+
 @Repository("repositorioUsuario")
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
@@ -42,6 +45,29 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     @Override
     public void modificar(Usuario usuario) {
         sessionFactory.getCurrentSession().update(usuario);
+    }
+
+    @Override
+    public Usuario buscarPorId(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM Usuario WHERE id = :id";
+        Query query = session.createQuery(hql, Usuario.class);
+        query.setParameter("id", id);
+
+        try {
+            return (Usuario) query.getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Retorna null si no se encuentra ningún resultado
+        }
+    }
+
+    @Override
+    public Usuario buscarUsuarioPassword(String email, String password) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (Usuario) session.createCriteria(Usuario.class)
+                .add(Restrictions.eq("email", email))
+                .add(Restrictions.eq("password", password))
+                .uniqueResult();
     }
 
 }

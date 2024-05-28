@@ -2,15 +2,13 @@ package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.RepositorioLibro;
-import com.tallerwebi.dominio.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import org.hibernate.query.Query;
-
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -50,41 +48,82 @@ public class RepositorioLibroImpl implements RepositorioLibro {
     }
 
     @Override
-    public List<Libro> obtenerEditoriales(){
+    public List<String> obtenerEditoriales(){
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("SELECT DISTINCT libro.editorial FROM Libro libro", Libro.class).getResultList();
+        String hql = "SELECT DISTINCT l.editorial FROM Libro l";
+        Query query = session.createQuery(hql);
+        return query.getResultList();
     }
 
     @Override
-    public List<Libro> filtrarPorEditoral(String editorial) {
-
+    public List<Libro> filtrarLibros(String editorial, Double precioMinimo, Double precioMaximo, String genero) {
         Session session = sessionFactory.getCurrentSession();
-        String hql = "FROM Libro WHERE editorial = :editorial";
-        Query query = session.createQuery(hql);
-        query.setParameter("editorial", editorial);
-        return query.getResultList();
 
+
+        StringBuilder hql = new StringBuilder("FROM Libro l WHERE 1=1");
+
+
+        if (editorial != null && !editorial.isEmpty()) {
+            hql.append(" AND l.editorial = :editorial");
+        }
+        if (precioMinimo != null) {
+            hql.append(" AND l.precio >= :precioMinimo");
+        }
+        if (precioMaximo != null) {
+            hql.append(" AND l.precio <= :precioMaximo");
+        }
+
+
+        if (genero != null && !genero.isEmpty()) {
+            hql.append(" AND l.genero.nombre = :genero");
+        }
+
+
+        Query query = session.createQuery(hql.toString());
+
+
+        if (editorial != null && !editorial.isEmpty()) {
+            query.setParameter("editorial", editorial);
+        }
+        if (precioMinimo != null) {
+            query.setParameter("precioMinimo", precioMinimo);
+        }
+        if (precioMaximo != null) {
+            query.setParameter("precioMaximo", precioMaximo);
+        }
+        if (genero != null && !genero.isEmpty()) {
+            query.setParameter("genero", genero);
+        }
+
+
+        return query.getResultList();
     }
 
+    //@Override
+    //public List<Libro> ordenarPorFechaAgregado(String fechaAgregado) {
+//
+   //    String hql = "FROM Libro ORDER BY STR_TO_DATE(fechaAgregado, '%Y-%m-%d') DESC";
+   //     Query query = session.createQuery(hql);
+   //     return query.getResultList();
+//
+  //  }
+
     @Override
-    public List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo) {
-
+    public List<String> obtenerGeneros() {
         Session session = sessionFactory.getCurrentSession();
-        String hql = "FROM Libro WHERE precio BETWEEN :min AND :max";
+        String hql = "SELECT DISTINCT g.nombre FROM Genero g";
         Query query = session.createQuery(hql);
-        query.setParameter("min", precioMinimo);
-        query.setParameter("max", precioMaximo);
         return query.getResultList();
-
     }
 
     @Override
     public Libro buscarLibroPorId(Long id) {
         Session session = sessionFactory.getCurrentSession();
         String hql = "FROM Libro WHERE id = :id";
-        Query<Libro> query = session.createQuery(hql, Libro.class);
+        org.hibernate.query.Query<Libro> query = session.createQuery(hql, Libro.class);
         query.setParameter("id", id);
         return query.uniqueResult();
     }
+
 
 }

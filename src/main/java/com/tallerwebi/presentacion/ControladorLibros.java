@@ -1,54 +1,49 @@
 package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.Libro;
+import com.tallerwebi.dominio.ServicioBarraBusqueda;
 import com.tallerwebi.dominio.ServicioLibro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
+
 
 @Controller
 public class ControladorLibros {
 
     private final ServicioLibro servicioLibro;
+    private final ServicioBarraBusqueda servicioBarraBusqueda;
 
     @Autowired
-    public ControladorLibros (ServicioLibro servicioLibro) {
+    public ControladorLibros(ServicioLibro servicioLibro, ServicioBarraBusqueda servicioBarraBusqueda) {
         this.servicioLibro = servicioLibro;
+        this.servicioBarraBusqueda = servicioBarraBusqueda;
     }
 
     @GetMapping("/libros")
-    public ModelAndView mostrarLibros() {
-        ModelAndView modelAndView = new ModelAndView("libros");
-        modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
-        return modelAndView;
+    public ModelAndView mostrarLibros(
+            @RequestParam(value = "editorial", required = false) String editorial,
+            @RequestParam(value = "precio-min", required = false) Double precioMinimo,
+            @RequestParam(value = "precio-max", required = false) Double precioMaximo,
+            @RequestParam(value = "genero", required = false) String genero)
+            {
+
+                List<Libro> libros = servicioLibro.filtrarLibros(editorial, precioMinimo, precioMaximo, genero);
+                List<String> editoriales = servicioLibro.obtenerEditoriales();
+                List<String> generos = servicioLibro.obtenerGeneros();
+
+                ModelAndView modelAndView = new ModelAndView("libros");
+                modelAndView.addObject("libros", libros);
+                modelAndView.addObject("editoriales", editoriales);
+                modelAndView.addObject("generos", generos);
+                return modelAndView;
     }
 
-    @GetMapping("/filtrar-libros")
-    public ModelAndView mostrarLibrosPorEditorial(@RequestParam("editorial") String editorial) {
-        List<Libro> librosFiltrados = servicioLibro.filtrarPorEditorial(editorial);
-        ModelAndView modelAndView = new ModelAndView("libros-filtrar");
-        modelAndView.addObject("librosFiltrados", librosFiltrados);
-        modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
-        return modelAndView;
-
-    }
-
-    @GetMapping("/filtrar-precio")
-    public ModelAndView mostrarLibrosPorPrecio(@RequestParam("precio-min") double precioMinimo, @RequestParam("precio-max") double precioMaximo){
-        List<Libro> librosFiltrados = servicioLibro.filtrarPorPrecio(precioMinimo, precioMaximo);
-        ModelAndView modelAndView = new ModelAndView("libros-precio");
-        modelAndView.addObject("librosFiltrados", librosFiltrados);
-        modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
-        return modelAndView;
-    }
 
 //    @PostMapping("/detalle-libro")
 //    public ModelAndView mostrarDetalleLibro(@ModelAttribute("libro") Libro libro) {

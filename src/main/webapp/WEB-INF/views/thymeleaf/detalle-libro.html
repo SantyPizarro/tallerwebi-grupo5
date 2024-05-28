@@ -39,7 +39,7 @@
 
         <h6 class="editorial" th:text="${libro.getEditorial()}"></h6>
 
-        <h6 class="genero" th:text="${libro.getGenero()}"></h6>
+        <h6 class="genero" th:text="${libro.getGenero().getNombre()}"></h6>
         <p class="notas-libro" th:text="${libro.getDescripcion()}"></p>
 
         <p class="precio" th:text="${libro.getPrecio()}"></p>

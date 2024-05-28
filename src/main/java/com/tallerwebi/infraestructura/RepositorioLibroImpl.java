@@ -2,7 +2,6 @@ package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.RepositorioLibro;
-import com.tallerwebi.dominio.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 @Transactional
@@ -101,15 +99,14 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         return query.getResultList();
     }
 
-    @Override
-    public List<Libro> ordenarPorFechaAgregado(String fechaAgregado) {
-
-        Session session = sessionFactory.getCurrentSession();
-        String hql = "FROM Libro ORDER BY STR_TO_DATE(fechaAgregado, '%Y-%m-%d') DESC";
-        Query query = session.createQuery(hql);
-        return query.getResultList();
-
-    }
+    //@Override
+    //public List<Libro> ordenarPorFechaAgregado(String fechaAgregado) {
+//
+   //    String hql = "FROM Libro ORDER BY STR_TO_DATE(fechaAgregado, '%Y-%m-%d') DESC";
+   //     Query query = session.createQuery(hql);
+   //     return query.getResultList();
+//
+  //  }
 
     @Override
     public List<String> obtenerGeneros() {
@@ -117,6 +114,15 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         String hql = "SELECT DISTINCT g.nombre FROM Genero g";
         Query query = session.createQuery(hql);
         return query.getResultList();
+    }
+
+    @Override
+    public Libro buscarLibroPorId(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM Libro WHERE id = :id";
+        org.hibernate.query.Query<Libro> query = session.createQuery(hql, Libro.class);
+        query.setParameter("id", id);
+        return query.uniqueResult();
     }
 
 

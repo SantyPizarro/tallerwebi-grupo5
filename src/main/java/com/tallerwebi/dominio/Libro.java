@@ -37,6 +37,10 @@ public class Libro{
     @ManyToOne
     private Genero genero;
 
+    public Genero getGenero(){
+        return genero;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }

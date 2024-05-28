@@ -29,38 +29,14 @@
             <label for="precio-max">Precio máximo</label>
             <input type="number" id="precio-max" name="precio-max" placeholder="Precio máximo">
             <button type="submit">Filtrar</button>
-        </form>
         <div class="menu-categorias">
             <ul>
-                <li>
-                    <a href="#">Artes</a>
-                    <span class="icono-toggle"></span>
-                    <ul>
-                        <li><a href="#">Pintura</a></li>
-                        <li><a href="#">Escultura</a></li>
-                        <li><a href="#">Dibujo</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Ciencias</a>
-                    <span class="icono-toggle"></span>
-                    <ul>
-                        <li><a href="#">Biología</a></li>
-                        <li><a href="#">Química</a></li>
-                        <li><a href="#">Física</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">Literatura</a>
-                    <span class="icono-toggle"></span>
-                    <ul>
-                        <li><a href="#">Poesía</a></li>
-                        <li><a href="#">Novela</a></li>
-                        <li><a href="#">Ensayo</a></li>
-                    </ul>
+                <li th:each="genero : ${generos}">
+                    <a th:href="@{'/libros?genero=' + ${genero}}"><p class="genero" type="button" th:text="${genero}"></p></a>
                 </li>
             </ul>
         </div>
+        </form>
     </aside>
     <section class="libros">
         <div th:each="libro : ${libros}" class="tarjeta-libro">

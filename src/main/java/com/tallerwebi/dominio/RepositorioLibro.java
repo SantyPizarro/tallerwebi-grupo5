@@ -7,8 +7,8 @@ public interface RepositorioLibro {
     List<Libro> buscarPorTitulo(String titulo);
     Libro buscarUnLibroPorSuTitulo(String titulo);
     List<Libro> obtenerTodosLosLibros();
-    List<Libro> obtenerEditoriales();
-    List<Libro> filtrarPorEditoral(String editorial);
-    List<Libro> filtrarPorPrecio(double precioMinimo, double precioMaximo);
+    List<String> obtenerEditoriales();
     List<Libro> ordenarPorFechaAgregado(String fechaAgregado);
+    List<String> obtenerGeneros();
+    List<Libro> filtrarLibros(String editorial, Double precioMinimo, Double precioMaximo, String genero);
 }

@@ -1,9 +1,6 @@
 package com.tallerwebi.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Libro{
@@ -18,7 +15,7 @@ public class Libro{
     private Double precio;
     private String ruta;
     private String descripcion;
-    private String genero;
+
 
 
     public Libro(){
@@ -30,15 +27,17 @@ public class Libro{
         this.editorial = editorial;
     }
 
-    public Libro(String titulo, String autor, String editorial, String fechaPublicacion, Double precio, String descripcion, String genero) {
+    public Libro(String titulo, String autor, String editorial, String fechaPublicacion, Double precio, String descripcion) {
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.fechaPublicacion = fechaPublicacion;
         this.precio = precio;
         this.descripcion = descripcion;
-        this.genero = genero;
     }
+
+    @ManyToOne
+    private Genero genero;
 
     public String getDescripcion() {
         return descripcion;
@@ -46,14 +45,6 @@ public class Libro{
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public Long getId() {

@@ -10,6 +10,6 @@ public interface RepositorioLibro {
     List<String> obtenerEditoriales();
     List<Libro> filtrarLibros(String editorial, Double precioMinimo, Double precioMaximo, String genero);
     List<String> obtenerGeneros();
-    //List<Libro> ordenarPorFechaAgregado(String fechaAgregado);
+    List<Libro> ordenarPorFechaAgregado();
     Libro buscarLibroPorId(Long id);
 }

@@ -99,14 +99,14 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         return query.getResultList();
     }
 
-    //@Override
-    //public List<Libro> ordenarPorFechaAgregado(String fechaAgregado) {
-//
-   //    String hql = "FROM Libro ORDER BY STR_TO_DATE(fechaAgregado, '%Y-%m-%d') DESC";
-   //     Query query = session.createQuery(hql);
-   //     return query.getResultList();
-//
-  //  }
+    @Override
+    public List<Libro> ordenarPorFechaAgregado() {
+
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM Libro ORDER BY STR_TO_DATE(fechaAgregado, '%Y-%m-%d') DESC";
+        Query query = session.createQuery(hql);
+        return query.getResultList();
+    }
 
     @Override
     public List<String> obtenerGeneros() {

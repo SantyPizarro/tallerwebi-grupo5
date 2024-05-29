@@ -14,6 +14,7 @@ public class Libro{
     private Double precio;
     private String ruta;
     private String descripcion;
+    private String fechaAgregado;
 
 
     public Libro(){
@@ -39,6 +40,18 @@ public class Libro{
 
     public Genero getGenero(){
         return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    public void setFechaAgregado(String fechaAgregado) {
+        this.fechaAgregado = fechaAgregado;
+    }
+
+    public String getFechaAgregado() {
+        return fechaAgregado;
     }
 
     public String getDescripcion() {

@@ -24,9 +24,9 @@ public class ServicioLibro {
         return repositorioLibro.obtenerEditoriales();
     }
 
-   /* public List<Libro> ordenarPorFechaAgregado(String fechaAgregado){
-        return repositorioLibro.ordenarPorFechaAgregado(fechaAgregado);
-    }*/
+    public List<Libro> ordenarPorFechaAgregado(){
+        return repositorioLibro.ordenarPorFechaAgregado();
+    }
 
     public Libro mostrarDetalleLibro(String titulo){
         return repositorioLibro.buscarUnLibroPorSuTitulo(titulo);

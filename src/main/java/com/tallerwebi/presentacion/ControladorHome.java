@@ -22,6 +22,8 @@ public class ControladorHome {
     public ModelAndView mostrarHome() {
         ModelAndView modelAndView = new ModelAndView("home");
         modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
+        modelAndView.addObject("librosOrdenados", servicioLibro.ordenarPorFechaAgregado());
         return modelAndView;
     }
+
 }

@@ -34,7 +34,7 @@
                 <div class="confirmacion-compra">
                     <p>Subtotal: $<span th:text="${subtotal}"></span></p>
                     <p id="showInput" style="cursor: pointer; color: #007bff;">¿Tiene un cupón de descuento?</p>
-                    <div id="inputContainer" class="hidden">
+                    <div id="inputContainer" style="display: none;">
                         <input type="text" id="couponInput" name="codigo" class="input-field form-control">
                         <label for="couponInput" class="input-label">Cupón de Descuento</label>
                     </div>
@@ -50,8 +50,23 @@
         </div>
     </div>
 </main>
+
 <footer th:replace="header_footer :: footer"></footer>
-<script type="text/javascript" th:src="@{/js/compra.js}"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Archivo compra.js cargado");
+
+        document.getElementById("showInput").addEventListener("click", function() {
+            console.log("Parrafo clickeado");
+            var inputContainer = document.getElementById("inputContainer");
+            if (inputContainer.style.display === "none" || inputContainer.style.display === "") {
+                inputContainer.style.display = "block";
+            } else {
+                inputContainer.style.display = "none";
+            }
+        });
+    });
+</script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/carrito.js}"></script>
 <script th:src="@{/js/menuUsuario.js}"></script>

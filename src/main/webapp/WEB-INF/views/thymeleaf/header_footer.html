@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/header.css}"/>
     <link rel="stylesheet" th:href="@{/css/header-busqueda.css}"/>
+
 </head>
 <body>
 
@@ -49,13 +50,21 @@
                 <span class="visually-hidden">unread messages</span>
             </span>
         </a>
-        <a href="perfil.html">
-             <span class="material-symbols-outlined">
-                person
-             </span>
-        </a>
 
-        <a th:href="@{/cerrar-sesion}">Cerrar sesion</a>
+
+
+
+
+        <div class="dropdown">
+            <button class="btn dropdownButton">
+                <span class="material-symbols-outlined">person</span>
+                Cuenta Usuario
+            </button>
+            <div class="dropdown-content dropdownContent">
+                <a href="perfil.html">Ver perfil</a>
+                <a th:href="@{/cerrar-sesion}">Cerrar sesión</a>
+            </div>
+        </div>
 
     </div>
 
@@ -104,13 +113,17 @@
                 <span class="visually-hidden">unread messages</span>
             </span>
             </a>
-            <a href="perfil.html">
-             <span class="material-symbols-outlined">
-                person
-             </span>
-            </a>
 
-            <a th:href="@{/cerrar-sesion}">Cerrar sesion</a>
+            <div class="dropdown">
+                <button class="btn dropdownButton">
+                    <span class="material-symbols-outlined">person</span>
+                    Cuenta Usuario
+                </button>
+                <div class="dropdown-content dropdownContent">
+                    <a href="perfil.html">Ver perfil</a>
+                    <a th:href="@{/cerrar-sesion}">Cerrar sesión</a>
+                </div>
+            </div>
 
         </div>
 
@@ -162,7 +175,7 @@
         <p> Defensa de las y los consumidores.</p>
     </div>
 </div>
-
+<script th:src="@{/js/menuUsuario.js}"></script>
 <script th:src="@{/js/carrito.js}"></script>
 </body>
 </html>

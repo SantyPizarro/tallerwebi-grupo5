@@ -35,13 +35,16 @@ public class ControladorCarrito {
         HttpSession sesion = request.getSession();
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
 
+        if(carrito != null){
         List<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
 
         ModelMap modelo = new ModelMap();
         modelo.addAttribute("librosComprados", librosComprados);
         modelo.addAttribute("subtotal", carritoService.obtenerSubtotal(carrito));
 
-        return new ModelAndView ("comprar", modelo);
+        return new ModelAndView ("comprar", modelo);}
+
+        return new ModelAndView ("redirect:/login");
     }
 
     @PostMapping("/carrito")

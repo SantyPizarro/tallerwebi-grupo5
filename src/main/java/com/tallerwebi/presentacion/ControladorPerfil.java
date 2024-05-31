@@ -1,6 +1,8 @@
 package com.tallerwebi.presentacion;
 
+import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.PerfilService;
+import com.tallerwebi.dominio.ServicioLibro;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,23 +21,22 @@ public class ControladorPerfil {
 
 
     private PerfilService perfilService;
-
-
+    private ServicioLibro servicioLibro;
 
 
     @Autowired
-    public ControladorPerfil(PerfilService perfilService) {
+    public ControladorPerfil(PerfilService perfilService,ServicioLibro servicioLibro) {
         this.perfilService = perfilService;
-
+        this.servicioLibro = servicioLibro;
     }
 
     @GetMapping("/perfil")
     public ModelAndView mostrarPerfil() {
-
-        Usuario usuario = perfilService.buscarUsuario("test@unlam.edu.ar","test");
+        Libro libro = new Libro();
+        Usuario usuario = perfilService.buscarUsuario("test@unlam.edu.ar", "test");
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
-
+        model.put("libro", libro);
         return new ModelAndView("perfil", model);
     }
 
@@ -46,7 +47,7 @@ public class ControladorPerfil {
                                        @RequestParam(name = "id") Long id,
                                        RedirectAttributes flash) {
 
-        Usuario usuarioExistente=perfilService.buscarUsuarioPorId(id);
+        Usuario usuarioExistente = perfilService.buscarUsuarioPorId(id);
         if (usuarioExistente == null) {
             // Manejar el caso donde el usuario no se encuentra
             flash.addFlashAttribute("error", "Usuario no encontrado");
@@ -54,10 +55,10 @@ public class ControladorPerfil {
         }
 
 
-        try{
-            perfilService.editarPerfilCompleto(usuarioExistente,usuario , foto);
+        try {
+            perfilService.editarPerfilCompleto(usuarioExistente, usuario, foto);
             flash.addFlashAttribute("success", "Usuario modificado");
-        }catch (Exception e){
+        } catch (Exception e) {
             flash.addFlashAttribute("error", "Error al guardar la foto: " + e.getMessage());
             return "redirect:/login";
         }
@@ -66,9 +67,11 @@ public class ControladorPerfil {
         return "redirect:/perfil";
     }
 
+    @PostMapping("/perfil/agregarLibro")
+    public String agregarLibro(@RequestParam("titulo")String titulo) {
+        servicioLibro.mostrarDetalleLibro(titulo);
 
-
-
-
+        return "redirect:/perfil";
+    }
 
 }

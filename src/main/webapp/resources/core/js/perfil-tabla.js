@@ -123,9 +123,10 @@ function mostrarContenido(opcion) {
 
         case 'favoritos':
             contenidoHTML = `
-                        <button type="button" class="btn btn-primary mb-3 favbutton" data-toggle="modal" data-target="#addBookModal">
-                            Agregar Libro
-                        </button>`;
+                        <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary favbutton" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+              Agregar Libro
+            </button>`;
             contenidoHTML += librosFavoritos.map(favorito =>
                 `<div class="card" style="width: 18rem;">
                             <img src="${favorito.imagen}" class="card-img-top" alt="${favorito.titulo}">

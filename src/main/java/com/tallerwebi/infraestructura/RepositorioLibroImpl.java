@@ -125,5 +125,10 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         return query.uniqueResult();
     }
 
+    @Override
+    public void agregar(Libro libroAgregar) {
+        sessionFactory.getCurrentSession().save(libroAgregar);
+    }
+
 
 }

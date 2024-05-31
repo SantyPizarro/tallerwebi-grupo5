@@ -1,5 +1,6 @@
 package com.tallerwebi.dominio;
 
+import com.tallerwebi.dominio.excepcion.LibroExistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,21 @@ public class ServicioLibro {
 
     public List<String> obtenerGeneros(){
         return repositorioLibro.obtenerGeneros();
+    }
+
+    private Libro buscarLibroPorTitulo(String titulo) {
+        return repositorioLibro.buscarUnLibroPorSuTitulo(titulo);
+    }
+
+    public void agregarLibro(DatosLibro datosLibro) throws LibroExistente {
+       Libro libro = buscarLibroPorTitulo(datosLibro.getTitulo());
+
+       if (libro != null){
+           throw new LibroExistente();
+       } else {
+           Libro libroAgregar = new Libro(datosLibro.getTitulo(), datosLibro.getAutor(), datosLibro.getEditorial(), datosLibro.getFechaPublicacion(),datosLibro.getPrecio(),datosLibro.getDescripcion());
+           repositorioLibro.agregar(libroAgregar);
+       }
     }
 
 }

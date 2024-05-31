@@ -38,7 +38,7 @@ public class ControladorLogin {
         ModelMap model = new ModelMap();
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail());
-        if (usuarioBuscado != null) {
+        if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
             HttpSession sesion = request.getSession();
             Carrito carrito = new Carrito();
             sesion.setAttribute("CARRITO", carrito);

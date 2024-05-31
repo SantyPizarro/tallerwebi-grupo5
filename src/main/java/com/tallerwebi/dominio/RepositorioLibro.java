@@ -12,4 +12,5 @@ public interface RepositorioLibro {
     List<String> obtenerGeneros();
     List<Libro> ordenarPorFechaAgregado();
     Libro buscarLibroPorId(Long id);
+    void agregar(Libro libroAgregar);
 }

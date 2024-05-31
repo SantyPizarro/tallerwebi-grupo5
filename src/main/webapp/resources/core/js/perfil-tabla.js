@@ -122,14 +122,18 @@ function mostrarContenido(opcion) {
             break;
 
         case 'favoritos':
-            contenidoHTML = librosFavoritos.map(favorito =>
+            contenidoHTML = `
+                        <button type="button" class="btn btn-primary mb-3 favbutton" data-toggle="modal" data-target="#addBookModal">
+                            Agregar Libro
+                        </button>`;
+            contenidoHTML += librosFavoritos.map(favorito =>
                 `<div class="card" style="width: 18rem;">
-                    <img src="${favorito.imagen}" class="card-img-top" alt="${favorito.titulo}">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title">${favorito.titulo}</h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
-                    </div>
-                </div>`
+                            <img src="${favorito.imagen}" class="card-img-top" alt="${favorito.titulo}">
+                            <div class="card-body detalle-tarjetas">
+                                <h5 class="card-title">${favorito.titulo}</h5>
+                                <a href="#" class="btn btn-primary">Detalles</a>
+                            </div>
+                        </div>`
             ).join('');
             break;
         case 'deseados':

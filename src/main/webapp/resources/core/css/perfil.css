@@ -148,6 +148,19 @@ footer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    position: relative;
+}
+
+.favbutton{
+    position: absolute;
+    width: 10%;
+    height: 6%;
+    top: 5%;
+    
+}
+
+.card{
+    margin-top: 3rem;
 }
 
 

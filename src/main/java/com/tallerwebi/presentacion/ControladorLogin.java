@@ -21,7 +21,7 @@ public class ControladorLogin {
 
 
     @Autowired
-    public ControladorLogin(ServicioLogin servicioLogin){
+    public ControladorLogin(ServicioLogin servicioLogin) {
         this.servicioLogin = servicioLogin;
     }
 
@@ -38,22 +38,27 @@ public class ControladorLogin {
         ModelMap model = new ModelMap();
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail());
-        if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
-            HttpSession sesion = request.getSession();
-            Carrito carrito = new Carrito();
-            sesion.setAttribute("CARRITO", carrito);
-            sesion.setAttribute("USUARIO", usuarioBuscado);
-            sesion.setAttribute("nombreUsuario", usuarioBuscado.getNombreDeUsuario());
-           // request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
-            return new ModelAndView("redirect:/home");
-        } else {
-            model.put("error", "Usuario o clave incorrecta");
+        String rol = usuarioBuscado.getRol();
+
+        if (rol.equals("user")) {
+            if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
+                HttpSession sesion = request.getSession();
+                Carrito carrito = new Carrito();
+                sesion.setAttribute("CARRITO", carrito);
+                sesion.setAttribute("USUARIO", usuarioBuscado);
+                sesion.setAttribute("nombreUsuario", usuarioBuscado.getNombreDeUsuario());
+
+                return new ModelAndView("redirect:/home");
+            } else {
+                model.put("error", "Usuario o clave incorrecta");
+            }
+            return new ModelAndView("login", model);
         }
-        return new ModelAndView("login", model);
+        return new ModelAndView("redirect:/perfilAdmin");
     }
 
     @RequestMapping(path = "/cerrar-sesion")
-    public ModelAndView cerrarSesion(HttpServletRequest request){
+    public ModelAndView cerrarSesion(HttpServletRequest request) {
         HttpSession sesion = request.getSession();
         sesion.removeAttribute("CARRITO");
         sesion.invalidate();
@@ -66,15 +71,15 @@ public class ControladorLogin {
     @RequestMapping(path = "/registrarme", method = RequestMethod.POST)
     public ModelAndView registrarme(@ModelAttribute("datosRegistro") DatosRegistro datosRegistro) {
         ModelMap model = new ModelMap();
-        try{
+        try {
             servicioLogin.registrar(datosRegistro);
-        } catch (UsuarioExistente e){
+        } catch (UsuarioExistente e) {
             model.put("error", "El usuario ya existe");
             return new ModelAndView("nuevo-usuario", model);
         } catch (NoCoincideContrasenia e) {
             model.put("error", "Las contraseñas no coinciden");
             return new ModelAndView("nuevo-usuario", model);
-        } catch (Exception e){
+        } catch (Exception e) {
             model.put("error", "Error al registrar el nuevo usuario");
             return new ModelAndView("nuevo-usuario", model);
         }

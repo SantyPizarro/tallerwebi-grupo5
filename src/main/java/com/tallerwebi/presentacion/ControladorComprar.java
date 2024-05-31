@@ -38,7 +38,7 @@ public class ControladorComprar {
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         compraLibroService.registrarCompra(usuario, carrito);
         carrito.limpiar();
-
+        sesion.setAttribute("cantidadLibros", 0);
         return new ModelAndView("redirect:/home");
     }
 

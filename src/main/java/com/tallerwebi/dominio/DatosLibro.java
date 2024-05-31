@@ -19,6 +19,7 @@ public class DatosLibro {
         this.editorial = editorial;
         this.descripcion = descripcion;
         this.autor = autor;
+
     }
 
     public String getAutor() {

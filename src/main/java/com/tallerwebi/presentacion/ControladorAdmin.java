@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -30,9 +31,10 @@ public class ControladorAdmin {
     }
 
     @RequestMapping(path = "/agregarLibroABDD", method = RequestMethod.POST)
-    public ModelAndView agregarLibroABDD(@ModelAttribute("datosLibro") DatosLibro datosLibro) throws LibroExistente {
+    public ModelAndView agregarLibroABDD(@ModelAttribute("datosLibro") DatosLibro datosLibro,
+                                        @RequestParam(name= "file", required = false) MultipartFile foto) throws LibroExistente {
 
-        servicioLibro.agregarLibro(datosLibro);
+        servicioLibro.agregarLibro(datosLibro, foto);
 
         return new ModelAndView ("redirect:/perfilAdmin");
     }

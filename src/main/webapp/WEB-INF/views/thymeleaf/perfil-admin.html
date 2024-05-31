@@ -51,12 +51,11 @@
                 <div class="modal-body">
                     <form accept-charset="utf-8" th:action="@{/agregarLibroABDD}" method="POST" th:object="${datosLibro}" enctype="multipart/form-data">
 
-                        <!---
                         <div class="mb-3">
                             <label for="formFile" class="form-label">Selecciona tu foto de perfil</label>
                             <input class="form-control" type="file" id="formFile" name="file">
                         </div>
-                        --->
+
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="titulo">Titulo</span>
                             <input th:field="*{titulo}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">

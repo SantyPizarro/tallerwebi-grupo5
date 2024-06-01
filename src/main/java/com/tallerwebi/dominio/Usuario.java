@@ -1,6 +1,8 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -22,6 +24,13 @@ public class Usuario {
     private String generoFav1;
     private String generoFav2;
     private String foto;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Libro> librosFavoritos ;
+
+    public Usuario() {
+        this.librosFavoritos = new ArrayList<>();
+    }
+
 
     public String getFoto() {
         return foto;
@@ -116,5 +125,13 @@ public class Usuario {
 
     public void activar() {
         activo = true;
+    }
+
+    public List<Libro> getLibrosFavoritos() {
+        return librosFavoritos;
+    }
+
+    public void setLibrosFavoritos(List<Libro> librosFavoritos) {
+        this.librosFavoritos = librosFavoritos;
     }
 }

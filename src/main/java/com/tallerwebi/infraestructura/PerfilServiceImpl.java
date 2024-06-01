@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.PerfilService;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
@@ -68,6 +69,12 @@ public class PerfilServiceImpl implements PerfilService {
         repositorioUsuario.modificar(usuarioExistente);
 
 
+    }
+
+    public void addLibroFavorito(Long usuarioId, Libro libro) {
+        Usuario usuario = repositorioUsuario.buscarPorId(usuarioId);
+        usuario.getLibrosFavoritos().add(libro);
+        repositorioUsuario.modificar(usuario);
     }
 
 }

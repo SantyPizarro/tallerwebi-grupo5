@@ -15,6 +15,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 public class ControladorPerfil {
@@ -31,12 +34,12 @@ public class ControladorPerfil {
     }
 
     @GetMapping("/perfil")
-    public ModelAndView mostrarPerfil() {
-        Libro libro = new Libro();
-        Usuario usuario = perfilService.buscarUsuario("test@unlam.edu.ar", "test");
+    public ModelAndView mostrarPerfil(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
         ModelMap model = new ModelMap();
         model.put("usuario", usuario);
-        model.put("libro", libro);
+
         return new ModelAndView("perfil", model);
     }
 
@@ -44,10 +47,11 @@ public class ControladorPerfil {
     @PostMapping("/perfil/editarPerfilCompleto")
     public String editarPerfilCompleto(@RequestParam(name = "file", required = false) MultipartFile foto,
                                        @ModelAttribute("usuario") Usuario usuario,
-                                       @RequestParam(name = "id") Long id,
-                                       RedirectAttributes flash) {
+                                       RedirectAttributes flash,
+                                       HttpServletRequest request) {
 
-        Usuario usuarioExistente = perfilService.buscarUsuarioPorId(id);
+        HttpSession session = request.getSession();
+        Usuario usuarioExistente = (Usuario) session.getAttribute("USUARIO");
         if (usuarioExistente == null) {
             // Manejar el caso donde el usuario no se encuentra
             flash.addFlashAttribute("error", "Usuario no encontrado");
@@ -68,10 +72,21 @@ public class ControladorPerfil {
     }
 
     @PostMapping("/perfil/agregarLibro")
-    public String agregarLibro(@RequestParam("titulo")String titulo) {
-        servicioLibro.mostrarDetalleLibro(titulo);
+    public String agregarLibro(@RequestParam("titulo") String titulo, HttpServletRequest request) {
 
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+        if (usuario != null) {
+            // Aquí puedes agregar el libro a la lista de libros favoritos del usuario
+            // Supongamos que tienes una función en Usuario para agregar libros
+            Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+            Long usuarioId = usuario.getId();// Supongo que este método devuelve un objeto Libro
+            if (libro != null) {
+                perfilService.addLibroFavorito(usuarioId, libro);
+                usuario.getLibrosFavoritos().add(libro);
+                return "redirect:/perfil";
+            }
+        }
         return "redirect:/perfil";
     }
-
 }

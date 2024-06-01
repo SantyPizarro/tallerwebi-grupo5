@@ -94,8 +94,37 @@
             </li>
         </ul>
 
-        <section class="tablas lightblue" id="contenido">
+        <section class="tablas lightblue" id="misLibros">
+            <h1>libros</h1>
+        </section>
 
+        <section class="tablas lightblue" id="amigos" style="display:none;">
+            <h1>amigos</h1>
+        </section>
+
+        <section class="tablas lightblue" id="favoritos" style="display:none;" >
+
+            <button type="button" class="btn btn-primary favbutton" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                Agregar Libro
+            </button>
+            <div th:if="${usuario.librosFavoritos}" class="librosFav">
+                <div th:each="libro : ${usuario.librosFavoritos}" class="card" style="width: 18rem;">
+                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title" th:text="${libro.titulo}"></h5>
+                        <a href="#" class="btn btn-primary">Detalles</a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="tablas lightblue" id="deseados" style="display:none;">
+            <h1>deseados</h1>
+        </section>
+
+        <section class="tablas lightblue" id="facturas" style="display:none;">
+            <h1>facturas</h1>
         </section>
     </div>
 
@@ -108,49 +137,48 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div style="padding: 1rem;"> <form accept-charset="utf-8" th:action="@{/perfil/editarPerfilCompleto}" method="post" th:object="${usuario}" enctype="multipart/form-data">
-                <input type="hidden" th:field="*{id}" />
 
-                <div class="mb-3">
-                    <label for="formFile" class="form-label">Selecciona tu foto de perfil</label>
-                    <input class="form-control" type="file" id="formFile" name="file">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Selecciona tu foto de perfil</label>
+                        <input class="form-control" type="file" id="formFile" name="file">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="nombre">nombre</span>
+                        <input th:field="*{nombreDeUsuario}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="descripcion">descripcion</span>
+                        <input th:field="*{descripcion}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                    </div>
+
+
+                    <select th:field="*{generoFav1}" class="form-select" aria-label="Default select example" name="generos" id="generos">
+                        <option value="1" disabled selected>seleccione un genero</option>
+                        <option value="horror">horror</option>
+                        <option value="accion">accion</option>
+                        <option value="ficcion">ficcion</option>
+                        <option value="deporte">deporte</option>
+                    </select>
+                    <br>
+                    <select th:field="*{generoFav2}" class="form-select" aria-label="Default select example" name="generos2" id="generos2">
+                        <option value="1" disabled selected>seleccione un genero</option>
+                        <option value="horror">horror</option>
+                        <option value="accion">accion</option>
+                        <option value="ficcion">ficcion</option>
+                        <option value="deporte">deporte</option>
+                    </select>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+
+
                 </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="nombre">nombre</span>
-                    <input th:field="*{nombreDeUsuario}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                </div>
-
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="descripcion">descripcion</span>
-                    <input th:field="*{descripcion}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                </div>
-
-
-                <select th:field="*{generoFav1}" class="form-select" aria-label="Default select example" name="generos" id="generos">
-                    <option value="1" disabled selected>seleccione un genero</option>
-                    <option value="horror">horror</option>
-                    <option value="accion">accion</option>
-                    <option value="ficcion">ficcion</option>
-                    <option value="deporte">deporte</option>
-                </select>
-                <br>
-                <select th:field="*{generoFav2}" class="form-select" aria-label="Default select example" name="generos2" id="generos2">
-                    <option value="1" disabled selected>seleccione un genero</option>
-                    <option value="horror">horror</option>
-                    <option value="accion">accion</option>
-                    <option value="ficcion">ficcion</option>
-                    <option value="deporte">deporte</option>
-                </select>
-
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-
-
-            </div>
 
             </div>
         </div>
@@ -168,12 +196,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form accept-charset="utf-8" th:action="@{/perfil/agregarLibro}" method="post" th:object="${libro}">
-                        <input type="hidden" th:field="*{id}"/>
+                    <form accept-charset="utf-8" th:action="@{/perfil/agregarLibro}" method="post" >
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="nombreLibro">titulo</span>
-                            <input th:field="*{titulo}" type="text" name="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                            <input type="text" name="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
 
                         <div class="modal-footer">

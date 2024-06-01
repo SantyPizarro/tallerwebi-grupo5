@@ -26,7 +26,7 @@ public class Libro{
         this.editorial = editorial;
     }
 
-    public Libro(String titulo, String autor, String editorial, String fechaPublicacion, Double precio, String descripcion, String ruta) {
+    public Libro(String titulo, String autor, String editorial, String fechaPublicacion, Double precio, String descripcion, String ruta, Genero genero) {
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
@@ -34,6 +34,7 @@ public class Libro{
         this.precio = precio;
         this.descripcion = descripcion;
         this.ruta = ruta;
+        this.genero = genero;
     }
 
     @ManyToOne

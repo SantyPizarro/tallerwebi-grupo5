@@ -8,18 +8,27 @@ public class DatosLibro {
     private Double precio;
     private String ruta;
     private String descripcion;
+    private Long genero;
 
     public DatosLibro() {
     }
 
-    public DatosLibro(String titulo, Double precio, String fechaPublicacion, String editorial, String descripcion, String autor) {
+    public DatosLibro(String titulo, Double precio, String fechaPublicacion, String editorial, String descripcion, String autor, Long genero) {
         this.titulo = titulo;
         this.precio = precio;
         this.fechaPublicacion = fechaPublicacion;
         this.editorial = editorial;
         this.descripcion = descripcion;
         this.autor = autor;
+        this.genero = genero;
+    }
 
+    public Long getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Long genero) {
+        this.genero = genero;
     }
 
     public String getAutor() {

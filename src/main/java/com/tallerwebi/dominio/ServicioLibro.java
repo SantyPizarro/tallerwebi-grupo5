@@ -75,9 +75,9 @@ public class ServicioLibro {
                     // Manejar la excepción de manera adecuada, por ejemplo, lanzar una nueva excepción o registrar el error
                 }
             }
-
+            Genero genero = repositorioLibro.buscarUnGeneroPorId(datosLibro.getGenero());
             // Crear el objeto Libro y establecer la ruta de la imagen
-            Libro libroAgregar = new Libro(datosLibro.getTitulo(), datosLibro.getAutor(), datosLibro.getEditorial(), datosLibro.getFechaPublicacion(), datosLibro.getPrecio(), datosLibro.getDescripcion(), rutaImagen);
+            Libro libroAgregar = new Libro(datosLibro.getTitulo(), datosLibro.getAutor(), datosLibro.getEditorial(), datosLibro.getFechaPublicacion(), datosLibro.getPrecio(), datosLibro.getDescripcion(), rutaImagen, genero);
             repositorioLibro.agregar(libroAgregar);
         }
     }

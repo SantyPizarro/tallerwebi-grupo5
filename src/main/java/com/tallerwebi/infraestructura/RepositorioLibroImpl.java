@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Genero;
 import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.RepositorioLibro;
 import org.hibernate.Session;
@@ -117,12 +118,26 @@ public class RepositorioLibroImpl implements RepositorioLibro {
     }
 
     @Override
+    public Genero buscarUnGeneroPorId(Long id){
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "FROM Genero WHERE id = :id";
+        org.hibernate.query.Query<Genero> query = session.createQuery(hql, Genero.class);
+        query.setParameter("id", id);
+        return query.uniqueResult();
+    }
+
+    @Override
     public Libro buscarLibroPorId(Long id) {
         Session session = sessionFactory.getCurrentSession();
         String hql = "FROM Libro WHERE id = :id";
         org.hibernate.query.Query<Libro> query = session.createQuery(hql, Libro.class);
         query.setParameter("id", id);
         return query.uniqueResult();
+    }
+
+    @Override
+    public void agregar(Libro libroAgregar) {
+        sessionFactory.getCurrentSession().save(libroAgregar);
     }
 
 

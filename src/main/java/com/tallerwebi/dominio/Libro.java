@@ -1,6 +1,9 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Libro{
@@ -102,4 +105,17 @@ public class Libro{
     public String getRuta(){ return ruta;}
 
     public void setRuta(String ruta){ this.ruta = ruta; }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Libro libro = (Libro) o;
+        return Objects.equals(id, libro.id) && Objects.equals(titulo, libro.titulo) && Objects.equals(autor, libro.autor) && Objects.equals(editorial, libro.editorial) && Objects.equals(fechaPublicacion, libro.fechaPublicacion) && Objects.equals(precio, libro.precio) && Objects.equals(ruta, libro.ruta) && Objects.equals(descripcion, libro.descripcion) && Objects.equals(genero, libro.genero);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, titulo, autor, editorial, fechaPublicacion, precio, ruta, descripcion, genero);
+    }
 }

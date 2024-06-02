@@ -149,15 +149,10 @@ footer{
     flex-wrap: wrap;
     justify-content: space-between;
     position: relative;
+    min-height: 500px;
 }
 
-.favbutton{
-    position: absolute;
-    width: 10%;
-    height: 6%;
-    top: 5%;
-    
-}
+
 
 .card{
     margin-top: 3rem;
@@ -186,6 +181,23 @@ footer{
 
 .nav-tabs{
     border-color: #1F23E0 !important;
+}
+
+
+.favbutton{
+    position: absolute;
+    width: 10%;
+    height: 50px;
+    top: 3%;
+
+}
+
+.librosFav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
 }
 
 

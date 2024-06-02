@@ -76,14 +76,17 @@ public class ControladorPerfil {
 
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+
         if (usuario != null) {
-            // Aquí puedes agregar el libro a la lista de libros favoritos del usuario
-            // Supongamos que tienes una función en Usuario para agregar libros
             Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
-            Long usuarioId = usuario.getId();// Supongo que este método devuelve un objeto Libro
+            Long usuarioId = usuario.getId();
+
             if (libro != null) {
                 perfilService.addLibroFavorito(usuarioId, libro);
-                usuario.getLibrosFavoritos().add(libro);
+                if(!usuario.getLibrosFavoritos().contains(libro)) {
+                    usuario.getLibrosFavoritos().add(libro);
+
+                }
                 return "redirect:/perfil";
             }
         }

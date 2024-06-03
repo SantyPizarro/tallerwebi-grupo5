@@ -39,12 +39,15 @@
 
         <h6 class="editorial" th:text="${libro.getEditorial()}"></h6>
 
-        <h6 class="genero" th:text="${libro.getGenero()}"></h6>
+        <h6 class="genero" th:text="${libro.getGenero().getNombre()}"></h6>
         <p class="notas-libro" th:text="${libro.getDescripcion()}"></p>
 
         <p class="precio" th:text="${libro.getPrecio()}"></p>
 
-        <button class="boton-compra"><a th:href="@{/comprar}">Agregar al carrito</a></button>
+        <form accept-charset="UTF-8" th:action="@{/carrito}" method="post">
+            <input type="hidden" th:name="id" th:value="${libro.id}">
+            <input class="boton-compra" type="submit" value="Agregar al carrito">
+        </form>
     </div>
 
 

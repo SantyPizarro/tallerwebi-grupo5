@@ -9,10 +9,22 @@
     flex-direction: row;
     align-content: center;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 0.7rem 1rem;
     background-color: #121482;
 }
+
+.botonModificado{
+    width: 10em;
+    display: flex;
+    justify-content: space-around
+}
+
+.logotipo{
+    position: relative;
+    right: 8%;
+}
+
 
 .logotipo img{
     border-radius: 50%;
@@ -36,6 +48,8 @@
 .contenedor-usuario{
     display: flex;
     gap: 1.2rem;
+    position: relative;
+    left: 7%;
 }
 
 

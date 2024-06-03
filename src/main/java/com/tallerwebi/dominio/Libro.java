@@ -1,9 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.time.LocalDate;
 
 @Entity
 public class Libro{
@@ -17,7 +15,8 @@ public class Libro{
     private Double precio;
     private String ruta;
     private String descripcion;
-    private String genero;
+    private String fechaAgregado;
+
 
     public Libro(){
 
@@ -28,14 +27,35 @@ public class Libro{
         this.editorial = editorial;
     }
 
-    public Libro(String titulo, String autor, String editorial, String fechaPublicacion, Double precio, String descripcion, String genero) {
+    public Libro(String titulo, String autor, String editorial, String fechaPublicacion, Double precio, String descripcion, String ruta, Genero genero) {
         this.titulo = titulo;
         this.autor = autor;
         this.editorial = editorial;
         this.fechaPublicacion = fechaPublicacion;
         this.precio = precio;
         this.descripcion = descripcion;
+        this.ruta = ruta;
         this.genero = genero;
+        this.fechaAgregado = LocalDate.now().toString();
+    }
+
+    @ManyToOne
+    private Genero genero;
+
+    public Genero getGenero(){
+        return genero;
+    }
+
+    public void setGenero(Genero genero) {
+        this.genero = genero;
+    }
+
+    public void setFechaAgregado(String fechaAgregado) {
+        this.fechaAgregado = fechaAgregado;
+    }
+
+    public String getFechaAgregado() {
+        return fechaAgregado;
     }
 
     public String getDescripcion() {
@@ -44,14 +64,6 @@ public class Libro{
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
     }
 
     public Long getId() {
@@ -105,17 +117,4 @@ public class Libro{
     public String getRuta(){ return ruta;}
 
     public void setRuta(String ruta){ this.ruta = ruta; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Libro libro = (Libro) o;
-        return Objects.equals(id, libro.id) && Objects.equals(titulo, libro.titulo) && Objects.equals(autor, libro.autor) && Objects.equals(editorial, libro.editorial) && Objects.equals(fechaPublicacion, libro.fechaPublicacion) && Objects.equals(precio, libro.precio) && Objects.equals(ruta, libro.ruta) && Objects.equals(descripcion, libro.descripcion) && Objects.equals(genero, libro.genero);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, titulo, autor, editorial, fechaPublicacion, precio, ruta, descripcion, genero);
-    }
 }

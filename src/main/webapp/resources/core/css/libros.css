@@ -155,7 +155,7 @@ footer{
 
 .menu-categorias ul {
     list-style-type: none;
-    padding: 0;
+    padding: 10px 0 0 0;
 }
 
 .menu-categorias ul ul {
@@ -164,4 +164,19 @@ footer{
 
 .menu-categorias ul li.active > ul {
     display: block;
+}
+
+.a{
+    text-decoration: none;
+}
+
+.genero{
+    color: #121481;
+    text-decoration: none;
+}
+
+.genero:hover{
+    color: #0056b3;
+    transition: color 0.3s ease;
+
 }

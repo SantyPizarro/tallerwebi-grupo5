@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Taller Web I</title>
+
+    <!-- Boostrap core css -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+
+    <link rel="stylesheet" th:href="@{/css/perfilAdmin.css}"/>
+</head>
+<body>
+
+<h1>BIENVENIDO, ADMIN</h1>
+
+    <div>
+        <ul class="nav nav-tabs listadesordenada">
+            <li class="nav-item">
+                <a class="nav-link active" href="#" onclick="mostrarContenido('libros')">Libros</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="mostrarContenido('usuarios')">Usuarios</a>
+            </li>
+        </ul>
+    </div>
+
+    <section class="tablas lightblue" id="libros" style="display:block">
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" th:action="@{/agregarLibroABDD}">
+            Agregar nuevo libro
+        </button>
+        <div class="contenedor-libro">
+            <div th:each="libro : ${libros}" class="card" style="width: 18rem;">
+                <img th:src="${libro.ruta}" class="card-img-top" th:alt="${libro.titulo}">
+                <div class="card-body detalle-tarjetas">
+                    <h5 class="card-title" th:text="${libro.titulo}"></h5>
+                    <a href="#" class="btn btn-primary">Detalles</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar nuevo libro</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form accept-charset="utf-8" th:action="@{/agregarLibroABDD}" method="POST" th:object="${datosLibro}" enctype="multipart/form-data">
+
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Selecciona tu foto de perfil</label>
+                            <input class="form-control" type="file" id="formFile" name="file">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="titulo">Titulo</span>
+                            <input th:field="*{titulo}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="autor">Autor</span>
+                            <input th:field="*{autor}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="editorial">Editorial</span>
+                            <input th:field="*{editorial}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="fechaDePublicacion">Fecha de publicacion</span>
+                            <input th:field="*{fechaPublicacion}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="precio">Precio</span>
+                            <input th:field="*{precio}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="descripcion">Descripcion</span>
+                            <input th:field="*{descripcion}" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <select th:field="*{genero}" class="form-select" aria-label="Default select example" name="generos" id="generos">
+                            <option value="0" disabled selected>seleccione un genero</option>
+                            <option value="1">Ficcion</option>
+                            <option value="2">Cuento</option>
+                            <option value="3">Novela</option>
+                            <option value="4">Poesia</option>
+                        </select>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Agregar libro</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="header_footer :: footer">
+
+    </footer>
+
+    <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
+</body>
+</html>

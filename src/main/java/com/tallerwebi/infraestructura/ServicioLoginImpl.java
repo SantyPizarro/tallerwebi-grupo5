@@ -43,6 +43,7 @@ public class ServicioLoginImpl implements ServicioLogin {
                 usuario.setDescripcion("Me llamo " + datosRegistro.getNombre() + " y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte");
                 usuario.setGeneroFav1("Ficcion");
                 usuario.setGeneroFav2("Deporte");
+                usuario.setRol("user");
                 repositorioUsuario.guardar(usuario);
             } else {
                 throw new NoCoincideContrasenia();

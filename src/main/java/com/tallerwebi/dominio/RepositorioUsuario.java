@@ -9,5 +9,6 @@ public interface RepositorioUsuario {
     Usuario buscarPorId(Long id);
     Usuario buscarUsuarioPassword(String email, String password);
 
+    Usuario buscarPorToken(String token);
 }
 

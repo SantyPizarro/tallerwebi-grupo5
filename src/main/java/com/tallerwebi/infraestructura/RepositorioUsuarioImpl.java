@@ -70,4 +70,12 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
                 .uniqueResult();
     }
 
+    @Override
+    public Usuario buscarPorToken(String token) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (Usuario) session.createCriteria(Usuario.class)
+                .add(Restrictions.eq("tokenDeVerificacion", token))
+                .uniqueResult();
+    }
+
 }

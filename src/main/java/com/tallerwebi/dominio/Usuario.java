@@ -22,6 +22,9 @@ public class Usuario {
     private String generoFav1;
     private String generoFav2;
     private String foto;
+    private String tokenDeVerificacion;
+    private Boolean emailVerificado = false;
+
 
     public String getFoto() {
         return foto;
@@ -116,5 +119,21 @@ public class Usuario {
 
     public void activar() {
         activo = true;
+    }
+
+    public String getTokenDeVerificacion() {
+        return tokenDeVerificacion;
+    }
+
+    public void setTokenDeVerificacion(String tokenDeVerificacion) {
+        this.tokenDeVerificacion = tokenDeVerificacion;
+    }
+
+    public Boolean getEmailVerificado() {
+        return emailVerificado;
+    }
+
+    public void setEmailVerificado(Boolean emailVerificado) {
+        this.emailVerificado = emailVerificado;
     }
 }

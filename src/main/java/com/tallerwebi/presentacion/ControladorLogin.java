@@ -2,6 +2,7 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.NoCoincideContrasenia;
+import com.tallerwebi.dominio.excepcion.TokenInvalido;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -83,7 +85,7 @@ public class ControladorLogin {
             model.put("error", "Error al registrar el nuevo usuario");
             return new ModelAndView("nuevo-usuario", model);
         }
-        return new ModelAndView("redirect:/login");
+        return new ModelAndView("codigoDeVerificacion");
     }
 
     @RequestMapping(path = "/nuevo-usuario", method = RequestMethod.GET)
@@ -97,5 +99,23 @@ public class ControladorLogin {
     public ModelAndView inicio() {
         return new ModelAndView("redirect:/login");
     }
+
+    // En ControladorLogin.java
+    @RequestMapping(path = "/validar-token", method = RequestMethod.POST)
+    public ModelAndView validarToken(@RequestParam("token") String token) {
+        ModelMap model = new ModelMap();
+        try {
+            servicioLogin.validarToken(token);
+        } catch (TokenInvalido e) {
+            model.put("error", "El token ingresado es inválido");
+            return new ModelAndView("validar-token", model);
+        } catch (Exception e) {
+            model.put("error", "Error al validar el token");
+            return new ModelAndView("validar-token", model);
+        }
+        return new ModelAndView("redirect:/login");
+    }
+
+
 }
 

@@ -31,5 +31,6 @@ public class ProductosCompra {
 
     public void setLibro(Libro libro) {
         this.libro = libro;
+        this.precioProducto = libro.getPrecio();
     }
 }

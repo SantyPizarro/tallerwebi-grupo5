@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class Libro{
@@ -35,6 +36,7 @@ public class Libro{
         this.descripcion = descripcion;
         this.ruta = ruta;
         this.genero = genero;
+        this.fechaAgregado = LocalDate.now().toString();
     }
 
     @ManyToOne

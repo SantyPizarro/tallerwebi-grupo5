@@ -36,8 +36,8 @@ public class ServicioLoginImpl implements ServicioLogin {
     public void registrar(DatosRegistro datosRegistro) throws UsuarioExistente, NoCoincideContrasenia {
         Usuario usuarioEncontrado = repositorioUsuario.buscarUsuario(datosRegistro.getEmail());
         Usuario usuario = new Usuario();
-       // String token = UUID.randomUUID().toString();
-        String token = "123456";
+        String token = UUID.randomUUID().toString();
+
         if(usuarioEncontrado != null){
             throw new UsuarioExistente();
         } else {
@@ -69,7 +69,7 @@ public class ServicioLoginImpl implements ServicioLogin {
         repositorioUsuario.guardar(usuario);
     }
 
-    private void enviarTokenDeVerificacion(Usuario usuario) {
+    public void enviarTokenDeVerificacion(Usuario usuario) {
         // Configurar el correo electrónico
         String destinatario = usuario.getEmail();
         String asunto = "Verificación de correo electrónico";

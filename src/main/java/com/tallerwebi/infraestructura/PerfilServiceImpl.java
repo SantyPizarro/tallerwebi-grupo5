@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.PerfilService;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
@@ -11,6 +12,8 @@ import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -68,6 +71,30 @@ public class PerfilServiceImpl implements PerfilService {
         repositorioUsuario.modificar(usuarioExistente);
 
 
+    }
+
+    public void addLibroFavorito(Long usuarioId, Libro libro) {
+        Usuario usuario = repositorioUsuario.buscarPorId(usuarioId);
+
+        // Verificar si el usuario y libro no son nulos
+        if (usuario == null || libro == null) {
+            throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
+        }
+
+        // Obtener la lista de libros favoritos del usuario
+        List<Libro> librosFavoritos = usuario.getLibrosFavoritos();
+
+        // Verificar si la lista de libros favoritos no es nula
+        if (librosFavoritos == null) {
+            librosFavoritos = new ArrayList<>();
+            usuario.setLibrosFavoritos(librosFavoritos);
+        }
+
+        // Añadir el libro a la lista si no está ya presente
+        if (!librosFavoritos.contains(libro)) {
+            librosFavoritos.add(libro);
+            repositorioUsuario.modificar(usuario);
+        }
     }
 
 }

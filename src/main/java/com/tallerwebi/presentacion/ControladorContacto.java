@@ -3,6 +3,7 @@ package com.tallerwebi.presentacion;
 import com.tallerwebi.dominio.MensajeContacto;
 import com.tallerwebi.dominio.RepositorioMensajeContacto;
 import com.tallerwebi.dominio.ServicioMensajeContacto;
+import com.tallerwebi.dominio.Usuario;
 import com.tallerwebi.infraestructura.RepositorioMensajeContactoImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -25,11 +28,15 @@ public class ControladorContacto {
     }
 
     @GetMapping("/contacto")
-    public ModelAndView mostrarContacto(){
-        ModelAndView modelAndView = new ModelAndView("contacto");
-        return modelAndView;
+    public ModelAndView mostrarContacto(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+        if (usuario != null) {
+            ModelAndView modelAndView = new ModelAndView("contacto");
+            return modelAndView;
+        }
 
-
+        return new ModelAndView("redirect:/login");
     }
 
 

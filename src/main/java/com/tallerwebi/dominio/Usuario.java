@@ -27,6 +27,8 @@ public class Usuario {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Libro> librosFavoritos ;
 
+
+
     public Usuario() {
         this.librosFavoritos = new ArrayList<>();
     }
@@ -134,4 +136,6 @@ public class Usuario {
     public void setLibrosFavoritos(List<Libro> librosFavoritos) {
         this.librosFavoritos = librosFavoritos;
     }
+
+
 }

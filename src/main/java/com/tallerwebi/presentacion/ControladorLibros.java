@@ -3,6 +3,7 @@ package com.tallerwebi.presentacion;
 import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.ServicioBarraBusqueda;
 import com.tallerwebi.dominio.ServicioLibro;
+import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -30,18 +34,24 @@ public class ControladorLibros {
             @RequestParam(value = "editorial", required = false) String editorial,
             @RequestParam(value = "precio-min", required = false) Double precioMinimo,
             @RequestParam(value = "precio-max", required = false) Double precioMaximo,
-            @RequestParam(value = "genero", required = false) String genero)
-            {
+            @RequestParam(value = "genero", required = false) String genero,
+            HttpServletRequest request) {
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
+        if (usuario != null) {
 
-                List<Libro> libros = servicioLibro.filtrarLibros(editorial, precioMinimo, precioMaximo, genero);
-                List<String> editoriales = servicioLibro.obtenerEditoriales();
-                List<String> generos = servicioLibro.obtenerGeneros();
+            List<Libro> libros = servicioLibro.filtrarLibros(editorial, precioMinimo, precioMaximo, genero);
+            List<String> editoriales = servicioLibro.obtenerEditoriales();
+            List<String> generos = servicioLibro.obtenerGeneros();
 
-                ModelAndView modelAndView = new ModelAndView("libros");
-                modelAndView.addObject("libros", libros);
-                modelAndView.addObject("editoriales", editoriales);
-                modelAndView.addObject("generos", generos);
-                return modelAndView;
+            ModelAndView modelAndView = new ModelAndView("libros");
+            modelAndView.addObject("libros", libros);
+            modelAndView.addObject("editoriales", editoriales);
+            modelAndView.addObject("generos", generos);
+            return modelAndView;
+        }
+
+        return new ModelAndView("redirect:/login");
     }
 
 

@@ -35,11 +35,14 @@ public class ControladorComprar {
     public ModelAndView comprar(HttpServletRequest request) {
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
-        Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
-        compraLibroService.registrarCompra(usuario, carrito);
-        carrito.limpiar();
-        sesion.setAttribute("cantidadLibros", 0);
-        return new ModelAndView("redirect:/home");
+        if(usuario!=null){
+            Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
+            compraLibroService.registrarCompra(usuario, carrito);
+            carrito.limpiar();
+            sesion.setAttribute("cantidadLibros", 0);
+            return new ModelAndView("redirect:/home");
+        }
+       return new ModelAndView("redirect:/login");
     }
 
 }

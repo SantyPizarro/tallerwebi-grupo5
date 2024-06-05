@@ -10,6 +10,8 @@ public interface PerfilService {
     void editarPerfilCompleto(Usuario usuarioExistente, Usuario usuario, MultipartFile foto);
     Usuario buscarUsuarioPorId(Long id);
     void addLibroFavorito(Long usuarioId, Libro libro);
+    void eliminarLibroFavorito(Long usuarioId, Libro libro);
+
 
 
 

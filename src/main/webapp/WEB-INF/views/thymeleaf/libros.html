@@ -41,7 +41,7 @@
     </aside>
         <section class="libros">
             <div th:each="libro : ${libros}" class="tarjeta-libro">
-                <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="">
+                <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" width="286px" height="410px">
                 <div class="contenido-tarjeta-libro">
                     <h3 class="titulo-libro colorLetra" th:text="${libro.titulo}">Título del Libro</h3>
                     <p class="precio-libro" th:text="${libro.precio}">$</p>

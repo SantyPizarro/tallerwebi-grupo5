@@ -109,10 +109,20 @@
             </button>
             <div th:if="${usuario.librosFavoritos}" class="librosFav">
                 <div th:each="libro : ${usuario.librosFavoritos}" class="card" style="width: 18rem;">
-                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}">
+                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
                     <div class="card-body detalle-tarjetas">
                         <h5 class="card-title" th:text="${libro.titulo}"></h5>
-                        <a href="#" class="btn btn-primary">Detalles</a>
+                        <div class="d-flex justify-content-around p-2">
+                            <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
+                                <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
+                                <a ><button class="btn btn-primary" type="submit">Detalles</button></a>
+                            </form>
+                            <form accept-charset="UTF-8" th:action="@{/perfil/eliminarLibroFavorito}" method="post">
+                                <input type="hidden" name="titulo" th:value="${libro.titulo}">
+                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -196,7 +206,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form accept-charset="utf-8" th:action="@{/perfil/agregarLibro}" method="post" >
+                    <form accept-charset="utf-8" th:action="@{/perfil/agregarLibroFavorito}" method="post" >
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="nombreLibro">titulo</span>

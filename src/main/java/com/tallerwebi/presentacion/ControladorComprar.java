@@ -1,5 +1,6 @@
 package com.tallerwebi.presentacion;
 
+import com.mercadopago.resources.payment.Payment;
 import com.mercadopago.resources.preference.Preference;
 import com.tallerwebi.dominio.*;
 import net.bytebuddy.asm.Advice;
@@ -35,19 +36,30 @@ public class ControladorComprar {
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
 
-
-        Preference preference = servicioMercadoPago.createPreference(usuario, carrito); // trycatch
+        Preference preference = servicioMercadoPago.createPreference(usuario, carrito);
 
         if (preference != null){
-            compraLibroService.registrarCompra(usuario, carrito);
-
-            carrito.limpiar();
-            sesion.setAttribute("cantidadLibros", 0);
             return new ModelAndView("redirect:" + preference.getSandboxInitPoint());
         }
 
         return new ModelAndView("redirect:/home");
     }
 
+    @GetMapping("/payment/feedback")
+    public ModelAndView feedback(@RequestParam("collection_status") String paymentStatus,
+                                 HttpServletRequest request) {
 
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
+        Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
+
+        if ("approved".equals(paymentStatus)) {
+            compraLibroService.registrarCompra(usuario, carrito);
+
+            carrito.limpiar();
+            sesion.setAttribute("cantidadLibros", 0);
+            return new ModelAndView("redirect:/home");
+        }
+        return new ModelAndView("redirect:/mostrar-carrito");
+    }
 }

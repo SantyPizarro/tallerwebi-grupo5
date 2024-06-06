@@ -1,9 +1,12 @@
 package com.tallerwebi.infraestructura;
 
 import com.mercadopago.MercadoPagoConfig;
+import com.mercadopago.client.payment.PaymentClient;
+import com.mercadopago.client.payment.PaymentCreateRequest;
 import com.mercadopago.client.preference.*;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
+import com.mercadopago.resources.payment.Payment;
 import com.mercadopago.resources.preference.Preference;
 import com.tallerwebi.dominio.Carrito;
 import com.tallerwebi.dominio.Libro;
@@ -26,12 +29,10 @@ public class ServicioMercadoPagoImpl implements ServicioMercadoPago {
     }
 
     public Preference createPreference(Usuario usuario, Carrito carrito) {
-
         List<Libro> compraLibros = carrito.getLibros();
         List<PreferenceItemRequest> items = new ArrayList<>();
 
-        for(Libro libro : compraLibros) {
-
+        for (Libro libro : compraLibros) {
             PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
                     .id(libro.getId().toString())
                     .title(libro.getTitulo())
@@ -42,39 +43,32 @@ public class ServicioMercadoPagoImpl implements ServicioMercadoPago {
                     .quantity(1)
                     .unitPrice(BigDecimal.valueOf(libro.getPrecio()))
                     .build();
-
             items.add(itemRequest);
         }
 
-        // Crea el pagador
         PreferencePayerRequest payer = PreferencePayerRequest.builder()
                 .name(usuario.getNombre())
                 .surname(usuario.getApellido())
                 .email(usuario.getEmail())
                 .build();
 
-
-        // Crea las URLs de retorno
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
-                .success("https://www.instagram.com/")
-                .failure("https://www.youtube.com/")
-                .pending("https://www.facebook.com/")
+                .success("http://localhost:8080/spring/payment/feedback")
+                .failure("http://localhost:8080/spring/payment/feedback")
+                .pending("http://localhost:8080/spring/payment/feedback")
                 .build();
 
-        // Configura los métodos de pago permitidos y excluidos
         PreferencePaymentMethodsRequest paymentMethods = PreferencePaymentMethodsRequest.builder()
                 .excludedPaymentMethods(new ArrayList<>())
                 .excludedPaymentTypes(new ArrayList<>())
                 .build();
 
-        // Crea la preferencia de pago
         PreferenceRequest preferenceRequest = PreferenceRequest.builder()
                 .items(items)
                 .payer(payer)
                 .backUrls(backUrls)
-                .autoReturn("approved")
+                .autoReturn("all")
                 .paymentMethods(paymentMethods)
-                .notificationUrl("https://www.your-site.com/ipn")
                 .statementDescriptor("Taller Web I")
                 .externalReference("Reference_1234")
                 .expires(true)
@@ -83,8 +77,27 @@ public class ServicioMercadoPagoImpl implements ServicioMercadoPago {
         try {
             PreferenceClient client = new PreferenceClient();
             Preference preference = client.create(preferenceRequest);
+            System.out.println("Preference created with ID: " + preference.getId());
             return preference;
         } catch (MPException | MPApiException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public Payment getPayment(String paymentId) {
+        try {
+            System.out.println("Fetching payment with ID: " + paymentId);
+            PaymentClient paymentClient = new PaymentClient();
+            Payment payment = paymentClient.get(Long.valueOf(paymentId));
+            System.out.println("Payment retrieved: " + (payment != null ? payment.toString() : "null"));
+            return payment;
+        } catch (MPApiException e) {
+            System.out.println("MPApiException occurred while fetching payment: " + e.getApiResponse().getContent());
+            e.printStackTrace();
+            return null;
+        } catch (MPException e) {
+            System.out.println("MPException occurred while fetching payment: " + e.getMessage());
             e.printStackTrace();
             return null;
         }

@@ -1,12 +1,15 @@
 package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.Libro;
+import com.tallerwebi.dominio.ServicioSuscriptor;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.tallerwebi.dominio.ServicioLibro;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +19,12 @@ import javax.servlet.http.HttpSession;
 public class ControladorHome {
 
     private final ServicioLibro servicioLibro;
+    private final ServicioSuscriptor servicioSuscriptor;
 
     @Autowired
-    public ControladorHome(ServicioLibro servicioLibro) {
+    public ControladorHome(ServicioLibro servicioLibro, ServicioSuscriptor servicioSuscriptor) {
         this.servicioLibro = servicioLibro;
+        this.servicioSuscriptor = servicioSuscriptor;
     }
 
     @GetMapping("/home")
@@ -36,5 +41,20 @@ public class ControladorHome {
         return new ModelAndView("redirect:/login");
 
     }
+
+    @PostMapping("/suscribirse")
+    public ModelAndView suscribirse(@RequestParam("nombre") String nombre,
+                                    @RequestParam("email") String email) {
+
+
+        try{
+            servicioSuscriptor.agregarSuscriptor(nombre, email);
+            return new ModelAndView("redirect:/home");
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/home");
+        }
+    }
+
+
 
 }

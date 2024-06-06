@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -79,7 +80,7 @@ public class PerfilServiceImpl implements PerfilService {
             throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
         }
 
-        List<Libro> librosFavoritos = usuario.getLibrosFavoritos();
+        Set<Libro> librosFavoritos = usuario.getLibrosFavoritos();
 
 
         if (!librosFavoritos.contains(libro)) {
@@ -94,13 +95,41 @@ public class PerfilServiceImpl implements PerfilService {
             throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
         }
 
-        List<Libro> librosFavoritos = usuario.getLibrosFavoritos();
+        Set<Libro> librosFavoritos = usuario.getLibrosFavoritos();
         if (librosFavoritos.contains(libro)) {
             librosFavoritos.remove(libro);
             repositorioUsuario.modificar(usuario);
         }
     }
 
+    @Override
+    public void addLibroDeseado(Usuario usuario, Libro libro) {
+
+        if (usuario == null || libro == null) {
+            throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
+        }
+
+        Set<Libro> librosDeseados = usuario.getLibrosDeseados();
+
+
+        if (!librosDeseados.contains(libro)) {
+            librosDeseados.add(libro);
+            repositorioUsuario.modificar(usuario);
+        }
+    }
+
+    @Override
+    public void eliminarLibroDeseado(Usuario usuario, Libro libro) {
+        if (usuario == null || libro == null) {
+            throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
+        }
+
+        Set<Libro> librosDeseados = usuario.getLibrosDeseados();
+        if (librosDeseados.contains(libro)) {
+            librosDeseados.remove(libro);
+            repositorioUsuario.modificar(usuario);
+        }
+    }
 
 
 }

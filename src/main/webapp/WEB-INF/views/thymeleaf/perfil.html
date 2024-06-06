@@ -130,7 +130,28 @@
         </section>
 
         <section class="tablas lightblue" id="deseados" style="display:none;">
-            <h1>deseados</h1>
+            <button type="button" class="btn btn-primary favbutton" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                Agregar Libro
+            </button>
+            <div th:if="${usuario.librosDeseados}" class="librosFav">
+                <div th:each="libro : ${usuario.librosDeseados}" class="card" style="width: 18rem;">
+                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title" th:text="${libro.titulo}"></h5>
+                        <div class="d-flex justify-content-around p-2">
+                            <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
+                                <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
+                                <a ><button class="btn btn-primary" type="submit">Detalles</button></a>
+                            </form>
+                            <form accept-charset="UTF-8" th:action="@{/perfil/eliminarLibroDeseado}" method="post">
+                                <input type="hidden" name="titulo" th:value="${libro.titulo}">
+                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section class="tablas lightblue" id="facturas" style="display:none;">
@@ -210,6 +231,32 @@
 
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="nombreLibro">titulo</span>
+                            <input type="text" name="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Agregar libro a deseados</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form accept-charset="utf-8" th:action="@{/perfil/agregarLibroDeseado}" method="post" >
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="nombreLibro2">titulo</span>
                             <input type="text" name="titulo" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
 

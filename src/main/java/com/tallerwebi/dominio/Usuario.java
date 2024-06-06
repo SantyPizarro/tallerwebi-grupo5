@@ -2,7 +2,9 @@ package com.tallerwebi.dominio;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Usuario {
@@ -25,12 +27,33 @@ public class Usuario {
     private String generoFav2;
     private String foto;
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Libro> librosFavoritos ;
+    @JoinTable(
+            name = "usuario_libros_favoritos",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "libroFavorito_id")
+    )
+    private Set<Libro> librosFavoritos;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_libros_deseados",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "libroDeseado_id")
+    )
+    private Set<Libro> librosDeseados;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_libros_comprados",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "libroComprado_id")
+    )
+    private Set<Libro> librosComprados;
 
 
 
     public Usuario() {
-        this.librosFavoritos = new ArrayList<>();
+        this.librosFavoritos = new HashSet<>();
     }
 
 
@@ -129,13 +152,27 @@ public class Usuario {
         activo = true;
     }
 
-    public List<Libro> getLibrosFavoritos() {
+    public Set<Libro> getLibrosFavoritos() {
         return librosFavoritos;
     }
 
-    public void setLibrosFavoritos(List<Libro> librosFavoritos) {
+    public void setLibrosFavoritos(Set<Libro> librosFavoritos) {
         this.librosFavoritos = librosFavoritos;
     }
 
+    public Set<Libro> getLibrosDeseados() {
+        return librosDeseados;
+    }
 
+    public void setLibrosDeseados(Set<Libro> librosDeseados) {
+        this.librosDeseados = librosDeseados;
+    }
+
+    public Set<Libro> getLibrosComprados() {
+        return librosComprados;
+    }
+
+    public void setLibrosComprados(Set<Libro> librosComprados) {
+        this.librosComprados = librosComprados;
+    }
 }

@@ -107,6 +107,39 @@ public class ControladorPerfil {
         return "redirect:/login";
     }
 
+    @PostMapping("/perfil/agregarLibroDeseado")
+    public String agregarLibroDeseado(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+
+        if (usuario != null) {
+            Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+            if (libro != null) {
+                perfilService.addLibroDeseado(usuario, libro);
+                return "redirect:/perfil";
+            }
+        }
+        return "redirect:/login";
+    }
+
+    @PostMapping("/perfil/eliminarLibroDeseado")
+    public String eliminarLibroDeseado(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+
+        if (usuario != null) {
+            Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+
+            if (libro != null) {
+                perfilService.eliminarLibroDeseado(usuario, libro);
+                return "redirect:/perfil";
+            }
+        }
+        return "redirect:/login";
+    }
+
 
 
 }

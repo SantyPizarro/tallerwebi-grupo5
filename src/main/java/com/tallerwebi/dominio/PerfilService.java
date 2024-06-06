@@ -11,6 +11,8 @@ public interface PerfilService {
     Usuario buscarUsuarioPorId(Long id);
     void addLibroFavorito(Usuario usuario, Libro libro);
     void eliminarLibroFavorito(Usuario usuario, Libro libro);
+    void addLibroDeseado(Usuario usuario, Libro libro);
+    void eliminarLibroDeseado(Usuario usuario, Libro libro);
 
 
 

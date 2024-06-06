@@ -1,0 +1,18 @@
+<section class="newsletter">
+    <h3>Enviar Newsletter</h3>
+    <form th:action="@{/enviarNewsletter}" method="post">
+        <div>
+            <label for="tema">Asunto:</label>
+            <input type="text" id="tema" name="tema" required>
+        </div>
+        <div>
+            <label for="mensaje">Mensaje:</label>
+            <textarea id="mensaje" name="mensaje" required></textarea>
+        </div>
+        <div>
+            <button class="enviarNewsletter" type="submit">Enviar Newsletter</button>
+        </div>
+        <div th:if="${success}" th:text="${success}"></div>
+        <div th:if="${error}" th:text="${error}"></div>
+    </form>
+</section>

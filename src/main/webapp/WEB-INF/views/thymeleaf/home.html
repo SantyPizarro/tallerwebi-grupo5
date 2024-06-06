@@ -75,6 +75,25 @@
       </div>
     </div>
   </section>
+
+  <section class="newsletter">
+
+    <h3>Suscribete a nuestro Newsletter</h3>
+
+    <form th:action="@{/suscribirse}" method="post">
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div>
+        <button class="suscribirse" type="submit">Suscribirse</button>
+      </div>
+    </form>
+  </section>
 </main>
 
 <footer th:replace="header_footer :: footer">

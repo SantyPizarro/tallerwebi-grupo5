@@ -73,24 +73,15 @@ public class PerfilServiceImpl implements PerfilService {
 
     }
 
-    public void addLibroFavorito(Long usuarioId, Libro libro) {
-        Usuario usuario = repositorioUsuario.buscarPorId(usuarioId);
+    public void addLibroFavorito(Usuario usuario, Libro libro) {
 
-        // Verificar si el usuario y libro no son nulos
         if (usuario == null || libro == null) {
             throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
         }
 
-        // Obtener la lista de libros favoritos del usuario
         List<Libro> librosFavoritos = usuario.getLibrosFavoritos();
 
-        // Verificar si la lista de libros favoritos no es nula
-        if (librosFavoritos == null) {
-            librosFavoritos = new ArrayList<>();
-            usuario.setLibrosFavoritos(librosFavoritos);
-        }
 
-        // Añadir el libro a la lista si no está ya presente
         if (!librosFavoritos.contains(libro)) {
             librosFavoritos.add(libro);
             repositorioUsuario.modificar(usuario);

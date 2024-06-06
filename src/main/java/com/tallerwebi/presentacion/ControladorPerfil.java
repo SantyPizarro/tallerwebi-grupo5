@@ -82,14 +82,8 @@ public class ControladorPerfil {
 
         if (usuario != null) {
             Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
-            Long usuarioId = usuario.getId();
-
             if (libro != null) {
-                perfilService.addLibroFavorito(usuarioId, libro);
-                if(!usuario.getLibrosFavoritos().contains(libro)) {
-                    usuario.getLibrosFavoritos().add(libro);
-
-                }
+                perfilService.addLibroFavorito(usuario, libro);
                 return "redirect:/perfil";
             }
         }

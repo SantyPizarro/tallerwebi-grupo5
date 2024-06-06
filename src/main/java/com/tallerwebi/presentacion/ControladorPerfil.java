@@ -98,14 +98,9 @@ public class ControladorPerfil {
 
         if (usuario != null) {
             Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
-            Long usuarioId = usuario.getId();
 
             if (libro != null) {
-                perfilService.eliminarLibroFavorito(usuarioId, libro);
-                if(usuario.getLibrosFavoritos().contains(libro)) {
-                    usuario.getLibrosFavoritos().remove(libro);
-
-                }
+                perfilService.eliminarLibroFavorito(usuario, libro);
                 return "redirect:/perfil";
             }
         }

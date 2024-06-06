@@ -89,8 +89,7 @@ public class PerfilServiceImpl implements PerfilService {
     }
 
     @Override
-    public void eliminarLibroFavorito(Long usuarioId, Libro libro) {
-        Usuario usuario = repositorioUsuario.buscarPorId(usuarioId);
+    public void eliminarLibroFavorito(Usuario usuario, Libro libro) {
         if (usuario == null || libro == null) {
             throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
         }

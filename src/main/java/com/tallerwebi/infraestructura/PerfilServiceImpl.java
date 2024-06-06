@@ -112,7 +112,7 @@ public class PerfilServiceImpl implements PerfilService {
         Set<Libro> librosDeseados = usuario.getLibrosDeseados();
 
 
-        if (!librosDeseados.contains(libro)) {
+        if (!librosDeseados.contains(libro) && !usuario.getLibrosComprados().contains(libro)) {
             librosDeseados.add(libro);
             repositorioUsuario.modificar(usuario);
         }

@@ -172,7 +172,7 @@ public class Usuario {
         return librosComprados;
     }
 
-    public void setLibrosComprados(Set<Libro> librosComprados) {
-        this.librosComprados = librosComprados;
+    public void setLibrosComprados(Libro libro) {
+        this.librosComprados.add(libro);
     }
 }

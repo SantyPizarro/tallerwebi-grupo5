@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ControladorCarrito {
@@ -37,7 +38,7 @@ public class ControladorCarrito {
         Integer cantidadDelibros = (Integer) sesion.getAttribute("cantidadLibros");
 
         if(carrito != null){
-        List<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
+        Set<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
 
         ModelMap modelo = new ModelMap();
         modelo.addAttribute("librosComprados", librosComprados);

@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -29,7 +30,7 @@ public class ServicioMercadoPagoImpl implements ServicioMercadoPago {
     }
 
     public Preference createPreference(Usuario usuario, Carrito carrito) {
-        List<Libro> compraLibros = carrito.getLibros();
+        Set<Libro> compraLibros = carrito.getLibros();
         List<PreferenceItemRequest> items = new ArrayList<>();
 
         for (Libro libro : compraLibros) {

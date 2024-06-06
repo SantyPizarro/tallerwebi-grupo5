@@ -43,7 +43,8 @@ public class ControladorCarrito {
         modelo.addAttribute("librosComprados", librosComprados);
         modelo.addAttribute("subtotal", carritoService.obtenerSubtotal(carrito));
 
-        return new ModelAndView ("comprar", modelo);}
+        return new ModelAndView ("comprar", modelo);
+        }
 
         return new ModelAndView ("redirect:/login");
     }

@@ -37,10 +37,13 @@ public class ControladorPerfil {
     public ModelAndView mostrarPerfil(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
-        ModelMap model = new ModelMap();
-        model.put("usuario", usuario);
+        if (usuario != null) {
+            ModelMap model = new ModelMap();
+            model.put("usuario", usuario);
 
-        return new ModelAndView("perfil", model);
+            return new ModelAndView("perfil", model);
+        }
+            return new ModelAndView("redirect:/login");
     }
 
 
@@ -71,25 +74,72 @@ public class ControladorPerfil {
         return "redirect:/perfil";
     }
 
-    @PostMapping("/perfil/agregarLibro")
-    public String agregarLibro(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+    @PostMapping("/perfil/agregarLibroFavorito")
+    public String agregarLibroFavorito(@RequestParam("titulo") String titulo, HttpServletRequest request) {
 
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
 
         if (usuario != null) {
             Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
-            Long usuarioId = usuario.getId();
-
             if (libro != null) {
-                perfilService.addLibroFavorito(usuarioId, libro);
-                if(!usuario.getLibrosFavoritos().contains(libro)) {
-                    usuario.getLibrosFavoritos().add(libro);
-
-                }
+                perfilService.addLibroFavorito(usuario, libro);
                 return "redirect:/perfil";
             }
         }
-        return "redirect:/perfil";
+        return "redirect:/login";
     }
+
+    @PostMapping("/perfil/eliminarLibroFavorito")
+    public String eliminarLibroFavorito(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+
+        if (usuario != null) {
+            Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+
+            if (libro != null) {
+                perfilService.eliminarLibroFavorito(usuario, libro);
+                return "redirect:/perfil";
+            }
+        }
+        return "redirect:/login";
+    }
+
+    @PostMapping("/perfil/agregarLibroDeseado")
+    public String agregarLibroDeseado(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+
+        if (usuario != null) {
+            Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+            if (libro != null) {
+                perfilService.addLibroDeseado(usuario, libro);
+                return "redirect:/perfil";
+            }
+        }
+        return "redirect:/login";
+    }
+
+    @PostMapping("/perfil/eliminarLibroDeseado")
+    public String eliminarLibroDeseado(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+
+        if (usuario != null) {
+            Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+
+            if (libro != null) {
+                perfilService.eliminarLibroDeseado(usuario, libro);
+                return "redirect:/perfil";
+            }
+        }
+        return "redirect:/login";
+    }
+
+
+
 }

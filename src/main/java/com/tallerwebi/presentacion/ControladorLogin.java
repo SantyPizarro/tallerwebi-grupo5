@@ -2,6 +2,7 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.NoCoincideContrasenia;
+import com.tallerwebi.dominio.excepcion.TokenInvalido;
 import com.tallerwebi.dominio.excepcion.UsuarioExistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -41,7 +42,7 @@ public class ControladorLogin {
         String rol = usuarioBuscado.getRol();
 
         if (rol.equals("user")) {
-            if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
+            if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && usuarioBuscado.getEmailVerificado()) {
                 HttpSession sesion = request.getSession();
                 Carrito carrito = new Carrito();
                 sesion.setAttribute("CARRITO", carrito);
@@ -50,7 +51,12 @@ public class ControladorLogin {
 
                 return new ModelAndView("redirect:/home");
             } else {
-                model.put("error", "Usuario o clave incorrecta");
+                if (!usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && !usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
+                    model.put("error", "Usuario o clave incorrecta");
+                } else {
+                    model.put("error", "El email no ha sido verificado");
+                    return new ModelAndView("codigoDeVerificacion");
+                }
             }
             return new ModelAndView("login", model);
         } else {
@@ -104,6 +110,21 @@ public class ControladorLogin {
         ModelMap model = new ModelMap();
         model.put("datosRegistro", new DatosRegistro());
         return new ModelAndView("nuevo-usuario", model);
+    }
+
+    @RequestMapping(path = "/validar-token", method = RequestMethod.POST)
+    public ModelAndView validarToken(@RequestParam("token") String token) {
+        ModelMap model = new ModelMap();
+        try {
+            servicioLogin.validarToken(token);
+        } catch (TokenInvalido e) {
+            model.put("error", "El token ingresado es inválido");
+            return new ModelAndView("codigoDeVerificacion", model);
+        } catch (Exception e) {
+            model.put("error", "Error al validar el token");
+            return new ModelAndView("codigoDeVerificacion", model);
+        }
+        return new ModelAndView("redirect:/login");
     }
 
     @RequestMapping(path = "/", method = RequestMethod.GET)

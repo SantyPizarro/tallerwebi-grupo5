@@ -52,7 +52,7 @@
             local_mall
         </span>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger numero">
-            <span th:text="${session.cantidadLibros != null} ? ${session.cantidadLibros} : 0"></span>
+                <span th:text="${#httpSession.getAttribute('cantidadLibros')}"></span>
                 <span class="visually-hidden">unread messages</span>
             </span>
         </a>
@@ -64,7 +64,7 @@
         <div class="dropdown">
             <button class="btn dropdownButton botonModificado" >
                 <span class="material-symbols-outlined">person</span>
-                <span th:text="${session.nombreUsuario != null} ? ${session.nombreUsuario} : 'Invitado'"></span>
+                <span th:text="${#httpSession.getAttribute('nombreUsuario')}"></span>
             </button>
             <div class="dropdown-content dropdownContent">
                 <a href="perfil.html">Ver perfil</a>
@@ -111,23 +111,19 @@
         <div class="contenedor-usuario">
 
             <a th:href="@{/mostrar-carrito}" class="position-relative">
-        <span class="material-symbols-outlined">
+            <span class="material-symbols-outlined">
             local_mall
-        </span>
+            </span>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger numero">
-            <span th:text="${session.cantidadLibros != null} ? ${session.cantidadLibros} : 0"></span>
+                 <span th:text="${#httpSession.getAttribute('cantidadLibros')}"></span>
                 <span class="visually-hidden">unread messages</span>
             </span>
             </a>
 
-
-
-
-
             <div class="dropdown">
-                <button class="btn dropdownButton botonModificado" >
+                <button class="btn dropdownButton botonModificado">
                     <span class="material-symbols-outlined">person</span>
-                    <span th:text="${session.nombreUsuario != null} ? ${session.nombreUsuario} : 'Invitado'"></span>
+                    <span th:text="${#httpSession.getAttribute('nombreUsuario')}"></span>
                 </button>
                 <div class="dropdown-content dropdownContent">
                     <a href="perfil.html">Ver perfil</a>

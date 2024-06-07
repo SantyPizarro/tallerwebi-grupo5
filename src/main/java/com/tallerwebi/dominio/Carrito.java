@@ -2,19 +2,17 @@ package com.tallerwebi.dominio;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 public class Carrito {
 
     private Long id;
-    private Set<Libro> libros;
+    private List<Libro> libros;
     private Usuario usuario;
 
     public Carrito() {
-        this.libros = new HashSet<>();
+        this.libros = new ArrayList<>();
     }
 
     public void agregarLibroAlCarrito(Libro libro) {
@@ -29,11 +27,11 @@ public class Carrito {
         this.id = id;
     }
 
-    public Set<Libro> getLibros() {
+    public List<Libro> getLibros() {
         return libros;
     }
 
-    public void setLibros(Set<Libro> libros) {
+    public void setLibros(List<Libro> libros) {
         this.libros = libros;
     }
 

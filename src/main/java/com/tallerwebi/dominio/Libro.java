@@ -2,7 +2,6 @@ package com.tallerwebi.dominio;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
 public class Libro{
@@ -118,17 +117,4 @@ public class Libro{
     public String getRuta(){ return ruta;}
 
     public void setRuta(String ruta){ this.ruta = ruta; }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Libro libro = (Libro) o;
-        return Objects.equals(id, libro.id) && Objects.equals(titulo, libro.titulo) && Objects.equals(autor, libro.autor) && Objects.equals(editorial, libro.editorial);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, titulo, autor, editorial);
-    }
 }

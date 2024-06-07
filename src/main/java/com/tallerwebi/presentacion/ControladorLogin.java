@@ -55,21 +55,8 @@ public class ControladorLogin {
                 model.put("error", "Usuario o clave incorrecta");
             }
             return new ModelAndView("login", model);
-        } else {
-            if (rol.equals("ADMIN")) {
-                if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
-                    HttpSession sesion = request.getSession();
-                    Carrito carrito = new Carrito();
-                    sesion.setAttribute("CARRITO", carrito);
-                    sesion.setAttribute("USUARIO", usuarioBuscado);
-                    sesion.setAttribute("nombreUsuario", usuarioBuscado.getNombreDeUsuario());
-                    return new ModelAndView("redirect:/perfilAdmin");
-                }else {
-                    model.put("error", "Usuario o clave incorrecta");
-                }
-            }
         }
-        return new ModelAndView("login", model);
+        return new ModelAndView("redirect:/perfilAdmin");
     }
 
     @RequestMapping(path = "/cerrar-sesion")

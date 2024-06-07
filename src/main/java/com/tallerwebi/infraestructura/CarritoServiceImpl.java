@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Service("CarritoService")
 @Transactional
@@ -43,14 +42,14 @@ public class CarritoServiceImpl implements CarritoService {
     }
 
     @Override
-    public Set<Libro> obtenerLibrosComprados(Carrito carrito) {
+    public List<Libro> obtenerLibrosComprados(Carrito carrito) {
         return carrito.getLibros();
     }
 
     @Override
     public Double obtenerSubtotal(Carrito carrito) {
         Double subtotal = 0.0;
-        Set<Libro> libros = obtenerLibrosComprados(carrito);
+        List<Libro> libros = obtenerLibrosComprados(carrito);
         for (Libro precioLibro : libros) {
             subtotal += precioLibro.getPrecio();
         }

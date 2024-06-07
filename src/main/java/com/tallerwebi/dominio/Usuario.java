@@ -1,10 +1,6 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 public class Usuario {
@@ -26,35 +22,8 @@ public class Usuario {
     private String generoFav1;
     private String generoFav2;
     private String foto;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuario_libros_favoritos",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "libroFavorito_id")
-    )
-    private Set<Libro> librosFavoritos;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuario_libros_deseados",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "libroDeseado_id")
-    )
-    private Set<Libro> librosDeseados;
-
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "usuario_libros_comprados",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "libroComprado_id")
-    )
-    private Set<Libro> librosComprados;
-
-
-
-    public Usuario() {
-        this.librosFavoritos = new HashSet<>();
-    }
+    private String tokenDeVerificacion;
+    private Boolean emailVerificado = false;
 
 
     public String getFoto() {
@@ -152,27 +121,19 @@ public class Usuario {
         activo = true;
     }
 
-    public Set<Libro> getLibrosFavoritos() {
-        return librosFavoritos;
+    public String getTokenDeVerificacion() {
+        return tokenDeVerificacion;
     }
 
-    public void setLibrosFavoritos(Set<Libro> librosFavoritos) {
-        this.librosFavoritos = librosFavoritos;
+    public void setTokenDeVerificacion(String tokenDeVerificacion) {
+        this.tokenDeVerificacion = tokenDeVerificacion;
     }
 
-    public Set<Libro> getLibrosDeseados() {
-        return librosDeseados;
+    public Boolean getEmailVerificado() {
+        return emailVerificado;
     }
 
-    public void setLibrosDeseados(Set<Libro> librosDeseados) {
-        this.librosDeseados = librosDeseados;
-    }
-
-    public Set<Libro> getLibrosComprados() {
-        return librosComprados;
-    }
-
-    public void setLibrosComprados(Libro libro) {
-        this.librosComprados.add(libro);
+    public void setEmailVerificado(Boolean emailVerificado) {
+        this.emailVerificado = emailVerificado;
     }
 }

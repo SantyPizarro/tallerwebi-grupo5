@@ -4,14 +4,13 @@ import com.tallerwebi.dominio.excepcion.LibroNoAgregado;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public interface CarritoService {
 
     void agregarLibrosAlCarrito(Long id, Carrito carrito) throws LibroNoAgregado;
 
-    Set<Libro> obtenerLibrosComprados(Carrito carrito);
+    List <Libro> obtenerLibrosComprados(Carrito carrito);
 
     Double obtenerSubtotal(Carrito carrito);
 

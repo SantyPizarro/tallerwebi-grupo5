@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Usuario {
@@ -25,6 +26,29 @@ public class Usuario {
     private String tokenDeVerificacion;
     private Boolean emailVerificado = false;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_libros_favoritos",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "libroFavorito_id")
+    )
+    private Set<Libro> librosFavoritos;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_libros_deseados",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "libroDeseado_id")
+    )
+    private Set<Libro> librosDeseados;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_libros_comprados",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "libroComprado_id")
+    )
+    private Set<Libro> librosComprados;
 
     public String getFoto() {
         return foto;
@@ -135,5 +159,29 @@ public class Usuario {
 
     public void setEmailVerificado(Boolean emailVerificado) {
         this.emailVerificado = emailVerificado;
+    }
+
+    public Set<Libro> getLibrosFavoritos() {
+        return librosFavoritos;
+    }
+
+    public void setLibrosFavoritos(Set<Libro> librosFavoritos) {
+        this.librosFavoritos = librosFavoritos;
+    }
+
+    public Set<Libro> getLibrosDeseados() {
+        return librosDeseados;
+    }
+
+    public void setLibrosDeseados(Set<Libro> librosDeseados) {
+        this.librosDeseados = librosDeseados;
+    }
+
+    public Set<Libro> getLibrosComprados() {
+        return librosComprados;
+    }
+
+    public void setLibrosComprados(Libro libro) {
+        this.librosComprados.add(libro);
     }
 }

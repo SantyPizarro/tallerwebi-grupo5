@@ -42,11 +42,12 @@
                     </div>
                     <p>Total: $<span th:text="${total}">0.00</span></p>
 
-                    <form th:action="@{/comprar}" method="get">
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <input type="submit" class="btn btn-primary" value="Confirmar compra">
-                        </div>
-                    </form>
+                    <form th:action="@{/comprar}" method="post">
+                        <button type="submit" style="border:none">
+                            <div id="wallet_container">
+
+                            </div>
+                        </button>
                 </div>
             </div>
         </div>
@@ -54,6 +55,24 @@
 </main>
 
 <footer th:replace="header_footer :: footer"></footer>
+<script>
+
+    const mp = new MercadoPago('APP_USR-1ad60a1a-2341-4c9b-abdc-d41cc1e4d8d7', {
+        locale: 'es-AR'
+    });
+
+    mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+            preferenceId: "<PREFERENCE_ID>",
+            redirectMode: "blank"
+        },
+        customization: {
+            texts: {
+                valueProp: 'smart_option',
+            },
+        },
+    });
+</script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         console.log("Archivo compra.js cargado");

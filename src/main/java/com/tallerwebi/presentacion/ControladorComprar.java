@@ -35,10 +35,6 @@ public class ControladorComprar {
         Preference preference = mercadoPagoService.createPreference(usuario, carrito);
 
         if (preference != null){
-            compraLibroService.registrarCompra(usuario, carrito);
-
-            carrito.limpiar();
-            sesion.setAttribute("cantidadLibros", 0);
             return new ModelAndView("redirect:" + preference.getSandboxInitPoint());
         }
 

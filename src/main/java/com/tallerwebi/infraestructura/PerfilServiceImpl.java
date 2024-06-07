@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.PerfilService;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -70,4 +72,60 @@ public class PerfilServiceImpl implements PerfilService {
 
     }
 
+    public void addLibroFavorito(Usuario usuario, Libro libro) {
+
+        if (usuario == null || libro == null) {
+            throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
+        }
+
+        Set<Libro> librosFavoritos = usuario.getLibrosFavoritos();
+
+
+        if (!librosFavoritos.contains(libro)) {
+            librosFavoritos.add(libro);
+            repositorioUsuario.modificar(usuario);
+        }
+    }
+
+    @Override
+    public void eliminarLibroFavorito(Usuario usuario, Libro libro) {
+        if (usuario == null || libro == null) {
+            throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
+        }
+
+        Set<Libro> librosFavoritos = usuario.getLibrosFavoritos();
+        if (librosFavoritos.contains(libro)) {
+            librosFavoritos.remove(libro);
+            repositorioUsuario.modificar(usuario);
+        }
+    }
+
+    @Override
+    public void addLibroDeseado(Usuario usuario, Libro libro) {
+
+        if (usuario == null || libro == null) {
+            throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
+        }
+
+        Set<Libro> librosDeseados = usuario.getLibrosDeseados();
+
+
+        if (!librosDeseados.contains(libro) && !usuario.getLibrosComprados().contains(libro)) {
+            librosDeseados.add(libro);
+            repositorioUsuario.modificar(usuario);
+        }
+    }
+
+    @Override
+    public void eliminarLibroDeseado(Usuario usuario, Libro libro) {
+        if (usuario == null || libro == null) {
+            throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
+        }
+
+        Set<Libro> librosDeseados = usuario.getLibrosDeseados();
+        if (librosDeseados.contains(libro)) {
+            librosDeseados.remove(libro);
+            repositorioUsuario.modificar(usuario);
+        }
+    }
 }

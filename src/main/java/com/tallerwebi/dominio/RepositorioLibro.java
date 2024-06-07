@@ -16,4 +16,6 @@ public interface RepositorioLibro {
 
     Libro buscarLibroPorId(Long id);
     void agregar(Libro libroAgregar);
+
+    void eliminarLibro(Libro libro);
 }

@@ -140,5 +140,13 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         sessionFactory.getCurrentSession().save(libroAgregar);
     }
 
+    @Override
+    public void eliminarLibro(Libro libroAborrar) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "DELETE FROM Libro WHERE id = : id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", libroAborrar.getId());
+        query.executeUpdate();
+    }
 
 }

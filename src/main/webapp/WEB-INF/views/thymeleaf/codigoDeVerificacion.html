@@ -33,10 +33,11 @@
                     <label class="input-group-text" id="inputGroup-sizing-sm">Codigo</label>
                     <input name="token" id="token" type="text" class="form-control" aria-label="Sizing example input"
                            aria-describedby="inputGroup-sizing-sm" required>
-                    <div class="invalid-feedback">
-                        Por favor coloca tu codigo.
+                    <div  th:if="${error != null}" class="alert alert-danger" th:text="'Error ' + ${error}">
+
                     </div>
                 </div>
+
                 <div class="form-group">
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Validar</button>
                 </div>

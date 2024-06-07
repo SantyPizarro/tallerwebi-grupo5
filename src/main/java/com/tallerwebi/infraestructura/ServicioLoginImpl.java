@@ -66,6 +66,7 @@ public class ServicioLoginImpl implements ServicioLogin {
             throw new TokenInvalido();
         }
         usuario.setEmailVerificado(true);
+        usuario.setTokenDeVerificacion(null);
         repositorioUsuario.guardar(usuario);
     }
 

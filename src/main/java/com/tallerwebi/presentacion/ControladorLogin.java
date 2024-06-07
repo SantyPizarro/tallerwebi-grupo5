@@ -43,7 +43,7 @@ public class ControladorLogin {
         String rol = usuarioBuscado.getRol();
 
         if (rol.equals("user")) {
-            if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
+            if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && usuarioBuscado.getEmailVerificado()) {
                 HttpSession sesion = request.getSession();
                 Carrito carrito = new Carrito();
                 sesion.setAttribute("CARRITO", carrito);
@@ -52,7 +52,13 @@ public class ControladorLogin {
 
                 return new ModelAndView("redirect:/home");
             } else {
-                model.put("error", "Usuario o clave incorrecta");
+                if (!usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && !usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
+                    model.put("error", "Usuario o clave incorrecta");
+                } else {
+                    model.put("error", "El email no ha sido verificado");
+                    return new ModelAndView("codigoDeVerificacion");
+                }
+
             }
             return new ModelAndView("login", model);
         }
@@ -108,10 +114,10 @@ public class ControladorLogin {
             servicioLogin.validarToken(token);
         } catch (TokenInvalido e) {
             model.put("error", "El token ingresado es inválido");
-            return new ModelAndView("validar-token", model);
+            return new ModelAndView("codigoDeVerificacion", model);
         } catch (Exception e) {
             model.put("error", "Error al validar el token");
-            return new ModelAndView("validar-token", model);
+            return new ModelAndView("codigoDeVerificacion", model);
         }
         return new ModelAndView("redirect:/login");
     }

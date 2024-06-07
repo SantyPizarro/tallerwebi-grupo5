@@ -20,10 +20,12 @@ public class RepositorioProductosCompraImpl implements RepositorioProductosCompr
         this.sessionFactory = sessionFactory;
     }
 
+
     @Override
     public void crearProducto(ProductosCompra producto) {
         sessionFactory.getCurrentSession().save(producto);
     }
+    
 }
 
 

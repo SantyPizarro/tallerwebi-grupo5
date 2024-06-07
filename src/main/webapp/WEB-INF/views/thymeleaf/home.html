@@ -38,9 +38,9 @@
 
   <section class="libros owl-carousel owl-theme" id="carousel-libros">
     <div th:each="libro : ${libros}" class="tarjeta-libro">
-      <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="">
+      <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="" width="286px" height="410px">
       <div class="contenido-tarjeta-libro">
-        <h3 class="titulo-libro colorLetra" th:text="${libro.titulo}">TÃ­tulo del Libro</h3>
+        <h3 class="titulo-libro colorLetra" th:text="${libro.titulo}">titulo del Libro</h3>
         <p class="precio-libro" th:text="${libro.precio}">$</p>
         <div class="botones-libro">
           <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
@@ -58,7 +58,7 @@
   <h3 class="colorLetra">Libros añadidos recientemente:</h3>
   <section class="libros owl-carousel owl-theme" id="carousel-libros-ordenados">
     <div th:each="libro : ${librosOrdenados}" class="tarjeta-libro">
-      <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="">
+      <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="" width="286px" height="410px">
       <div class="contenido-tarjeta-libro">
         <h3 class="titulo-libro colorLetra" th:text="${libro.titulo}">Título del Libro</h3>
         <p class="precio-libro" th:text="${libro.precio}">$</p>

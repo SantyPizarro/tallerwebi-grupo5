@@ -39,7 +39,7 @@
     </button>
     <div class="contenedor-libro">
         <div th:each="libro : ${libros}" class="card" style="width: 18rem;">
-            <img th:src="${libro.ruta}" class="card-img-top" th:alt="${libro.titulo}">
+            <img th:src="${libro.ruta}" class="card-img-top" th:alt="${libro.titulo}" width="286px" height="410px">
             <div class="card-body detalle-tarjetas">
                 <h5 class="card-title" th:text="${libro.titulo}"></h5>
                 <form accept-charset="UTF-8" th:action="@{/eliminarLibroDeBDD}" method="POST">

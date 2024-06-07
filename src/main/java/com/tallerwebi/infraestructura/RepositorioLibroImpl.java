@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.DatosLibro;
 import com.tallerwebi.dominio.Genero;
 import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.RepositorioLibro;
@@ -138,6 +139,15 @@ public class RepositorioLibroImpl implements RepositorioLibro {
     @Override
     public void agregar(Libro libroAgregar) {
         sessionFactory.getCurrentSession().save(libroAgregar);
+    }
+
+    @Override
+    public void eliminarLibro(Libro libroAborrar) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "DELETE FROM Libro WHERE id = : id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", libroAborrar.getId());
+        query.executeUpdate();
     }
 
 

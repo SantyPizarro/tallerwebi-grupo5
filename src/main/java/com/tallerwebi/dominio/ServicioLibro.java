@@ -82,5 +82,10 @@ public class ServicioLibro {
         }
     }
 
+    public void eliminarLibro(String titulo){
+        repositorioLibro.eliminarLibro(repositorioLibro.buscarUnLibroPorSuTitulo(titulo));
+    }
+
+
 
 }

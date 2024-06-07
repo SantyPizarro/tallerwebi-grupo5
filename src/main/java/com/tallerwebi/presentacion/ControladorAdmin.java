@@ -2,6 +2,7 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.DatosLibro;
 import com.tallerwebi.dominio.DatosRegistro;
+import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.ServicioLibro;
 import com.tallerwebi.dominio.excepcion.LibroExistente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,4 +39,13 @@ public class ControladorAdmin {
 
         return new ModelAndView ("redirect:/perfilAdmin");
     }
+
+    @RequestMapping(path = "/eliminarLibroDeBDD", method = RequestMethod.POST)
+    public ModelAndView eliminarLibroDeBDD(@ModelAttribute("titulo") String titulo){
+
+        servicioLibro.eliminarLibro(titulo);
+
+        return new ModelAndView ("redirect:/perfilAdmin");
+    }
+
 }

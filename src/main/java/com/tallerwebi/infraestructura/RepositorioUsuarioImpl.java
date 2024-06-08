@@ -74,9 +74,12 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     }
 
     @Override
-    public List<Usuario> buscarTodos() {
+    public List<Usuario> buscarTodos(Usuario usuario) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("FROM Usuario").list();
+        return session.createQuery("FROM Usuario WHERE rol = :userRole AND id != :userId")
+                .setParameter("userRole", "USER")
+                .setParameter("userId", usuario.getId())
+                .list();
     }
 
     @Override

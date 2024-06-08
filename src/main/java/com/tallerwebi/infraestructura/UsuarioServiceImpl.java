@@ -20,7 +20,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Override
-    public List<Usuario> listar() {
-        return repositorioUsuario.buscarTodos();
+    public List<Usuario> listar(Usuario usuario) {
+        return repositorioUsuario.buscarTodos(usuario);
     }
 }

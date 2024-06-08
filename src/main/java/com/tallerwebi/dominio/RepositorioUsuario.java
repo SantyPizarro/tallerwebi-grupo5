@@ -10,7 +10,7 @@ public interface RepositorioUsuario {
     void modificar(Usuario usuario);
     Usuario buscarPorId(Long id);
     Usuario buscarUsuarioPassword(String email, String password);
-    List<Usuario> buscarTodos();
+    List<Usuario> buscarTodos(Usuario usuario);
     Usuario buscarPorToken(String token);
 }
 

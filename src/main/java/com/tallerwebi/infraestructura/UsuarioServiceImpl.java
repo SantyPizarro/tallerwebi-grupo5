@@ -23,4 +23,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<Usuario> listar(Usuario usuario) {
         return repositorioUsuario.buscarTodos(usuario);
     }
+
+    @Override
+    public List<Usuario> mostrarUsers() {
+        return repositorioUsuario.buscarUsers();
+    }
+
+    @Override
+    public List<Usuario> mostrarAdmins() {
+        return repositorioUsuario.buscarAdmins();
+    }
 }

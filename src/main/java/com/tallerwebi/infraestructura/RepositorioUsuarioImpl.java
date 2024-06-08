@@ -90,4 +90,20 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
                 .uniqueResult();
     }
 
+    @Override
+    public List<Usuario> buscarUsers() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("FROM Usuario WHERE rol = :userRole")
+                .setParameter("userRole", "USER")
+                .list();
+    }
+
+    @Override
+    public List<Usuario> buscarAdmins() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("FROM Usuario WHERE rol = :userRole")
+                .setParameter("userRole", "ADMIN")
+                .list();
+    }
+
 }

@@ -1,11 +1,8 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.DatosLibro;
-import com.tallerwebi.dominio.DatosRegistro;
-import com.tallerwebi.dominio.Libro;
-import com.tallerwebi.dominio.ServicioLibro;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.LibroExistente;
+import com.tallerwebi.infraestructura.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,15 +12,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class ControladorAdmin {
 
     private final ServicioLibro servicioLibro;
+    private final UsuarioService usuarioService;
 
     @Autowired
-    public ControladorAdmin(ServicioLibro servicioLibro) {
+    public ControladorAdmin(ServicioLibro servicioLibro, UsuarioService usuarioService) {
         this.servicioLibro = servicioLibro;
+        this.usuarioService = usuarioService;
     }
 
     @GetMapping("/perfilAdmin")
@@ -33,6 +33,10 @@ public class ControladorAdmin {
         if (usuario != null) {
             ModelMap model = new ModelMap();
             DatosLibro datosLibro = new DatosLibro();
+
+            model.put("usuarios",usuarioService.mostrarUsers());
+            model.put("usuariosAdmin",usuarioService.mostrarAdmins());
+
             model.put("datosLibro", datosLibro);
             model.put("libros", servicioLibro.obtenerTodosLosLibros());
             return new ModelAndView("perfil-admin", model);
@@ -56,5 +60,7 @@ public class ControladorAdmin {
 
         return new ModelAndView ("redirect:/perfilAdmin");
     }
+
+
 
 }

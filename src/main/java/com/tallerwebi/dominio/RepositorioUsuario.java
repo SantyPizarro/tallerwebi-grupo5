@@ -12,5 +12,9 @@ public interface RepositorioUsuario {
     Usuario buscarUsuarioPassword(String email, String password);
     List<Usuario> buscarTodos(Usuario usuario);
     Usuario buscarPorToken(String token);
+
+    List<Usuario> buscarUsers();
+
+    List<Usuario> buscarAdmins();
 }
 

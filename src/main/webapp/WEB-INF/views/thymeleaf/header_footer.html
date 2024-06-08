@@ -13,9 +13,26 @@
 </head>
 <body>
 
+<div class="contenedor-header" th:fragment="headerAdmin">
+    <div class="logotipo">
+        <a href="home.html"><img th:src="@{/images/logo.png}" width="60px" height="60px" alt="logo"></a>
+    </div>
+
+    <div class="dropdown">
+        <button class="btn dropdownButton botonModificado" >
+            <span class="material-symbols-outlined">person</span>
+            <span th:text="${#httpSession.getAttribute('nombreUsuario')}"></span>
+        </button>
+        <div class="dropdown-content dropdownContent">
+            <a href="perfil.html">Ver perfil</a>
+            <a th:href="@{/cerrar-sesion}">Cerrar sesión</a>
+        </div>
+    </div>
+</div>
+
 <div class="contenedor-header" th:fragment="headerLogin">
     <div class="logotipo">
-        <a><img th:src="@{/images/logo.png}" width="60px" height="60px" alt="logo"></a>
+        <a href="home.html"><img th:src="@{/images/logo.png}" width="60px" height="60px" alt="logo"></a>
     </div>
 </div>
 

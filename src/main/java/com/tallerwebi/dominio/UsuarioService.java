@@ -4,4 +4,8 @@ import java.util.List;
 
 public interface UsuarioService {
     List<Usuario> listar(Usuario usuario);
+
+    List<Usuario> mostrarUsers();
+
+    List<Usuario> mostrarAdmins();
 }

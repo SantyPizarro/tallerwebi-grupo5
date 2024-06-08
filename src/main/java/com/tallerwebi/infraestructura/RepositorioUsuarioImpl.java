@@ -10,8 +10,11 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository("repositorioUsuario")
+@Transactional
 public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
     private SessionFactory sessionFactory;
@@ -68,6 +71,12 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
                 .add(Restrictions.eq("email", email))
                 .add(Restrictions.eq("password", password))
                 .uniqueResult();
+    }
+
+    @Override
+    public List<Usuario> buscarTodos() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("FROM Usuario").list();
     }
 
     @Override

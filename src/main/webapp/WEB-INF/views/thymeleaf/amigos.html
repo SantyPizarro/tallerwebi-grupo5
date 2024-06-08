@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!-- Boostrap core css -->
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
+
+    <!-- custom style -->
+    <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
+    <title>Title</title>
+
+    <div th:replace="header_footer::head"></div>
+
+</head>
+<body>
+
+<header th:replace="header_footer :: header">
+
+</header>
+
+<div class="container">
+    <div th:each="usuario : ${usuarios}" class="contenedor">
+        <div>
+            <div class="avatar-perfil">
+                <img th:src="@{'/images/' + ${usuario.foto}}" th:alt="${usuario.foto}">
+            </div>
+            <div class="nombre">
+                <h2 th:text="${usuario.nombreDeUsuario}"></h2>
+            </div>
+        </div>
+        <div class="descripcion">
+            <h4>Descripción:</h4>
+            <p th:text="${usuario.descripcion}"></p>
+            <div class="preferencias">
+                <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
+                <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
+            </div>
+            <button type="button" class="btn btn-primary configuracion" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Añadir
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

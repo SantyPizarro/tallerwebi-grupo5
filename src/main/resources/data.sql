@@ -1,5 +1,8 @@
 INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2,foto) VALUES(null, 'test@unlam.edu.ar', 'test', 'ADMIN', true,'Me llamo Tomas y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte','Tomas Pezzano','ficcion','deporte','mifoto2.jpg');
 INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2,foto,emailVerificado) VALUES(null, 'asd@asd.com', '123', 'user', true,'Me llamo asd y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte','Tomas Pezzano','ficcion','deporte','mifoto2.jpg',true);
+INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2,foto,emailVerificado) VALUES(null, 'marcos@hotmail.com', '123', 'user', true,'Me llamo marcos y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte','Tomas Pezzano','ficcion','deporte','loroo.PNG',true);
+INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2,foto,emailVerificado) VALUES(null, 'qwe@qwe.com', '123', 'user', true,'Me llamo marcos y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte','Tomas Pezzano','ficcion','deporte','loroo.PNG',true);
+INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2,foto,emailVerificado) VALUES(null, 'zxc@zxc.com', '123', 'user', true,'Me llamo marcos y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte ','Tomas Pezzano','ficcion','deporte','loroo.PNG',true);
 
 INSERT INTO Genero (id, nombre) VALUES
                                     (1, 'Ficcion'),

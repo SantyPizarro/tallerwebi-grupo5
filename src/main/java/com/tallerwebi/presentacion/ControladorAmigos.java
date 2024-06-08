@@ -28,8 +28,11 @@ public class ControladorAmigos {
     public ModelAndView mostrarAmigos(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
-        ModelMap model = new ModelMap();
-        model.put("usuarios", usuarioService.listar(usuario));
-        return new ModelAndView("amigos",model);
+        if (usuario != null) {
+            ModelMap model = new ModelMap();
+            model.put("usuarios", usuarioService.listar(usuario));
+            return new ModelAndView("amigos",model);
+        }
+        return new ModelAndView("redirect:/login");
     }
 }

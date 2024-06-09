@@ -21,9 +21,7 @@ public class ProductosCompra {
         this.compra = compra;
     }
 
-    public ProductosCompra() {
-
-    }
+    public ProductosCompra() {}
 
     public Libro getLibro() {
         return libro;
@@ -32,5 +30,17 @@ public class ProductosCompra {
     public void setLibro(Libro libro) {
         this.libro = libro;
         this.precioProducto = libro.getPrecio();
+    }
+
+    public Double getPrecioProducto() {
+        return precioProducto;
+    }
+
+    public Compra getCompra() {
+        return compra;
+    }
+
+    public void setCompra(Compra compra) {
+        this.compra = compra;
     }
 }

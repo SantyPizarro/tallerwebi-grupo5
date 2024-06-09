@@ -1,9 +1,6 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.Libro;
-import com.tallerwebi.dominio.PerfilService;
-import com.tallerwebi.dominio.RepositorioUsuario;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -12,6 +9,7 @@ import javax.transaction.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -127,5 +125,10 @@ public class PerfilServiceImpl implements PerfilService {
             librosDeseados.remove(libro);
             repositorioUsuario.modificar(usuario);
         }
+    }
+
+    @Override
+    public List<Compra> historialDeCompras(Usuario usuario) {
+        return repositorioUsuario.historialDeCompras(usuario);
     }
 }

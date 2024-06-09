@@ -1,5 +1,7 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Compra;
+import com.tallerwebi.dominio.ProductosCompra;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
 import org.hibernate.Session;
@@ -9,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
-import javax.persistence.Query;
+import org.hibernate.query.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -105,5 +111,23 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
                 .setParameter("userRole", "ADMIN")
                 .list();
     }
+
+    @Override
+    public List<Compra> historialDeCompras(Usuario usuario) {
+        Session session = sessionFactory.getCurrentSession();
+
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Compra> criteriaQuery = builder.createQuery(Compra.class);
+
+        Root<Compra> compraRoot = criteriaQuery.from(Compra.class);
+        Join<Compra, Usuario> usuarioJoin = compraRoot.join("usuario");
+
+        criteriaQuery.select(compraRoot);
+        criteriaQuery.where(builder.equal(usuarioJoin.get("id"), usuario.getId()));
+
+        Query<Compra> query = session.createQuery(criteriaQuery);
+        return query.getResultList();
+    }
+
 
 }

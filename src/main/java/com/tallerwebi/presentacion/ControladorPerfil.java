@@ -37,9 +37,11 @@ public class ControladorPerfil {
     public ModelAndView mostrarPerfil(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+
         if (usuario != null) {
             ModelMap model = new ModelMap();
             model.put("usuario", usuario);
+            model.put("historialDeCompras", perfilService.historialDeCompras(usuario));
 
             return new ModelAndView("perfil", model);
         }

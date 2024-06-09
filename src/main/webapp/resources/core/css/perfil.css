@@ -200,6 +200,93 @@ footer{
     flex-wrap: wrap;
 }
 
+.tablas {
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.tablas h1 {
+    text-align: center;
+    color: #005f9e;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.facturas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.facturas-table thead {
+    background-color: #005f9e;
+    color: #fff;
+}
+
+.facturas-table th, .facturas-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.facturas-table th {
+    font-size: 16px;
+}
+
+.facturas-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.facturas-table tbody tr:hover {
+    background-color: #e6f7ff;
+}
+
+.libros-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.libros-list li {
+    padding: 5px 0;
+}
+
+@media screen and (max-width: 768px) {
+    .facturas-table, .facturas-table thead, .facturas-table tbody, .facturas-table th, .facturas-table td, .facturas-table tr {
+        display: block;
+    }
+
+    .facturas-table thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .facturas-table tr {
+        margin: 0 0 1rem 0;
+    }
+
+    .facturas-table td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+        text-align: right;
+    }
+
+    .facturas-table td:before {
+        position: absolute;
+        top: 0;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        content: attr(data-title);
+        text-align: left;
+        font-weight: bold;
+    }
+}
+
 
 @media only screen and (max-width: 1270px) {
     .contenedor {

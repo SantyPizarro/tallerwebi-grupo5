@@ -16,5 +16,7 @@ public interface RepositorioUsuario {
     List<Usuario> buscarUsers();
 
     List<Usuario> buscarAdmins();
+
+    List<Compra> historialDeCompras(Usuario usuario);
 }
 

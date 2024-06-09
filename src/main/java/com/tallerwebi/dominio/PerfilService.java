@@ -2,6 +2,8 @@ package com.tallerwebi.dominio;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public interface PerfilService {
 
 
@@ -14,4 +16,5 @@ public interface PerfilService {
     void addLibroDeseado(Usuario usuario, Libro libro);
     void eliminarLibroDeseado(Usuario usuario, Libro libro);
 
+    List<Compra> historialDeCompras(Usuario usuario);
 }

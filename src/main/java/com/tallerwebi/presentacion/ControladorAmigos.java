@@ -24,7 +24,7 @@ public class ControladorAmigos {
         this.usuarioService = usuarioService;
     }
 
-    @GetMapping("mostrarAmigos")
+    @GetMapping("/mostrarAmigos")
     public ModelAndView mostrarAmigos(HttpServletRequest request) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");

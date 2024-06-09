@@ -33,4 +33,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     public List<Usuario> mostrarAdmins() {
         return repositorioUsuario.buscarAdmins();
     }
+
+    @Override
+    public Usuario buscarPorId(Long idAmigo) {
+        return repositorioUsuario.buscarPorId(idAmigo);
+    }
 }

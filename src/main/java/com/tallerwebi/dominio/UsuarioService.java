@@ -8,4 +8,6 @@ public interface UsuarioService {
     List<Usuario> mostrarUsers();
 
     List<Usuario> mostrarAdmins();
+
+    Usuario buscarPorId(Long idAmigo);
 }

@@ -55,46 +55,56 @@
 
     <h3>Usuarios Administradores:</h3>
 
-    <div th:each="usuarioAdmin : ${usuariosAdmin}" class="contenedor">
-        <div>
-            <div class="avatar-perfil">
-                <img th:src="@{'/images/' + ${usuarioAdmin.foto}}" th:alt="${usuarioAdmin.foto}">
-            </div>
-            <div class="nombre">
-                <h2 th:text="${usuarioAdmin.nombreDeUsuario}"></h2>
-            </div>
-        </div>
-        <div class="descripcion">
-            <h4>Descripción:</h4>
-            <p th:text="${usuarioAdmin.descripcion}"></p>
-            <div class="preferencias">
-                <span class="etiqueta" th:text="${usuarioAdmin.generoFav1}"></span>
-                <span class="etiqueta" th:text="${usuarioAdmin.generoFav2}"></span>
-            </div>
+            <div class="container">
+                <div th:each="usuario : ${usuariosAdmin}" class="contenedor">
+                    <div>
+                        <div class="avatar-perfiles">
+                            <img th:src="@{'/images/' + ${usuario.foto}}" th:alt="${usuario.foto}">
+                        </div>
+                        <div class="nombre">
+                            <h2 th:text="${usuario.nombreDeUsuario}"></h2>
+                        </div>
+                    </div>
+                    <div class="descripcion">
+                        <h4>Descripción:</h4>
+                        <p th:text="${usuario.descripcion}"></p>
+                        <div class="preferencias">
+                            <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
+                            <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
+                        </div>
+                        <button type="button" class="btn btn-danger configuracion" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
         </div>
     </div>
-
     <h3>Usuarios:</h3>
 
-    <div th:each="usuario : ${usuarios}" class="contenedor">
-        <div>
-            <div class="avatar-perfil">
-                <img th:src="@{'/images/' + ${usuario.foto}}" th:alt="${usuario.foto}">
-            </div>
-            <div class="nombre">
-                <h2 th:text="${usuario.nombreDeUsuario}"></h2>
-            </div>
-        </div>
-        <div class="descripcion">
-            <h4>Descripción:</h4>
-            <p th:text="${usuario.descripcion}"></p>
-            <div class="preferencias">
-                <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
-                <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
-            </div>
+            <div class="container">
+                <div th:each="usuario : ${usuarios}" class="contenedor">
+                    <div>
+                        <div class="avatar-perfiles">
+                            <img th:src="@{'/images/' + ${usuario.foto}}" th:alt="${usuario.foto}">
+                        </div>
+                        <div class="nombre">
+                            <h2 th:text="${usuario.nombreDeUsuario}"></h2>
+                        </div>
+                    </div>
+                    <div class="descripcion">
+                        <h4>Descripción:</h4>
+                        <p th:text="${usuario.descripcion}"></p>
+                        <div class="preferencias">
+                            <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
+                            <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
+                        </div>
+                        <button type="button" class="btn btn-danger configuracion" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Eliminar
+                        </button>
+                    </div>
+                </div>
         </div>
     </div>
-
 </section>
 
 <!-- Modal -->

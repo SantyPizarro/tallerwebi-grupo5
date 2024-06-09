@@ -36,6 +36,7 @@ public class ControladorAdmin {
 
             model.put("usuarios",usuarioService.mostrarUsers());
             model.put("usuariosAdmin",usuarioService.mostrarAdmins());
+            model.put("usuario", usuario);
 
             model.put("datosLibro", datosLibro);
             model.put("libros", servicioLibro.obtenerTodosLosLibros());

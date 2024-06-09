@@ -1,3 +1,84 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.contenedor{
+    position: relative;
+    background-color: #000000;
+    color: #FFFFFF;
+    border-radius: 2rem;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    margin-top: 3.5rem;
+    padding:20px;
+}
+
+.avatar-perfiles{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    background-color: #D9DCF1;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 8px solid #FFFFFF;
+    box-shadow: 0 0 12px 2px rgba(0, 0, 0, .2);
+    margin-right: 10px;
+}
+
+.avatar-perfiles img {
+    width: 200%;
+    height: 100%;
+}
+
+.nombre{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.nombre h2{
+    font-size: 1.4rem;
+}
+
+.descripcion h4{
+    font-size: 1rem;
+}
+
+.preferencias{
+    position: absolute;
+    display: flex;
+    bottom: 10%;
+    right: 10%;
+    gap: 1rem;
+}
+
+.preferencias .etiqueta{
+    background-color: #1F23E0;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.5rem 0.2rem 0.5rem;
+}
+
+.configuracion{
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    border: none;
+    padding: 0.2rem;
+    border-radius: 0.5rem;
+    background-color: #121482;
+}
+
 .contenedor-libro{
     display:flex;
     flex-wrap: wrap;
@@ -5,30 +86,4 @@
     align-content: center;
     justify-content: center;
     gap: 8rem;
-}
-
-.avatar-perfil{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 230px;
-    height: 230px;
-    background-color: #D9DCF1;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 8px solid #FFFFFF;
-    box-shadow: 0 0 12px 2px rgba(0, 0, 0, .2);
-}
-
-.contenedor .avatar-perfil img{
-    width: 200%;
-    height: 100%;
-}
-
-.nombre{
-    margin-top: 1rem;
-}
-
-.descripcion{
-    margin-left: 2rem;
 }

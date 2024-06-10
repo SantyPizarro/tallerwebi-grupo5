@@ -52,14 +52,15 @@ public class ControladorLogin {
 
                 return new ModelAndView("redirect:/home");
             } else {
-                if (!usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && !usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
-                    model.put("error", "Usuario o clave incorrecta");
-                } else {
+                if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && usuarioBuscado.getEmailVerificado() == false) {
                     model.put("error", "El email no ha sido verificado");
                     return new ModelAndView("codigoDeVerificacion");
+                } else {
+                    model.put("error", "Usuario o clave incorrecta");
+                    return new ModelAndView("login", model);
                 }
             }
-            return new ModelAndView("login", model);
+
         } else {
             if (rol.equals("ADMIN")) {
                 if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {

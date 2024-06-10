@@ -7,4 +7,8 @@ public interface RepositorioSolicitudAmistad {
     void guardar(SolicitudAmistad solicitud);
 
     List<SolicitudAmistad> buscarSolicitudes(Usuario usuario);
+
+    SolicitudAmistad buscarSolicitudAmistadEntreDosPersonas(Usuario aceptante, Usuario solicitante);
+
+    void aceptarSolicitud(SolicitudAmistad solicitud);
 }

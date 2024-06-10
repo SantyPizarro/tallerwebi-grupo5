@@ -1,7 +1,6 @@
 package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Compra;
-import com.tallerwebi.dominio.ProductosCompra;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
 import org.hibernate.Session;
@@ -54,6 +53,11 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     @Override
     public void modificar(Usuario usuario) {
         sessionFactory.getCurrentSession().update(usuario);
+    }
+
+    @Override
+    public void modificarMerge(Usuario usuario) {
+        sessionFactory.getCurrentSession().merge(usuario);
     }
 
     @Override

@@ -13,10 +13,12 @@ import java.util.List;
 public class SolicitudAmistadServiceImpl implements SolicitudAmistadService {
 
     private RepositorioSolicitudAmistad repositorioSolicitudAmistad;
+    private RepositorioUsuario repositorioUsuario;
 
     @Autowired
-    public SolicitudAmistadServiceImpl (RepositorioSolicitudAmistad repositorioSolicitudAmistad){
+    public SolicitudAmistadServiceImpl (RepositorioSolicitudAmistad repositorioSolicitudAmistad, RepositorioUsuario repositorioUsuario){
         this.repositorioSolicitudAmistad = repositorioSolicitudAmistad;
+        this.repositorioUsuario = repositorioUsuario;
     }
 
     @Override
@@ -31,5 +33,15 @@ public class SolicitudAmistadServiceImpl implements SolicitudAmistadService {
     @Override
     public List<SolicitudAmistad> buscarSolicitudes(Usuario usuario) {
         return repositorioSolicitudAmistad.buscarSolicitudes(usuario);
+    }
+
+    @Override
+    public void aceptarSolicitud(Usuario aceptante, Usuario solicitante) {
+        SolicitudAmistad solicitud =  repositorioSolicitudAmistad.buscarSolicitudAmistadEntreDosPersonas(aceptante, solicitante);
+        aceptante.agregarAmigo(solicitante);
+        solicitante.agregarAmigo(aceptante);
+        repositorioSolicitudAmistad.aceptarSolicitud(solicitud);
+        repositorioUsuario.modificarMerge(aceptante);
+        repositorioUsuario.modificarMerge(solicitante);
     }
 }

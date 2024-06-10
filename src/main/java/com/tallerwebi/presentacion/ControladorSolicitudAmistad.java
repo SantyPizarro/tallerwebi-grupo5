@@ -54,5 +54,18 @@ public class ControladorSolicitudAmistad {
         return new ModelAndView("redirect:/mostrarAmigos");
     }
 
+    @PostMapping("/aceptar-solicitud")
+    public ModelAndView aceptarSolicitud(HttpServletRequest request, @RequestParam("solicitante") Long idAmigo) {
+        HttpSession session = request.getSession();
+        Usuario aceptante = (Usuario) session.getAttribute("USUARIO");
+
+        if (aceptante != null) {
+            Usuario solicitante = usuarioService.buscarPorId(idAmigo);
+            if (solicitante != null) {
+                solicitudAmistadService.aceptarSolicitud(aceptante, solicitante);
+            }
+        }
+        return new ModelAndView("redirect:/mostrarAmigos");
+    }
 
 }

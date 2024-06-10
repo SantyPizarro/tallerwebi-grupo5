@@ -20,6 +20,7 @@ import java.time.LocalDateTime;
         private Usuario solicitado;
 
         private LocalDateTime fechaSolicitud;
+
         private Boolean aceptada = false;
 
         // Getters y setters

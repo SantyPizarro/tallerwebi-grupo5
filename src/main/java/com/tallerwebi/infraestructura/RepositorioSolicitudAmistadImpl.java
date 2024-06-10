@@ -32,4 +32,20 @@ public class RepositorioSolicitudAmistadImpl implements RepositorioSolicitudAmis
                 .setParameter("usuario", usuario)
                 .getResultList();
     }
+
+    @Override
+    public SolicitudAmistad buscarSolicitudAmistadEntreDosPersonas(Usuario aceptante, Usuario solicitante) {
+        return sessionFactory.getCurrentSession().createQuery("from SolicitudAmistad s where s.solicitado = :aceptante and s.solicitante = :solicitante", SolicitudAmistad.class)
+                .setParameter("aceptante", aceptante)
+                .setParameter("solicitante", solicitante)
+                .uniqueResult();
+    }
+
+    @Override
+    public void aceptarSolicitud(SolicitudAmistad solicitud) {
+        solicitud.setAceptada(true);
+        sessionFactory.getCurrentSession().update(solicitud);
+    }
+
+
 }

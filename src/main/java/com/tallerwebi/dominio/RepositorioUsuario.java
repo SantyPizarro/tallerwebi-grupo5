@@ -8,6 +8,9 @@ public interface RepositorioUsuario {
     void guardar(Usuario usuario);
     Usuario buscar(String email);
     void modificar(Usuario usuario);
+
+    void modificarMerge(Usuario usuario);
+
     Usuario buscarPorId(Long id);
     Usuario buscarUsuarioPassword(String email, String password);
     List<Usuario> buscarTodos(Usuario usuario);

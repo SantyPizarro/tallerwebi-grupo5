@@ -47,5 +47,17 @@ public class RepositorioSolicitudAmistadImpl implements RepositorioSolicitudAmis
         sessionFactory.getCurrentSession().update(solicitud);
     }
 
+    @Override
+    public void rechazarSolicitud(SolicitudAmistad solicitud) {
+        sessionFactory.getCurrentSession().delete(solicitud);
+    }
+
+    @Override
+    public SolicitudAmistad buscarSolicitudPorId(Long idSolicitud) {
+        return sessionFactory.getCurrentSession().createQuery("from SolicitudAmistad s where s.id = :idSolicitud", SolicitudAmistad.class)
+                .setParameter("idSolicitud", idSolicitud)
+                .uniqueResult();
+    }
+
 
 }

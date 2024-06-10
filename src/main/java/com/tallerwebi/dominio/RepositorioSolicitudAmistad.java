@@ -11,4 +11,8 @@ public interface RepositorioSolicitudAmistad {
     SolicitudAmistad buscarSolicitudAmistadEntreDosPersonas(Usuario aceptante, Usuario solicitante);
 
     void aceptarSolicitud(SolicitudAmistad solicitud);
+
+    void rechazarSolicitud(SolicitudAmistad solicitud);
+
+    SolicitudAmistad buscarSolicitudPorId(Long idSolicitud);
 }

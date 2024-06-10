@@ -1,9 +1,6 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.DatosLogin;
-import com.tallerwebi.dominio.SolicitudAmistadService;
-import com.tallerwebi.dominio.Usuario;
-import com.tallerwebi.dominio.UsuarioService;
+import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -36,8 +33,9 @@ public class ControladorSolicitudAmistad {
         modelo.put("datosLogin", new DatosLogin());
         if(usuario != null){
             modelo.put("solicitudes", solicitudAmistadService.buscarSolicitudes(usuario));
+            return new ModelAndView("notificaciones", modelo);
         }
-        return new ModelAndView("notificaciones", modelo);
+        return new ModelAndView("redirect:/login");
     }
 
     @PostMapping("/enviar-solicitud")
@@ -49,9 +47,10 @@ public class ControladorSolicitudAmistad {
             Usuario solicitado = usuarioService.buscarPorId(idAmigo);
             if (solicitado != null) {
                 solicitudAmistadService.enviarSolicitud(solicitante, solicitado);
+                return new ModelAndView("redirect:/mostrarAmigos");
             }
         }
-        return new ModelAndView("redirect:/mostrarAmigos");
+        return new ModelAndView("redirect:/login");
     }
 
     @PostMapping("/aceptar-solicitud")
@@ -63,9 +62,24 @@ public class ControladorSolicitudAmistad {
             Usuario solicitante = usuarioService.buscarPorId(idAmigo);
             if (solicitante != null) {
                 solicitudAmistadService.aceptarSolicitud(aceptante, solicitante);
+                return new ModelAndView("redirect:/solicitud-amistad");
             }
         }
-        return new ModelAndView("redirect:/mostrarAmigos");
+        return new ModelAndView("redirect:/login");
     }
 
+    @PostMapping("/rechazar-solicitud")
+    public ModelAndView rechazarSolicitud(HttpServletRequest request, @RequestParam("idSolicitud") Long idSolicitud) {
+        HttpSession session = request.getSession();
+        Usuario aceptante = (Usuario) session.getAttribute("USUARIO");
+
+        if (aceptante != null ) {
+            SolicitudAmistad solicitud = solicitudAmistadService.buscarPorId(idSolicitud);
+            if (solicitud != null){
+                solicitudAmistadService.rechazarSolicitud(solicitud);
+                return new ModelAndView("redirect:/solicitud-amistad");
+            }
+        }
+        return new ModelAndView("redirect:/login");
+    }
 }

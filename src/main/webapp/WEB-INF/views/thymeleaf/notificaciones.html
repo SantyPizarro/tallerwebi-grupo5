@@ -30,7 +30,7 @@
                     </a>
                 </form>
                 <form accept-charset="UTF-8" th:action="@{/rechazar-solicitud}" method="post">
-                    <input type="hidden" th:name="solicitante" th:value="${solicitud.getSolicitante().getId()}">
+                    <input type="hidden" th:name="idSolicitud" th:value="${solicitud.getId()}">
                     <button class="btn btn-danger" type="submit">Rechazar</button>
                 </form>
             </div>

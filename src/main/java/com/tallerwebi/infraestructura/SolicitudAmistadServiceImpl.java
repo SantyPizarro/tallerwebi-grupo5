@@ -44,4 +44,14 @@ public class SolicitudAmistadServiceImpl implements SolicitudAmistadService {
         repositorioUsuario.modificarMerge(aceptante);
         repositorioUsuario.modificarMerge(solicitante);
     }
+
+    @Override
+    public SolicitudAmistad buscarPorId(Long idSolicitud) {
+        return repositorioSolicitudAmistad.buscarSolicitudPorId(idSolicitud);
+    }
+
+    @Override
+    public void rechazarSolicitud(SolicitudAmistad solicitud) {
+        repositorioSolicitudAmistad.rechazarSolicitud(solicitud);
+    }
 }

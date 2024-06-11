@@ -1,4 +1,4 @@
 package com.tallerwebi.dominio.excepcion;
 
-public class TokenInvalido extends Exception {
+public class TokenInvalido extends Exception{
 }

@@ -47,11 +47,16 @@ public class SolicitudAmistadServiceImpl implements SolicitudAmistadService {
     @Override
     public void aceptarSolicitud(Usuario aceptante, Usuario solicitante) {
         SolicitudAmistad solicitud =  repositorioSolicitudAmistad.buscarSolicitudAmistadEntreDosPersonas(aceptante, solicitante);
-        aceptante.agregarAmigo(solicitante);
-        solicitante.agregarAmigo(aceptante);
-        repositorioSolicitudAmistad.aceptarSolicitud(solicitud);
-        repositorioUsuario.modificarMerge(aceptante);
-        repositorioUsuario.modificarMerge(solicitante);
+
+        Amistad amistad = new Amistad(aceptante, solicitante);
+        Amistad amistad2 = new Amistad(solicitante, aceptante);
+
+
+        repositorioSolicitudAmistad.crearAmistad(amistad);
+        repositorioSolicitudAmistad.crearAmistad(amistad2);
+
+        repositorioSolicitudAmistad.aceptarSolicitud(solicitud, amistad);
+
         repositorioSolicitudAmistad.eliminarSolicitud(solicitud);
     }
 

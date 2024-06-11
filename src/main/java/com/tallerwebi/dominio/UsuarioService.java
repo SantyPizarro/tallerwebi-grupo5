@@ -1,9 +1,10 @@
 package com.tallerwebi.dominio;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UsuarioService {
-    List<Usuario> listar(Usuario usuario);
+    Set<Usuario> listar(Usuario usuario);
 
     List<Usuario> mostrarUsers();
 

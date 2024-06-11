@@ -3,6 +3,7 @@ package com.tallerwebi.dominio;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Set;
 
 public interface PerfilService {
 
@@ -17,4 +18,6 @@ public interface PerfilService {
     void eliminarLibroDeseado(Usuario usuario, Libro libro);
 
     List<Compra> historialDeCompras(Usuario usuario);
+
+    Set<Usuario> buscarAmigos(Usuario usuario);
 }

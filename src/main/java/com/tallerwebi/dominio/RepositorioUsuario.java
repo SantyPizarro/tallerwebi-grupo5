@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import java.util.List;
+import java.util.Set;
 
 public interface RepositorioUsuario {
 
@@ -9,7 +10,6 @@ public interface RepositorioUsuario {
     Usuario buscar(String email);
     void modificar(Usuario usuario);
 
-    void modificarMerge(Usuario usuario);
 
     Usuario buscarPorId(Long id);
     Usuario buscarUsuarioPassword(String email, String password);
@@ -21,5 +21,7 @@ public interface RepositorioUsuario {
     List<Usuario> buscarAdmins();
 
     List<Compra> historialDeCompras(Usuario usuario);
+
+    Set<Usuario> buscarAmigos(Usuario usuario);
 }
 

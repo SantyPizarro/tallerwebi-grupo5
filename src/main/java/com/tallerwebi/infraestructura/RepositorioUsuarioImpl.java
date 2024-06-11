@@ -16,7 +16,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Repository("repositorioUsuario")
 @Transactional
@@ -55,10 +57,6 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         sessionFactory.getCurrentSession().update(usuario);
     }
 
-    @Override
-    public void modificarMerge(Usuario usuario) {
-        sessionFactory.getCurrentSession().merge(usuario);
-    }
 
     @Override
     public Usuario buscarPorId(Long id) {
@@ -131,6 +129,17 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 
         Query<Compra> query = session.createQuery(criteriaQuery);
         return query.getResultList();
+    }
+
+    @Override
+    public Set<Usuario> buscarAmigos(Usuario usuario) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Usuario> amigosUsuario =  session.createQuery(
+                        "SELECT a.usuario FROM Amistad a WHERE a.amigo = :usuario", Usuario.class)
+                .setParameter("usuario", usuario)
+                .getResultList();
+
+        return new HashSet<>(amigosUsuario);
     }
 
 

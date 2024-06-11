@@ -131,4 +131,9 @@ public class PerfilServiceImpl implements PerfilService {
     public List<Compra> historialDeCompras(Usuario usuario) {
         return repositorioUsuario.historialDeCompras(usuario);
     }
+
+    @Override
+    public Set<Usuario> buscarAmigos(Usuario usuario) {
+        return repositorioUsuario.buscarAmigos(usuario);
+    }
 }

@@ -23,12 +23,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Override
-    public List<Usuario> listar(Usuario usuario) {
+    public Set<Usuario> listar(Usuario usuario) {
         List<Usuario> usuarios = repositorioUsuario.buscarTodos(usuario);
-        List<Usuario> usuariosAux = new ArrayList<Usuario>();
+        Set<Usuario> usuariosAux = new HashSet<>();
 
         // Crear un set con los amigos del usuario para búsqueda rápida
-        Set<Usuario> amigosSet = new HashSet<>(usuario.getAmigos());
+        Set<Usuario> amigosSet = repositorioUsuario.buscarAmigos(usuario);
 
         for (Usuario usuarioAux : usuarios) {
             if (usuarioAux != null && !amigosSet.contains(usuarioAux)) {

@@ -1,5 +1,6 @@
 package com.tallerwebi.infraestructura;
 
+import com.tallerwebi.dominio.Amistad;
 import com.tallerwebi.dominio.RepositorioSolicitudAmistad;
 import com.tallerwebi.dominio.SolicitudAmistad;
 import com.tallerwebi.dominio.Usuario;
@@ -42,10 +43,11 @@ public class RepositorioSolicitudAmistadImpl implements RepositorioSolicitudAmis
     }
 
     @Override
-    public void aceptarSolicitud(SolicitudAmistad solicitud) {
+    public void aceptarSolicitud(SolicitudAmistad solicitud, Amistad amistad) {
         solicitud.setAceptada(true);
         sessionFactory.getCurrentSession().update(solicitud);
     }
+
 
     @Override
     public void eliminarSolicitud(SolicitudAmistad solicitud) {
@@ -57,6 +59,11 @@ public class RepositorioSolicitudAmistadImpl implements RepositorioSolicitudAmis
         return sessionFactory.getCurrentSession().createQuery("from SolicitudAmistad s where s.id = :idSolicitud", SolicitudAmistad.class)
                 .setParameter("idSolicitud", idSolicitud)
                 .uniqueResult();
+    }
+
+    @Override
+    public void crearAmistad(Amistad amistad) {
+        sessionFactory.getCurrentSession().save(amistad);
     }
 
 

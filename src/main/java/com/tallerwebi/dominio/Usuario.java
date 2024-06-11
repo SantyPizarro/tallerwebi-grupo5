@@ -52,14 +52,6 @@ public class Usuario {
 
     private Set<Libro> librosComprados;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "amistad",
-            joinColumns = @JoinColumn(name = "usuario_id"),
-            inverseJoinColumns = @JoinColumn(name = "amigo_id")
-    )
-    private Set<Usuario> amigos;
-
     public String getFoto() {
         return foto;
     }
@@ -195,23 +187,6 @@ public class Usuario {
         this.librosComprados.add(libro);
     }
 
-    public Set<Usuario> getAmigos() {
-        return amigos;
-    }
-
-    public void setAmigos(Set<Usuario> amigos) {
-        this.amigos = amigos;
-    }
-
-    public void agregarAmigo(Usuario amigo) {
-        this.amigos.add(amigo);
-        amigo.getAmigos().add(this); // Asegura la relación bidireccional
-    }
-
-    public void eliminarAmigo(Usuario amigo) {
-        this.amigos.remove(amigo);
-        amigo.getAmigos().remove(this); // Asegura la relación bidireccional
-    }
 
     @Override
     public boolean equals(Object o) {

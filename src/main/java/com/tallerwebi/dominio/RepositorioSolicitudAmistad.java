@@ -12,7 +12,7 @@ public interface RepositorioSolicitudAmistad {
 
     void aceptarSolicitud(SolicitudAmistad solicitud);
 
-    void rechazarSolicitud(SolicitudAmistad solicitud);
+    void eliminarSolicitud(SolicitudAmistad solicitud);
 
     SolicitudAmistad buscarSolicitudPorId(Long idSolicitud);
 }

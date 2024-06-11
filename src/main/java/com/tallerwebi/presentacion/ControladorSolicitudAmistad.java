@@ -45,7 +45,7 @@ public class ControladorSolicitudAmistad {
 
         if (solicitante != null) {
             Usuario solicitado = usuarioService.buscarPorId(idAmigo);
-            if (solicitado != null) {
+            if (solicitado != null && !solicitudAmistadService.comprobarSolicitudPendiente(solicitado, solicitante)) {
                 solicitudAmistadService.enviarSolicitud(solicitante, solicitado);
                 return new ModelAndView("redirect:/mostrarAmigos");
             }

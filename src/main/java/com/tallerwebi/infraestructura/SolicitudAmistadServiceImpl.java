@@ -36,6 +36,15 @@ public class SolicitudAmistadServiceImpl implements SolicitudAmistadService {
     }
 
     @Override
+    public Boolean comprobarSolicitudPendiente(Usuario solicitante, Usuario solicitado) {
+        SolicitudAmistad solicitud =  repositorioSolicitudAmistad.buscarSolicitudAmistadEntreDosPersonas(solicitante, solicitado);
+        if(solicitud!=null){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public void aceptarSolicitud(Usuario aceptante, Usuario solicitante) {
         SolicitudAmistad solicitud =  repositorioSolicitudAmistad.buscarSolicitudAmistadEntreDosPersonas(aceptante, solicitante);
         aceptante.agregarAmigo(solicitante);
@@ -43,6 +52,7 @@ public class SolicitudAmistadServiceImpl implements SolicitudAmistadService {
         repositorioSolicitudAmistad.aceptarSolicitud(solicitud);
         repositorioUsuario.modificarMerge(aceptante);
         repositorioUsuario.modificarMerge(solicitante);
+        repositorioSolicitudAmistad.eliminarSolicitud(solicitud);
     }
 
     @Override
@@ -52,6 +62,6 @@ public class SolicitudAmistadServiceImpl implements SolicitudAmistadService {
 
     @Override
     public void rechazarSolicitud(SolicitudAmistad solicitud) {
-        repositorioSolicitudAmistad.rechazarSolicitud(solicitud);
+        repositorioSolicitudAmistad.eliminarSolicitud(solicitud);
     }
 }

@@ -124,11 +124,11 @@ public class Libro{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Libro libro = (Libro) o;
-        return Objects.equals(id, libro.id) && Objects.equals(titulo, libro.titulo) && Objects.equals(autor, libro.autor) && Objects.equals(editorial, libro.editorial);
+        return Objects.equals(id, libro.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, titulo, autor, editorial);
+        return Objects.hashCode(id);
     }
 }

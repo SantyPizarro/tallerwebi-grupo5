@@ -48,7 +48,7 @@ public class RepositorioSolicitudAmistadImpl implements RepositorioSolicitudAmis
     }
 
     @Override
-    public void rechazarSolicitud(SolicitudAmistad solicitud) {
+    public void eliminarSolicitud(SolicitudAmistad solicitud) {
         sessionFactory.getCurrentSession().delete(solicitud);
     }
 

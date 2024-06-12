@@ -127,6 +127,15 @@
                 <div class="descripcion">
                     <h4>Descripción:</h4>
                     <p th:text="${usuario.descripcion}"></p>
+
+                    <form th:action="@{/traerDatosAmigoAIntercambiar}" method="post">
+                        <input type="hidden" name="usuarioAmigo" th:value="${usuario.id}">
+                        <button type="submit" class="btn btn-primary favbutton" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal3">
+                            <span class="material-symbols-outlined">sync_alt</span>
+                        </button>
+                    </form>
+
                     <div class="preferencias">
                         <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
                         <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
@@ -207,7 +216,9 @@
                         <td th:text="${compra.productosCompra.size()}">Cantidad de Libros</td>
                         <td>
                             <ul class="libros-list">
-                                <li th:each="producto : ${compra.productosCompra}" th:text="${producto.libro.getTitulo()}">Nombre del Libro</li>
+                                <li th:each="producto : ${compra.productosCompra}"
+                                    th:text="${producto.libro.getTitulo()}">Nombre del Libro
+                                </li>
                             </ul>
                         </td>
                     </tr>
@@ -215,7 +226,6 @@
                 </table>
             </div>
         </section>
-
 
 
     </div>
@@ -335,6 +345,63 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" th:classappend="${modal == 'true'} ? 'show' : ''" th:attr="style=${modal == 'true'} ? 'display:block;' : ''">
+        <div class="modal-dialog" th:if="${modal} == 'true'">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel3">Intercambio de libros</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form accept-charset="utf-8" th:action="@{/intercambiar-libro}" method="post">
+                        <ul class="nav nav-tabs listadesordenada">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#" onclick="mostrarLibrosComprados('librosComprados')">Mis Libros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="mostrarLibrosComprados('susLibrosComprados')">Sus libros</a>
+                            </li>
+                        </ul>
+                        <section class="tablas lightblue" id="librosComprados">
+                            <div th:if="${usuario.librosComprados}" class="librosFav">
+                                <div th:each="libro : ${usuario.librosComprados}" class="card" style="width: 18rem;">
+                                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
+                                    <div class="card-body detalle-tarjetas">
+                                        <h5 class="card-title" th:text="${libro.titulo}"></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="tablas lightblue" id="susLibrosComprados">
+                            <div th:if="${amigo != null && !amigo.librosComprados.isEmpty()}" class="librosFav">
+                                <div th:each="libroAmigo : ${amigo.librosComprados}" class="card" style="width: 18rem;">
+                                    <img th:src="${libroAmigo.ruta}" class="card-img-top" alt="${libroAmigo.titulo}" width="286px" height="410px">
+                                    <div class="card-body detalle-tarjetas">
+                                        <h5 class="card-title" th:text="${libroAmigo.titulo}"></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Enviar solicitud de intercambio</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            if (document.querySelector("#exampleModal3").classList.contains('show')) {
+                let modal = new bootstrap.Modal(document.getElementById('exampleModal3'));
+                modal.show();
+            }
+        });
+    </script>
 </main>
 
 <footer th:replace="header_footer :: footer">
@@ -342,9 +409,11 @@
 </footer>
 <!-- Boostrap core js -->
 <script th:src="@{/js/perfil-tabla.js}"></script>
+<script th:src="@{/js/intercambioLibros.js}"></script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/carrito.js}"></script>
 <script th:src="@{/js/menuUsuario.js}"></script>
+
 
 </body>
 </html>

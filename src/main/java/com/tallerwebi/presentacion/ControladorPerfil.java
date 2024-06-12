@@ -7,10 +7,7 @@ import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,13 +25,13 @@ public class ControladorPerfil {
 
 
     @Autowired
-    public ControladorPerfil(PerfilService perfilService,ServicioLibro servicioLibro) {
+    public ControladorPerfil(PerfilService perfilService, ServicioLibro servicioLibro) {
         this.perfilService = perfilService;
         this.servicioLibro = servicioLibro;
     }
 
     @GetMapping("/perfil")
-    public ModelAndView mostrarPerfil(HttpServletRequest request) {
+    public ModelAndView mostrarPerfil(HttpServletRequest request, @ModelAttribute("amigo") Usuario amigo, @ModelAttribute("modal") String modal) {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
 
@@ -43,6 +40,10 @@ public class ControladorPerfil {
             model.put("usuario", usuario);
             model.put("historialDeCompras", perfilService.historialDeCompras(usuario));
             model.put("amigosUsuario", perfilService.buscarAmigos(usuario));
+            if (amigo != null) {
+                model.put("amigo", amigo);
+                model.put("modal", modal);
+            }
 
             return new ModelAndView("perfil", model);
         }
@@ -143,6 +144,19 @@ public class ControladorPerfil {
         return "redirect:/login";
     }
 
+    @PostMapping("/traerDatosAmigoAIntercambiar")
+    public String traerDatosAmigoAIntercambiar(@RequestParam("usuarioAmigo") Long id, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+        Usuario amigo = perfilService.buscarUsuarioPorId(id);
+
+        if (usuario != null) {
+            redirectAttributes.addFlashAttribute("amigo", amigo);
+            redirectAttributes.addFlashAttribute("modal", "true");
+        }
+
+        return "redirect:/perfil";
+    }
 
 
 }

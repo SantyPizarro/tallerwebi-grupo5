@@ -50,6 +50,9 @@ public class ServicioLibro {
         return repositorioLibro.buscarUnLibroPorSuTitulo(titulo);
     }
 
+    public Libro buscarLibroPorId(Long id) {return repositorioLibro.buscarLibroPorId(id);}
+
+
     public void agregarLibro(DatosLibro datosLibro, MultipartFile foto) throws LibroExistente {
         Libro libro = buscarLibroPorTitulo(datosLibro.getTitulo());
 

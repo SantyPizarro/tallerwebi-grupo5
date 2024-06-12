@@ -364,20 +364,22 @@
                             </li>
                         </ul>
                         <section class="tablas lightblue" id="librosComprados">
-                            <div th:if="${usuario.librosComprados}" class="librosFav">
-                                <div th:each="libro : ${usuario.librosComprados}" class="card" style="width: 18rem;">
-                                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
-                                    <div class="card-body detalle-tarjetas">
+                            <div th:if="${usuario.librosComprados}">
+                                <div th:each="libro : ${usuario.librosComprados}" class="d-flex align-items-center mb-1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                    <img th:src="${libro.ruta}" th:alt="${libro.titulo}" width="143px" height="180px" style="margin: 0 2rem">
+                                    <div>
                                         <h5 class="card-title" th:text="${libro.titulo}"></h5>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <section class="tablas lightblue" id="susLibrosComprados">
-                            <div th:if="${amigo != null && !amigo.librosComprados.isEmpty()}" class="librosFav">
-                                <div th:each="libroAmigo : ${amigo.librosComprados}" class="card" style="width: 18rem;">
-                                    <img th:src="${libroAmigo.ruta}" class="card-img-top" alt="${libroAmigo.titulo}" width="286px" height="410px">
-                                    <div class="card-body detalle-tarjetas">
+                            <div th:if="${amigo != null && !amigo.librosComprados.isEmpty()}">
+                                <div th:each="libroAmigo : ${amigo.librosComprados}" class="d-flex align-items-center mb-1">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault1">
+                                    <img th:src="${libroAmigo.ruta}" th:alt="${libroAmigo.titulo}" width="143px" height="180px" style="margin: 0 2rem">
+                                    <div>
                                         <h5 class="card-title" th:text="${libroAmigo.titulo}"></h5>
                                     </div>
                                 </div>

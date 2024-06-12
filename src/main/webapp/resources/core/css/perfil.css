@@ -251,6 +251,13 @@ footer{
     padding: 5px 0;
 }
 
+.contenedor-libros{
+    display: flex;
+}
+
+#exampleModal3{
+    --bs-modal-width: 650px !important;
+}
 @media screen and (max-width: 768px) {
     .facturas-table, .facturas-table thead, .facturas-table tbody, .facturas-table th, .facturas-table td, .facturas-table tr {
         display: block;

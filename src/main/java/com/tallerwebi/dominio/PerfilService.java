@@ -20,4 +20,6 @@ public interface PerfilService {
     List<Compra> historialDeCompras(Usuario usuario);
 
     Set<Usuario> buscarAmigos(Usuario usuario);
+
+
 }

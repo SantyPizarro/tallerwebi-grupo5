@@ -1,5 +1,8 @@
 package com.tallerwebi.dominio;
 
+import com.tallerwebi.dominio.excepcion.LibroNoAgregado;
+import com.tallerwebi.dominio.excepcion.LibroNoExiste;
+
 import java.util.List;
 
 public interface RepositorioLibro {

@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import com.tallerwebi.dominio.excepcion.LibroExistente;
+import com.tallerwebi.dominio.excepcion.LibroNoExiste;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -82,8 +83,13 @@ public class ServicioLibro {
         }
     }
 
-    public void eliminarLibro(String titulo){
-        repositorioLibro.eliminarLibro(repositorioLibro.buscarUnLibroPorSuTitulo(titulo));
+    public void eliminarLibro(String titulo) throws LibroNoExiste {
+
+        try {
+            repositorioLibro.eliminarLibro(repositorioLibro.buscarUnLibroPorSuTitulo(titulo));
+        }catch (Exception e){
+            throw new LibroNoExiste();
+        }
     }
 
 

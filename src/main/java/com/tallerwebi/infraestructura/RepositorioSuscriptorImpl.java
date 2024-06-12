@@ -8,6 +8,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
+import java.util.List;
+
 
 @Repository
 public class RepositorioSuscriptorImpl implements RepositorioSuscriptor {
@@ -21,13 +24,16 @@ public class RepositorioSuscriptorImpl implements RepositorioSuscriptor {
     }
 
     @Override
+    @Transactional
     public void agregarSuscriptor(String email, String nombre) {
-        Session session = sessionFactory.getCurrentSession();
         Suscriptor suscriptor = new Suscriptor(email, nombre);
-        suscriptor.setEmail(email);
-        suscriptor.setName(nombre);
-        session.save(suscriptor);
+        sessionFactory.getCurrentSession().save(suscriptor);
+    }
 
+    @Override
+    @Transactional
+    public List<Suscriptor> obtenerTodosLosSucriptores() {
+        return sessionFactory.getCurrentSession().createQuery("FROM Suscriptor", Suscriptor.class).list();
     }
 
 }

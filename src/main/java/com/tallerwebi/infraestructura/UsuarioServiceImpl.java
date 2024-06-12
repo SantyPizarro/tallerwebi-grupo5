@@ -54,4 +54,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Usuario buscarPorId(Long idAmigo) {
         return repositorioUsuario.buscarPorId(idAmigo);
     }
+
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        repositorioUsuario.eliminarUsuario(usuario);
+    }
 }

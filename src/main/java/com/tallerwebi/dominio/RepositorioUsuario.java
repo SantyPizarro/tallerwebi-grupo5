@@ -23,5 +23,7 @@ public interface RepositorioUsuario {
     List<Compra> historialDeCompras(Usuario usuario);
 
     Set<Usuario> buscarAmigos(Usuario usuario);
+
+    void eliminarUsuario(Usuario usuario);
 }
 

@@ -62,6 +62,14 @@ public class ControladorAdmin {
         return new ModelAndView ("redirect:/perfilAdmin");
     }
 
+    @RequestMapping(path = "/eliminarUsuario", method = RequestMethod.POST)
+    public ModelAndView eliminarUsuarioDeBDD(@ModelAttribute("idUsuario") Long idUsuario){
+
+        usuarioService.eliminarUsuario(usuarioService.buscarPorId(idUsuario));
+
+        return new ModelAndView ("redirect:/perfilAdmin");
+    }
+
 
 
 }

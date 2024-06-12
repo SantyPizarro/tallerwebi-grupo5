@@ -75,13 +75,10 @@
                             <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
                             <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
                         </div>
-                        <button type="button" class="btn btn-danger configuracion" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Eliminar
-                        </button>
                     </div>
                 </div>
         </div>
-    </div>
+
     <h3>Usuarios:</h3>
 
             <div class="container">
@@ -101,13 +98,16 @@
                             <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
                             <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
                         </div>
-                        <button type="button" class="btn btn-danger configuracion" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Eliminar
-                        </button>
+                        <form th:action="@{/eliminarUsuario}" method="post">
+                            <input type="hidden" name="idUsuario" th:value="${usuario.id}">
+                            <button type="submit" class="btn btn-danger configuracion" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Eliminar
+                            </button>
+                        </form>
                     </div>
                 </div>
         </div>
-    </div>
+
 </section>
 
 <!-- Modal -->

@@ -26,6 +26,7 @@ public class Usuario {
     private String foto;
     private String tokenDeVerificacion;
     private Boolean emailVerificado = false;
+    private Integer cantidadDeNotificaciones;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -187,6 +188,9 @@ public class Usuario {
         this.librosComprados.add(libro);
     }
 
+    public Integer getCantidadDeNotificaciones() {return cantidadDeNotificaciones;}
+
+    public void setCantidadDeNotificaciones(Integer cantidadDeNotificaciones) {this.cantidadDeNotificaciones = cantidadDeNotificaciones;}
 
     @Override
     public boolean equals(Object o) {

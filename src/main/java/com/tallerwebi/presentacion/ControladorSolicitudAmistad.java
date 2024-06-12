@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,8 +30,14 @@ public class ControladorSolicitudAmistad {
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
         ModelMap modelo = new ModelMap();
         modelo.put("datosLogin", new DatosLogin());
-        if(usuario != null){
+        ModelAndView modelAndView = new ModelAndView("header_footer");
+        modelAndView.addAllObjects(modelo);
+
+        if (usuario != null) {
             modelo.put("solicitudes", solicitudAmistadService.buscarSolicitudes(usuario));
+            modelo.put("cantidadNotificaciones", usuario.getCantidadDeNotificaciones());
+
+
             return new ModelAndView("notificaciones", modelo);
         }
         return new ModelAndView("redirect:/login");
@@ -47,6 +52,12 @@ public class ControladorSolicitudAmistad {
             Usuario solicitado = usuarioService.buscarPorId(idAmigo);
             if (solicitado != null && !solicitudAmistadService.comprobarSolicitudPendiente(solicitado, solicitante)) {
                 solicitudAmistadService.enviarSolicitud(solicitante, solicitado);
+
+                Integer cantNotificaciones = solicitado.getCantidadDeNotificaciones();
+                cantNotificaciones = (cantNotificaciones == null) ? 1 : cantNotificaciones + 1;
+                solicitado.setCantidadDeNotificaciones(cantNotificaciones);
+                usuarioService.actualizarUsuario(solicitado);
+
                 return new ModelAndView("redirect:/mostrarAmigos");
             }
         }
@@ -62,6 +73,12 @@ public class ControladorSolicitudAmistad {
             Usuario solicitante = usuarioService.buscarPorId(idAmigo);
             if (solicitante != null) {
                 solicitudAmistadService.aceptarSolicitud(aceptante, solicitante);
+
+                Integer cantNotificaciones = aceptante.getCantidadDeNotificaciones();
+                cantNotificaciones = (cantNotificaciones == null) ? 0 : Math.max(0, cantNotificaciones - 1);
+                aceptante.setCantidadDeNotificaciones(cantNotificaciones);
+                usuarioService.actualizarUsuario(aceptante);
+
                 return new ModelAndView("redirect:/solicitud-amistad");
             }
         }
@@ -73,10 +90,17 @@ public class ControladorSolicitudAmistad {
         HttpSession session = request.getSession();
         Usuario aceptante = (Usuario) session.getAttribute("USUARIO");
 
-        if (aceptante != null ) {
+        if (aceptante != null) {
             SolicitudAmistad solicitud = solicitudAmistadService.buscarPorId(idSolicitud);
-            if (solicitud != null){
+            if (solicitud != null) {
                 solicitudAmistadService.rechazarSolicitud(solicitud);
+
+                // Disminuir cantidad de notificaciones
+                Integer cantNotificaciones = aceptante.getCantidadDeNotificaciones();
+                cantNotificaciones = (cantNotificaciones == null) ? 0 : Math.max(0, cantNotificaciones - 1);
+                aceptante.setCantidadDeNotificaciones(cantNotificaciones);
+                usuarioService.actualizarUsuario(aceptante);
+
                 return new ModelAndView("redirect:/solicitud-amistad");
             }
         }

@@ -25,5 +25,7 @@ public interface RepositorioUsuario {
     Set<Usuario> buscarAmigos(Usuario usuario);
 
     void eliminarUsuario(Usuario usuario);
+
+    void actualizarUsuario(Usuario solicitado);
 }
 

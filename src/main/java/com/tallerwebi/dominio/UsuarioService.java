@@ -13,4 +13,6 @@ public interface UsuarioService {
     Usuario buscarPorId(Long idAmigo);
 
     void eliminarUsuario(Usuario usuario);
+
+    void actualizarUsuario(Usuario solicitado);
 }

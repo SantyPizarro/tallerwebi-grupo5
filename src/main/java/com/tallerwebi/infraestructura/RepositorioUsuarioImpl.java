@@ -151,5 +151,16 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         query.executeUpdate();
     }
 
+    @Override
+    public void actualizarUsuario(Usuario solicitado) {
+        Session session = sessionFactory.getCurrentSession();
+        Integer cantidadDeNotificaciones = solicitado.getCantidadDeNotificaciones();
+        Long usuarioId = solicitado.getId();
+        Query query = session.createQuery("update Usuario set cantidadDeNotificaciones = :cantidad where id = :id");
+        query.setParameter("cantidad", cantidadDeNotificaciones);
+        query.setParameter("id", usuarioId);
+        query.executeUpdate();
+    }
+
 
 }

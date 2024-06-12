@@ -124,11 +124,14 @@
         <div class="contenedor-usuario">
             <a th:href="@{/solicitud-amistad}" class="position-relative">
                 <span class="material-symbols-outlined">notifications</span>
-            </a>
-            <a th:href="@{/mostrar-carrito}" class="position-relative">
-            <span class="material-symbols-outlined">
-            local_mall
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger numero">
+                    <span th:text="${cantidadNotificaciones}"></span>
+            <span class="visually-hidden">unread messages</span>
             </span>
+            </a>
+
+            <a th:href="@{/mostrar-carrito}" class="position-relative">
+            <span class="material-symbols-outlined">local_mall</span>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger numero">
                  <span th:text="${#httpSession.getAttribute('cantidadLibros')}"></span>
                 <span class="visually-hidden">unread messages</span>
@@ -146,29 +149,29 @@
                     <a th:href="@{/cerrar-sesion}">Cerrar sesión</a>
                 </div>
             </div>
-
         </div>
-
     </div>
+</div>
 
-    <div class="contenedor-navegador">
 
-        <nav class="navbar bg-body-tertiary">
-            <form action="buscar-libro" method="get" class="container-fluid">
-                <div class="input-group inputs">
-                    <input type="text" name="titulo" class="form-control input-group-text textinput"
-                           placeholder="Busca un título..." aria-label="titulo" aria-describedby="basic-addon1">
+<div class="contenedor-navegador">
 
-                    <button type="submit" class="buscar">
+    <nav class="navbar bg-body-tertiary">
+        <form action="buscar-libro" method="get" class="container-fluid">
+            <div class="input-group inputs">
+                <input type="text" name="titulo" class="form-control input-group-text textinput"
+                       placeholder="Busca un título..." aria-label="titulo" aria-describedby="basic-addon1">
+
+                <button type="submit" class="buscar">
                     <span class="material-symbols-outlined" id="lupita">
                         search
                     </span>
-                    </button>
-                </div>
-            </form>
-        </nav>
+                </button>
+            </div>
+        </form>
+    </nav>
 
-    </div>
+</div>
 
 </div>
 

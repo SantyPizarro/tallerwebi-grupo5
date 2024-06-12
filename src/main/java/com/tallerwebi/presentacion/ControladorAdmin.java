@@ -2,6 +2,7 @@ package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.LibroExistente;
+import com.tallerwebi.dominio.excepcion.LibroNoExiste;
 import com.tallerwebi.infraestructura.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -54,12 +56,16 @@ public class ControladorAdmin {
         return new ModelAndView ("redirect:/perfilAdmin");
     }
 
-    @RequestMapping(path = "/eliminarLibroDeBDD", method = RequestMethod.POST)
-    public ModelAndView eliminarLibroDeBDD(@ModelAttribute("titulo") String titulo){
+    @PostMapping(path = "/eliminarLibroDeBDD")
+    public String eliminarLibroDeBDD(@ModelAttribute("titulo") String titulo, RedirectAttributes redirectAttributes) {
+        try {
+            servicioLibro.eliminarLibro(titulo);
+            redirectAttributes.addFlashAttribute("exitoso", "Libro borrado exitosamente");
+        } catch (LibroNoExiste e) {
+            redirectAttributes.addFlashAttribute("error", "No existe libro");
+        }
 
-        servicioLibro.eliminarLibro(titulo);
-
-        return new ModelAndView ("redirect:/perfilAdmin");
+        return "redirect:/perfilAdmin";
     }
 
 

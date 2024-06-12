@@ -142,5 +142,14 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         return new HashSet<>(amigosUsuario);
     }
 
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "DELETE FROM Usuario WHERE id = :id";
+        Query query = session.createQuery(hql);
+        query.setParameter("id", usuario.getId());
+        query.executeUpdate();
+    }
+
 
 }

@@ -11,4 +11,6 @@ public interface UsuarioService {
     List<Usuario> mostrarAdmins();
 
     Usuario buscarPorId(Long idAmigo);
+
+    void eliminarUsuario(Usuario usuario);
 }

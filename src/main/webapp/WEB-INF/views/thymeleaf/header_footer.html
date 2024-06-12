@@ -25,7 +25,7 @@
             <span th:text="${#httpSession.getAttribute('nombreUsuario')}"></span>
         </button>
         <div class="dropdown-content dropdownContent">
-            <a href="perfil.html">Ver perfil</a>
+            <a th:href="@{/editar-perfil-admin}">Ver perfil</a>
             <a th:href="@{/cerrar-sesion}">Cerrar sesión</a>
         </div>
     </div>

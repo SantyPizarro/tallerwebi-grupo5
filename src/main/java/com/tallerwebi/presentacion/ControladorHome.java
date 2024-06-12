@@ -1,6 +1,5 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.ServicioSuscriptor;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,18 +42,9 @@ public class ControladorHome {
     }
 
     @PostMapping("/suscribirse")
-    public ModelAndView suscribirse(@RequestParam("nombre") String nombre,
-                                    @RequestParam("email") String email) {
-
-
-        try{
-            servicioSuscriptor.agregarSuscriptor(nombre, email);
-            return new ModelAndView("redirect:/home");
-        } catch (Exception e) {
-            return new ModelAndView("redirect:/home");
-        }
+    public String agregarSuscriptor(@RequestParam("email") String email, @RequestParam("nombre") String nombre) {
+        servicioSuscriptor.agregarSuscriptor(email, nombre);
+        return "redirect:/home";
     }
-
-
 
 }

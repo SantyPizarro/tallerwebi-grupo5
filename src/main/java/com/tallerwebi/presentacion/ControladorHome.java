@@ -1,6 +1,7 @@
 package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.Libro;
+import com.tallerwebi.dominio.SolicitudAmistadService;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,12 @@ import javax.servlet.http.HttpSession;
 public class ControladorHome {
 
     private final ServicioLibro servicioLibro;
+    private final SolicitudAmistadService solicitudAmistadService;
 
     @Autowired
-    public ControladorHome(ServicioLibro servicioLibro) {
+    public ControladorHome(ServicioLibro servicioLibro, SolicitudAmistadService solicitudAmistadService) {
         this.servicioLibro = servicioLibro;
+        this.solicitudAmistadService = solicitudAmistadService;
     }
 
     @GetMapping("/home")
@@ -30,6 +33,7 @@ public class ControladorHome {
             ModelAndView modelAndView = new ModelAndView("home");
             modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
             modelAndView.addObject("librosOrdenados", servicioLibro.ordenarPorFechaAgregado());
+            modelAndView.addObject("cantidadNotificaciones", solicitudAmistadService.buscarSolicitudes(usuario).size());
             return modelAndView;
         }
 

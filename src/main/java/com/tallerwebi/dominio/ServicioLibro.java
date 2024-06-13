@@ -46,6 +46,10 @@ public class ServicioLibro {
         return repositorioLibro.obtenerGeneros();
     }
 
+    public List<Libro> obtenerListaDeGeneros(List<String> generos){
+        return repositorioLibro.obtenerListaDeGeneros(generos);
+    }
+
     private Libro buscarLibroPorTitulo(String titulo) {
         return repositorioLibro.buscarUnLibroPorSuTitulo(titulo);
     }

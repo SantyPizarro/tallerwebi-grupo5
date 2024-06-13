@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class OfertaIntercambio {
+public class OfertaIntercambio implements NotificacionService{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,10 @@ public class OfertaIntercambio {
     private Libro libroSolicitado;
 
     private Boolean aceptada = false;
+
+    private LocalDateTime fechaOferta;
+
+    private String tipo = "amistad";
 
     public Boolean getAceptada() {
         return aceptada;
@@ -68,11 +72,30 @@ public class OfertaIntercambio {
         this.solicitado = solicitado;
     }
 
+    public void setSolicitante(Usuario solicitante) {
+        this.solicitante = solicitante;
+    }
+
+    public void setFechaOferta(LocalDateTime fechaOferta) {
+        this.fechaOferta = fechaOferta;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String getTipo() {
+        return tipo;
+    }
+
+    @Override
     public Usuario getSolicitante() {
         return solicitante;
     }
 
-    public void setSolicitante(Usuario solicitante) {
-        this.solicitante = solicitante;
+    @Override
+    public LocalDateTime getFecha() {
+        return fechaOferta;
     }
 }

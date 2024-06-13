@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Repository
 @Transactional
@@ -31,5 +32,12 @@ public class RepositorioIntercambioImpl implements RepositorioIntercambio {
                     .setParameter("libroARecibir", libroARecibir)
                     .setParameter("libroADar", libroADar)
                     .uniqueResult();
+    }
+
+    @Override
+    public List<OfertaIntercambio> buscarOfertas(Usuario usuario) {
+        return sessionFactory.getCurrentSession().createQuery("from OfertaIntercambio o where o.solicitado = :usuario", OfertaIntercambio.class)
+                .setParameter("usuario", usuario)
+                .getResultList();
     }
 }

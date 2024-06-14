@@ -30,7 +30,7 @@ public class OfertaIntercambio implements NotificacionService{
 
     private LocalDateTime fechaOferta;
 
-    private String tipo = "amistad";
+    private String tipo = "intercambio";
 
     public Boolean getAceptada() {
         return aceptada;

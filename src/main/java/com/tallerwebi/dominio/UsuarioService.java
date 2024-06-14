@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 public interface UsuarioService {
+
+    void actualizarUser(Usuario usuario);
+
     Set<Usuario> listar(Usuario usuario);
 
     List<Usuario> mostrarUsers();

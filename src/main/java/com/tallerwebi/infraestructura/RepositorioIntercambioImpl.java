@@ -40,4 +40,22 @@ public class RepositorioIntercambioImpl implements RepositorioIntercambio {
                 .setParameter("usuario", usuario)
                 .getResultList();
     }
+
+    @Override
+    public OfertaIntercambio buscarOfertaPorId(Long idSolicitud) {
+        return sessionFactory.getCurrentSession().createQuery("from OfertaIntercambio o where o.id = :idSolicitud", OfertaIntercambio.class)
+                .setParameter("idSolicitud", idSolicitud)
+                .uniqueResult();
+    }
+
+    @Override
+    public void aceptarOferta(OfertaIntercambio oferta) {
+        oferta.setAceptada(true);
+        sessionFactory.getCurrentSession().update(oferta);
+    }
+
+    @Override
+    public void eliminarOferta(OfertaIntercambio oferta) {
+        sessionFactory.getCurrentSession().delete(oferta);
+    }
 }

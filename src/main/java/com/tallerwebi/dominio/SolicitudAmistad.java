@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 
     @Entity
-    public class SolicitudAmistad implements NotificacionService{
+    public class SolicitudAmistad implements TipoNotificacionService{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)

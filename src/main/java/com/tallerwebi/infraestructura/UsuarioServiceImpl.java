@@ -23,6 +23,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Override
+    public void actualizarUser(Usuario usuario) {
+        repositorioUsuario.modificar(usuario);
+    }
+
+    @Override
     public Set<Usuario> listar(Usuario usuario) {
         List<Usuario> usuarios = repositorioUsuario.buscarTodos(usuario);
         Set<Usuario> usuariosAux = new HashSet<>();

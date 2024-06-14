@@ -21,12 +21,14 @@ public class ControladorSolicitudAmistad {
     private UsuarioService usuarioService;
     private SolicitudAmistadService solicitudAmistadService;
     private IntercambioService intercambioService;
+    private NotificacionService notificacionService;
 
     @Autowired
-    public ControladorSolicitudAmistad(UsuarioService usuarioService, SolicitudAmistadService solicitudAmistadService, IntercambioService intercambioService) {
+    public ControladorSolicitudAmistad(UsuarioService usuarioService, SolicitudAmistadService solicitudAmistadService, IntercambioService intercambioService, NotificacionService notificacionService) {
         this.usuarioService = usuarioService;
         this.solicitudAmistadService = solicitudAmistadService;
         this.intercambioService = intercambioService;
+        this.notificacionService = notificacionService;
     }
 
     @RequestMapping("/solicitud-amistad")
@@ -86,18 +88,21 @@ public class ControladorSolicitudAmistad {
         return new ModelAndView("redirect:/login");
     }
 
-    @PostMapping("/aceptar-solicitud")
-    public ModelAndView aceptarSolicitud(HttpServletRequest request, @RequestParam("solicitante") Long idAmigo) {
+    @PostMapping("/aceptar-notificacion")
+    public ModelAndView aceptarNotificacion(HttpServletRequest request, @RequestParam("notificacion") Long idNotificacion, @RequestParam("tipoSolictud") String tipoNotificacion ) {
         HttpSession session = request.getSession();
         Usuario aceptante = (Usuario) session.getAttribute("USUARIO");
 
         if (aceptante != null) {
-            Usuario solicitante = usuarioService.buscarPorId(idAmigo);
-            if (solicitante != null) {
-                solicitudAmistadService.aceptarSolicitud(aceptante, solicitante);
-                return new ModelAndView("redirect:/solicitud-amistad");
-            }
+            notificacionService.aceptarNotificacion(tipoNotificacion, idNotificacion);
+
+            usuarioService.actualizarUser(aceptante);
+
+            session.setAttribute("USUARIO", aceptante); //CHECKEAR
+
+            return new ModelAndView("redirect:/solicitud-amistad");
         }
+
         return new ModelAndView("redirect:/login");
     }
 

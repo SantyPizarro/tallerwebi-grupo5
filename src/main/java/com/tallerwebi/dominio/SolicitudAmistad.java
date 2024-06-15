@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 
     @Entity
-    public class SolicitudAmistad {
+    public class SolicitudAmistad implements NotificacionService{
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 
         private Boolean aceptada = false;
 
+        private String tipo = "amistad";
         // Getters y setters
 
         public Long getId() {
@@ -31,10 +32,6 @@ import java.time.LocalDateTime;
 
         public void setId(Long id) {
             this.id = id;
-        }
-
-        public Usuario getSolicitante() {
-            return solicitante;
         }
 
         public void setSolicitante(Usuario solicitante) {
@@ -49,9 +46,6 @@ import java.time.LocalDateTime;
             this.solicitado = solicitado;
         }
 
-        public LocalDateTime getFechaSolicitud() {
-            return fechaSolicitud;
-        }
 
         public void setFechaSolicitud(LocalDateTime fechaSolicitud) {
             this.fechaSolicitud = fechaSolicitud;
@@ -64,4 +58,24 @@ import java.time.LocalDateTime;
         public void setAceptada(Boolean aceptada) {
             this.aceptada = aceptada;
         }
-}
+
+
+        public void setTipo(String tipo) {
+            this.tipo = tipo;
+        }
+
+        @Override
+        public String getTipo() {
+            return tipo;
+        }
+
+        @Override
+        public Usuario getSolicitante() {
+            return solicitante;
+        }
+
+        @Override
+        public LocalDateTime getFecha() {
+            return fechaSolicitud;
+        }
+    }

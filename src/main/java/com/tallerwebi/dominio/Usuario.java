@@ -52,6 +52,12 @@ public class Usuario {
 
     private Set<Libro> librosComprados;
 
+
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
+    private Plan plan;
+
+
     public String getFoto() {
         return foto;
     }
@@ -187,6 +193,13 @@ public class Usuario {
         this.librosComprados.add(libro);
     }
 
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
 
     @Override
     public boolean equals(Object o) {

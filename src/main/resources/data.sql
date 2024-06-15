@@ -19,3 +19,12 @@ INSERT INTO Libro(id, titulo, autor, editorial, fechaPublicacion, precio, ruta, 
                                                                                                                            (NULL, 'La Sombra del Viento', 'Carlos Ruiz Zafón', 'Editorial Planeta', '2001-01-01', 25000, '/spring/images/libros/lasombra.jpg', 'Es una novela ambientada en la Barcelona de la posguerra, donde un joven llamado Daniel Sempere descubre un misterioso libro que lo lleva a desentrañar los secretos oscuros del autor y de su propia vida. Es una mezcla de thriller, romance e historia.', '2024-06-01', 2),
                                                                                                                            (NULL, 'El Chico que Bajo las Estrellas', 'Jordi Sierra i Fabra', 'Random House', '2022-01-01', 15000, '/spring/images/libros/elchico.jpg', 'Es una novela juvenil que sigue a un joven que, enfrentándose a la adversidad, logra superar sus miedos y cumplir sus sueños. Es una historia inspiradora sobre la perseverancia y el coraje.', '2024-07-01', 3),
                                                                                                                            (NULL, 'El Alquimista', 'Paulo Coelho', 'Anaya', '2010-01-01', 1000, '/spring/images/libros/elalquimista.jpg', 'Es una novela filosófica que cuenta la historia de Santiago, un joven pastor andaluz que busca un tesoro en las pirámides de Egipto. En su viaje, aprende sobre el amor, el destino y la importancia de seguir los sueños.', '2024-08-01', 1);
+
+
+INSERT INTO tipoplan (id,nombre) values (1,"basic");
+INSERT INTO tipoplan (id,nombre) values (2,"standard");
+INSERT INTO tipoplan (id,nombre) values (3,"premium");
+
+INSERT INTO plan (id,tipo_plan_id) values (1,1);
+INSERT INTO plan (id,tipo_plan_id) values (2,2);
+INSERT INTO plan (id,tipo_plan_id) values (3,3);

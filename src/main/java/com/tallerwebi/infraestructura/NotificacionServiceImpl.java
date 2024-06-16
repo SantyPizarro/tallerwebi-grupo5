@@ -58,4 +58,9 @@ public class NotificacionServiceImpl implements NotificacionService {
         }
 
     }
+
+    @Override
+    public Integer cantidadDeNotificaciones(Usuario usuario) {
+        return repositorioSolicitudAmistad.buscarSolicitudes(usuario).size() + repositorioIntercambio.buscarOfertas(usuario).size();
+    }
 }

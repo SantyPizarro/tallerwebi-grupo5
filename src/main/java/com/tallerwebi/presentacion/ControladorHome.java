@@ -1,13 +1,11 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.Libro;
-import com.tallerwebi.dominio.SolicitudAmistadService;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
+import com.tallerwebi.infraestructura.NotificacionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.tallerwebi.dominio.ServicioLibro;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +16,13 @@ public class ControladorHome {
 
     private final ServicioLibro servicioLibro;
     private final SolicitudAmistadService solicitudAmistadService;
+    private final NotificacionService notificacionService;
 
     @Autowired
-    public ControladorHome(ServicioLibro servicioLibro, SolicitudAmistadService solicitudAmistadService) {
+    public ControladorHome(ServicioLibro servicioLibro, SolicitudAmistadService solicitudAmistadService, NotificacionService notificacionService) {
         this.servicioLibro = servicioLibro;
         this.solicitudAmistadService = solicitudAmistadService;
+        this.notificacionService = notificacionService;
     }
 
     @GetMapping("/home")
@@ -33,7 +33,7 @@ public class ControladorHome {
             ModelAndView modelAndView = new ModelAndView("home");
             modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
             modelAndView.addObject("librosOrdenados", servicioLibro.ordenarPorFechaAgregado());
-            modelAndView.addObject("cantidadNotificaciones", solicitudAmistadService.buscarSolicitudes(usuario).size());
+            modelAndView.addObject("cantidadNotificaciones", notificacionService.cantidadDeNotificaciones(usuario));
             return modelAndView;
         }
 

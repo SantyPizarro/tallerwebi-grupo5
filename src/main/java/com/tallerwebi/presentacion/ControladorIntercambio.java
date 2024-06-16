@@ -40,22 +40,5 @@ public class ControladorIntercambio {
         return new ModelAndView("redirect:/perfil");
     }
 
-    @PostMapping("/aceptar-intercambio")
-    public ModelAndView aceptarIntercambio(HttpServletRequest request, @RequestParam("solicitante") Long idAmigo, @RequestParam("libroAPrestar") Long idLibroQuePresto, @RequestParam("libroQueRecibo") Long idLibroQueRecibo) {
-        HttpSession session = request.getSession();
-        Usuario aceptante = (Usuario) session.getAttribute("USUARIO");
-
-        Libro libroADar = servicioLibro.buscarLibroPorId(idLibroQuePresto);
-        Libro libroARecibir = servicioLibro.buscarLibroPorId(idLibroQueRecibo);
-
-        if (aceptante != null && libroADar != null) {
-            Usuario solicitante = usuarioService.buscarPorId(idAmigo);
-            if (solicitante != null &&  libroARecibir != null) {
-                intercambioService.aceptarOferta(aceptante,libroARecibir, solicitante, libroADar);
-                return new ModelAndView("redirect:/solicitud-amistad");
-            }
-        }
-        return new ModelAndView("redirect:/login");
-    }
 
 }

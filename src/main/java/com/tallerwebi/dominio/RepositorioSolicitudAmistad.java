@@ -16,6 +16,5 @@ public interface RepositorioSolicitudAmistad {
 
     SolicitudAmistad buscarSolicitudPorId(Long idSolicitud);
 
-
     void crearAmistad(Amistad amistad);
 }

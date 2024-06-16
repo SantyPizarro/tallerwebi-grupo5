@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-public class OfertaIntercambio implements NotificacionService{
+public class OfertaIntercambio implements TipoNotificacionService{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class OfertaIntercambio implements NotificacionService{
 
     private LocalDateTime fechaOferta;
 
-    private String tipo = "amistad";
+    private String tipo = "intercambio";
 
     public Boolean getAceptada() {
         return aceptada;

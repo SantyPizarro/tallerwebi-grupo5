@@ -38,6 +38,7 @@ public class ControladorHome {
             ModelAndView modelAndView = new ModelAndView("home");
             modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
             modelAndView.addObject("librosOrdenados", servicioLibro.ordenarPorFechaAgregado());
+            modelAndView.addObject("librosDestacados", servicioLibro.getLibrosDestacados());
 
             Preferencias preferencias = new Preferencias(usuario);
 

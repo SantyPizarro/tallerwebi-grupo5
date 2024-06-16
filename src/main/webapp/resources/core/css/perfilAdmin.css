@@ -87,3 +87,7 @@
     justify-content: center;
     gap: 8rem;
 }
+
+.imgDestacado{
+    padding-right: 5px;
+}

@@ -9,13 +9,17 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
 public class ServicioLibro {
 
     private final RepositorioLibro repositorioLibro;
+    private final List<Libro> librosDestacados = new ArrayList<>();
+
 
     @Autowired
     public ServicioLibro(RepositorioLibro repositorioLibro) {
@@ -90,6 +94,7 @@ public class ServicioLibro {
         }
     }
 
+
     public void eliminarLibro(String titulo) throws LibroNoExiste {
 
         try {
@@ -99,6 +104,16 @@ public class ServicioLibro {
         }
     }
 
+    public List<Libro> getLibrosDestacados() {
+        return librosDestacados;
+    }
 
+    public void agregarLibroALibrosDestacados(Long id) {
+        Optional<Libro> libro = Optional.ofNullable(repositorioLibro.buscarLibroPorId(id));
+        libro.ifPresent(librosDestacados::add);
+    }
 
+    public void eliminarLibroDeLibrosDestacados(Long id) {
+        librosDestacados.removeIf(libro -> libro.getId().equals(id));
+    }
 }

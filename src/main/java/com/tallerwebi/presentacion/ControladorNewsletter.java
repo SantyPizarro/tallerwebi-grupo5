@@ -28,12 +28,6 @@ public class ControladorNewsletter {
         this.servicioSuscriptor = servicioSuscriptor;
     }
 
-    @GetMapping("/newsletter")
-    public ModelAndView mostrarNewsletter() {
-        return new ModelAndView("newsletter");
-    }
-
-
     @PostMapping("/enviarNewsletter")
     public ModelAndView enviarNewsletter(@RequestParam("tema") String tema, @RequestParam("mensaje") String mensaje) {
         List<Suscriptor> suscriptores = servicioSuscriptor.obtenerTodosLosSuscriptores();

@@ -1,9 +1,6 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.DatosLibro;
-import com.tallerwebi.dominio.Genero;
-import com.tallerwebi.dominio.Libro;
-import com.tallerwebi.dominio.RepositorioLibro;
+import com.tallerwebi.dominio.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -12,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
 
 @Repository
@@ -148,6 +146,15 @@ public class RepositorioLibroImpl implements RepositorioLibro {
         Query query = session.createQuery(hql);
         query.setParameter("id", libroAborrar.getId());
         query.executeUpdate();
+    }
+
+    @Override
+    public List<Libro> obtenerListaDeGeneros(List<String> generos) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "SELECT l FROM Libro l WHERE l.genero.nombre IN :generos";
+        return session.createQuery(hql, Libro.class)
+                .setParameter("generos", generos)
+                .getResultList();
     }
 
 

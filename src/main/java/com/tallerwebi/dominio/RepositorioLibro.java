@@ -21,4 +21,7 @@ public interface RepositorioLibro {
     void agregar(Libro libroAgregar);
 
     void eliminarLibro(Libro libroAborrar);
+
+    List<Libro> obtenerListaDeGeneros(List<String> generos);
+
 }

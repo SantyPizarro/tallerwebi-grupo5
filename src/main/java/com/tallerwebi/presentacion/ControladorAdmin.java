@@ -35,7 +35,7 @@ public class ControladorAdmin {
         if (usuario != null) {
             ModelMap model = new ModelMap();
             DatosLibro datosLibro = new DatosLibro();
-
+            model.put("librosDestacados", servicioLibro.getLibrosDestacados());
             model.put("usuarios",usuarioService.mostrarUsers());
             model.put("usuariosAdmin",usuarioService.mostrarAdmins());
             model.put("usuario", usuario);
@@ -74,6 +74,18 @@ public class ControladorAdmin {
         usuarioService.eliminarUsuario(usuarioService.buscarPorId(idUsuario));
 
         return new ModelAndView ("redirect:/perfilAdmin");
+    }
+
+    @PostMapping("/agregarLibroDestacado")
+    public String agregarLibro(@RequestParam Long libroId) {
+        servicioLibro.agregarLibroALibrosDestacados(libroId);
+        return "redirect:/";
+    }
+
+    @PostMapping("/eliminarLibroDestacado")
+    public String eliminarLibro(@RequestParam Long libroId) {
+        servicioLibro.eliminarLibroDeLibrosDestacados(libroId);
+        return "redirect:/";
     }
 
 

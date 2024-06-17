@@ -214,11 +214,7 @@ public class Usuario {
         return Objects.hashCode(id);
     }
 
-    public void eliminarLibro(Libro libroARecibir) {
-        for (Libro libro : librosComprados) {
-            if (libro.equals(libroARecibir)) {
-                librosComprados.remove(libro);
-            }
-        }
+    public void eliminarLibro(Libro libroEliminar) {
+        librosComprados.remove(libroEliminar);
     }
 }

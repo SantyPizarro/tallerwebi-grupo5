@@ -2,7 +2,9 @@ package com.tallerwebi.dominio;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Libro{
@@ -17,6 +19,9 @@ public class Libro{
     private String ruta;
     private String descripcion;
     private String fechaAgregado;
+
+    @ManyToMany(mappedBy = "librosComprados")
+    private Set<Usuario> usuariosCompradores = new HashSet<>();
 
 
     public Libro(){
@@ -118,6 +123,14 @@ public class Libro{
     public String getRuta(){ return ruta;}
 
     public void setRuta(String ruta){ this.ruta = ruta; }
+
+    public Set<Usuario> getUsuariosCompradores() {
+        return usuariosCompradores;
+    }
+
+    public void setUsuariosCompradores(Set<Usuario> usuariosCompradores) {
+        this.usuariosCompradores = usuariosCompradores;
+    }
 
     @Override
     public boolean equals(Object o) {

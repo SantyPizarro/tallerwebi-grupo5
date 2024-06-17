@@ -1,6 +1,7 @@
 package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.Compra;
+import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.RepositorioUsuario;
 import com.tallerwebi.dominio.Usuario;
 import org.hibernate.Session;
@@ -151,5 +152,15 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         query.executeUpdate();
     }
 
+    @Override
+    public Set<Libro> buscarMisLibros(Usuario usuario) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Libro> librosComprados = session.createQuery(
+                        "SELECT l FROM Libro l JOIN l.usuariosCompradores u WHERE u = :usuario", Libro.class)
+                .setParameter("usuario", usuario)
+                .getResultList();
+
+        return new HashSet<>(librosComprados);
+    }
 
 }

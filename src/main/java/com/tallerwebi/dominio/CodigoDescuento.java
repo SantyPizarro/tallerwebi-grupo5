@@ -2,7 +2,9 @@ package com.tallerwebi.dominio;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class CodigoDescuento {
@@ -13,7 +15,7 @@ public class CodigoDescuento {
     private Long id;
 
     @OneToMany
-    List<Cupon> cuponesDescuento = new ArrayList<Cupon>();
+    Set<Cupon> cuponesDescuento = new HashSet<>();
 
 
 
@@ -25,11 +27,11 @@ public class CodigoDescuento {
         return id;
     }
 
-    public List<Cupon> getCuponesDescuento() {
+    public Set<Cupon> getCuponesDescuento() {
         return cuponesDescuento;
     }
 
-    public void setCuponesDescuento(List<Cupon> cuponesDescuento) {
+    public void setCuponesDescuento(Set<Cupon> cuponesDescuento) {
         this.cuponesDescuento = cuponesDescuento;
     }
 }

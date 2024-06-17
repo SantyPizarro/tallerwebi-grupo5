@@ -15,6 +15,13 @@ public class Cupon {
 
     private Integer descuento;
 
+    public Cupon() {}
+
+
+    public Cupon(Integer descuento) {
+        this.descuento = descuento;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }

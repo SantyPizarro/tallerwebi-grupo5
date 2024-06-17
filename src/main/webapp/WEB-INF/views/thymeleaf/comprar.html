@@ -18,7 +18,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card mb-3" th:each="libro : ${librosComprados}">
-                    <div class="row g-0">
+                    <div class="row g-0" style="position: relative;">
                         <div class="col-md-4">
                             <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}"
                                  class="img-fluid rounded-start" alt="..." width="286px" height="410px">
@@ -28,6 +28,12 @@
                                 <h5 class="card-title" th:text="${libro.titulo}">Título del Libro</h5>
                                 <p class="card-text" th:text="${libro.precio}">$ Precio del Libro</p>
                             </div>
+                            <form accept-charset="UTF-8" th:action="@{/eliminarLibroDeCarrito}" method="post">
+                                <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
+                                <button type="submit" class="btn btn-danger " id="botonEliminar" data-bs-toggle="modal">
+                                    Eliminar libro
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -48,6 +54,7 @@
 
                             </div>
                         </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -74,10 +81,10 @@
     });
 </script>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         console.log("Archivo compra.js cargado");
 
-        document.getElementById("showInput").addEventListener("click", function() {
+        document.getElementById("showInput").addEventListener("click", function () {
             console.log("Parrafo clickeado");
             var inputContainer = document.getElementById("inputContainer");
             if (inputContainer.style.display === "none" || inputContainer.style.display === "") {

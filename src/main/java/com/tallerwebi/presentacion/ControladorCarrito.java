@@ -25,10 +25,12 @@ public class ControladorCarrito {
 
 
     private final CarritoService carritoService;
+    private final ServicioLibro servicioLibro;
 
     @Autowired
-    public ControladorCarrito(CarritoService carritoService) {
+    public ControladorCarrito(CarritoService carritoService, ServicioLibro servicioLibro) {
         this.carritoService = carritoService;
+        this.servicioLibro = servicioLibro;
     }
 
     @GetMapping("/mostrar-carrito")
@@ -79,4 +81,18 @@ public class ControladorCarrito {
 
     }
 
+    @PostMapping("/eliminarLibroDeCarrito")
+    public ModelAndView eliminarLibroDeCarrito(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+        HttpSession sesion = request.getSession();
+        Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
+        Integer cantidadDelibros = (Integer) sesion.getAttribute("cantidadLibros");
+
+        if(carrito != null){
+            carritoService.eliminarLibroDeCarrito(servicioLibro.buscarLibroPorTitulo(titulo), carrito);
+            cantidadDelibros = (cantidadDelibros == null) ? 0 : cantidadDelibros - 1;
+            sesion.setAttribute("cantidadLibros", cantidadDelibros);
+        }
+
+        return new ModelAndView("redirect:/mostrar-carrito");
+    }
 }

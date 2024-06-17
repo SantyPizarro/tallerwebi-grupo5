@@ -21,13 +21,16 @@ public class ControladorHome {
     private final ServicioSuscriptor servicioSuscriptor;
     private final ServicioPreferencias servicioPreferencias;
     private final SolicitudAmistadService solicitudAmistadService;
+    private final NotificacionService notificacionService;
 
     @Autowired
-    public ControladorHome(ServicioLibro servicioLibro, ServicioSuscriptor servicioSuscriptor, ServicioPreferencias servicioPreferencias, SolicitudAmistadService solicitudAmistadService) {
+    public ControladorHome(ServicioLibro servicioLibro, ServicioSuscriptor servicioSuscriptor, ServicioPreferencias servicioPreferencias, SolicitudAmistadService solicitudAmistadService, NotificacionService notificacionService) {
         this.servicioLibro = servicioLibro;
         this.servicioSuscriptor = servicioSuscriptor;
         this.servicioPreferencias = servicioPreferencias;
         this.solicitudAmistadService = solicitudAmistadService;
+        this.notificacionService = notificacionService;
+
     }
 
     @GetMapping("/home")
@@ -45,7 +48,7 @@ public class ControladorHome {
             List<Libro> librosRecomendados = servicioPreferencias.recomendarLibros(preferencias);
 
             modelAndView.addObject("librosRecomendados", librosRecomendados);
-            modelAndView.addObject("cantidadNotificaciones", solicitudAmistadService.buscarSolicitudes(usuario).size());
+            modelAndView.addObject("cantidadNotificaciones", notificacionService.cantidadDeNotificaciones(usuario));
             return modelAndView;
         }
 

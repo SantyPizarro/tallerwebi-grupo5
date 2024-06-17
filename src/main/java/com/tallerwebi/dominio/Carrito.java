@@ -38,4 +38,8 @@ public class Carrito {
     public void limpiar() {
         this.libros.clear();
     }
+
+    public void eliminarLibro(Libro libro, Carrito carrito) {
+        carrito.getLibros().remove(libro);
+    }
 }

@@ -46,11 +46,9 @@ public class NotificacionServiceImpl implements NotificacionService {
             Usuario solicitante = oferta.getSolicitante();
 
             aceptante.eliminarLibro(oferta.getLibroSolicitado());
-            aceptante.setLibrosComprados(oferta.getLibroSolicitante());
-
             solicitante.eliminarLibro(oferta.getLibroSolicitante());
+            aceptante.setLibrosComprados(oferta.getLibroSolicitante());
             solicitante.setLibrosComprados(oferta.getLibroSolicitado());
-
 
             repositorioIntercambio.aceptarOferta(oferta);
 

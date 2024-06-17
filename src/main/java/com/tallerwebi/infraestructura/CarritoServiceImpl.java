@@ -58,6 +58,11 @@ public class CarritoServiceImpl implements CarritoService {
         return subtotal;
     }
 
+    @Override
+    public void eliminarLibroDeCarrito(Libro libro, Carrito carrito) {
+        carrito.eliminarLibro(libro, carrito);
+    }
+
     private Libro buscarLibroPorId(Long id) {
         return repositorioLibro.buscarLibroPorId(id);
     }

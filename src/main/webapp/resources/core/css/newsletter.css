@@ -1,0 +1,47 @@
+.newsletter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+    background-color: #f0f0f0;
+}
+
+.newsletter form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 400px;
+}
+
+.newsletter h3 {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.newsletter label,
+.newsletter select,
+.newsletter input[type="number"],
+.newsletter textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.newsletter button {
+    width: auto;
+    margin: 0 auto;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #121481;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter button:hover {
+    background-color: #0056b3;
+}

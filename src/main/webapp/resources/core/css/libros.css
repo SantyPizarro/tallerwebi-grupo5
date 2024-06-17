@@ -172,11 +172,13 @@ footer{
 
 .genero{
     color: #121481;
+    text-decoration-color: #121481;
     text-decoration: none;
 }
 
 .genero:hover{
     color: #0056b3;
+    text-decoration-color: #0056b3;
     transition: color 0.3s ease;
 
 }

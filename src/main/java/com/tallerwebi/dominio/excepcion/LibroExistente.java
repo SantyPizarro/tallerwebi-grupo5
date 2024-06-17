@@ -1,4 +1,4 @@
 package com.tallerwebi.dominio.excepcion;
 
-public class LibroExistente extends Exception {
+public class LibroExistente extends Exception{
 }

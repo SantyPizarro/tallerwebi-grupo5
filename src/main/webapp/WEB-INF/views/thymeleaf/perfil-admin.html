@@ -27,6 +27,9 @@
         <li class="nav-item">
             <a class="nav-link" href="#" onclick="mostrarContenido('usuarios')">Usuarios</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" onclick="mostrarContenido('home')">Home</a>
+        </li>
     </ul>
 </div>
 
@@ -38,6 +41,7 @@
     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2">
         Eliminar libro
     </button>
+
 
 
     <!-- Mensaje de error -->
@@ -119,6 +123,15 @@
     </div>
 </section>
 
+<section class="tablas lightblue" id="home" style="display:none;">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarRecomendadosModal">
+        Editar libros recomendados
+    </button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsletterModal">
+        Enviar Newsletter
+    </button>
+</section>
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -187,7 +200,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel2">Eliminar libro</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form accept-charset="utf-8" th:action="@{/eliminarLibroDeBDD}" method="post">
@@ -206,6 +219,76 @@
     </div>
 </div>
 
+<div class="modal fade" id="editarRecomendadosModal" tabindex="-1" aria-labelledby="editarRecomendadosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="librosModalLabel">Libros Destacados</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h2>Lista Actual</h2>
+                <ul class="list-group mb-3">
+                    <div th:if="${#lists.isEmpty(librosDestacados)}" class="alert alert-info">
+                        <p th:text="'Aún no hay una lista de libros destacados, se muestran todos los libros en su lugar'"></p>
+                    </div>
+                    <li class="list-group-item" th:each="libro : ${librosDestacados}">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <img th:src="@{${#strings.replace(libro.getRuta(), '/spring', '')}}" alt="Imagen del libro" width="50" height="75" class="mr-3" id="imgDestacado"/>
+                                <span th:text="${libro.titulo}"></span>
+                            </div>
+                            <form th:action="@{/eliminarLibroDestacado}" method="post" class="mb-0">
+                                <input type="hidden" th:name="libroId" th:value="${libro.id}"/>
+                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+                <h2>Agregar Libro</h2>
+                <form th:action="@{/agregarLibroDestacado}" method="post">
+                    <div class="form-group">
+                        <label for="libroId">Selecciona un libro</label>
+                        <select id="libroId" name="libroId" class="form-control">
+                            <option th:each="libro : ${libros}" th:value="${libro.id}" th:text="${libro.titulo}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="newsletterModal" tabindex="-1" aria-labelledby="newsletterModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="newsletterModalLabel">Enviar Newsletter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/enviarNewsletter}" method="post">
+                    <div class="mb-3">
+                        <label for="tema" class="form-label">Asunto:</label>
+                        <input type="text" id="tema" name="tema" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mensaje" class="form-label">Mensaje:</label>
+                        <textarea id="mensaje" name="mensaje" class="form-control" rows="5" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Enviar Newsletter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <footer th:replace="header_footer :: footer"></footer>
 
 <script>
@@ -214,12 +297,11 @@
     });
 
     function mostrarContenido(opcion) {
-        const secciones = ['libros', 'usuarios'];
+        const secciones = ['libros', 'usuarios', 'home'];
         secciones.forEach(function (seccion) {
             document.getElementById(seccion).style.display = (seccion === opcion) ? 'block' : 'none';
         });
     }
-
     document.addEventListener("DOMContentLoaded", function () {
         var navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(function (link) {

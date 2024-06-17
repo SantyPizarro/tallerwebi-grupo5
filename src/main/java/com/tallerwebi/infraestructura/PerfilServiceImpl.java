@@ -17,10 +17,12 @@ import java.util.Set;
 public class PerfilServiceImpl implements PerfilService {
 
     private RepositorioUsuario repositorioUsuario;
+    private PlanRepository planRepository;
 
     @Autowired
-    public PerfilServiceImpl(RepositorioUsuario repositorioUsuario) {
+    public PerfilServiceImpl(RepositorioUsuario repositorioUsuario, PlanRepository planRepository) {
         this.repositorioUsuario = repositorioUsuario;
+        this.planRepository = planRepository;
     }
 
 
@@ -140,5 +142,10 @@ public class PerfilServiceImpl implements PerfilService {
     @Override
     public Set<Libro> buscarMisLibros(Usuario usuario) {
         return repositorioUsuario.buscarMisLibros(usuario);
+    }
+
+    @Override
+    public Boolean verificarPlan(Usuario usuario) {
+        return planRepository.verificarPlanDeUsuario(usuario)!=null;
     }
 }

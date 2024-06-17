@@ -46,16 +46,8 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public void aplicarBeneficioPlanBasico(Usuario usuario) {
            if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("basic")) {
-               if(usuario.getLibrosComprados().contains(repositorioLibro.buscarLibroPorId(2L))){
-                   usuario.getLibrosComprados().remove(repositorioLibro.buscarLibroPorId(2L));
-               }
 
-               if(usuario.getLibrosComprados().contains(repositorioLibro.buscarLibroPorId(3L))){
-                   usuario.getLibrosComprados().remove(repositorioLibro.buscarLibroPorId(3L));
-               }
 
-                usuario.getLibrosComprados().add(repositorioLibro.buscarLibroPorId(1L));
-                repositorioUsuario.modificar(usuario);
            }
     }
 

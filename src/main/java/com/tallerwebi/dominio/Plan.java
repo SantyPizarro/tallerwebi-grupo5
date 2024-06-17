@@ -13,8 +13,7 @@ public class Plan {
     @JoinColumn(name = "tipo_plan_id", nullable = false)
     private TipoPlan tipoPlan;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
-    private Set<Usuario> usuarios;
+
 
     public void setId(Long id) {
         this.id = id;
@@ -32,11 +31,5 @@ public class Plan {
         this.tipoPlan = tipoPlan;
     }
 
-    public Set<Usuario> getUsuarios() {
-        return usuarios;
-    }
 
-    public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
 }

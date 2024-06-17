@@ -136,4 +136,9 @@ public class PerfilServiceImpl implements PerfilService {
     public Set<Usuario> buscarAmigos(Usuario usuario) {
         return repositorioUsuario.buscarAmigos(usuario);
     }
+
+    @Override
+    public Set<Libro> buscarMisLibros(Usuario usuario) {
+        return repositorioUsuario.buscarMisLibros(usuario);
+    }
 }

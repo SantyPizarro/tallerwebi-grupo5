@@ -1,6 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -12,6 +13,10 @@ public class Plan {
     @ManyToOne
     @JoinColumn(name = "tipo_plan_id", nullable = false)
     private TipoPlan tipoPlan;
+
+    private Date fechaCompra;
+
+    private Date fechaVencimiento;
 
 
 
@@ -31,5 +36,19 @@ public class Plan {
         this.tipoPlan = tipoPlan;
     }
 
+    public Date getFechaCompra() {
+        return fechaCompra;
+    }
 
+    public void setFechaCompra(Date fechaCompra) {
+        this.fechaCompra = fechaCompra;
+    }
+
+    public Date getFechaVencimiento() {
+        return fechaVencimiento;
+    }
+
+    public void setFechaVencimiento(Date fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
 }

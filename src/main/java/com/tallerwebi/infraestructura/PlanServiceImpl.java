@@ -49,24 +49,30 @@ public class PlanServiceImpl implements PlanService {
         repositorioUsuario.modificar(usuario);
     }
 
+
+    public void beneficioCuponPlan(Usuario usuario,Integer porcentaje){
+        Cupon a1 = new Cupon(porcentaje);
+        a1.setCodigo(generateRandomString());
+        repositorioCupon.guardarCupon(a1);
+        CodigoDescuento codigos = new CodigoDescuento();
+        codigos.getCuponesDescuento().add(a1);
+        repositorioCupon.modificarCodigoDescuento(codigos);
+        usuario.getCuponesDeDescuento().add(a1);
+        repositorioUsuario.modificar(usuario);
+    }
+
     @Override
     public void aplicarBeneficioPlanBasico(Usuario usuario) {
            if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("basic")) {
-            Cupon a1 = new Cupon(30);
-            a1.setCodigo(generateRandomString());
-            repositorioCupon.guardarCupon(a1);
-            CodigoDescuento codigos = new CodigoDescuento();
-            codigos.getCuponesDescuento().add(a1);
-            repositorioCupon.modificarCodigoDescuento(codigos);
-            usuario.getCuponesDeDescuento().add(a1);
-            repositorioUsuario.modificar(usuario);
+            beneficioCuponPlan(usuario,20);
            }
     }
+
 
     @Override
     public void aplicarBeneficioPlanEstandar(Usuario usuario) {
         if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("standard")) {
-        aplicarBeneficioPlanBasico(usuario);
+        beneficioCuponPlan(usuario,25);
         usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(1L));
         usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(2L));
         repositorioUsuario.modificar(usuario);
@@ -76,9 +82,7 @@ public class PlanServiceImpl implements PlanService {
     @Override
     public void aplicarBeneficioPlanPremium(Usuario usuario) {
         if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("premium")) {
-            usuario.getLibrosComprados().add(repositorioLibro.buscarLibroPorId(1L));
-            usuario.getLibrosComprados().add(repositorioLibro.buscarLibroPorId(2L));
-            usuario.getLibrosComprados().add(repositorioLibro.buscarLibroPorId(3L));
+            beneficioCuponPlan(usuario,30);
             repositorioUsuario.modificar(usuario);
         }
     }
@@ -123,5 +127,41 @@ public class PlanServiceImpl implements PlanService {
 
         return sb.toString();
     }
+
+
+
+    /*
+    public void otorgarCuponesCadaDosCompras(Usuario usuario){
+
+    if(fecha_compra_plan > fecha_compra_libro && fecha_vencimiento_plan < fecha_compra_libro){
+
+
+        // Obtener el número total de compras del usuario
+        int totalCompras = compraRepository.countByUsuarioId(usuario.getId());
+
+        // Calcular cupones a otorgar
+        int cuponesNuevos = totalCompras / 2;
+
+        // Obtener el número actual de cupones
+        int cuponesActuales = usuario.getCuponesDeDescuento().size();
+
+        // Calcular cuántos cupones adicionales se necesitan
+        int cuponesAAgregar = cuponesNuevos - cuponesActuales;
+
+        // Crear y agregar los cupones al usuario si es necesario
+        for (int i = 0; i < cuponesAAgregar; i++) {
+            Cupon cupon = new Cupon();
+            cupon.setCodigo(generateRandomString());
+            usuario.getCuponesDeDescuento().add(cupon);
+        }
+
+        // Guardar el usuario actualizado
+            usuarioRepository.modificar(usuario);
+    }
+}
+    }
+
+
+            */
 
 }

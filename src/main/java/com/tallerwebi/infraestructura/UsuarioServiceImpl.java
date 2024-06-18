@@ -65,8 +65,5 @@ public class UsuarioServiceImpl implements UsuarioService {
         repositorioUsuario.eliminarUsuario(usuario);
     }
 
-    @Override
-    public void actualizarUsuario(Usuario solicitado) {
-        repositorioUsuario.actualizarUsuario(solicitado);
-    }
+
 }

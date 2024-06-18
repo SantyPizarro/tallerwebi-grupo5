@@ -8,6 +8,8 @@ public interface PlanService {
     void aplicarBeneficioPlanBasico(Usuario usuario);
     void aplicarBeneficioPlanEstandar(Usuario usuario);
     void aplicarBeneficioPlanPremium(Usuario usuario);
+
+    void cuponCadaDosCompras(Usuario usuario);
    /* void actualizarPlanUsuario(Usuario usuario,Long planId);
     void aplicarBeneficio(Usuario usuario);
 */

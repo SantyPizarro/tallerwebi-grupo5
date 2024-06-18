@@ -23,11 +23,11 @@ public class PlanServiceImpl implements PlanService {
     private static final SecureRandom RANDOM = new SecureRandom();
 
     @Autowired
-    public PlanServiceImpl(PlanRepository planRepository, RepositorioUsuario repositorioUsuario, RepositorioLibro repositorioLibro,RepositorioCupon repositorioCupon) {
-        this.planRepository=planRepository;
-        this.repositorioUsuario=repositorioUsuario;
-        this.repositorioLibro=repositorioLibro;
-        this.repositorioCupon=repositorioCupon;
+    public PlanServiceImpl(PlanRepository planRepository, RepositorioUsuario repositorioUsuario, RepositorioLibro repositorioLibro, RepositorioCupon repositorioCupon) {
+        this.planRepository = planRepository;
+        this.repositorioUsuario = repositorioUsuario;
+        this.repositorioLibro = repositorioLibro;
+        this.repositorioCupon = repositorioCupon;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
 
-    public void beneficioCuponPlan(Usuario usuario,Integer porcentaje){
+    public void beneficioCuponPlan(Usuario usuario, Integer porcentaje) {
         Cupon a1 = new Cupon(porcentaje);
         a1.setCodigo(generateRandomString());
         repositorioCupon.guardarCupon(a1);
@@ -63,28 +63,49 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public void aplicarBeneficioPlanBasico(Usuario usuario) {
-           if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("basic")) {
-            beneficioCuponPlan(usuario,20);
-           }
+        if (usuario != null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("basic")) {
+            beneficioCuponPlan(usuario, 20);
+        }
     }
 
 
     @Override
     public void aplicarBeneficioPlanEstandar(Usuario usuario) {
-        if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("standard")) {
-        beneficioCuponPlan(usuario,25);
-        usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(1L));
-        usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(2L));
-        repositorioUsuario.modificar(usuario);
+        if (usuario != null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("standard")) {
+            beneficioCuponPlan(usuario, 25);
+            usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(1L));
+            usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(2L));
+            repositorioUsuario.modificar(usuario);
         }
     }
 
     @Override
     public void aplicarBeneficioPlanPremium(Usuario usuario) {
-        if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("premium")) {
-            beneficioCuponPlan(usuario,30);
+        if (usuario != null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("premium")) {
+            beneficioCuponPlan(usuario, 30);
             repositorioUsuario.modificar(usuario);
         }
+    }
+
+    @Override
+    public void cuponCadaDosCompras(Usuario usuario) {
+        int totalCompras = repositorioUsuario.historialDeCompras(usuario).size();
+        int cuponesNuevos = totalCompras / 2;
+        int cuponesActuales = usuario.getCuponesDeDescuento().size() - 1;
+        int cuponesAAgregar = 0;
+
+        if (cuponesActuales < 0) {
+            cuponesAAgregar = cuponesNuevos - usuario.getCuponesDeDescuento().size();
+        } else {
+            cuponesAAgregar = cuponesNuevos - cuponesActuales;
+        }
+
+        for (int i = 0; i < cuponesAAgregar; i++) {
+            Cupon cupon = new Cupon();
+            cupon.setCodigo(generateRandomString());
+            usuario.getCuponesDeDescuento().add(cupon);
+        }
+        repositorioUsuario.modificar(usuario);
     }
 
 

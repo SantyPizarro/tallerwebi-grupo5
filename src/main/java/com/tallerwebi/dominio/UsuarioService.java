@@ -17,5 +17,5 @@ public interface UsuarioService {
 
     void eliminarUsuario(Usuario usuario);
 
-    void actualizarUsuario(Usuario solicitado);
+
 }

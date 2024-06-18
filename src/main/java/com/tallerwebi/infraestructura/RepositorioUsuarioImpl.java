@@ -1,8 +1,6 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.Compra;
-import com.tallerwebi.dominio.RepositorioUsuario;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -56,6 +54,8 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     public void modificar(Usuario usuario) {
         sessionFactory.getCurrentSession().update(usuario);
     }
+
+
 
 
     @Override
@@ -152,15 +152,14 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     }
 
     @Override
-    public void actualizarUsuario(Usuario solicitado) {
+    public Set<Libro> buscarMisLibros(Usuario usuario) {
         Session session = sessionFactory.getCurrentSession();
-        Integer cantidadDeNotificaciones = solicitado.getCantidadDeNotificaciones();
-        Long usuarioId = solicitado.getId();
-        Query query = session.createQuery("update Usuario set cantidadDeNotificaciones = :cantidad where id = :id");
-        query.setParameter("cantidad", cantidadDeNotificaciones);
-        query.setParameter("id", usuarioId);
-        query.executeUpdate();
-    }
+        List<Libro> librosComprados = session.createQuery(
+                        "SELECT l FROM Libro l JOIN l.usuariosCompradores u WHERE u = :usuario", Libro.class)
+                .setParameter("usuario", usuario)
+                .getResultList();
 
+        return new HashSet<>(librosComprados);
+    }
 
 }

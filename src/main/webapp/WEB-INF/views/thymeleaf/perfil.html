@@ -94,8 +94,8 @@
         </ul>
 
         <section class="tablas lightblue" id="misLibros">
-            <div th:if="${usuario.librosComprados}" class="librosFav">
-                <div th:each="libro : ${usuario.librosComprados}" class="card" style="width: 18rem;">
+            <div th:if="${librosUsuario}" class="librosFav">
+                <div th:each="libro : ${librosUsuario}" class="card" style="width: 18rem;">
                     <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
                     <div class="card-body detalle-tarjetas">
                         <h5 class="card-title" th:text="${libro.titulo}"></h5>
@@ -127,15 +127,15 @@
                 <div class="descripcion">
                     <h4>Descripción:</h4>
                     <p th:text="${usuario.descripcion}"></p>
-
+                <div th:if="${planUsuario==true}">
                     <form th:action="@{/traerDatosAmigoAIntercambiar}" method="post">
                         <input type="hidden" name="usuarioAmigo" th:value="${usuario.id}">
-                        <button type="submit" class="btn btn-primary favbutton" data-bs-toggle="modal"
+                        <button  type="submit" class="btn btn-primary favbutton" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal3">
                             <span class="material-symbols-outlined">sync_alt</span>
                         </button>
                     </form>
-
+                </div>
                     <div class="preferencias">
                         <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
                         <span class="etiqueta" th:text="${usuario.generoFav2}"></span>

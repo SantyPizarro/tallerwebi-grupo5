@@ -1,8 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class Usuario {
@@ -26,7 +25,6 @@ public class Usuario {
     private String foto;
     private String tokenDeVerificacion;
     private Boolean emailVerificado = false;
-    private Integer cantidadDeNotificaciones;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -52,6 +50,20 @@ public class Usuario {
     )
 
     private Set<Libro> librosComprados;
+
+
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
+    private Plan plan;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Cupon> cuponesDeDescuento = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_libros_plan")
+    private Set<Libro> librosPlan = new HashSet<>();
+
 
     public String getFoto() {
         return foto;
@@ -188,9 +200,33 @@ public class Usuario {
         this.librosComprados.add(libro);
     }
 
-    public Integer getCantidadDeNotificaciones() {return cantidadDeNotificaciones;}
+    public Plan getPlan() {
+        return plan;
+    }
 
-    public void setCantidadDeNotificaciones(Integer cantidadDeNotificaciones) {this.cantidadDeNotificaciones = cantidadDeNotificaciones;}
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
+    public void setLibrosComprados(Set<Libro> librosComprados) {
+        this.librosComprados = librosComprados;
+    }
+
+    public Set<Cupon> getCuponesDeDescuento() {
+        return cuponesDeDescuento;
+    }
+
+    public Set<Libro> getLibrosPlan() {
+        return librosPlan;
+    }
+
+    public void setLibrosPlan(Set<Libro> librosPlan) {
+        this.librosPlan = librosPlan;
+    }
+
+    public void setCuponesDeDescuento(Set<Cupon> cuponesDeDescuento) {
+        this.cuponesDeDescuento = cuponesDeDescuento;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -205,11 +241,7 @@ public class Usuario {
         return Objects.hashCode(id);
     }
 
-    public void eliminarLibro(Libro libroARecibir) {
-        for (Libro libro : librosComprados) {
-            if (libro.equals(libroARecibir)) {
-                librosComprados.remove(libro);
-            }
-        }
+    public void eliminarLibro(Libro libroEliminar) {
+        librosComprados.remove(libroEliminar);
     }
 }

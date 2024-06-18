@@ -60,7 +60,10 @@
                     <strong>24/7</strong> support
                 </li>
             </ul>
-            <button class="cta-btn">SELECT</button>
+            <form th:action="@{/comprarPlanBasico}" method="post">
+                <button class="cta-btn" type="submit">SELECT</button>
+            </form>
+
         </div>
         <div class="pricing-card standard">
             <div class="heading">
@@ -105,7 +108,11 @@
                     <strong>24/7</strong> support
                 </li>
             </ul>
-            <button class="cta-btn">SELECT</button>
+
+            <form th:action="@{/comprarPlanEstandar}" method="post">
+                <button class="cta-btn" type="submit">SELECT</button>
+            </form>
+
         </div>
         <div class="pricing-card premium">
             <div class="heading">
@@ -154,7 +161,9 @@
                     <strong>Advanced</strong> security features
                 </li>
             </ul>
-            <button class="cta-btn">SELECT</button>
+            <form th:action="@{/comprarPlanPremium}" method="post">
+                <button class="cta-btn" type="submit">SELECT</button>
+            </form>
         </div>
     </section>
 </main>

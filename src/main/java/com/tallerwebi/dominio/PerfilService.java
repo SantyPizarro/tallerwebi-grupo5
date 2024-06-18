@@ -22,4 +22,6 @@ public interface PerfilService {
     Set<Usuario> buscarAmigos(Usuario usuario);
 
 
+    Set<Libro> buscarMisLibros(Usuario usuario);
+    Boolean verificarPlan(Usuario usuario);
 }

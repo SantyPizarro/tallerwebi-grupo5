@@ -94,11 +94,8 @@ public class ControladorSolicitudAmistad {
         Usuario aceptante = (Usuario) session.getAttribute("USUARIO");
 
         if (aceptante != null) {
+
             notificacionService.aceptarNotificacion(tipoNotificacion, idNotificacion);
-
-            usuarioService.actualizarUser(aceptante);
-
-            session.setAttribute("USUARIO", aceptante); //CHECKEAR
 
             return new ModelAndView("redirect:/solicitud-amistad");
         }

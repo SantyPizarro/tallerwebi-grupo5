@@ -10,7 +10,6 @@ public interface RepositorioUsuario {
     Usuario buscar(String email);
     void modificar(Usuario usuario);
 
-
     Usuario buscarPorId(Long id);
     Usuario buscarUsuarioPassword(String email, String password);
     List<Usuario> buscarTodos(Usuario usuario);
@@ -26,6 +25,6 @@ public interface RepositorioUsuario {
 
     void eliminarUsuario(Usuario usuario);
 
-    void actualizarUsuario(Usuario solicitado);
+    Set<Libro> buscarMisLibros(Usuario usuario);
 }
 

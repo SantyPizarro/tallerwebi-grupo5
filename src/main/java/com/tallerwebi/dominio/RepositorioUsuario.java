@@ -1,5 +1,6 @@
 package com.tallerwebi.dominio;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +28,6 @@ public interface RepositorioUsuario {
 
     Set<Libro> buscarMisLibros(Usuario usuario);
 
-    Integer cantidadDeCompras(Usuario usuario);
+    Integer cantidadDeCompras(Usuario usuario, LocalDateTime fechaCompraPlan);
 }
 

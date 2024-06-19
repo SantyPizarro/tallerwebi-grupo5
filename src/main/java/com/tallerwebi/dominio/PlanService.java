@@ -2,6 +2,8 @@ package com.tallerwebi.dominio;
 
 public interface PlanService {
 
+    void planFree(Usuario usuario);
+
     void comprarPlanBasico(Usuario usuario);
     void comprarPlanEstandar(Usuario usuario);
     void comprarPlanPremium(Usuario usuario);

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.security.SecureRandom;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @Transactional
@@ -28,21 +30,33 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public void comprarPlanBasico(Usuario usuario) {
+    public void planFree(Usuario usuario) {
         usuario.setPlan(planRepository.buscarPlan(1L));
+    }
+
+    @Override
+    public void comprarPlanBasico(Usuario usuario) {
+        usuario.setPlan(planRepository.buscarPlan(2L));
+        usuario.getPlan().setFechaCompra(LocalDateTime.now());
+        usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
         repositorioUsuario.modificar(usuario);
+        System.out.println(usuario.getPlan().getFechaCompra());
+        System.out.println(usuario.getPlan().getFechaVencimiento());
     }
 
     @Override
     public void comprarPlanEstandar(Usuario usuario) {
-        usuario.setPlan(planRepository.buscarPlan(2L));
+        usuario.setPlan(planRepository.buscarPlan(3L));
+        usuario.getPlan().setFechaCompra(LocalDateTime.now());
+        usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
         repositorioUsuario.modificar(usuario);
-
     }
 
     @Override
     public void comprarPlanPremium(Usuario usuario) {
-        usuario.setPlan(planRepository.buscarPlan(3L));
+        usuario.setPlan(planRepository.buscarPlan(4L));
+        usuario.getPlan().setFechaCompra(LocalDateTime.now());
+        usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
         repositorioUsuario.modificar(usuario);
     }
 

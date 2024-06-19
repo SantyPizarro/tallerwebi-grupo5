@@ -2,6 +2,7 @@ package com.tallerwebi.dominio;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,11 +19,11 @@ public class Compra {
     @OneToMany(mappedBy = "compra", fetch = FetchType.EAGER)
     private List<ProductosCompra> productosCompra;
 
-    private LocalDate fechaDeCompra;
+    private LocalDateTime fechaDeCompra;
 
     public Compra(Usuario usuario) {
         this.usuario = usuario;
-        this.fechaDeCompra = LocalDate.now();
+        this.fechaDeCompra = LocalDateTime.now();
         this.productosCompra = new ArrayList<>();
     }
 
@@ -52,7 +53,7 @@ public class Compra {
         this.usuario = usuario;
     }
 
-    public LocalDate getFechaDeCompra() {
+    public LocalDateTime getFechaDeCompra() {
         return fechaDeCompra;
     }
 

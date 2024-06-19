@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.NoResultException;
+
 import org.hibernate.query.Query;
+
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,7 +28,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     private SessionFactory sessionFactory;
 
     @Autowired
-    public RepositorioUsuarioImpl(SessionFactory sessionFactory){
+    public RepositorioUsuarioImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -54,8 +57,6 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     public void modificar(Usuario usuario) {
         sessionFactory.getCurrentSession().update(usuario);
     }
-
-
 
 
     @Override
@@ -134,7 +135,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     @Override
     public Set<Usuario> buscarAmigos(Usuario usuario) {
         Session session = sessionFactory.getCurrentSession();
-        List<Usuario> amigosUsuario =  session.createQuery(
+        List<Usuario> amigosUsuario = session.createQuery(
                         "SELECT a.usuario FROM Amistad a WHERE a.amigo = :usuario", Usuario.class)
                 .setParameter("usuario", usuario)
                 .getResultList();
@@ -163,12 +164,13 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
     }
 
     @Override
-    public Integer cantidadDeCompras(Usuario usuario) {
+    public Integer cantidadDeCompras(Usuario usuario, LocalDateTime fechaCompra) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createQuery("SELECT c FROM Compra c WHERE c.usuario = :usuario", Compra.class)
-                .setParameter("usuario", usuario)
-                .getResultList()
-                .size();
+        String hql = "SELECT COUNT(*) FROM Compra WHERE usuario = :usuario AND fechaDeCompra > :fechaCompra";
+        Query<Long> query = session.createQuery(hql, Long.class);
+        query.setParameter("usuario", usuario);
+        query.setParameter("fechaCompra", fechaCompra);
+        Long count = query.uniqueResult();
+        return count != null ? count.intValue() : 0;
     }
-
 }

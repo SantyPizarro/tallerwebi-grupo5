@@ -19,12 +19,14 @@ public class ServicioLoginImpl implements ServicioLogin {
 
     private RepositorioUsuario repositorioUsuario;
     private ServicioCorreo servicioCorreo;
+    private PlanRepository repositorioPlan;
 
     @Autowired
-    public ServicioLoginImpl(RepositorioUsuario repositorioUsuario, ServicioCorreo servicioCorreo){
+    public ServicioLoginImpl(RepositorioUsuario repositorioUsuario, ServicioCorreo servicioCorreo, PlanRepository repositorioPlan){
 
         this.repositorioUsuario = repositorioUsuario;
         this.servicioCorreo = servicioCorreo;
+        this.repositorioPlan = repositorioPlan;
     }
 
     @Override
@@ -52,6 +54,7 @@ public class ServicioLoginImpl implements ServicioLogin {
                 usuario.setGeneroFav2("Deporte");
                 usuario.setRol("user");
                 usuario.setTokenDeVerificacion(token);
+                usuario.setPlan(repositorioPlan.buscarPlan(1L));
                 repositorioUsuario.guardar(usuario);
                 enviarTokenDeVerificacion(usuario);
             } else {

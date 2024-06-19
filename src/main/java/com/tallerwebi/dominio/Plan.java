@@ -1,8 +1,9 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 public class Plan {
@@ -14,9 +15,9 @@ public class Plan {
     @JoinColumn(name = "tipo_plan_id", nullable = false)
     private TipoPlan tipoPlan;
 
-    private Date fechaCompra;
+    private LocalDateTime fechaCompra;
 
-    private Date fechaVencimiento;
+    private LocalDateTime fechaVencimiento;
 
 
 
@@ -36,19 +37,19 @@ public class Plan {
         this.tipoPlan = tipoPlan;
     }
 
-    public Date getFechaCompra() {
+    public LocalDateTime getFechaCompra() {
         return fechaCompra;
     }
 
-    public void setFechaCompra(Date fechaCompra) {
+    public void setFechaCompra(LocalDateTime fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
 
-    public Date getFechaVencimiento() {
+    public LocalDateTime getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
+    public void setFechaVencimiento(LocalDateTime fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 }

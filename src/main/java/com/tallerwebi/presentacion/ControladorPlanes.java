@@ -50,7 +50,6 @@ public class ControladorPlanes {
         if(usuario != null) {
             planService.comprarPlanEstandar(usuario);
             planService.aplicarBeneficioPlanEstandar(usuario);
-            planService.cuponCadaDosCompras(usuario);
             return "redirect:/planes";
         }
 

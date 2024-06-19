@@ -26,5 +26,7 @@ public interface RepositorioUsuario {
     void eliminarUsuario(Usuario usuario);
 
     Set<Libro> buscarMisLibros(Usuario usuario);
+
+    Integer cantidadDeCompras(Usuario usuario);
 }
 

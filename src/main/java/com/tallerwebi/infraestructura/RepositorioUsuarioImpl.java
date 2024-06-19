@@ -162,4 +162,13 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         return new HashSet<>(librosComprados);
     }
 
+    @Override
+    public Integer cantidadDeCompras(Usuario usuario) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("SELECT c FROM Compra c WHERE c.usuario = :usuario", Compra.class)
+                .setParameter("usuario", usuario)
+                .getResultList()
+                .size();
+    }
+
 }

@@ -1,9 +1,6 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.Libro;
-import com.tallerwebi.dominio.PerfilService;
-import com.tallerwebi.dominio.ServicioLibro;
-import com.tallerwebi.dominio.Usuario;
+import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,12 +19,14 @@ public class ControladorPerfil {
 
     private PerfilService perfilService;
     private ServicioLibro servicioLibro;
+    private PlanService planService;
 
 
     @Autowired
-    public ControladorPerfil(PerfilService perfilService, ServicioLibro servicioLibro) {
+    public ControladorPerfil(PerfilService perfilService, ServicioLibro servicioLibro, PlanService planService) {
         this.perfilService = perfilService;
         this.servicioLibro = servicioLibro;
+        this.planService = planService;
     }
 
     @GetMapping("/perfil")
@@ -42,6 +41,10 @@ public class ControladorPerfil {
             model.put("historialDeCompras", perfilService.historialDeCompras(usuario));
             model.put("amigosUsuario", perfilService.buscarAmigos(usuario));
             model.put("planUsuario",perfilService.verificarPlan(usuario));
+            model.addAttribute("free", planService.descripcionPlanes(1L));
+            model.addAttribute("basic", planService.descripcionPlanes(2L));
+            model.addAttribute("estandar", planService.descripcionPlanes(3L));
+            model.addAttribute("premium", planService.descripcionPlanes(4L));
             if (amigo != null) {
                 model.put("amigo", amigo);
                 model.put("modal", modal);

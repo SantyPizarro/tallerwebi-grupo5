@@ -33,6 +33,7 @@ public class ControladorPlanes {
 
         if (usuario != null) {
             ModelMap modelo = new ModelMap();
+            modelo.addAttribute("free", planService.descripcionPlanes(1L));
             modelo.addAttribute("basic", planService.descripcionPlanes(2L));
             modelo.addAttribute("estandar", planService.descripcionPlanes(3L));
             modelo.addAttribute("premium", planService.descripcionPlanes(4L));

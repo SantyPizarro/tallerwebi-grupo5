@@ -1,14 +1,11 @@
 package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.*;
-import org.hibernate.annotations.AttributeAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.security.SecureRandom;
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -49,7 +46,7 @@ public class PlanServiceImpl implements PlanService {
         repositorioUsuario.modificar(usuario);
     }
 
-
+    @Override
     public void beneficioCuponPlan(Usuario usuario, Integer porcentaje) {
         Cupon a1 = new Cupon(porcentaje);
         a1.setCodigo(generateRandomString());
@@ -58,13 +55,13 @@ public class PlanServiceImpl implements PlanService {
         codigos.getCuponesDescuento().add(a1);
         repositorioCupon.modificarCodigoDescuento(codigos);
         usuario.getCuponesDeDescuento().add(a1);
-        repositorioUsuario.modificar(usuario);
     }
 
     @Override
     public void aplicarBeneficioPlanBasico(Usuario usuario) {
         if (usuario != null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("basic")) {
             beneficioCuponPlan(usuario, 20);
+            repositorioUsuario.modificar(usuario);
         }
     }
 
@@ -75,7 +72,6 @@ public class PlanServiceImpl implements PlanService {
             beneficioCuponPlan(usuario, 25);
             usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(1L));
             usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(2L));
-            cuponCadaDosCompras(usuario);
             repositorioUsuario.modificar(usuario);
         }
     }
@@ -87,24 +83,6 @@ public class PlanServiceImpl implements PlanService {
             repositorioUsuario.modificar(usuario);
         }
     }
-
-    @Override
-    public void cuponCadaDosCompras(Usuario usuario) {
-        Integer totalCompras = repositorioUsuario.cantidadDeCompras(usuario);
-        Integer cuponesNuevos = totalCompras / 2; //1
-        Integer cuponesActuales = usuario.getCuponesDeDescuento().size(); //0
-        Integer cuponesAAgregar = 0;
-
-
-        cuponesAAgregar = cuponesNuevos - cuponesActuales;
-
-
-        for (int i = 0; i < cuponesAAgregar; i++) {
-            beneficioCuponPlan(usuario, 30);
-        }
-        repositorioUsuario.modificar(usuario);
-    }
-
 
     /*
     @Override

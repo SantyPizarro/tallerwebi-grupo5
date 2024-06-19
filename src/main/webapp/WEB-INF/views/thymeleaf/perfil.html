@@ -3,43 +3,28 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <title>Taller Web I</title>
-
-    <!-- Boostrap core css -->
+    <title>Perfil</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.0/css/bootstrap.min.css}"/>
-
-    <!-- custom style -->
     <link rel="stylesheet" th:href="@{/css/perfil.css}"/>
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
-
-
     <div th:replace="header_footer::head"></div>
-
 </head>
 <body>
-
-<header th:replace="header_footer :: header">
-
-</header>
-
+<header th:replace="header_footer :: header"></header>
 <main>
-
     <section class="primero">
-
         <div class="contenedor">
             <div>
                 <div class="avatar-perfil">
                     <img th:src="@{'/images/'+${usuario.foto}}" th:alt="${usuario.foto}">
-
                 </div>
                 <div class="nombre">
                     <h2 th:text="${usuario.getNombreDeUsuario()}"></h2>
                 </div>
             </div>
             <div class="descripcion">
-                <h4>descripcion:</h4>
+                <h4>Descripción:</h4>
                 <p th:text="${usuario.getDescripcion()}"></p>
                 <div class="preferencias">
                     <span class="etiqueta" th:text="${usuario.getGeneroFav1()}"></span>
@@ -47,377 +32,42 @@
                 </div>
                 <button type="button" class="btn btn-primary configuracion" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
-                    editar
+                    Editar
                 </button>
             </div>
         </div>
 
-
         <div class="contenedor-plan">
             <div class="plan-titulo">
-                <h3>Mi plan</h3>
-                <p>Free</p>
+                <p>Mi Plan: </p><p th:text="${usuario.getPlan().getTipoPlan().getNombre()}"></p>
             </div>
             <div class="beneficios">
-                <ul>
-                    <li>ningun beneficio</li>
-                    <li>Cuenta normal</li>
-                    <li>sin descuentos</li>
+                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'free'}">
+                    <li th:utext="${free}"></li>
+                </ul>
+                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'basic'}">
+                    <li th:utext="${basic}"></li>
+                </ul>
+                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'standard'}">
+                    <li th:utext="${estandar}"></li>
+                </ul>
+                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'premium'}">
+                    <li th:utext="${premium}"></li>
                 </ul>
             </div>
             <div class="plan">
-                <button><a href="#">Mejorar plan</a></button>
+                <button><a th:href="@{/planes}">Mejorar Plan</a></button>
             </div>
         </div>
-
     </section>
 
-
-    <div>
-
-        <ul class="nav nav-tabs listadesordenada">
-            <li class="nav-item">
-                <a class="nav-link active  " href="#" onclick="mostrarContenido('misLibros')">Mis Libros</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#" onclick="mostrarContenido('amigos')">Mis Amigos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#" onclick="mostrarContenido('favoritos')">Libros Favoritos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#" onclick="mostrarContenido('deseados')">Libros Deseados</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " href="#" onclick="mostrarContenido('facturas')">Historial de Compras</a>
-            </li>
-        </ul>
-
-        <section class="tablas lightblue" id="misLibros">
-            <div th:if="${librosUsuario}" class="librosFav">
-                <div th:each="libro : ${librosUsuario}" class="card" style="width: 18rem;">
-                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title" th:text="${libro.titulo}"></h5>
-                        <div class="d-flex justify-content-around p-2">
-                            <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
-                                <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
-                                <a>
-                                    <button class="btn btn-primary" type="submit">Detalles</button>
-                                </a>
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="tablas lightblue" id="amigos" style="display:none;">
-
-            <div th:each="usuario : ${amigosUsuario}" class="contenedor">
-                <div>
-                    <div class="avatar-perfil">
-                        <img th:src="@{'/images/' + ${usuario.foto}}" th:alt="${usuario.foto}">
-                    </div>
-                    <div class="nombre">
-                        <h2 th:text="${usuario.nombreDeUsuario}"></h2>
-                    </div>
-                </div>
-                <div class="descripcion">
-                    <h4>Descripción:</h4>
-                    <p th:text="${usuario.descripcion}"></p>
-                <div th:if="${planUsuario==true}">
-                    <form th:action="@{/traerDatosAmigoAIntercambiar}" method="post">
-                        <input type="hidden" name="usuarioAmigo" th:value="${usuario.id}">
-                        <button  type="submit" class="btn btn-primary favbutton" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal3">
-                            <span class="material-symbols-outlined">sync_alt</span>
-                        </button>
-                    </form>
-                </div>
-                    <div class="preferencias">
-                        <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
-                        <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="tablas lightblue" id="favoritos" style="display:none;">
-            <button type="button" class="btn btn-primary favbutton" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal1">
-                Agregar Libro
-            </button>
-            <div th:if="${usuario.librosFavoritos}" class="librosFav">
-                <div th:each="libro : ${usuario.librosFavoritos}" class="card" style="width: 18rem;">
-                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title" th:text="${libro.titulo}"></h5>
-                        <div class="d-flex justify-content-around p-2">
-                            <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
-                                <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
-                                <a>
-                                    <button class="btn btn-primary" type="submit">Detalles</button>
-                                </a>
-                            </form>
-                            <form accept-charset="UTF-8" th:action="@{/perfil/eliminarLibroFavorito}" method="post">
-                                <input type="hidden" name="titulo" th:value="${libro.titulo}">
-                                <button class="btn btn-danger" type="submit">Eliminar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="tablas lightblue" id="deseados" style="display:none;">
-            <button type="button" class="btn btn-primary favbutton" data-bs-toggle="modal"
-                    data-bs-target="#exampleModal2">
-                Agregar Libro
-            </button>
-            <div th:if="${usuario.librosDeseados}" class="librosFav">
-                <div th:each="libro : ${usuario.librosDeseados}" class="card" style="width: 18rem;">
-                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
-                    <div class="card-body detalle-tarjetas">
-                        <h5 class="card-title" th:text="${libro.titulo}"></h5>
-                        <div class="d-flex justify-content-around p-2">
-                            <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
-                                <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
-                                <a>
-                                    <button class="btn btn-primary" type="submit">Detalles</button>
-                                </a>
-                            </form>
-                            <form accept-charset="UTF-8" th:action="@{/perfil/eliminarLibroDeseado}" method="post">
-                                <input type="hidden" name="titulo" th:value="${libro.titulo}">
-                                <button class="btn btn-danger" type="submit">Eliminar</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="tablas lightblue" id="facturas">
-            <h1>Facturas</h1>
-            <div th:if="${historialDeCompras != null}">
-                <table class="facturas-table">
-                    <thead>
-                    <tr>
-                        <th>Fecha de Compra</th>
-                        <th>Precio Total</th>
-                        <th>Cantidad de Libros</th>
-                        <th>Nombre de los Libros</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="compra : ${historialDeCompras}">
-                        <td th:text="${compra.fechaDeCompra}">Fecha</td>
-                        <td th:text="${#numbers.formatDecimal(compra.getPrecioTotal(), 2, 2)}">Precio Total</td>
-                        <td th:text="${compra.productosCompra.size()}">Cantidad de Libros</td>
-                        <td>
-                            <ul class="libros-list">
-                                <li th:each="producto : ${compra.productosCompra}"
-                                    th:text="${producto.libro.getTitulo()}">Nombre del Libro
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-
-    </div>
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Editar perfil</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form accept-charset="utf-8" th:action="@{/perfil/editarPerfilCompleto}" method="post"
-                          th:object="${usuario}" enctype="multipart/form-data">
-                        <input type="hidden" th:field="*{id}"/>
-
-                        <div class="mb-3">
-                            <label for="formFile" class="form-label">Selecciona tu foto de perfil</label>
-                            <input class="form-control" type="file" id="formFile" name="file">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="nombre">nombre</span>
-                            <input th:field="*{nombreDeUsuario}" type="text" class="form-control"
-                                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                        </div>
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="descripcion">descripcion</span>
-                            <input th:field="*{descripcion}" type="text" class="form-control"
-                                   aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                        </div>
-
-
-                        <select th:field="*{generoFav1}" class="form-select" aria-label="Default select example"
-                                name="generos" id="generos">
-                            <option value="1" disabled selected>seleccione un genero</option>
-                            <option value="horror">horror</option>
-                            <option value="accion">accion</option>
-                            <option value="ficcion">ficcion</option>
-                            <option value="deporte">deporte</option>
-                        </select>
-                        <br>
-                        <select th:field="*{generoFav2}" class="form-select" aria-label="Default select example"
-                                name="generos2" id="generos2">
-                            <option value="1" disabled selected>seleccione un genero</option>
-                            <option value="horror">horror</option>
-                            <option value="accion">accion</option>
-                            <option value="ficcion">ficcion</option>
-                            <option value="deporte">deporte</option>
-                        </select>
-
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal LIBRO-->
-
-
-    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel1">Agregar libro a favoritos</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form accept-charset="utf-8" th:action="@{/perfil/agregarLibroFavorito}" method="post">
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="nombreLibro">titulo</span>
-                            <input type="text" name="titulo" class="form-control" aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-default">
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel2">Agregar libro a deseados</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form accept-charset="utf-8" th:action="@{/perfil/agregarLibroDeseado}" method="post">
-
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="nombreLibro2">titulo</span>
-                            <input type="text" name="titulo" class="form-control" aria-label="Sizing example input"
-                                   aria-describedby="inputGroup-sizing-default">
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" th:classappend="${modal == 'true'} ? 'show' : ''" th:attr="style=${modal == 'true'} ? 'display:block;' : ''">
-        <div class="modal-dialog" th:if="${modal} == 'true'">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel3">Intercambio de libros</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form accept-charset="utf-8" th:action="@{/intercambiar-libro}" method="post">
-                        <ul class="nav nav-tabs listadesordenada">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#" onclick="mostrarLibrosComprados('librosComprados')">Mis Libros</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" onclick="mostrarLibrosComprados('susLibrosComprados')">Sus libros</a>
-                            </li>
-                        </ul>
-                        <section class="tablas lightblue" id="librosComprados">
-                            <div th:if="${usuario.librosComprados}">
-                                <div th:each="libro : ${usuario.librosComprados}" class="d-flex align-items-center mb-1">
-                                    <input class="form-check-input" type="hidden" name="flexRadioDefault" th:name="usuario" th:value="${usuario.id}">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" th:name="libroADar" th:value="${libro.id}">
-                                    <img th:src="${libro.ruta}" th:alt="${libro.titulo}" width="143px" height="180px" style="margin: 0 2rem">
-                                    <div>
-                                        <h5 class="card-title" th:text="${libro.titulo}"></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="tablas lightblue" id="susLibrosComprados">
-                            <div th:if="${amigo != null && !amigo.librosComprados.isEmpty()}">
-                                <div th:each="libroAmigo : ${amigo.librosComprados}" class="d-flex align-items-center mb-1">
-                                    <input class="form-check-input" type="hidden" name="flexRadioDefault1" th:name="usuarioAmigo" th:value="${amigo.id}">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault1" th:name="libroPedido" th:value="${libroAmigo.id}">
-                                    <img th:src="${libroAmigo.ruta}" th:alt="${libroAmigo.titulo}" width="143px" height="180px" style="margin: 0 2rem">
-                                    <div>
-                                        <h5 class="card-title" th:text="${libroAmigo.titulo}"></h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Enviar solicitud de intercambio</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            if (document.querySelector("#exampleModal3").classList.contains('show')) {
-                let modal = new bootstrap.Modal(document.getElementById('exampleModal3'));
-                modal.show();
-            }
-        });
-    </script>
+    <!-- Resto de tu código -->
 </main>
-
-<footer th:replace="header_footer :: footer">
-
-</footer>
-<!-- Boostrap core js -->
+<footer th:replace="header_footer :: footer"></footer>
 <script th:src="@{/js/perfil-tabla.js}"></script>
 <script th:src="@{/js/intercambioLibros.js}"></script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 <script type="text/javascript" th:src="@{/js/carrito.js}"></script>
 <script th:src="@{/js/menuUsuario.js}"></script>
-
-
 </body>
 </html>

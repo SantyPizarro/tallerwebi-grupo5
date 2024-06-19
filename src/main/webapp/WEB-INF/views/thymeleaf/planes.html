@@ -16,6 +16,10 @@
 </header>
 
 <main>
+    <div th:if="${error != null}" class="alert alert-danger" role="alert">
+        <!--/*@thymesVar id="error" type=""*/-->
+        <span th:text="${error}"></span>
+    </div>
     <section class="pricing-plans">
         <div class="pricing-card basic">
             <div class="heading">

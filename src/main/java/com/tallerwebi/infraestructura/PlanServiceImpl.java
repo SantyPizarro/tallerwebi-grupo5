@@ -1,6 +1,7 @@
 package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.*;
+import com.tallerwebi.dominio.excepcion.PlanYaAdquiridoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,29 +36,41 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public void comprarPlanBasico(Usuario usuario) {
-        usuario.setPlan(planRepository.buscarPlan(2L));
-        usuario.getPlan().setFechaCompra(LocalDateTime.now());
-        usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
-        repositorioUsuario.modificar(usuario);
-        System.out.println(usuario.getPlan().getFechaCompra());
-        System.out.println(usuario.getPlan().getFechaVencimiento());
+    public void comprarPlanBasico(Usuario usuario) throws PlanYaAdquiridoException {
+        if (verificarPlan(usuario)) {
+            usuario.setPlan(planRepository.buscarPlan(2L));
+            usuario.getPlan().setFechaCompra(LocalDateTime.now());
+            usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
+            repositorioUsuario.modificar(usuario);
+            System.out.println(usuario.getPlan().getFechaCompra());
+            System.out.println(usuario.getPlan().getFechaVencimiento());
+        } else {
+            throw new PlanYaAdquiridoException();
+        }
     }
 
     @Override
-    public void comprarPlanEstandar(Usuario usuario) {
-        usuario.setPlan(planRepository.buscarPlan(3L));
-        usuario.getPlan().setFechaCompra(LocalDateTime.now());
-        usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
-        repositorioUsuario.modificar(usuario);
+    public void comprarPlanEstandar(Usuario usuario) throws PlanYaAdquiridoException {
+        if (verificarPlan(usuario)) {
+            usuario.setPlan(planRepository.buscarPlan(3L));
+            usuario.getPlan().setFechaCompra(LocalDateTime.now());
+            usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
+            repositorioUsuario.modificar(usuario);
+        } else {
+            throw new PlanYaAdquiridoException();
+        }
     }
 
     @Override
-    public void comprarPlanPremium(Usuario usuario) {
-        usuario.setPlan(planRepository.buscarPlan(4L));
-        usuario.getPlan().setFechaCompra(LocalDateTime.now());
-        usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
-        repositorioUsuario.modificar(usuario);
+    public void comprarPlanPremium(Usuario usuario) throws PlanYaAdquiridoException {
+        if (verificarPlan(usuario)) {
+            usuario.setPlan(planRepository.buscarPlan(4L));
+            usuario.getPlan().setFechaCompra(LocalDateTime.now());
+            usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
+            repositorioUsuario.modificar(usuario);
+        } else {
+            throw new PlanYaAdquiridoException();
+        }
     }
 
     @Override
@@ -98,6 +111,11 @@ public class PlanServiceImpl implements PlanService {
         }
     }
 
+    private Boolean verificarPlan(Usuario usuario) {
+        return usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("free");
+    }
+
+
     /*
     @Override
     public void actualizarPlanUsuario(Usuario usuario, Long planId) {
@@ -110,7 +128,6 @@ public class PlanServiceImpl implements PlanService {
         repositorioUsuario.modificar(usuario);
 
     }*/
-
     /*
     @Override
     public void aplicarBeneficio(Usuario usuario) {

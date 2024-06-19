@@ -26,13 +26,20 @@ public class ControladorPlanes {
     }
 
     @GetMapping("/planes")
-    public ModelAndView planes() {
-        ModelMap modelo = new ModelMap();
-        modelo.addAttribute("basic", planService.descripcionPlanes(2L));
-        modelo.addAttribute("estandar", planService.descripcionPlanes(3L));
-        modelo.addAttribute("premium", planService.descripcionPlanes(4L));
+    public ModelAndView planes(HttpServletRequest request) {
 
-        return new ModelAndView("planes", modelo);
+        HttpSession session = request.getSession();
+        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
+
+        if (usuario != null) {
+            ModelMap modelo = new ModelMap();
+            modelo.addAttribute("basic", planService.descripcionPlanes(2L));
+            modelo.addAttribute("estandar", planService.descripcionPlanes(3L));
+            modelo.addAttribute("premium", planService.descripcionPlanes(4L));
+
+            return new ModelAndView("planes", modelo);
+        }
+        return new ModelAndView("redirect:/login");
     }
 
     @PostMapping("/comprarPlanBasico")

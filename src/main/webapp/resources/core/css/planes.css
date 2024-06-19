@@ -10,7 +10,6 @@ body {
     place-items: center;
     min-height: 100vh;
 }
-
 .pricing-plans {
     gap: 32px;
     display: flex;
@@ -48,10 +47,14 @@ body {
 
 .pricing-card:hover {
     border-color: var(--col);
-    background-color: #26262680;
+    background-color: #5c5959;
     box-shadow: 0 0 32px #171717;
     transform: translateY(-16px) scale(1.02);
     transition: all 0.5s ease;
+}
+
+.pricing-card:hover .features li {
+    color: var(--col);
 }
 
 .pricing-card > *:not(:last-child) {
@@ -125,3 +128,4 @@ body {
     color: var(--col);
     transition: all 0.3s ease;
 }
+

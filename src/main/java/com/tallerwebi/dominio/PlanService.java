@@ -16,6 +16,8 @@ public interface PlanService {
     void aplicarBeneficioPlanEstandar(Usuario usuario);
     void aplicarBeneficioPlanPremium(Usuario usuario);
 
+    String descripcionPlanes(Long id);
+
    /* void actualizarPlanUsuario(Usuario usuario,Long planId);
     void aplicarBeneficio(Usuario usuario);
 */

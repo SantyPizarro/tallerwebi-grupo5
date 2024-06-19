@@ -27,7 +27,12 @@ public class ControladorPlanes {
 
     @GetMapping("/planes")
     public ModelAndView planes() {
-        return new ModelAndView("planes");
+        ModelMap modelo = new ModelMap();
+        modelo.addAttribute("basic", planService.descripcionPlanes(2L));
+        modelo.addAttribute("estandar", planService.descripcionPlanes(3L));
+        modelo.addAttribute("premium", planService.descripcionPlanes(4L));
+
+        return new ModelAndView("planes", modelo);
     }
 
     @PostMapping("/comprarPlanBasico")

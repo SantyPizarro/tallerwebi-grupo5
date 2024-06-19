@@ -1,8 +1,7 @@
-INSERT INTO tipoplan (id,nombre) values (1,"free");
-INSERT INTO tipoplan (id,nombre) values (2,"basic");
-INSERT INTO tipoplan (id,nombre) values (3,"standard");
-INSERT INTO tipoplan (id,nombre) values (4,"premium");
-
+INSERT INTO tipoplan (id, nombre, descripcion) VALUES (1, 'free', '* Comprar libros ilimitados<br>* Agregar amigos');
+INSERT INTO tipoplan (id, nombre, descripcion) VALUES (2, 'basic', '* Comprar libros ilimitados<br>* Agregar amigos<br>* Código de descuento de regalo para tu compra<br>* Intercambiá libros con tus amigos');
+INSERT INTO tipoplan (id, nombre, descripcion) VALUES (3, 'standard', '* Comprar libros ilimitados<br>* Agregar amigos<br>* Código de descuento de regalo para tu compra<br>* Intercambiá libros con tus amigos<br>* 2 libros de regalo<br>* Cada dos libros comprados tenes un nuevo cupón de descuento');
+INSERT INTO tipoplan (id, nombre, descripcion) VALUES (4, 'premium', '* Comprar libros ilimitados<br>* Agregar amigos<br>* Código de descuento de regalo para tu compra<br>* Intercambiá libros con tus amigos<br>* 2 libros de regalo<br>* Cada dos libros comprados tenes un nuevo cupón de descuento<br>* Plan canje! entrega tu libro como forma de pago y llevate uno nuevo');
 INSERT INTO plan (id,tipo_plan_id) values (1,1);
 INSERT INTO plan (id,tipo_plan_id) values (2,2);
 INSERT INTO plan (id,tipo_plan_id) values (3,3);

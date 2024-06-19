@@ -18,16 +18,18 @@ public class PlanServiceImpl implements PlanService {
     private RepositorioUsuario repositorioUsuario;
     private RepositorioLibro repositorioLibro;
     private RepositorioCupon repositorioCupon;
+    private RepositorioTipoPlan repositorioTipoPlan;
 
     private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final SecureRandom RANDOM = new SecureRandom();
 
     @Autowired
-    public PlanServiceImpl(PlanRepository planRepository, RepositorioUsuario repositorioUsuario, RepositorioLibro repositorioLibro, RepositorioCupon repositorioCupon) {
+    public PlanServiceImpl(PlanRepository planRepository, RepositorioUsuario repositorioUsuario, RepositorioLibro repositorioLibro, RepositorioCupon repositorioCupon, RepositorioTipoPlan repositorioTipoPlan) {
         this.planRepository = planRepository;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioLibro = repositorioLibro;
         this.repositorioCupon = repositorioCupon;
+        this.repositorioTipoPlan = repositorioTipoPlan;
     }
 
     @Override
@@ -110,6 +112,12 @@ public class PlanServiceImpl implements PlanService {
             repositorioUsuario.modificar(usuario);
         }
     }
+
+    @Override
+    public String descripcionPlanes(Long id) {
+        return repositorioTipoPlan.obtenerDescripcionPlanes(id);
+    }
+
 
     private Boolean verificarPlan(Usuario usuario) {
         return usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("free");

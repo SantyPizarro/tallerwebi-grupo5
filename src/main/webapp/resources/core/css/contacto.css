@@ -47,6 +47,16 @@ footer{
     background-color: #000000;
 }
 
+.contenedor-atencion{
+    width: 100%;
+    padding: 10px;
+}
+
+.iframe{
+    width: 100%;
+    margin: 10px;
+}
+
 @media (max-width: 768px) {
     .contenido-container {
         flex-direction: column;

@@ -20,4 +20,10 @@ public interface CarritoService {
     void setTotal(Carrito carrito, Double total);
 
     Double obtenerTotal(Carrito carrito);
+
+    Cupon buscarCuponPorId(Long id);
+
+    void eliminarCupon(Cupon cupon);
+
+    void calcularTotalConCupon(Carrito carrito, Cupon cupon);
 }

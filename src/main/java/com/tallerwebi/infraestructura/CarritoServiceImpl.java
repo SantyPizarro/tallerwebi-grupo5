@@ -1,9 +1,6 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.Carrito;
-import com.tallerwebi.dominio.CarritoService;
-import com.tallerwebi.dominio.Libro;
-import com.tallerwebi.dominio.RepositorioLibro;
+import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.LibroNoAgregado;
 import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +16,15 @@ import java.util.Set;
 public class CarritoServiceImpl implements CarritoService {
 
     private RepositorioLibro repositorioLibro;
+    private RepositorioCupon repositorioCupon;
 
 
 
 
     @Autowired
-    public CarritoServiceImpl(RepositorioLibro repositorioLibro){
+    public CarritoServiceImpl(RepositorioLibro repositorioLibro, RepositorioCupon repositorioCupon){
         this.repositorioLibro = repositorioLibro;
+        this.repositorioCupon = repositorioCupon;
 
     }
 
@@ -71,6 +70,23 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     public Double obtenerTotal(Carrito carrito) {
         return carrito.getTotal();
+    }
+
+    @Override
+    public Cupon buscarCuponPorId(Long id) {
+        return repositorioCupon.buscarCuponPorId(id);
+    }
+
+    @Override
+    public void eliminarCupon(Cupon cupon) {
+        repositorioCupon.eliminarCupon(cupon);
+    }
+
+    @Override
+    public void calcularTotalConCupon(Carrito carrito, Cupon cupon) {
+        Double subtotal = obtenerSubtotal(carrito);
+        Double descuento = (subtotal * cupon.getDescuento())/100;
+        setTotal(carrito, subtotal - descuento);
     }
 
     private Libro buscarLibroPorId(Long id) {

@@ -49,6 +49,9 @@ public class Carrito {
     public void eliminarLibro(Libro libro, Carrito carrito) {
         carrito.getLibros().remove(libro);
         carrito.setTotal(carrito.getTotal() - libro.getPrecio());
+        if(carrito.getTotal() < 0.0){
+            setTotal(0.0);
+        }
     }
 
     public Double getTotal() {

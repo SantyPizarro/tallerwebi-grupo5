@@ -43,16 +43,16 @@
                 <p style="margin-left: 0.4rem;" th:text="${usuario.getPlan().getTipoPlan().getNombre()}"></p>
             </div>
             <div class="beneficios">
-                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'free'}">
+                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'free'}" class="ps-3 mb-0">
                     <li th:utext="${free}" style="list-style: none;"></li>
                 </ul>
-                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'basic'}">
+                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'basic'}" class="ps-3 mb-0">
                     <li th:utext="${basic}" style="list-style: none;"></li>
                 </ul>
-                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'standard'}">
+                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'standard'}" class="ps-3 mb-0">
                     <li th:utext="${estandar}" style="list-style: none;"></li>
                 </ul>
-                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'premium'}">
+                <ul th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'premium'}" class="ps-3 mb-0">
                     <li th:utext="${premium}" style="list-style: none;"></li>
                 </ul>
             </div>

@@ -39,7 +39,7 @@ public class CompraLibroServiceImpl implements CompraLibroService {
             repositorioUsuario.modificar(usuario);
         }
 
-        if (usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("standard")) {
+        if (usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("standard") || usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("premium")) {
             LocalDateTime fechaCompraPlan = usuario.getPlan().getFechaCompra();
             LocalDateTime fechaVencimientoPlan = usuario.getPlan().getFechaVencimiento();
             LocalDateTime fechaDeCompra = compra.getFechaDeCompra();

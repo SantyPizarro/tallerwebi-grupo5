@@ -31,6 +31,7 @@ body {
     background-color: #26262620;
     box-shadow: 0 0 32px transparent;
     text-align: center;
+    width: 30%;
 }
 
 .pricing-card.basic {

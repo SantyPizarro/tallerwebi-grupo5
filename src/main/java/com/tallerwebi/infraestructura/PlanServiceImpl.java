@@ -44,8 +44,6 @@ public class PlanServiceImpl implements PlanService {
             usuario.getPlan().setFechaCompra(LocalDateTime.now());
             usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
             repositorioUsuario.modificar(usuario);
-            System.out.println(usuario.getPlan().getFechaCompra());
-            System.out.println(usuario.getPlan().getFechaVencimiento());
         } else {
             throw new PlanYaAdquiridoException();
         }

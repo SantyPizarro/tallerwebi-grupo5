@@ -109,6 +109,11 @@ public class PlanServiceImpl implements PlanService {
     public void aplicarBeneficioPlanPremium(Usuario usuario) {
         if (usuario != null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("premium")) {
             beneficioCuponPlan(usuario, 30);
+            usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(1L));
+            usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(2L));
+            usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(3L));
+            usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(4L));
+            usuario.getLibrosPlan().add(repositorioLibro.buscarLibroPorId(5L));
             repositorioUsuario.modificar(usuario);
         }
     }

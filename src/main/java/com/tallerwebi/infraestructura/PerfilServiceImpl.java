@@ -148,4 +148,9 @@ public class PerfilServiceImpl implements PerfilService {
     public Boolean verificarPlan(Usuario usuario) {
         return planRepository.verificarPlanDeUsuario(usuario)!=null;
     }
+
+    @Override
+    public Set<Libro> buscarLibrosDePlan(Usuario usuario) {
+        return usuario.getLibrosPlan();
+    }
 }

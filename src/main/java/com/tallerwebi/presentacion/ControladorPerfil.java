@@ -38,6 +38,7 @@ public class ControladorPerfil {
             ModelMap model = new ModelMap();
             model.put("usuario", usuario);
             model.put("librosUsuario", perfilService.buscarMisLibros(usuario));
+            model.put("libroPlan", perfilService.buscarLibrosDePlan(usuario));
             model.put("historialDeCompras", perfilService.historialDeCompras(usuario));
             model.put("amigosUsuario", perfilService.buscarAmigos(usuario));
             model.put("planUsuario",perfilService.verificarPlan(usuario));

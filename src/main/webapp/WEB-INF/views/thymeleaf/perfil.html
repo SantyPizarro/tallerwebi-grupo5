@@ -85,12 +85,30 @@
         <section class="tablas lightblue" id="misLibros">
             <div th:if="${librosUsuario}" class="librosFav">
                 <div th:each="libro : ${librosUsuario}" class="card" style="width: 18rem;">
-                    <img th:src="${libro.ruta}" class="card-img-top" alt="${libro.titulo}" width="286px" height="410px">
+                    <img th:src="${libro.ruta}" class="card-img-top" th:alt="${libro.titulo}" width="286px" height="410px">
                     <div class="card-body detalle-tarjetas">
                         <h5 class="card-title" th:text="${libro.titulo}"></h5>
                         <div class="d-flex justify-content-around p-2">
                             <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
                                 <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
+                                <a>
+                                    <button class="btn btn-primary" type="submit">Detalles</button>
+                                </a>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="librosFav">
+                <div th:each="libroDePlan : ${libroPlan}" class="card" style="width: 18rem;">
+                    <img th:src="${libroDePlan.ruta}" class="card-img-top" th:alt="${libroDePlan.titulo}" width="286px" height="410px">
+                    <div class="card-body detalle-tarjetas">
+                        <h5 class="card-title" th:text="${libroDePlan.titulo}"></h5>
+                        <div class="d-flex justify-content-around p-2">
+                            <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
+                                <input type="hidden" th:name="titulo" th:value="${libroDePlan.titulo}">
                                 <a>
                                     <button class="btn btn-primary" type="submit">Detalles</button>
                                 </a>

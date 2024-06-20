@@ -64,8 +64,6 @@ public class ControladorCarrito {
             cantidadDelibros = 0;
         }
 
-
-
         try {
             carritoService.agregarLibrosAlCarrito(id, carrito);
             cantidadDelibros = (cantidadDelibros == null) ? 1 : cantidadDelibros + 1;
@@ -108,7 +106,7 @@ public class ControladorCarrito {
             if(precioLibroComprados > precioLibro){
                carritoService.setTotal(carrito, (precioLibroComprados - precioLibro));
            }else{
-                carritoService.setTotal(carrito, 0.0);
+                carritoService.setTotal(carrito, 0.01);
            }
         }
 

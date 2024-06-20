@@ -33,14 +33,12 @@ public class ControladorComprar {
         this.repositorioUsuario = repositorioUsuario;
     }
     @PostMapping("/comprar")
-    public ModelAndView comprar(HttpServletRequest request) {
+    public ModelAndView comprar(HttpServletRequest request,@RequestParam("precioFinal") Double precioFinal ) {
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
 
-        Double totalCarrito = carritoService.obtenerTotal(carrito);
-
-        Preference preference = mercadoPagoService.createPreference(usuario, totalCarrito);
+        Preference preference = mercadoPagoService.createPreference(usuario, precioFinal);
 
         if (preference != null){
             return new ModelAndView("redirect:" + preference.getSandboxInitPoint());

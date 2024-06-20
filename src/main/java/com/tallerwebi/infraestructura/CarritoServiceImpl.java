@@ -49,12 +49,12 @@ public class CarritoServiceImpl implements CarritoService {
 
     @Override
     public Double obtenerSubtotal(Carrito carrito) {
-        Double subtotal = 0.0;
+        Double subtotal = carrito.getSubtotal();
         Set<Libro> libros = obtenerLibrosComprados(carrito);
         for (Libro precioLibro : libros) {
             subtotal += precioLibro.getPrecio();
         }
-        setTotal(carrito, subtotal);
+
         return subtotal;
     }
 

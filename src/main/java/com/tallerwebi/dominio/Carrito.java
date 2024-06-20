@@ -10,14 +10,18 @@ public class Carrito {
     private Long id;
     private Set<Libro> libros;
     private Usuario usuario;
+    private Double subtotal;
     private Double total;
 
     public Carrito() {
         this.libros = new HashSet<>();
+        this.subtotal = 0.0;
+        this.total = subtotal;
     }
 
     public void agregarLibroAlCarrito(Libro libro) {
         libros.add(libro);
+        total += libro.getPrecio();
     }
 
     public Long getId() {
@@ -38,6 +42,8 @@ public class Carrito {
 
     public void limpiar() {
         this.libros.clear();
+        this.subtotal = 0.0;
+        this.total = 0.0;
     }
 
     public void eliminarLibro(Libro libro, Carrito carrito) {
@@ -58,5 +64,13 @@ public class Carrito {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Double getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal = subtotal;
     }
 }

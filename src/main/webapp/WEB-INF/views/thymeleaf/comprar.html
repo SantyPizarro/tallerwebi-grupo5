@@ -46,6 +46,11 @@
                         <input type="text" id="couponInput" name="codigo" class="input-field form-control">
                         <label for="couponInput" class="input-label">Cupón de Descuento</label>
                     </div>
+
+                    <div th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'premium'}">
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModal1">Agregar libro en forma de pago</button>
+                    </div>
+
                     <p>Total: $<span th:text="${total}">0.00</span></p>
 
                     <form th:action="@{/comprar}" method="post">
@@ -59,6 +64,42 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel3">Elige uno de tus libros para dar en forma de pago</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form accept-charset="utf-8" th:action="@{/darLibroEnFormaDePago}" method="post">
+
+                        <section class="tablas lightblue" id="librosComprados">
+                            <div th:if="${usuario.librosComprados}">
+                                <div th:each="libro : ${usuario.librosComprados}" class="d-flex align-items-center mb-1">
+                                    <input class="form-check-input" type="hidden" name="flexRadioDefault" th:name="usuario" th:value="${usuario.id}">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" th:name="libroADar" th:value="${libro.id}">
+                                    <img th:src="${libro.ruta}" th:alt="${libro.titulo}" width="143px" height="180px" style="margin: 0 2rem">
+                                    <div>
+                                        <h5 class="card-title" th:text="${libro.titulo}"></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Enviar solicitud de intercambio</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </main>
 
 <footer th:replace="header_footer :: footer"></footer>

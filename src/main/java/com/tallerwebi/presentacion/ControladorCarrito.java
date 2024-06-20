@@ -1,9 +1,6 @@
 package com.tallerwebi.presentacion;
 
-import com.tallerwebi.dominio.Carrito;
-import com.tallerwebi.dominio.CarritoService;
-import com.tallerwebi.dominio.Libro;
-import com.tallerwebi.dominio.ServicioLibro;
+import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.LibroNoAgregado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +34,7 @@ public class ControladorCarrito {
     public ModelAndView mostrarLibrosComprados(HttpServletRequest request){
         HttpSession sesion = request.getSession();
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
+        Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
         Integer cantidadDelibros = (Integer) sesion.getAttribute("cantidadLibros");
 
         if(carrito != null){
@@ -45,7 +43,7 @@ public class ControladorCarrito {
             ModelMap modelo = new ModelMap();
             modelo.addAttribute("librosComprados", librosComprados);
             modelo.addAttribute("subtotal", carritoService.obtenerSubtotal(carrito));
-
+            modelo.addAttribute("usuario", usuario);
             return new ModelAndView ("comprar", modelo);
         }
 

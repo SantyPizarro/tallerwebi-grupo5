@@ -18,13 +18,15 @@ import java.util.List;
 @Controller
 public class ControladorComprar {
 
+    private final CarritoService carritoService;
     private final CompraLibroService compraLibroService;
     private final MercadoPagoService mercadoPagoService;
 
     @Autowired
-    public ControladorComprar (CompraLibroService compraLibroService,MercadoPagoService mercadoPagoService) {
+    public ControladorComprar (CompraLibroService compraLibroService,MercadoPagoService mercadoPagoService, CarritoService carritoService) {
         this.mercadoPagoService = mercadoPagoService;
         this.compraLibroService = compraLibroService;
+        this.carritoService = carritoService;
     }
     @PostMapping("/comprar")
     public ModelAndView comprar(HttpServletRequest request) {
@@ -32,7 +34,9 @@ public class ControladorComprar {
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
 
-        Preference preference = mercadoPagoService.createPreference(usuario, carrito);
+        Double totalCarrito = carritoService.obtenerSubtotal(carrito);
+
+        Preference preference = mercadoPagoService.createPreference(usuario, totalCarrito);
 
         if (preference != null){
             return new ModelAndView("redirect:" + preference.getSandboxInitPoint());

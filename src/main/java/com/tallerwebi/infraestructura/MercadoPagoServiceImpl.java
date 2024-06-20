@@ -25,23 +25,20 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
         MercadoPagoConfig.setAccessToken("APP_USR-7544106560468957-060313-b384a8aa74089431a6bfe64a7417d696-1811981688");
     }
 
-    public Preference createPreference(Usuario usuario, Carrito carrito) {
-        Set<Libro> compraLibros = carrito.getLibros();
+    public Preference createPreference(Usuario usuario, Double total) {
+
         List<PreferenceItemRequest> items = new ArrayList<>();
 
-        for (Libro libro : compraLibros) {
             PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
-                    .id(libro.getId().toString())
-                    .title(libro.getTitulo())
+                    .id("Carrito total")
+                    .title("Compra de Libros")
                     .currencyId("ARS")
-                    .pictureUrl(libro.getRuta())
-                    .description(libro.getDescripcion())
                     .categoryId("books")
                     .quantity(1)
-                    .unitPrice(BigDecimal.valueOf(libro.getPrecio()))
+                    .unitPrice(BigDecimal.valueOf(total))
                     .build();
             items.add(itemRequest);
-        }
+
 
         PreferencePayerRequest payer = PreferencePayerRequest.builder()
                 .name(usuario.getNombre())
@@ -74,7 +71,6 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
         try {
             PreferenceClient client = new PreferenceClient();
             Preference preference = client.create(preferenceRequest);
-            System.out.println("Preference created with ID: " + preference.getId());
             return preference;
         } catch (MPException | MPApiException e) {
             e.printStackTrace();

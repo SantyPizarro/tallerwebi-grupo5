@@ -93,4 +93,25 @@ public class ControladorCarrito {
 
         return new ModelAndView("redirect:/mostrar-carrito");
     }
+
+    @PostMapping("/darLibroEnFormaDePago")
+    public ModelAndView darLibroEnFormaDePago(@RequestParam("libroADar") Long id, HttpServletRequest request) {
+        HttpSession sesion = request.getSession();
+        Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
+        Libro libroAeliminar = servicioLibro.buscarLibroPorId(id);
+        sesion.setAttribute("libroAeliminar", libroAeliminar);
+
+        if(carrito != null){
+            Double precioLibro = libroAeliminar.getPrecio();
+            Double precioLibroComprados = carritoService.obtenerSubtotal(carrito);
+            if(precioLibroComprados > precioLibro){
+               carritoService.setTotal(carrito, (precioLibroComprados - precioLibro));
+           }else{
+                carritoService.setTotal(carrito, 0.0);
+           }
+        }
+
+        return new ModelAndView("redirect:/mostrar-carrito");
+    }
+
 }

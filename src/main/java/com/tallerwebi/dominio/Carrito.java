@@ -10,6 +10,7 @@ public class Carrito {
     private Long id;
     private Set<Libro> libros;
     private Usuario usuario;
+    private Double total;
 
     public Carrito() {
         this.libros = new HashSet<>();
@@ -41,5 +42,21 @@ public class Carrito {
 
     public void eliminarLibro(Libro libro, Carrito carrito) {
         carrito.getLibros().remove(libro);
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

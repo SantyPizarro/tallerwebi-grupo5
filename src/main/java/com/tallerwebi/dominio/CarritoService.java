@@ -16,4 +16,8 @@ public interface CarritoService {
     Double obtenerSubtotal(Carrito carrito);
 
     void eliminarLibroDeCarrito(Libro libro, Carrito carrito);
+
+    void setTotal(Carrito carrito, Double total);
+
+    Double obtenerTotal(Carrito carrito);
 }

@@ -54,13 +54,23 @@ public class CarritoServiceImpl implements CarritoService {
         for (Libro precioLibro : libros) {
             subtotal += precioLibro.getPrecio();
         }
-
+        setTotal(carrito, subtotal);
         return subtotal;
     }
 
     @Override
     public void eliminarLibroDeCarrito(Libro libro, Carrito carrito) {
         carrito.eliminarLibro(libro, carrito);
+    }
+
+    @Override
+    public void setTotal(Carrito carrito, Double total) {
+        carrito.setTotal(total);
+    }
+
+    @Override
+    public Double obtenerTotal(Carrito carrito) {
+        return carrito.getTotal();
     }
 
     private Libro buscarLibroPorId(Long id) {

@@ -78,7 +78,7 @@ public class PlanServiceImpl implements PlanService {
         Cupon a1 = new Cupon(porcentaje);
         a1.setCodigo(generateRandomString());
         repositorioCupon.guardarCupon(a1);
-        CodigoDescuento codigos = new CodigoDescuento();
+        CodigoDescuento codigos = repositorioCupon.buscarCodigoDescuento(1L);
         codigos.getCuponesDescuento().add(a1);
         repositorioCupon.modificarCodigoDescuento(codigos);
         usuario.getCuponesDeDescuento().add(a1);

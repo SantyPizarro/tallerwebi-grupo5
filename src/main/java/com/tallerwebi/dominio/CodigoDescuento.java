@@ -1,10 +1,7 @@
 package com.tallerwebi.dominio;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 public class CodigoDescuento {
@@ -14,7 +11,7 @@ public class CodigoDescuento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     Set<Cupon> cuponesDescuento = new HashSet<>();
 
 
@@ -33,5 +30,18 @@ public class CodigoDescuento {
 
     public void setCuponesDescuento(Set<Cupon> cuponesDescuento) {
         this.cuponesDescuento = cuponesDescuento;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CodigoDescuento that = (CodigoDescuento) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

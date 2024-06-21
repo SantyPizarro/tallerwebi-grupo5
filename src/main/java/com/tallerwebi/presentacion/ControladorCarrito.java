@@ -42,9 +42,7 @@ public class ControladorCarrito {
             ModelMap modelo = new ModelMap();
             modelo.addAttribute("librosComprados", librosComprados);
             modelo.addAttribute("subtotal", carritoService.obtenerSubtotal(carrito));
-            System.out.println(carrito.getSubtotal());
             modelo.addAttribute("total", carritoService.obtenerTotal(carrito));
-            System.out.println(carrito.getTotal());
 
             modelo.addAttribute("usuario", usuario);
             return new ModelAndView("comprar", modelo);

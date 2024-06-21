@@ -46,10 +46,10 @@ public class ControladorLogin {
             if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && usuarioBuscado.getEmailVerificado()) {
                 HttpSession sesion = request.getSession();
                 Carrito carrito = new Carrito();
+                CodigoDescuento codigoDescuento = new CodigoDescuento();
                 sesion.setAttribute("CARRITO", carrito);
                 sesion.setAttribute("USUARIO", usuarioBuscado);
                 sesion.setAttribute("nombreUsuario", usuarioBuscado.getNombreDeUsuario());
-
                 return new ModelAndView("redirect:/home");
             } else {
                 if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && usuarioBuscado.getEmailVerificado() == false) {

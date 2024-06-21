@@ -1,9 +1,6 @@
 package com.tallerwebi.infraestructura;
 
-import com.tallerwebi.dominio.CodigoDescuento;
-import com.tallerwebi.dominio.Cupon;
-import com.tallerwebi.dominio.Genero;
-import com.tallerwebi.dominio.RepositorioCupon;
+import com.tallerwebi.dominio.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -27,7 +24,17 @@ public class RepostorioCuponImpl implements RepositorioCupon {
 
     @Override
     public void modificarCodigoDescuento(CodigoDescuento codigoDescuento) {
-        sessionFactory.getCurrentSession().saveOrUpdate(codigoDescuento);
+        sessionFactory.getCurrentSession().update(codigoDescuento);
+    }
+
+    @Override
+    public void guardarCodigoDescuento(CodigoDescuento codigoDescuento) {
+        sessionFactory.getCurrentSession().save(codigoDescuento);
+    }
+
+    @Override
+    public CodigoDescuento buscarCodigoDescuento(Long id) {
+        return sessionFactory.getCurrentSession().get(CodigoDescuento.class, id);
     }
 
     @Override
@@ -41,15 +48,7 @@ public class RepostorioCuponImpl implements RepositorioCupon {
 
     @Override
     public void eliminarCupon(Cupon cupon) {
-        Session session = sessionFactory.getCurrentSession();
-
-        // Eliminar referencias en usuario_cupon
-        String hqlDelete = "DELETE FROM CodigoDescuento WHERE CodigoDescuento.id = :cuponesDescuento_id";
-        session.createQuery(hqlDelete)
-                .setParameter("cuponesDescuento_id", cupon.getId())
-                .executeUpdate();
-
-        session.delete(cupon);
+        sessionFactory.getCurrentSession().delete(cupon);
     }
 
 }

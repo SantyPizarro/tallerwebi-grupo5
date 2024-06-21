@@ -7,6 +7,8 @@ INSERT INTO plan (id,tipo_plan_id) values (2,2);
 INSERT INTO plan (id,tipo_plan_id) values (3,3);
 INSERT INTO plan (id,tipo_plan_id) values (4,4);
 
+INSERT INTO codigodescuento(id) values (1);
+
 INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2,foto) VALUES(null, 'test@unlam.edu.ar', 'test', 'ADMIN', true,'Me llamo Tomas y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte','Tomas Pezzano','ficcion','deporte','mifoto2.jpg');
 INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2,foto,emailVerificado, plan_id) VALUES(null, 'asd@asd.com', '123', 'user', true,'Me llamo Mati y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte','MatiFdz','ficcion','deporte','amigo3.jpeg',true, 1);
 INSERT INTO Usuario(id, email, password, rol, activo,descripcion,nombreDeUsuario,generoFav1,generoFav2,foto,emailVerificado, plan_id) VALUES(null, 'marcos@hotmail.com', '123', 'user', true,'Me llamo Marcos y he sido un ávido lector desde que era niño. Mis géneros favoritos son ficcion y deporte','Marcos123','ficcion','deporte','loroo.PNG',true, 1);

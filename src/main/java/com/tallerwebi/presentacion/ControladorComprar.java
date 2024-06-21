@@ -24,13 +24,15 @@ public class ControladorComprar {
     private final CompraLibroService compraLibroService;
     private final MercadoPagoService mercadoPagoService;
     private final RepositorioUsuario repositorioUsuario;
+    private final RepositorioCupon repositorioCupon;
 
     @Autowired
-    public ControladorComprar (CompraLibroService compraLibroService, MercadoPagoService mercadoPagoService, CarritoService carritoService, RepositorioUsuario repositorioUsuario) {
+    public ControladorComprar (CompraLibroService compraLibroService, MercadoPagoService mercadoPagoService, CarritoService carritoService, RepositorioUsuario repositorioUsuario,RepositorioCupon repositorioCupon) {
         this.mercadoPagoService = mercadoPagoService;
         this.compraLibroService = compraLibroService;
         this.carritoService = carritoService;
         this.repositorioUsuario = repositorioUsuario;
+        this.repositorioCupon = repositorioCupon;
     }
     @PostMapping("/comprar")
     public ModelAndView comprar(HttpServletRequest request,@RequestParam("precioFinal") Double precioFinal ) {
@@ -55,6 +57,7 @@ public class ControladorComprar {
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Libro libroAeliminar = (Libro) sesion.getAttribute("libroAeliminar");
+        Cupon cupon = (Cupon) sesion.getAttribute("cupon");
 
         if ("approved".equals(paymentStatus)) {
             compraLibroService.registrarCompra(usuario, carrito);
@@ -64,6 +67,17 @@ public class ControladorComprar {
                 repositorioUsuario.modificar(usuario);
                 sesion.setAttribute("libroAeliminar", null);
             }
+
+            if(cupon != null){
+                usuario.getCuponesDeDescuento().remove(cupon);
+                repositorioUsuario.modificar(usuario);
+                CodigoDescuento codigoDescuento = repositorioCupon.buscarCodigoDescuento(1L);
+                codigoDescuento.getCuponesDescuento().remove(cupon);
+                repositorioCupon.modificarCodigoDescuento(codigoDescuento);
+                repositorioCupon.eliminarCupon(cupon);
+                sesion.setAttribute("cupon", null);
+            }
+
             carrito.limpiar();
             sesion.setAttribute("cantidadLibros", 0);
 

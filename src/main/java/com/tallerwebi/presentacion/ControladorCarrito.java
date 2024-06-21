@@ -31,25 +31,28 @@ public class ControladorCarrito {
     }
 
     @GetMapping("/mostrar-carrito")
-    public ModelAndView mostrarLibrosComprados(HttpServletRequest request){
+    public ModelAndView mostrarLibrosComprados(HttpServletRequest request) {
         HttpSession sesion = request.getSession();
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
-        Integer cantidadDelibros = (Integer) sesion.getAttribute("cantidadLibros");
 
-        if(carrito != null){
+        if (carrito != null) {
             Set<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
 
             ModelMap modelo = new ModelMap();
             modelo.addAttribute("librosComprados", librosComprados);
             modelo.addAttribute("subtotal", carritoService.obtenerSubtotal(carrito));
+            System.out.println(carrito.getSubtotal());
             modelo.addAttribute("total", carritoService.obtenerTotal(carrito));
+            System.out.println(carrito.getTotal());
+
             modelo.addAttribute("usuario", usuario);
-            return new ModelAndView ("comprar", modelo);
+            return new ModelAndView("comprar", modelo);
         }
 
-        return new ModelAndView ("redirect:/login");
+        return new ModelAndView("redirect:/login");
     }
+
 
     @PostMapping("/carrito")
     public ModelAndView guardarLibros(@RequestParam("id") Long id, HttpServletRequest request) {
@@ -115,23 +118,19 @@ public class ControladorCarrito {
         return new ModelAndView("redirect:/mostrar-carrito");
     }
 
-    @PostMapping ("/aplicarCupon")
-    public ModelAndView aplicarCupon(@RequestParam("cuponAaplicar") Long id, HttpServletRequest request){
+    @PostMapping("/aplicarCupon")
+    public ModelAndView aplicarCupon(@RequestParam("cuponAaplicar") Long id, HttpServletRequest request) {
         HttpSession sesion = request.getSession();
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Cupon cupon = carritoService.buscarCuponPorId(id);
         sesion.setAttribute("cupon", cupon);
 
-        if(carrito != null){
-            if(cupon != null){
-                carritoService.calcularTotalConCupon(carrito, cupon);
-
-
-               // carritoService.eliminarCupon(cupon);
-            }
+        if (carrito != null && cupon != null) {
+            carritoService.calcularTotalConCupon(carrito, cupon);
         }
 
         return new ModelAndView("redirect:/mostrar-carrito");
     }
+    }
 
-}
+

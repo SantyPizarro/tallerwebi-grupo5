@@ -1,9 +1,7 @@
 package com.tallerwebi.dominio;
 
-
 import java.util.HashSet;
 import java.util.Set;
-
 
 public class Carrito {
 
@@ -16,12 +14,24 @@ public class Carrito {
     public Carrito() {
         this.libros = new HashSet<>();
         this.subtotal = 0.0;
-        this.total = subtotal;
+        this.total = 0.0;
     }
 
     public void agregarLibroAlCarrito(Libro libro) {
+        // Verificar si el libro ya está en el carrito
+        if (libros.contains(libro)) {
+            return; // No agregar el libro ni actualizar los totales si ya está en el carrito
+        }
         libros.add(libro);
-        total += libro.getPrecio();
+        subtotal += libro.getPrecio();
+        total = subtotal;  // Inicialmente el total es igual al subtotal
+    }
+
+    public void aplicarDescuento(Double descuento) {
+        if (descuento < 0 || descuento > subtotal) {
+            throw new IllegalArgumentException("Descuento inválido");
+        }
+        this.total = this.subtotal - descuento;
     }
 
     public Long getId() {
@@ -46,11 +56,10 @@ public class Carrito {
         this.total = 0.0;
     }
 
-    public void eliminarLibro(Libro libro, Carrito carrito) {
-        carrito.getLibros().remove(libro);
-        carrito.setTotal(carrito.getTotal() - libro.getPrecio());
-        if(carrito.getTotal() < 0.0){
-            setTotal(0.0);
+    public void eliminarLibro(Libro libro) {
+        if (libros.remove(libro)) {
+            subtotal -= libro.getPrecio();
+            total = subtotal;  // Resetear el total al subtotal
         }
     }
 

@@ -64,6 +64,15 @@ public class Usuario {
             name = "usuario_libros_plan")
     private Set<Libro> librosPlan = new HashSet<>();
 
+    private Integer cuponesEmitidos = 0;
+
+    public Integer getCuponesEmitidos() {
+        return cuponesEmitidos;
+    }
+
+    public void setCuponesEmitidos(Integer cuponesEmitidos) {
+        this.cuponesEmitidos = cuponesEmitidos;
+    }
 
     public String getFoto() {
         return foto;

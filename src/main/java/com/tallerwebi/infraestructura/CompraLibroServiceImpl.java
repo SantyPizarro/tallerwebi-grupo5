@@ -57,20 +57,18 @@ public class CompraLibroServiceImpl implements CompraLibroService {
 
 
     @Override
-    public void cuponCadaDosCompras(Usuario usuario, LocalDateTime fechaCompraPlan){
-        Integer totalCompras = repositorioUsuario.cantidadDeCompras(usuario, fechaCompraPlan); //2
-        Integer cuponesNuevos = totalCompras / 2; //1
-        Integer cuponesActuales = usuario.getCuponesDeDescuento().size() - 1; //0
-        Integer cuponesAAgregar = 0;
+    public void cuponCadaDosCompras(Usuario usuario, LocalDateTime fechaCompraPlan) {
+        Integer totalCompras = repositorioUsuario.cantidadDeCompras(usuario, fechaCompraPlan);
 
-        if (cuponesActuales < 0) {
-            cuponesAAgregar = cuponesNuevos - usuario.getCuponesDeDescuento().size();
-        } else {
-            cuponesAAgregar = cuponesNuevos - cuponesActuales;
-        }
+        Integer cuponesNuevos = totalCompras / 2;
+
+        Integer cuponesEmitidos = usuario.getCuponesEmitidos() - 1;
+
+        Integer cuponesAAgregar = Math.max(cuponesNuevos - cuponesEmitidos, 0);
 
         for (int i = 0; i < cuponesAAgregar; i++) {
             planService.beneficioCuponPlan(usuario, 30);
         }
     }
+
 }

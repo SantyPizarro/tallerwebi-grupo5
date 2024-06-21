@@ -43,6 +43,7 @@ public class PlanServiceImpl implements PlanService {
             usuario.setPlan(planRepository.buscarPlan(2L));
             usuario.getPlan().setFechaCompra(LocalDateTime.now());
             usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
+            usuario.setCuponesEmitidos(1);
             repositorioUsuario.modificar(usuario);
         } else {
             throw new PlanYaAdquiridoException();
@@ -55,6 +56,7 @@ public class PlanServiceImpl implements PlanService {
             usuario.setPlan(planRepository.buscarPlan(3L));
             usuario.getPlan().setFechaCompra(LocalDateTime.now());
             usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
+            usuario.setCuponesEmitidos(1);
             repositorioUsuario.modificar(usuario);
         } else {
             throw new PlanYaAdquiridoException();
@@ -67,6 +69,7 @@ public class PlanServiceImpl implements PlanService {
             usuario.setPlan(planRepository.buscarPlan(4L));
             usuario.getPlan().setFechaCompra(LocalDateTime.now());
             usuario.getPlan().setFechaVencimiento(LocalDateTime.now().plusMonths(1));
+            usuario.setCuponesEmitidos(1);
             repositorioUsuario.modificar(usuario);
         } else {
             throw new PlanYaAdquiridoException();
@@ -82,6 +85,8 @@ public class PlanServiceImpl implements PlanService {
         codigos.getCuponesDescuento().add(a1);
         repositorioCupon.modificarCodigoDescuento(codigos);
         usuario.getCuponesDeDescuento().add(a1);
+        usuario.setCuponesEmitidos(usuario.getCuponesEmitidos() + 1);
+        repositorioUsuario.modificar(usuario);
     }
 
     @Override

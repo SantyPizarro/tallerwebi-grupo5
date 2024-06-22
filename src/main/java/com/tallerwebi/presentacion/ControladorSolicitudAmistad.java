@@ -6,10 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
@@ -103,18 +101,18 @@ public class ControladorSolicitudAmistad {
         return new ModelAndView("redirect:/login");
     }
 
-    @PostMapping("/rechazar-solicitud")
-    public ModelAndView rechazarSolicitud(HttpServletRequest request, @RequestParam("idSolicitud") Long idSolicitud) {
+    @PostMapping("/rechazar-notificacion")
+    public ModelAndView rechazarNotificacion(HttpServletRequest request, @RequestParam("notificacion") Long idNotificacion, @RequestParam("tipoSolictud") String tipoNotificacion) {
         HttpSession session = request.getSession();
         Usuario aceptante = (Usuario) session.getAttribute("USUARIO");
 
-        if (aceptante != null ) {
-            SolicitudAmistad solicitud = solicitudAmistadService.buscarPorId(idSolicitud);
-            if (solicitud != null){
-                solicitudAmistadService.rechazarSolicitud(solicitud);
-                return new ModelAndView("redirect:/solicitud-amistad");
-            }
+        if (aceptante != null) {
+
+            notificacionService.rechazarSolicitud(tipoNotificacion, idNotificacion);
+
+            return new ModelAndView("redirect:/solicitud-amistad");
         }
+
         return new ModelAndView("redirect:/login");
     }
 }

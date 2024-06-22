@@ -4,10 +4,8 @@ import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.PlanYaAdquiridoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.security.SecureRandom;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -144,20 +142,7 @@ public class PlanServiceImpl implements PlanService {
         repositorioUsuario.modificar(usuario);
 
     }*/
-    /*
-    @Override
-    public void aplicarBeneficio(Usuario usuario) {
-        Set<Libro> librosBeneficio = new HashSet<>();
-        librosBeneficio.add(repositorioLibro.buscarLibroPorId(1L));
-        librosBeneficio.add(repositorioLibro.buscarLibroPorId(2L));
-        librosBeneficio.add(repositorioLibro.buscarLibroPorId(3L));
 
-        if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("basic")) {
-
-            }
-        }
-
-    }*/
 
     public String generateRandomString() {
         int length = 6 + RANDOM.nextInt(3); // Genera un número entre 6 y 8 inclusive

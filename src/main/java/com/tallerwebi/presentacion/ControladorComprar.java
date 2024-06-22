@@ -20,17 +20,15 @@ import java.util.List;
 @Controller
 public class ControladorComprar {
 
-    private final CarritoService carritoService;
     private final CompraLibroService compraLibroService;
     private final MercadoPagoService mercadoPagoService;
     private final RepositorioUsuario repositorioUsuario;
     private final RepositorioCupon repositorioCupon;
 
     @Autowired
-    public ControladorComprar (CompraLibroService compraLibroService, MercadoPagoService mercadoPagoService, CarritoService carritoService, RepositorioUsuario repositorioUsuario,RepositorioCupon repositorioCupon) {
+    public ControladorComprar (CompraLibroService compraLibroService, MercadoPagoService mercadoPagoService, RepositorioUsuario repositorioUsuario,RepositorioCupon repositorioCupon) {
         this.mercadoPagoService = mercadoPagoService;
         this.compraLibroService = compraLibroService;
-        this.carritoService = carritoService;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioCupon = repositorioCupon;
     }
@@ -38,7 +36,6 @@ public class ControladorComprar {
     public ModelAndView comprar(HttpServletRequest request,@RequestParam("precioFinal") Double precioFinal ) {
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
-        Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
 
         Preference preference = mercadoPagoService.createPreference(usuario, precioFinal);
 

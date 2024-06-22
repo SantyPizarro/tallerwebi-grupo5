@@ -3,7 +3,6 @@ package com.tallerwebi.dominio;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
     @Entity
     public class SolicitudAmistad implements TipoNotificacionService{
 

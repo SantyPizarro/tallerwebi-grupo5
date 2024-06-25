@@ -66,14 +66,20 @@ public class ControladorLibros {
 //    }
 
     @PostMapping("/detalle-libro")
-    public String detalleLibro(@RequestParam("titulo") String titulo, Model model) {
-        Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
-        if (libro != null) {
-            model.addAttribute("libro", libro);
-            return "detalle-libro";
-        } else {
-            // Manejar el caso en que no se encuentre el libro
-            return "error";
+    public String detalleLibro(@RequestParam("titulo") String titulo, Model model,HttpServletRequest request) {
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
+        if (usuario != null) {
+
+            Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+            if (libro != null) {
+                model.addAttribute("libro", libro);
+                model.addAttribute("titulo", titulo);
+                return "detalle-libro";
+            } else {
+                return "error";
+            }
         }
+        return "redirect:/login";
     }
 }

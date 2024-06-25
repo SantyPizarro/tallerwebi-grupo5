@@ -9,6 +9,9 @@ import javax.transaction.Transactional;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 @Service
 @Transactional
@@ -127,37 +130,12 @@ public class PlanServiceImpl implements PlanService {
     }
 
 
+
+
     private Boolean verificarPlan(Usuario usuario) {
         return usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("free");
     }
 
-
-    /*
-    @Override
-    public void actualizarPlanUsuario(Usuario usuario, Long planId) {
-        Plan nuevoPlan = planRepository.buscarPlan(planId);
-
-        usuario.setPlan(nuevoPlan);
-
-        aplicarBeneficio(usuario);
-
-        repositorioUsuario.modificar(usuario);
-
-    }*/
-    /*
-    @Override
-    public void aplicarBeneficio(Usuario usuario) {
-        Set<Libro> librosBeneficio = new HashSet<>();
-        librosBeneficio.add(repositorioLibro.buscarLibroPorId(1L));
-        librosBeneficio.add(repositorioLibro.buscarLibroPorId(2L));
-        librosBeneficio.add(repositorioLibro.buscarLibroPorId(3L));
-
-        if(usuario!=null && usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("basic")) {
-
-            }
-        }
-
-    }*/
 
     public String generateRandomString() {
         int length = 6 + RANDOM.nextInt(3); // Genera un número entre 6 y 8 inclusive
@@ -171,40 +149,25 @@ public class PlanServiceImpl implements PlanService {
         return sb.toString();
     }
 
-
-
-    /*
-    public void otorgarCuponesCadaDosCompras(Usuario usuario){
-
-    if(fecha_compra_plan > fecha_compra_libro && fecha_vencimiento_plan < fecha_compra_libro){
-
-
-        // Obtener el número total de compras del usuario
-        int totalCompras = compraRepository.countByUsuarioId(usuario.getId());
-
-        // Calcular cupones a otorgar
-        int cuponesNuevos = totalCompras / 2;
-
-        // Obtener el número actual de cupones
-        int cuponesActuales = usuario.getCuponesDeDescuento().size();
-
-        // Calcular cuántos cupones adicionales se necesitan
-        int cuponesAAgregar = cuponesNuevos - cuponesActuales;
-
-        // Crear y agregar los cupones al usuario si es necesario
-        for (int i = 0; i < cuponesAAgregar; i++) {
-            Cupon cupon = new Cupon();
-            cupon.setCodigo(generateRandomString());
-            usuario.getCuponesDeDescuento().add(cupon);
+    @Override
+    public void verificarYActualizarPlanesExpirados() {
+        List<Usuario> usuarios = repositorioUsuario.buscarTodosLosUsuarios();
+        LocalDateTime now = LocalDateTime.now();
+        for (Usuario usuario : usuarios) {
+            if (usuario.getPlan() != null && usuario.getPlan().getFechaVencimiento() != null) {
+                if (now.isAfter(usuario.getPlan().getFechaVencimiento())) {
+                    usuario.setPlan(planRepository.buscarPlan(1L));
+                    usuario.setCuponesDeDescuento(new HashSet<>());
+                    usuario.setCuponesEmitidos(0);
+                    usuario.setLibrosPlan(new HashSet<>());
+                    repositorioUsuario.modificar(usuario);
+                }
+            }
         }
-
-        // Guardar el usuario actualizado
-            usuarioRepository.modificar(usuario);
-    }
-}
     }
 
-
-            */
-
 }
+
+
+
+

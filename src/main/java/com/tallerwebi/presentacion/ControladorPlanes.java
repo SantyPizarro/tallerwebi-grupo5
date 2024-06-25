@@ -94,18 +94,6 @@ public class ControladorPlanes {
         return "redirect:/login";
     }
 
-    /*@PostMapping("/comprarPlan")
-    public String comprarPlan(@RequestParam("id")Long id , HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        Usuario usuario = (Usuario) session.getAttribute("USUARIO");
 
-
-        if(usuario != null) {
-            planService.actualizarPlanUsuario(usuario, id);
-            return "redirect:/planes";
-        }
-
-        return "redirect:/login";
-    }*/
 
 }

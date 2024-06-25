@@ -1,9 +1,6 @@
 package com.tallerwebi;
 
-import com.tallerwebi.config.DatabaseInitializationConfig;
-import com.tallerwebi.config.HibernateConfig;
-import com.tallerwebi.config.MailConfig;
-import com.tallerwebi.config.SpringWebConfig;
+import com.tallerwebi.config.*;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class MyServletInitializer
@@ -18,7 +15,7 @@ public class MyServletInitializer
     // controller, view resolver, handler mapping
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[]{SpringWebConfig.class, HibernateConfig.class, DatabaseInitializationConfig.class, MailConfig.class};
+        return new Class[]{SpringWebConfig.class, HibernateConfig.class, DatabaseInitializationConfig.class, MailConfig.class, SchedulerConfig.class};
     }
 
     @Override

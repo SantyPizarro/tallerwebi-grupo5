@@ -173,4 +173,10 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         Long count = query.uniqueResult();
         return count != null ? count.intValue() : 0;
     }
+
+    @Override
+    public List<Usuario> buscarTodosLosUsuarios() {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
+    }
 }

@@ -18,6 +18,9 @@ public interface PlanService {
 
     String descripcionPlanes(Long id);
 
+    void verificarYActualizarPlanesExpirados();
+
+
    /* void actualizarPlanUsuario(Usuario usuario,Long planId);
     void aplicarBeneficio(Usuario usuario);
 */

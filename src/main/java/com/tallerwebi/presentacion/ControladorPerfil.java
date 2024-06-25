@@ -1,6 +1,7 @@
 package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.*;
+import com.tallerwebi.dominio.excepcion.LibroExistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -85,7 +86,7 @@ public class ControladorPerfil {
     }
 
     @PostMapping("/perfil/agregarLibroFavorito")
-    public String agregarLibroFavorito(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+    public String agregarLibroFavorito(@RequestParam("titulo") String titulo, HttpServletRequest request, RedirectAttributes redirectAttributes) {
 
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
@@ -93,8 +94,15 @@ public class ControladorPerfil {
         if (usuario != null) {
             Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
             if (libro != null) {
-                perfilService.addLibroFavorito(usuario, libro);
-                return "redirect:/perfil";
+                try{
+                    perfilService.addLibroFavorito(usuario, libro);
+                    return "redirect:/perfil";
+                }
+                catch (LibroExistente e) {
+                    redirectAttributes.addFlashAttribute("errorLibroFavorito", "No se puede añadir un libro como favorito si ya existe en la lista");
+                    return "redirect:/perfil";
+                }
+
             }
         }
         return "redirect:/login";
@@ -118,7 +126,7 @@ public class ControladorPerfil {
     }
 
     @PostMapping("/perfil/agregarLibroDeseado")
-    public String agregarLibroDeseado(@RequestParam("titulo") String titulo, HttpServletRequest request) {
+    public String agregarLibroDeseado(@RequestParam("titulo") String titulo, HttpServletRequest request,RedirectAttributes redirectAttributes) {
 
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
@@ -126,8 +134,14 @@ public class ControladorPerfil {
         if (usuario != null) {
             Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
             if (libro != null) {
-                perfilService.addLibroDeseado(usuario, libro);
-                return "redirect:/perfil";
+                try{
+                    perfilService.addLibroDeseado(usuario, libro);
+                    return "redirect:/perfil";
+                }catch(LibroExistente e){
+                    redirectAttributes.addFlashAttribute("errorLibroDeseado", "No se puede añadir un libro como deseado si ya existe en la lista o ya has comprado ese libro");
+                    return "redirect:/perfil";
+                }
+
             }
         }
         return "redirect:/login";

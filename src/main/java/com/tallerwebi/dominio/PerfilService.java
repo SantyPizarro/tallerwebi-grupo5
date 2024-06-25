@@ -1,5 +1,6 @@
 package com.tallerwebi.dominio;
 
+import com.tallerwebi.dominio.excepcion.LibroExistente;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -12,9 +13,9 @@ public interface PerfilService {
     Usuario buscarUsuario(String email,String password);
     void editarPerfilCompleto(Usuario usuarioExistente, Usuario usuario, MultipartFile foto);
     Usuario buscarUsuarioPorId(Long id);
-    void addLibroFavorito(Usuario usuario, Libro libro);
+    void addLibroFavorito(Usuario usuario, Libro libro) throws LibroExistente;
     void eliminarLibroFavorito(Usuario usuario, Libro libro);
-    void addLibroDeseado(Usuario usuario, Libro libro);
+    void addLibroDeseado(Usuario usuario, Libro libro) throws LibroExistente;
     void eliminarLibroDeseado(Usuario usuario, Libro libro);
 
     List<Compra> historialDeCompras(Usuario usuario);

@@ -1,6 +1,7 @@
 package com.tallerwebi.infraestructura;
 
 import com.tallerwebi.dominio.*;
+import com.tallerwebi.dominio.excepcion.LibroExistente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -72,7 +73,7 @@ public class PerfilServiceImpl implements PerfilService {
 
     }
 
-    public void addLibroFavorito(Usuario usuario, Libro libro) {
+    public void addLibroFavorito(Usuario usuario, Libro libro) throws LibroExistente {
 
         if (usuario == null || libro == null) {
             throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
@@ -84,6 +85,8 @@ public class PerfilServiceImpl implements PerfilService {
         if (!librosFavoritos.contains(libro)) {
             librosFavoritos.add(libro);
             repositorioUsuario.modificar(usuario);
+        }else{
+            throw new LibroExistente();
         }
     }
 
@@ -101,7 +104,7 @@ public class PerfilServiceImpl implements PerfilService {
     }
 
     @Override
-    public void addLibroDeseado(Usuario usuario, Libro libro) {
+    public void addLibroDeseado(Usuario usuario, Libro libro) throws LibroExistente {
 
         if (usuario == null || libro == null) {
             throw new IllegalArgumentException("Usuario o libro no pueden ser nulos");
@@ -113,6 +116,8 @@ public class PerfilServiceImpl implements PerfilService {
         if (!librosDeseados.contains(libro) && !usuario.getLibrosComprados().contains(libro)) {
             librosDeseados.add(libro);
             repositorioUsuario.modificar(usuario);
+        }else{
+            throw new LibroExistente();
         }
     }
 

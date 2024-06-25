@@ -13,7 +13,16 @@
 <body>
 <header th:replace="header_footer :: header"></header>
 <main>
+    <div th:if="${errorLibroDeseado != null}" class="alert alert-danger" role="alert">
+        <!--/*@thymesVar id="error" type=""*/-->
+        <span th:text="${errorLibroDeseado}"></span>
+    </div>
+    <div th:if="${errorLibroFavorito != null}" class="alert alert-danger" role="alert">
+        <!--/*@thymesVar id="error" type=""*/-->
+        <span th:text="${errorLibroFavorito}"></span>
+    </div>
     <section class="primero">
+
         <div class="contenedor">
             <div>
                 <div class="avatar-perfil">

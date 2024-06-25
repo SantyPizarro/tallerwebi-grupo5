@@ -29,5 +29,7 @@ public interface RepositorioUsuario {
     Set<Libro> buscarMisLibros(Usuario usuario);
 
     Integer cantidadDeCompras(Usuario usuario, LocalDateTime fechaCompraPlan);
+
+    List<Usuario> buscarTodosLosUsuarios();
 }
 

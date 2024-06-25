@@ -9,9 +9,4 @@ public interface SolicitudAmistadService {
 
     Boolean comprobarSolicitudPendiente(Usuario solicitante, Usuario solicitado);
 
-    void aceptarSolicitud(Usuario aceptante, Usuario solicitante);
-
-    SolicitudAmistad buscarPorId(Long idSolicitud);
-
-    void rechazarSolicitud(SolicitudAmistad solicitud);
 }

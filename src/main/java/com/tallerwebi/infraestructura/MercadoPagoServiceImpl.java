@@ -7,8 +7,6 @@ import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
 import com.mercadopago.resources.payment.Payment;
 import com.mercadopago.resources.preference.Preference;
-import com.tallerwebi.dominio.Carrito;
-import com.tallerwebi.dominio.Libro;
 import com.tallerwebi.dominio.MercadoPagoService;
 import com.tallerwebi.dominio.Usuario;
 import org.springframework.stereotype.Service;
@@ -16,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Service
 @Transactional

@@ -33,7 +33,7 @@
                             <button class="btn btn-primary" type="submit">Aceptar</button>
                         </a>
                     </form>
-                    <form accept-charset="UTF-8" th:action="@{/rechazar-solicitud}" method="post">
+                    <form accept-charset="UTF-8" th:action="@{/rechazar-notificacion}" method="post">
                         <input type="hidden" th:name="tipoSolictud" th:value="${notificacion.tipo}">
                         <input type="hidden" th:name="notificacion" th:value="${notificacion.getId()}">
                         <button class="btn btn-danger" type="submit">Rechazar</button>

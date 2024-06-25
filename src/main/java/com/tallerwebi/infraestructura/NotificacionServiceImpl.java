@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Service
 @Transactional
 public class NotificacionServiceImpl implements NotificacionService {
@@ -52,9 +50,26 @@ public class NotificacionServiceImpl implements NotificacionService {
 
             repositorioIntercambio.aceptarOferta(oferta);
 
-            repositorioIntercambio.eliminarOferta(oferta);
         }
 
+    }
+
+    @Override
+    public void rechazarSolicitud(String tipoNotificacion, Long idNotificacion) {
+
+        if (tipoNotificacion != null && tipoNotificacion.equalsIgnoreCase("amistad") && idNotificacion != null) {
+
+            SolicitudAmistad solicitud =  repositorioSolicitudAmistad.buscarSolicitudPorId(idNotificacion);
+
+            repositorioSolicitudAmistad.eliminarSolicitud(solicitud);
+        }
+
+        if (tipoNotificacion != null && tipoNotificacion.equalsIgnoreCase("intercambio") && idNotificacion != null){
+
+            OfertaIntercambio oferta = repositorioIntercambio.buscarOfertaPorId(idNotificacion);
+
+            repositorioIntercambio.eliminarOferta(oferta);
+        }
     }
 
     @Override

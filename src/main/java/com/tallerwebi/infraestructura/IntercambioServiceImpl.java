@@ -4,16 +4,14 @@ import com.tallerwebi.dominio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.time.LocalDateTime;
 import java.util.List;
-
 
 @Service
 @Transactional
 public class IntercambioServiceImpl implements IntercambioService {
 
-    private RepositorioIntercambio repositorioIntercambio;
+    private final RepositorioIntercambio repositorioIntercambio;
 
     @Autowired
     public IntercambioServiceImpl(RepositorioIntercambio repositorioIntercambio) {
@@ -36,15 +34,4 @@ public class IntercambioServiceImpl implements IntercambioService {
         repositorioIntercambio.guardar(oferta);
     }
 
-    @Override
-    public void aceptarOferta(Usuario aceptante, Libro libroARecibir, Usuario solicitante, Libro libroADar) {
-        OfertaIntercambio oferta =  repositorioIntercambio.buscarOfertaEntreDosPersonas(aceptante,libroARecibir, solicitante,libroADar);
-
-        aceptante.setLibrosComprados(libroADar);
-        solicitante.setLibrosComprados(libroARecibir);
-
-        aceptante.eliminarLibro(libroARecibir);
-        solicitante.eliminarLibro(libroADar);
-        repositorioIntercambio.guardar(oferta);
-    }
 }

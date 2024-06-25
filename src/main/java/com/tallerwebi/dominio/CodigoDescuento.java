@@ -15,7 +15,6 @@ public class CodigoDescuento {
     Set<Cupon> cuponesDescuento = new HashSet<>();
 
 
-
     public void setId(Long id) {
         this.id = id;
     }

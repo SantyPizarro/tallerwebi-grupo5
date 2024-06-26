@@ -42,7 +42,8 @@
                 <div class="confirmacion-compra">
                     <p>Subtotal: $<span th:text="${subtotal}"></span></p>
                     <div th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'premium' or usuario.getPlan().getTipoPlan().getNombre() == 'standard' or usuario.getPlan().getTipoPlan().getNombre() == 'basic'}">
-                        <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal2">Cupón de Descuento
+                        <button class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                            Cupón de Descuento
                         </button>
                     </div>
                     <div id="inputContainer" style="display: none;">
@@ -51,7 +52,8 @@
                     </div>
 
                     <div th:if="${usuario.getPlan().getTipoPlan().getNombre() == 'premium'}">
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Agregar libro en forma de pago
+                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Agregar
+                            libro en forma de pago
                         </button>
                     </div>
 
@@ -88,7 +90,8 @@
                                     <input class="form-check-input" type="hidden" name="flexRadioDefault"
                                            th:name="usuario" th:value="${usuario.id}">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                           th:name="libroADar" th:value="${libro.id}">
+                                           th:name="libroADar" th:value="${libro.id}"
+                                           th:checked="${libroSeleccionado != null and libro.id == libroSeleccionado.id}">
                                     <img th:src="${libro.ruta}" th:alt="${libro.titulo}" width="143px" height="180px"
                                          style="margin: 0 2rem">
                                     <div>

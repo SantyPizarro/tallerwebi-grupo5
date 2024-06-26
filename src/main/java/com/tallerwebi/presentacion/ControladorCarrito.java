@@ -33,6 +33,7 @@ public class ControladorCarrito {
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
         Cupon cupon = (Cupon) sesion.getAttribute("cupon");
+        Libro libro = (Libro) sesion.getAttribute("libroAeliminar");
 
         if (carrito != null) {
             Set<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
@@ -44,6 +45,9 @@ public class ControladorCarrito {
             modelo.addAttribute("usuario", usuario);
             if (cupon != null) {
                 modelo.addAttribute("idCuponSeleccionado", cupon);
+            }
+            if(libro != null) {
+                modelo.addAttribute("libroSeleccionado", libro);
             }
             return new ModelAndView("comprar", modelo);
         }

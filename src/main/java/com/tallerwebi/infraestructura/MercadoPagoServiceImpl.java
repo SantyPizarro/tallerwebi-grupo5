@@ -1,11 +1,9 @@
 package com.tallerwebi.infraestructura;
 
 import com.mercadopago.MercadoPagoConfig;
-import com.mercadopago.client.payment.PaymentClient;
 import com.mercadopago.client.preference.*;
 import com.mercadopago.exceptions.MPApiException;
 import com.mercadopago.exceptions.MPException;
-import com.mercadopago.resources.payment.Payment;
 import com.mercadopago.resources.preference.Preference;
 import com.tallerwebi.dominio.MercadoPagoService;
 import com.tallerwebi.dominio.Usuario;
@@ -24,24 +22,10 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
 
     public Preference createPreference(Usuario usuario, Double total) {
 
-        List<PreferenceItemRequest> items = new ArrayList<>();
+        List<PreferenceItemRequest> items = getPreferenceItemRequest(total);
 
-            PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
-                    .id("Carrito total")
-                    .title("Compra de Libros")
-                    .currencyId("ARS")
-                    .categoryId("books")
-                    .quantity(1)
-                    .unitPrice(BigDecimal.valueOf(total))
-                    .build();
-            items.add(itemRequest);
+        PreferencePayerRequest payer = getPayer(usuario);
 
-
-        PreferencePayerRequest payer = PreferencePayerRequest.builder()
-                .name(usuario.getNombre())
-                .surname(usuario.getApellido())
-                .email(usuario.getEmail())
-                .build();
 
         PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
                 .success("http://localhost:8080/spring/payment/feedback")
@@ -49,6 +33,49 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
                 .pending("http://localhost:8080/spring/payment/feedback")
                 .build();
 
+        return getPreference(items, payer, backUrls);
+    }
+
+    public Preference createPreferencePlan(Usuario usuario, Double total) {
+
+        List<PreferenceItemRequest> items = getPreferenceItemRequest(total);
+
+        PreferencePayerRequest payer = getPayer(usuario);
+
+        PreferenceBackUrlsRequest backUrls = PreferenceBackUrlsRequest.builder()
+                .success("http://localhost:8080/spring/payment/feedbackPlan")
+                .failure("http://localhost:8080/spring/payment/feedbackPlan")
+                .pending("http://localhost:8080/spring/payment/feedbackPlan")
+                .build();
+
+        return getPreference(items, payer, backUrls);
+    }
+
+    private PreferencePayerRequest getPayer(Usuario usuario) {
+        PreferencePayerRequest payer = PreferencePayerRequest.builder()
+                .name(usuario.getNombre())
+                .surname(usuario.getApellido())
+                .email(usuario.getEmail())
+                .build();
+        return payer;
+    }
+
+    private List<PreferenceItemRequest> getPreferenceItemRequest(Double total) {
+
+        List<PreferenceItemRequest> items = new ArrayList<>();
+        PreferenceItemRequest itemRequest = PreferenceItemRequest.builder()
+                .id("Compra")
+                .title("Compra")
+                .currencyId("ARS")
+                .categoryId("books")
+                .quantity(1)
+                .unitPrice(BigDecimal.valueOf(total))
+                .build();
+        items.add(itemRequest);
+        return items;
+    }
+
+    private Preference getPreference(List<PreferenceItemRequest> items, PreferencePayerRequest payer, PreferenceBackUrlsRequest backUrls) {
         PreferencePaymentMethodsRequest paymentMethods = PreferencePaymentMethodsRequest.builder()
                 .excludedPaymentMethods(new ArrayList<>())
                 .excludedPaymentTypes(new ArrayList<>())
@@ -75,21 +102,4 @@ public class MercadoPagoServiceImpl implements MercadoPagoService {
         }
     }
 
-    public Payment getPayment(String paymentId) {
-        try {
-            System.out.println("Fetching payment with ID: " + paymentId);
-            PaymentClient paymentClient = new PaymentClient();
-            Payment payment = paymentClient.get(Long.valueOf(paymentId));
-            System.out.println("Payment retrieved: " + (payment != null ? payment.toString() : "null"));
-            return payment;
-        } catch (MPApiException e) {
-            System.out.println("MPApiException occurred while fetching payment: " + e.getApiResponse().getContent());
-            e.printStackTrace();
-            return null;
-        } catch (MPException e) {
-            System.out.println("MPException occurred while fetching payment: " + e.getMessage());
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

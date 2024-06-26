@@ -50,6 +50,8 @@ public class NotificacionServiceImpl implements NotificacionService {
 
             repositorioIntercambio.aceptarOferta(oferta);
 
+            repositorioIntercambio.eliminarOferta(oferta);
+
         }
 
     }

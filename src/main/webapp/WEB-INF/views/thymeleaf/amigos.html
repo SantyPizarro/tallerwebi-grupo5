@@ -17,36 +17,39 @@
 <header th:replace="header_footer :: header">
 
 </header>
-
-<div class="container">
-    <div th:each="usuario : ${usuarios}" class="contenedor">
-        <div>
-            <div class="avatar-perfil">
-                <img th:src="@{'/images/' + ${usuario.foto}}" th:alt="${usuario.foto}">
+<div class="footerAbajo">
+    <div class="container">
+        <div th:each="usuario : ${usuarios}" class="contenedor">
+            <div>
+                <div class="avatar-perfil">
+                    <img th:src="@{'/images/' + ${usuario.foto}}" th:alt="${usuario.foto}">
+                </div>
+                <div class="nombre">
+                    <h2 th:text="${usuario.nombreDeUsuario}"></h2>
+                </div>
             </div>
-            <div class="nombre">
-                <h2 th:text="${usuario.nombreDeUsuario}"></h2>
-            </div>
-        </div>
-        <div class="descripcion">
-            <h4>Descripción:</h4>
-            <p th:text="${usuario.descripcion}"></p>
-            <div class="preferencias">
-                <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
-                <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
-            </div>
+            <div class="descripcion">
+                <h4>Descripción:</h4>
+                <p th:text="${usuario.descripcion}"></p>
+                <div class="preferencias">
+                    <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
+                    <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
+                </div>
 
-            <form th:action="@{/enviar-solicitud}" method="post">
-                <input type="hidden" th:name="idAmigo" th:value="${usuario.getId()}">
-                <button type="submit" class="btn btn-primary configuracion"  data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Agregar amigo
-                </button>
-            </form>
+                <form th:action="@{/enviar-solicitud}" method="post">
+                    <input type="hidden" th:name="idAmigo" th:value="${usuario.getId()}">
+                    <button type="submit" class="btn btn-primary configuracion"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Agregar amigo
+                    </button>
+                </form>
 
+            </div>
         </div>
     </div>
 </div>
-<script th:src="@{/js/menuUsuario.js}"></script>
 
+<footer th:replace="header_footer :: footer"></footer>
+
+<script th:src="@{/js/menuUsuario.js}"></script>
 </body>
 </html>

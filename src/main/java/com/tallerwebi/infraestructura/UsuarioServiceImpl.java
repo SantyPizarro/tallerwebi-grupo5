@@ -65,5 +65,10 @@ public class UsuarioServiceImpl implements UsuarioService {
         repositorioUsuario.eliminarUsuario(usuario);
     }
 
+    @Override
+    public void eliminarRelacionesDeAmistad(Usuario usuario) {
+        repositorioUsuario.eliminarRelacionesDeAmistad(usuario);
+    }
+
 
 }

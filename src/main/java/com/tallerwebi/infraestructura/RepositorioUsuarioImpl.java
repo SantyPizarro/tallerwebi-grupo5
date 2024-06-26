@@ -179,4 +179,13 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
         Session session = sessionFactory.getCurrentSession();
         return session.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
     }
+
+    @Override
+    public void eliminarRelacionesDeAmistad(Usuario usuario) {
+        Session session = sessionFactory.getCurrentSession();
+        String hql = "DELETE FROM Amistad WHERE usuario = :usuario OR amigo = :usuario";
+        Query query = session.createQuery(hql);
+        query.setParameter("usuario", usuario);
+        query.executeUpdate();
+    }
 }

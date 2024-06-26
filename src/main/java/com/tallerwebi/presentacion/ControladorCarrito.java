@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Set;
@@ -31,6 +32,7 @@ public class ControladorCarrito {
         HttpSession sesion = request.getSession();
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
+        Cupon cupon = (Cupon) sesion.getAttribute("idCuponSeleccionado");
 
         if (carrito != null) {
             Set<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
@@ -40,6 +42,9 @@ public class ControladorCarrito {
             modelo.addAttribute("subtotal", carritoService.obtenerSubtotal(carrito));
             modelo.addAttribute("total", carritoService.obtenerTotal(carrito));
             modelo.addAttribute("usuario", usuario);
+            if (cupon != null) {
+                modelo.addAttribute("idCuponSeleccionado", cupon);
+            }
             return new ModelAndView("comprar", modelo);
         }
 
@@ -54,7 +59,7 @@ public class ControladorCarrito {
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Integer cantidadDelibros = (Integer) sesion.getAttribute("cantidadLibros");
 
-        if(carrito == null){
+        if (carrito == null) {
             carrito = new Carrito();
             sesion.setAttribute("CARRITO", carrito);
             cantidadDelibros = 0;
@@ -81,11 +86,15 @@ public class ControladorCarrito {
         Integer cantidadDelibros = (Integer) sesion.getAttribute("cantidadLibros");
         Cupon cupon = (Cupon) sesion.getAttribute("cupon");
 
-        if(carrito != null){
+        if (carrito != null) {
             carritoService.eliminarLibroDeCarrito(servicioLibro.buscarLibroPorTitulo(titulo), carrito);
             cantidadDelibros = (cantidadDelibros == null) ? 0 : cantidadDelibros - 1;
             sesion.setAttribute("cantidadLibros", cantidadDelibros);
-            carritoService.calcularTotalConCupon(carrito, cupon);
+            if (cupon != null) {
+                carritoService.calcularTotalConCupon(carrito, cupon);
+            } else {
+                carritoService.obtenerTotal(carrito);
+            }
         }
 
         return new ModelAndView("redirect:/mostrar-carrito");
@@ -98,14 +107,14 @@ public class ControladorCarrito {
         Libro libroAeliminar = servicioLibro.buscarLibroPorId(id);
         sesion.setAttribute("libroAeliminar", libroAeliminar);
 
-        if(carrito != null){
+        if (carrito != null) {
             Double precioLibro = libroAeliminar.getPrecio();
             Double precioLibroComprados = carritoService.obtenerSubtotal(carrito);
-            if(precioLibroComprados > precioLibro){
-               carritoService.setTotal(carrito, (precioLibroComprados - precioLibro));
-           }else{
+            if (precioLibroComprados > precioLibro) {
+                carritoService.setTotal(carrito, (precioLibroComprados - precioLibro));
+            } else {
                 carritoService.setTotal(carrito, 0.01);
-           }
+            }
         }
 
         return new ModelAndView("redirect:/mostrar-carrito");
@@ -116,7 +125,7 @@ public class ControladorCarrito {
         HttpSession sesion = request.getSession();
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Cupon cupon = carritoService.buscarCuponPorId(id);
-        sesion.setAttribute("cupon", cupon);
+        sesion.setAttribute("idCuponSeleccionado", cupon);
 
         if (carrito != null && cupon != null) {
             carritoService.calcularTotalConCupon(carrito, cupon);
@@ -124,6 +133,6 @@ public class ControladorCarrito {
 
         return new ModelAndView("redirect:/mostrar-carrito");
     }
-    }
+}
 
 

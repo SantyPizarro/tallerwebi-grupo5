@@ -40,29 +40,29 @@ public class ControladorLogin {
         ModelMap model = new ModelMap();
 
         Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail());
-        String rol = usuarioBuscado.getRol();
 
-        if (rol.equals("user")) {
-            if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && usuarioBuscado.getEmailVerificado()) {
-                HttpSession sesion = request.getSession();
-                Carrito carrito = new Carrito();
-                CodigoDescuento codigoDescuento = new CodigoDescuento();
-                sesion.setAttribute("CARRITO", carrito);
-                sesion.setAttribute("USUARIO", usuarioBuscado);
-                sesion.setAttribute("nombreUsuario", usuarioBuscado.getNombreDeUsuario());
-                return new ModelAndView("redirect:/home");
-            } else {
-                if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && usuarioBuscado.getEmailVerificado() == false) {
-                    model.put("error", "El email no ha sido verificado");
-                    return new ModelAndView("codigoDeVerificacion");
+        // Verificar si usuarioBuscado es null antes de intentar acceder a sus propiedades
+        if (usuarioBuscado != null) {
+            String rol = usuarioBuscado.getRol();
+
+            if ("user".equals(rol)) {
+                if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && usuarioBuscado.getEmailVerificado()) {
+                    HttpSession sesion = request.getSession();
+                    Carrito carrito = new Carrito();
+                    sesion.setAttribute("CARRITO", carrito);
+                    sesion.setAttribute("USUARIO", usuarioBuscado);
+                    sesion.setAttribute("nombreUsuario", usuarioBuscado.getNombreDeUsuario());
+                    return new ModelAndView("redirect:/home");
                 } else {
-                    model.put("error", "Usuario o clave incorrecta");
-                    return new ModelAndView("login", model);
+                    if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword()) && !usuarioBuscado.getEmailVerificado()) {
+                        model.put("error", "El email no ha sido verificado");
+                        return new ModelAndView("codigoDeVerificacion");
+                    } else {
+                        model.put("error", "Usuario o clave incorrecta");
+                        return new ModelAndView("login", model);
+                    }
                 }
-            }
-
-        } else {
-            if (rol.equals("ADMIN")) {
+            } else if ("ADMIN".equals(rol)) {
                 if (usuarioBuscado.getEmail().equals(datosLogin.getEmail()) && usuarioBuscado.getPassword().equals(datosLogin.getPassword())) {
                     HttpSession sesion = request.getSession();
                     Carrito carrito = new Carrito();
@@ -70,13 +70,17 @@ public class ControladorLogin {
                     sesion.setAttribute("USUARIO", usuarioBuscado);
                     sesion.setAttribute("nombreUsuario", usuarioBuscado.getNombreDeUsuario());
                     return new ModelAndView("redirect:/perfilAdmin");
-                }else {
+                } else {
                     model.put("error", "Usuario o clave incorrecta");
                 }
             }
+        } else {
+            model.put("error", "Usuario no encontrado"); // Manejar caso donde usuarioBuscado es null
         }
+
         return new ModelAndView("login", model);
     }
+
 
     @RequestMapping(path = "/cerrar-sesion")
     public ModelAndView cerrarSesion(HttpServletRequest request) {

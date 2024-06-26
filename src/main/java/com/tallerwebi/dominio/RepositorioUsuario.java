@@ -31,5 +31,7 @@ public interface RepositorioUsuario {
     Integer cantidadDeCompras(Usuario usuario, LocalDateTime fechaCompraPlan);
 
     List<Usuario> buscarTodosLosUsuarios();
+
+    void eliminarRelacionesDeAmistad(Usuario usuario);
 }
 

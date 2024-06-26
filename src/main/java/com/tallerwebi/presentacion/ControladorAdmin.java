@@ -71,6 +71,8 @@ public class ControladorAdmin {
     @RequestMapping(path = "/eliminarUsuario", method = RequestMethod.POST)
     public ModelAndView eliminarUsuarioDeBDD(@ModelAttribute("idUsuario") Long idUsuario){
 
+        usuarioService.eliminarRelacionesDeAmistad(usuarioService.buscarPorId(idUsuario));
+
         usuarioService.eliminarUsuario(usuarioService.buscarPorId(idUsuario));
 
         return new ModelAndView ("redirect:/perfilAdmin");

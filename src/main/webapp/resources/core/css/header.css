@@ -14,6 +14,19 @@
     background-color: #121482;
 }
 
+.contenedor-header-login{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    padding: 0.7rem 1rem;
+    background-color: #121482;
+}
+
+.logotipo-login img{
+    border-radius: 50%;
+}
+
 .logotipo img{
     border-radius: 50%;
 }

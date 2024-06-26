@@ -68,9 +68,9 @@
             <ul class="features">
                 <li th:utext="${premium}"></li>
             </ul>
-            <form th:action="@{/comprarPlan}" method="post" class="cta-btn">
+            <form th:action="@{/comprarPlan}" method="post">
                 <input type="hidden" th:name="nombrePlan" th:value="premium">
-                <button type="submit" style="border:none">
+                <button type="submit" style="border:none" class="cta-btn">
                     Comprar plan
                 </button>
             </form>

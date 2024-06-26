@@ -32,7 +32,7 @@ public class ControladorCarrito {
         HttpSession sesion = request.getSession();
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
-        Cupon cupon = (Cupon) sesion.getAttribute("idCuponSeleccionado");
+        Cupon cupon = (Cupon) sesion.getAttribute("cupon");
 
         if (carrito != null) {
             Set<Libro> librosComprados = carritoService.obtenerLibrosComprados(carrito);
@@ -125,7 +125,7 @@ public class ControladorCarrito {
         HttpSession sesion = request.getSession();
         Carrito carrito = (Carrito) sesion.getAttribute("CARRITO");
         Cupon cupon = carritoService.buscarCuponPorId(id);
-        sesion.setAttribute("idCuponSeleccionado", cupon);
+        sesion.setAttribute("cupon", cupon);
 
         if (carrito != null && cupon != null) {
             carritoService.calcularTotalConCupon(carrito, cupon);

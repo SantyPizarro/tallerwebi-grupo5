@@ -6,9 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
+
 
 @Controller
 public class ControladorIntercambio {
@@ -16,14 +15,12 @@ public class ControladorIntercambio {
     private PerfilService perfilService;
     private ServicioLibro servicioLibro;
     private IntercambioService intercambioService;
-    private UsuarioService usuarioService;
 
     @Autowired
-    public ControladorIntercambio(PerfilService perfilService, ServicioLibro servicioLibro,IntercambioService intercambioService, UsuarioService usuarioService) {
+    public ControladorIntercambio(PerfilService perfilService, ServicioLibro servicioLibro,IntercambioService intercambioService) {
         this.perfilService = perfilService;
         this.servicioLibro = servicioLibro;
         this.intercambioService = intercambioService;
-        this.usuarioService = usuarioService;
     }
 
     @PostMapping("/intercambiar-libro")

@@ -81,14 +81,19 @@ public class ControladorPlanes {
     }
 
     @PostMapping("/comprarPlanPremium")
-    public String comprarPlanPremium(HttpServletRequest request) throws PlanYaAdquiridoException {
+    public String comprarPlanPremium(HttpServletRequest request, RedirectAttributes flash) throws PlanYaAdquiridoException {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("USUARIO");
 
         if(usuario != null) {
+            try {
             planService.comprarPlanPremium(usuario);
             planService.aplicarBeneficioPlanPremium(usuario);
-            return "redirect:/planes";
+            return "redirect:/planes";}
+            catch (PlanYaAdquiridoException e) {
+                flash.addFlashAttribute("error", "El usuario ya tiene un plan activo.");
+                return "redirect:/planes";
+            }
         }
 
         return "redirect:/login";

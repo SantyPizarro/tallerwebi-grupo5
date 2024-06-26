@@ -6,6 +6,7 @@ import com.tallerwebi.dominio.excepcion.LibroNoExiste;
 import com.tallerwebi.infraestructura.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -88,6 +89,23 @@ public class ControladorAdmin {
     public String eliminarLibro(@RequestParam Long libroId) {
         servicioLibro.eliminarLibroDeLibrosDestacados(libroId);
         return "redirect:/";
+    }
+
+    @PostMapping("/detalle-libro-admin")
+        public String detalleLibroAdmin(@RequestParam("titulo") String titulo, Model model,HttpServletRequest request) {
+            HttpSession sesion = request.getSession();
+            Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
+            if (usuario != null) {
+                Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
+                if (libro != null) {
+                    model.addAttribute("libro", libro);
+                    model.addAttribute("titulo", titulo);
+                    return "detalle-libro-admin";
+                } else {
+                    return "error";
+                }
+            }
+            return "redirect:/login";
     }
 
 

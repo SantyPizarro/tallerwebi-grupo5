@@ -12,9 +12,9 @@
 </head>
 <body>
 
-<header th:replace="header_footer :: header">
+<header th:replace="header_footer :: headerAdmin"></header>
 
-</header>
+
 
 <main>
     <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb" class="navegador-detalle">
@@ -24,34 +24,30 @@
             <li class="breadcrumb-item active" aria-current="page"><a th:text="${libro.titulo}"></a></li>
         </ol>
     </nav>
-<div class="contenedor">
+    <div class="contenedor">
 
-    <div class="contenedor-imagen">
-        <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}">
+        <div class="contenedor-imagen">
+            <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}">
+        </div>
+
+        <div class="contenedor-detalle">
+            <h1 th:text="${libro.getTitulo()}"></h1>
+
+            <h5 >Descripcion</h5>
+
+            <h6 class="autor" th:text="${libro.getAutor()}"></h6>
+
+            <h6 class="editorial" th:text="${libro.getEditorial()}"></h6>
+
+            <h6 class="genero" th:text="${libro.getGenero().getNombre()}"></h6>
+            <p class="notas-libro" th:text="${libro.getDescripcion()}"></p>
+
+            <p class="precio" th:text="${libro.getPrecio()}"></p>
+
+        </div>
+
+
     </div>
-
-    <div class="contenedor-detalle">
-        <h1 th:text="${libro.getTitulo()}"></h1>
-
-        <h5 >Descripcion</h5>
-
-        <h6 class="autor" th:text="${libro.getAutor()}"></h6>
-
-        <h6 class="editorial" th:text="${libro.getEditorial()}"></h6>
-
-        <h6 class="genero" th:text="${libro.getGenero().getNombre()}"></h6>
-        <p class="notas-libro" th:text="${libro.getDescripcion()}"></p>
-
-        <p class="precio" th:text="${libro.getPrecio()}"></p>
-
-        <form accept-charset="UTF-8" th:action="@{/carrito}" method="post">
-            <input type="hidden" th:name="id" th:value="${libro.id}">
-            <input class="boton-compra" type="submit" value="Agregar al carrito">
-        </form>
-    </div>
-
-
-</div>
 
 </main>
 

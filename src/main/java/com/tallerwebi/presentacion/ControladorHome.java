@@ -22,15 +22,16 @@ public class ControladorHome {
     private final ServicioPreferencias servicioPreferencias;
     private final SolicitudAmistadService solicitudAmistadService;
     private final NotificacionService notificacionService;
+    private final ServicioSliderHero servicioSliderHero;
 
     @Autowired
-    public ControladorHome(ServicioLibro servicioLibro, ServicioSuscriptor servicioSuscriptor, ServicioPreferencias servicioPreferencias, SolicitudAmistadService solicitudAmistadService, NotificacionService notificacionService) {
+    public ControladorHome(ServicioLibro servicioLibro, ServicioSuscriptor servicioSuscriptor, ServicioPreferencias servicioPreferencias, SolicitudAmistadService solicitudAmistadService, NotificacionService notificacionService, ServicioSliderHero servicioSliderHero) {
         this.servicioLibro = servicioLibro;
         this.servicioSuscriptor = servicioSuscriptor;
         this.servicioPreferencias = servicioPreferencias;
         this.solicitudAmistadService = solicitudAmistadService;
         this.notificacionService = notificacionService;
-
+        this.servicioSliderHero = servicioSliderHero;
     }
 
     @GetMapping("/home")
@@ -42,6 +43,7 @@ public class ControladorHome {
             modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
             modelAndView.addObject("librosOrdenados", servicioLibro.ordenarPorFechaAgregado());
             modelAndView.addObject("librosDestacados", servicioLibro.getLibrosDestacados());
+            modelAndView.addObject("sliderHeroes", servicioSliderHero.getAllSliderHeroes());
 
             Preferencias preferencias = new Preferencias(usuario);
 

@@ -120,13 +120,7 @@ public class ControladorAdmin {
     @PostMapping("/eliminarSliderHero")
     public String eliminarSliderHero(@RequestParam("imageName") String imageName, Model model) throws IOException {
         Path path = Paths.get(DIRECTORIOSLIDERHEROES + imageName);
-        boolean eliminado = Files.deleteIfExists(path);
-
-        if (eliminado) {
-            model.addAttribute("mensaje", "La imagen " + imageName + " ha sido eliminada");
-        } else {
-            model.addAttribute("mensaje", "La imagen " + imageName + " no pudo ser eliminada");
-        }
+        Files.deleteIfExists(path);
 
         return "redirect:/perfilAdmin";
     }

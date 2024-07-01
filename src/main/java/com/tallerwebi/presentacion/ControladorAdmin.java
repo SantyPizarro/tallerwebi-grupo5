@@ -28,13 +28,15 @@ public class ControladorAdmin {
 
     private final ServicioLibro servicioLibro;
     private final UsuarioService usuarioService;
+    private final ServicioSliderHero servicioSliderHero;
     private static final String DIRECTORIOSLIDERHEROES = "src/main/webapp/resources/core/images/slider-heroes/";
 
 
     @Autowired
-    public ControladorAdmin(ServicioLibro servicioLibro, UsuarioService usuarioService) {
+    public ControladorAdmin(ServicioLibro servicioLibro, UsuarioService usuarioService, ServicioSliderHero servicioSliderHero) {
         this.servicioLibro = servicioLibro;
         this.usuarioService = usuarioService;
+        this.servicioSliderHero = servicioSliderHero;
     }
 
     @GetMapping("/perfilAdmin")
@@ -110,6 +112,11 @@ public class ControladorAdmin {
         byte[] bytes = sliderHero.getBytes();
         Path path = Paths.get(DIRECTORIOSLIDERHEROES + sliderHero.getOriginalFilename());
         Files.write(path, bytes);
+
+        SliderHero newSliderHero = new SliderHero();
+        newSliderHero.setImageName(sliderHero.getOriginalFilename());
+
+        servicioSliderHero.save(newSliderHero);
 
         model.addAttribute("sliderHero", sliderHero.getOriginalFilename());
         model.addAttribute("mensaje", "El archivo " + sliderHero.getOriginalFilename() + " se ha guardado exitosamente");

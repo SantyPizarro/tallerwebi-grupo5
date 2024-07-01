@@ -91,3 +91,14 @@
 .imgDestacado{
     padding-right: 5px;
 }
+
+.boton-contacto a{
+    text-decoration: none;
+    color: white;
+}
+
+
+.boton-contacto a:hover{
+    text-decoration: none;
+    color: white;
+}

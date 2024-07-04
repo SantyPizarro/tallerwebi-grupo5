@@ -150,7 +150,7 @@
                 <div class="descripcion">
                     <h4>Descripción:</h4>
                     <p th:text="${usuario.descripcion}"></p>
-                    <div th:if="${planUsuario==true}">
+                    <div th:if="${planUsuario==true}"> <!-- AGREGAR VALIDACION QUE SI NO TIENE PLAN NO APAREZCA EL BOTON -->
                         <form th:action="@{/traerDatosAmigoAIntercambiar}" method="post">
                             <input type="hidden" name="usuarioAmigo" th:value="${usuario.id}">
                             <button  type="submit" class="btn btn-primary favbutton" id="botonIntercambiar" data-bs-toggle="modal"

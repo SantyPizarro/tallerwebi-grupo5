@@ -13,9 +13,7 @@ import javax.servlet.http.HttpSession;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class ControladorPerfilTest {
 
@@ -43,6 +41,8 @@ public class ControladorPerfilTest {
         controladorPerfil = new ControladorPerfil(servicioPerfilMock,servicioLibroMock,servicioPlanMock);
     }
 
+
+
     @Test
     public void usuarioPuedeVerSuPerfil(){
         // preparacion
@@ -56,6 +56,52 @@ public class ControladorPerfilTest {
 
         // validacion
         assertThat(modelAndView.getViewName(), equalToIgnoringCase("perfil"));
+    }
+
+    @Test
+    public void usuarioPuedeModificarSuPerfil() {
+        // Preparación
+        Usuario usuarioEncontradoMock = mock(Usuario.class);
+        Usuario usuarioNuevo = new Usuario();
+        when(sessionMock.getAttribute("USUARIO")).thenReturn(usuarioEncontradoMock);
+        when(requestMock.getSession()).thenReturn(sessionMock);
+        // Ejecución
+        String redirectView = controladorPerfil.editarPerfilCompleto(null,usuarioNuevo,redirectAttributesMock,requestMock);
+
+        // Validación
+        assertThat(redirectView, is("redirect:/perfil"));
+        verify(redirectAttributesMock).addFlashAttribute("success", "Usuario modificado");
+    }
+
+    @Test
+    public void usuarioNoEncontradoEnSesion() {
+        // Preparación
+        when(sessionMock.getAttribute("USUARIO")).thenReturn(null);
+        when(requestMock.getSession()).thenReturn(sessionMock);
+
+        // Ejecución
+        String redirectView = controladorPerfil.editarPerfilCompleto(null, new Usuario(), redirectAttributesMock, requestMock);
+
+        // Validación
+        assertThat(redirectView, is("redirect:/perfil"));
+        verify(redirectAttributesMock).addFlashAttribute("error", "Usuario no encontrado");
+    }
+
+    @Test
+    public void errorAlGuardarLaFoto() {
+        // Preparación
+        Usuario usuarioEncontradoMock = mock(Usuario.class);
+        Usuario usuarioNuevo = new Usuario();
+        when(sessionMock.getAttribute("USUARIO")).thenReturn(usuarioEncontradoMock);
+        when(requestMock.getSession()).thenReturn(sessionMock);
+        doThrow(new RuntimeException("Error al guardar la foto")).when(servicioPerfilMock).editarPerfilCompleto(usuarioEncontradoMock, usuarioNuevo, null);
+
+        // Ejecución
+        String redirectView = controladorPerfil.editarPerfilCompleto(null, usuarioNuevo, redirectAttributesMock, requestMock);
+
+        // Validación
+        assertThat(redirectView, is("redirect:/login"));
+        verify(redirectAttributesMock).addFlashAttribute("error", "Error al guardar la foto: Error al guardar la foto");
     }
 
     @Test

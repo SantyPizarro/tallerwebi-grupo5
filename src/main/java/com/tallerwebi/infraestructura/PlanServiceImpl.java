@@ -131,8 +131,8 @@ public class PlanServiceImpl implements PlanService {
 
 
 
-
-    private Boolean verificarPlan(Usuario usuario) {
+    @Override
+    public Boolean verificarPlan(Usuario usuario) {
         return usuario.getPlan().getTipoPlan().getNombre().equalsIgnoreCase("free");
     }
 

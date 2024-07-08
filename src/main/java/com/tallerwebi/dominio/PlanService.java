@@ -20,7 +20,7 @@ public interface PlanService {
 
     void verificarYActualizarPlanesExpirados();
 
-
+    Boolean verificarPlan(Usuario usuario);
    /* void actualizarPlanUsuario(Usuario usuario,Long planId);
     void aplicarBeneficio(Usuario usuario);
 */

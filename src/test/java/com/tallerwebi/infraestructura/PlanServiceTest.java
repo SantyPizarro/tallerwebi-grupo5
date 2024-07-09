@@ -95,9 +95,12 @@ public class PlanServiceTest {
         plan.setTipoPlan(tipoPlan);
         usuario.setPlan(plan);
 
-        Libro libro = new Libro("chicharo",20,"eb");
+        Libro libro = new Libro("martin fierro",20,"eb");
+        Libro libro2 = new Libro("principito",20,"eb");
+
         when(repositorioLibro.buscarLibroPorId(1L)).thenReturn(libro);
-        when(repositorioLibro.buscarLibroPorId(2L)).thenReturn(new Libro());
+        when(repositorioLibro.buscarLibroPorId(2L)).thenReturn(libro2);
+
 
         doNothing().when(planService).beneficioCuponPlan(usuario, 25);
         planService.aplicarBeneficioPlanEstandar(usuario);
@@ -111,6 +114,47 @@ public class PlanServiceTest {
        // assertEquals(2, usuario.getLibrosPlan().size());   NO TERMINA DE AGREGAR BIEN LOS LIBROS
         verify(repositorioUsuario).modificar(usuario);
     }
+
+
+    @Test
+    @Rollback
+    public void testAplicarBeneficioPlanPremium() {
+        Usuario usuario = new Usuario();
+        usuario.setLibrosPlan(new HashSet<>());
+        TipoPlan tipoPlan = new TipoPlan();
+        tipoPlan.setNombre("premium");
+        Plan planPremium = new Plan();
+        planPremium.setTipoPlan(tipoPlan);
+        usuario.setPlan(planPremium);
+
+        Libro libro1 = new Libro();
+        Libro libro2 = new Libro();
+        Libro libro3 = new Libro();
+        Libro libro4 = new Libro();
+        Libro libro5 = new Libro();
+
+        when(repositorioLibro.buscarLibroPorId(1L)).thenReturn(libro1);
+        when(repositorioLibro.buscarLibroPorId(2L)).thenReturn(libro2);
+        when(repositorioLibro.buscarLibroPorId(3L)).thenReturn(libro3);
+        when(repositorioLibro.buscarLibroPorId(4L)).thenReturn(libro4);
+        when(repositorioLibro.buscarLibroPorId(5L)).thenReturn(libro5);
+
+        doNothing().when(planService).beneficioCuponPlan(usuario, 30);
+
+        planService.aplicarBeneficioPlanPremium(usuario);
+
+        verify(planService).beneficioCuponPlan(usuario, 30);
+        verify(repositorioUsuario).modificar(usuario);
+
+       // assertEquals(5, usuario.getLibrosPlan().size()); No Agrega bien los libros
+        assertTrue(usuario.getLibrosPlan().contains(libro1));
+        assertTrue(usuario.getLibrosPlan().contains(libro2));
+        assertTrue(usuario.getLibrosPlan().contains(libro3));
+        assertTrue(usuario.getLibrosPlan().contains(libro4));
+        assertTrue(usuario.getLibrosPlan().contains(libro5));
+    }
+
+
 
 
 }

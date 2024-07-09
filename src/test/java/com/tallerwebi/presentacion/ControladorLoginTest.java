@@ -29,7 +29,7 @@ public class ControladorLoginTest {
 
 	@BeforeEach
 	public void init(){
-		datosLoginMock = new DatosLogin("dami@unlam.com", "123");
+		datosLoginMock = new DatosLogin("test@unlam.edu.ar", "test");
 		usuarioMock = mock(Usuario.class);
 		when(usuarioMock.getEmail()).thenReturn("dami@unlam.com");
 		requestMock = mock(HttpServletRequest.class);
@@ -49,15 +49,18 @@ public class ControladorLoginTest {
 
 		// validacion
 		assertThat(modelAndView.getViewName(), equalToIgnoringCase("login"));
-		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Usuario o clave incorrecta"));
+		assertThat(modelAndView.getModel().get("error").toString(), equalToIgnoringCase("Usuario no encontrado"));
 		verify(sessionMock, times(0)).setAttribute("ROL", "ADMIN");
 	}
-	
+
 	@Test
-	public void loginConUsuarioYPasswordCorrectosDeberiaLLevarAHome(){
+	public void loginAdministradorConUsuarioYPasswordCorrectosDeberiaLLevarAPerfilAdmin(){
 		// preparacion
 		Usuario usuarioEncontradoMock = mock(Usuario.class);
 		when(usuarioEncontradoMock.getRol()).thenReturn("ADMIN");
+		when(usuarioEncontradoMock.getEmail()).thenReturn("test@unlam.edu.ar");
+		when(usuarioEncontradoMock.getPassword()).thenReturn("test");
+
 
 		when(requestMock.getSession()).thenReturn(sessionMock);
 		when(servicioLoginMock.consultarUsuario(anyString())).thenReturn(usuarioEncontradoMock);
@@ -66,18 +69,18 @@ public class ControladorLoginTest {
 		ModelAndView modelAndView = controladorLogin.validarLogin(datosLoginMock, requestMock);
 		
 		// validacion
-		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/home"));
-		verify(sessionMock, times(1)).setAttribute("ROL", usuarioEncontradoMock.getRol());
+		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/perfilAdmin"));
+		verify(sessionMock, times(1)).setAttribute("nombreUsuario", usuarioEncontradoMock.getNombreDeUsuario());
 	}
 
 	@Test
-	public void registrameSiUsuarioNoExisteDeberiaCrearUsuarioYVolverAlLogin() throws UsuarioExistente, NoCoincideContrasenia {
+	public void registrameSiUsuarioNoExisteDeberiaCrearUsuarioYMostrarPantallaDeCodigoDeVerificacion() throws UsuarioExistente, NoCoincideContrasenia {
 
 		// ejecucion
 		ModelAndView modelAndView = controladorLogin.registrarme(datosRegistroMock);
 
 		// validacion
-		assertThat(modelAndView.getViewName(), equalToIgnoringCase("redirect:/login"));
+		assertThat(modelAndView.getViewName(), equalToIgnoringCase("codigoDeVerificacion"));
 		verify(servicioLoginMock, times(1)).registrar(datosRegistroMock);
 	}
 

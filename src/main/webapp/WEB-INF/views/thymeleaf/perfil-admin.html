@@ -127,6 +127,10 @@
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newsletterModal">
         Enviar Newsletter
     </button>
+    <button type="button" class= "btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarSliderHero">
+        Editar Slider Hero
+    </button>
+    <a th:href="contactoMensajes" class="btn btn-primary">Ver mensajes de contacto</a>
 </section>
 
 <!-- Modal -->
@@ -221,9 +225,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="librosModalLabel">Libros Destacados</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <h2>Lista Actual</h2>
@@ -285,6 +287,41 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="editarSliderHero" tabindex="-1" aria-labelledby="editarSliderHeroLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarSliderHeroLabel">Editar Slider hero</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form th:action="@{/editarSliderHero}" method="post" enctype="multipart/form-data">
+                    <label for="formFile" class="form-label">Seleccionar nueva imagen</label>
+                    <input class="form-control" type="file" id="sliderHero" name="sliderHero">
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar nueva imagen</button>
+                    </div>
+                </form>
+                <hr>
+                <div>
+                    <h5>Imágenes actuales</h5>
+                    <div class="row">
+                        <div th:each="image : ${sliderHeroes}" class="col-md-3">
+                            <div class="card mb-3">
+                                <img th:src="@{'/images/slider-heroes/' + ${image}}" class="card-img-top" alt="Imagen">
+                                <div class="card-body text-center">
+                                    <button class="btn btn-primary btn-select" th:data-image="${image}" type="button">Seleccionar</button>
+                                    <button class="btn btn-danger btn-delete" th:data-image="${image}" th:action="@{/eliminarSliderHero}"  >Eliminar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer th:replace="header_footer :: footer"></footer>
 
@@ -313,6 +350,7 @@
 </script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>
 <script th:src="@{/js/menuUsuario.js}"></script>
+<script th:src="@{/js/perfilAdmin.js}"></script>
 
 </body>
 </html>

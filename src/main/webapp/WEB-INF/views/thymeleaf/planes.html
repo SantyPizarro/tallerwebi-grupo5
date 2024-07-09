@@ -30,8 +30,11 @@
             <ul class="features">
                 <li th:utext="${basic}"></li>
             </ul>
-            <form th:action="@{/comprarPlanBasico}" method="post">
-                <button class="cta-btn" type="submit">SELECT</button>
+            <form th:action="@{/comprarPlan}" method="post">
+                <input type="hidden" th:name="nombrePlan" th:value="basic">
+                <button type="submit" style="border:none" class="cta-btn">
+                    Comprar plan
+                </button>
             </form>
         </div>
 
@@ -46,8 +49,11 @@
             <ul class="features">
                 <li th:utext="${estandar}"></li>
             </ul>
-            <form th:action="@{/comprarPlanEstandar}" method="post">
-                <button class="cta-btn" type="submit">SELECT</button>
+            <form th:action="@{/comprarPlan}" method="post">
+                <input type="hidden" th:name="nombrePlan" th:value="estandar">
+                <button type="submit" style="border:none" class="cta-btn">
+                    Comprar plan
+                </button>
             </form>
         </div>
 
@@ -62,14 +68,35 @@
             <ul class="features">
                 <li th:utext="${premium}"></li>
             </ul>
-            <form th:action="@{/comprarPlanPremium}" method="post">
-                <button class="cta-btn" type="submit">SELECT</button>
+            <form th:action="@{/comprarPlan}" method="post">
+                <input type="hidden" th:name="nombrePlan" th:value="premium">
+                <button type="submit" style="border:none" class="cta-btn">
+                    Comprar plan
+                </button>
             </form>
         </div>
     </section>
 </main>
 
 <footer th:replace="header_footer :: footer"></footer>
+
+<script>
+    const mp = new MercadoPago('APP_USR-1ad60a1a-2341-4c9b-abdc-d41cc1e4d8d7', {
+        locale: 'es-AR'
+    });
+
+    mp.bricks().create("wallet", "wallet_container", {
+        initialization: {
+            preferenceId: "<PREFERENCE_ID>",
+            redirectMode: "blank"
+        },
+        customization: {
+            texts: {
+                valueProp: 'smart_option',
+            },
+        },
+    });
+</script>
 
 <script type="text/javascript" th:src="@{/js/carrito.js}"></script>
 <script type="text/javascript" th:src="@{webjars/bootstrap/5.2.0/js/bootstrap.min.js}"></script>

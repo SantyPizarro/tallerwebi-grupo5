@@ -15,6 +15,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,11 +28,15 @@ public class ControladorAdmin {
 
     private final ServicioLibro servicioLibro;
     private final UsuarioService usuarioService;
+    private final ServicioSliderHero servicioSliderHero;
+    private static final String DIRECTORIOSLIDERHEROES = "src/main/webapp/resources/core/images/slider-heroes/";
+
 
     @Autowired
-    public ControladorAdmin(ServicioLibro servicioLibro, UsuarioService usuarioService) {
+    public ControladorAdmin(ServicioLibro servicioLibro, UsuarioService usuarioService, ServicioSliderHero servicioSliderHero) {
         this.servicioLibro = servicioLibro;
         this.usuarioService = usuarioService;
+        this.servicioSliderHero = servicioSliderHero;
     }
 
     @GetMapping("/perfilAdmin")
@@ -40,6 +50,7 @@ public class ControladorAdmin {
             model.put("usuarios",usuarioService.mostrarUsers());
             model.put("usuariosAdmin",usuarioService.mostrarAdmins());
             model.put("usuario", usuario);
+            model.put("sliderHeroes", obtenerImagenesSliderHeroes());
 
             model.put("datosLibro", datosLibro);
             model.put("libros", servicioLibro.obtenerTodosLosLibros());
@@ -82,32 +93,56 @@ public class ControladorAdmin {
     @PostMapping("/agregarLibroDestacado")
     public String agregarLibro(@RequestParam Long libroId) {
         servicioLibro.agregarLibroALibrosDestacados(libroId);
-        return "redirect:/";
+        return "redirect:/perfilAdmin";
     }
 
     @PostMapping("/eliminarLibroDestacado")
     public String eliminarLibro(@RequestParam Long libroId) {
         servicioLibro.eliminarLibroDeLibrosDestacados(libroId);
-        return "redirect:/";
+        return "redirect:/perfilAdmin";
     }
 
-    @PostMapping("/detalle-libro-admin")
-        public String detalleLibroAdmin(@RequestParam("titulo") String titulo, Model model,HttpServletRequest request) {
-            HttpSession sesion = request.getSession();
-            Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
-            if (usuario != null) {
-                Libro libro = servicioLibro.mostrarDetalleLibro(titulo);
-                if (libro != null) {
-                    model.addAttribute("libro", libro);
-                    model.addAttribute("titulo", titulo);
-                    return "detalle-libro-admin";
-                } else {
-                    return "error";
+    @PostMapping("/editarSliderHero")
+    public String editarSliderHero(@RequestParam(name = "sliderHero", required = false) MultipartFile sliderHero, Model model) throws IOException {
+        if (sliderHero.isEmpty()) {
+            model.addAttribute("mensaje", "No se ha seleccionado ningún archivo");
+            return "redirect:/perfilAdmin";
+        }
+
+        byte[] bytes = sliderHero.getBytes();
+        Path path = Paths.get(DIRECTORIOSLIDERHEROES + sliderHero.getOriginalFilename());
+        Files.write(path, bytes);
+
+        SliderHero newSliderHero = new SliderHero();
+        newSliderHero.setImageName(sliderHero.getOriginalFilename());
+
+        servicioSliderHero.save(newSliderHero);
+
+        model.addAttribute("sliderHero", sliderHero.getOriginalFilename());
+        model.addAttribute("mensaje", "El archivo " + sliderHero.getOriginalFilename() + " se ha guardado exitosamente");
+
+        return "redirect:/perfilAdmin";
+    }
+
+    @PostMapping("/eliminarSliderHero")
+    public String eliminarSliderHero(@RequestParam("imageName") String imageName, Model model) throws IOException {
+        Path path = Paths.get(DIRECTORIOSLIDERHEROES + imageName);
+        Files.deleteIfExists(path);
+
+        return "redirect:/perfilAdmin";
+    }
+
+    private List<String> obtenerImagenesSliderHeroes() {
+        File carpeta = new File(DIRECTORIOSLIDERHEROES);
+        File[] archivos = carpeta.listFiles();
+        List<String> nombresArchivos = new ArrayList<>();
+        if (archivos != null) {
+            for (File archivo : archivos) {
+                if (archivo.isFile() && (archivo.getName().toLowerCase().endsWith(".jpg") || archivo.getName().toLowerCase().endsWith(".png"))) {
+                    nombresArchivos.add(archivo.getName());
                 }
             }
-            return "redirect:/login";
+        }
+        return nombresArchivos;
     }
-
-
-
 }

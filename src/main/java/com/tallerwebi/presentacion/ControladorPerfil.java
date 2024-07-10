@@ -42,7 +42,6 @@ public class ControladorPerfil {
             model.put("libroPlan", perfilService.buscarLibrosDePlan(usuario));
             model.put("historialDeCompras", perfilService.historialDeCompras(usuario));
             model.put("amigosUsuario", perfilService.buscarAmigos(usuario));
-            model.put("planUsuario",perfilService.verificarPlan(usuario));
             model.addAttribute("free", planService.descripcionPlanes(1L));
             model.addAttribute("basic", planService.descripcionPlanes(2L));
             model.addAttribute("estandar", planService.descripcionPlanes(3L));

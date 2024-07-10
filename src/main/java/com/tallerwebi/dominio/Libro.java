@@ -32,6 +32,11 @@ public class Libro{
         this.precio = precio;
     }
 
+    public Libro(Long id, String titulo){
+        this.id = id;
+        this.titulo = titulo;
+    }
+
     public Libro(Long id, String titulo, Genero genero){
         this.id = id;
         this.titulo = titulo;

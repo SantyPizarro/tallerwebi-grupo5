@@ -26,7 +26,7 @@ public class RepositorioLibroImplTest {
     @Autowired
     private SessionFactory sessionFactory;
 
-    private RepositorioLibro repositorioLibro; // Aquí debería ser autowired el repositorio real, no un mock
+    private RepositorioLibro repositorioLibro;
 
     private ServicioLibro servicioLibro;
     private RepositorioLibroImpl repositorioLibroImpl;
@@ -35,8 +35,8 @@ public class RepositorioLibroImplTest {
     public void init() {
         insertarDatosPrueba();
 
-        servicioLibro = new ServicioLibro(repositorioLibro); // Instancia real del servicio, no mock
-        repositorioLibroImpl = new RepositorioLibroImpl(sessionFactory); // Instancia real del repositorio, no mock
+        servicioLibro = new ServicioLibro(repositorioLibro);
+        repositorioLibroImpl = new RepositorioLibroImpl(sessionFactory);
 
 
     }

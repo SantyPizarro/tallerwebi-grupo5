@@ -223,6 +223,22 @@
             <version>2.12.3</version>
         </dependency>
 
+        <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>4.0.0</version> <!-- Ejemplo de versión, verifica la más reciente -->
+    </dependency>
+    <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>1.14.4</version> <!-- Ejemplo de versión, verifica la más reciente -->
+    </dependency>
+    <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy-agent</artifactId>
+        <version>1.14.4</version> <!-- Ejemplo de versión, verifica la más reciente -->
+    </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
         <dependency>
             <groupId>com.h2database</groupId>

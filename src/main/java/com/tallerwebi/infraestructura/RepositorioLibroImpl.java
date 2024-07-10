@@ -159,6 +159,4 @@ public class RepositorioLibroImpl implements RepositorioLibro {
                 .setParameter("generos", generos)
                 .getResultList();
     }
-
-
 }

@@ -27,6 +27,30 @@ public class Libro{
     public Libro(){
 
     }
+
+    public Libro(double precio){
+        this.precio = precio;
+    }
+
+    public Libro(Long id, String titulo, Genero genero){
+        this.id = id;
+        this.titulo = titulo;
+        this.genero = genero;
+    }
+
+    public Libro(String titulo, Double precio, Genero genero){
+        this.titulo = titulo;
+        this.precio = precio;
+        this.genero = genero;
+    }
+
+    public Libro(String titulo, Double precio, String editorial, Genero genero){
+        this.titulo = titulo;
+        this.precio = precio;
+        this.editorial = editorial;
+        this.genero = genero;
+    }
+
     public Libro(String titulo, double precio, String editorial) {
         this.titulo = titulo;
         this.precio = precio;
@@ -45,13 +69,28 @@ public class Libro{
         this.fechaAgregado = LocalDate.now().toString();
     }
 
-    public Libro(Long id,String titulo){
+    public Libro(String titulo, String fechaAgregado){
         this.titulo = titulo;
-        this.id = id;
+        this.fechaAgregado = fechaAgregado;
+
+    }
+
+    public Libro(String titulo, String editorial, String fechaAgregado, Double precio, Genero genero){
+        this.titulo = titulo;
+        this.editorial = editorial;
+        this.fechaAgregado = fechaAgregado;
+        this.precio = precio;
+        this.genero = genero;
     }
 
     @ManyToOne
+    @JoinColumn(name = "genero_id")
     private Genero genero;
+
+    public Libro(String titulo, Genero genero) {
+        this.titulo = titulo;
+        this.genero = genero;
+    }
 
     public Genero getGenero(){
         return genero;

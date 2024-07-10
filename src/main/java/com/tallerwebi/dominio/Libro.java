@@ -45,6 +45,11 @@ public class Libro{
         this.fechaAgregado = LocalDate.now().toString();
     }
 
+    public Libro(Long id,String titulo){
+        this.titulo = titulo;
+        this.id = id;
+    }
+
     @ManyToOne
     private Genero genero;
 

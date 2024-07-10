@@ -88,15 +88,16 @@ public class PlanServiceTest {
     @Rollback
     public void testAplicarBeneficioPlanEstandar() {
         Usuario usuario = new Usuario();
-        usuario.setLibrosPlan(new HashSet<>());
+        HashSet<Libro> librosPlan= new HashSet<>();
+        usuario.setLibrosPlan(librosPlan);
         Plan plan = new Plan();
         TipoPlan tipoPlan = new TipoPlan();
         tipoPlan.setNombre("standard");
         plan.setTipoPlan(tipoPlan);
         usuario.setPlan(plan);
 
-        Libro libro = new Libro("martin fierro",20,"eb");
-        Libro libro2 = new Libro("principito",20,"eb");
+        Libro libro = new Libro(1L,"martin fierro");
+        Libro libro2 = new Libro(2L,"principito");
 
         when(repositorioLibro.buscarLibroPorId(1L)).thenReturn(libro);
         when(repositorioLibro.buscarLibroPorId(2L)).thenReturn(libro2);
@@ -105,13 +106,8 @@ public class PlanServiceTest {
         doNothing().when(planService).beneficioCuponPlan(usuario, 25);
         planService.aplicarBeneficioPlanEstandar(usuario);
 
-        System.out.println("Libros en el plan después de aplicar el beneficio: " + usuario.getLibrosPlan().size());
-        for (Libro l : usuario.getLibrosPlan()) {
-            System.out.println("Libro: " + l.toString());
-        }
-
         verify(planService).beneficioCuponPlan(usuario, 25);
-       // assertEquals(2, usuario.getLibrosPlan().size());   NO TERMINA DE AGREGAR BIEN LOS LIBROS
+        assertEquals(2, usuario.getLibrosPlan().size());
         verify(repositorioUsuario).modificar(usuario);
     }
 
@@ -127,11 +123,11 @@ public class PlanServiceTest {
         planPremium.setTipoPlan(tipoPlan);
         usuario.setPlan(planPremium);
 
-        Libro libro1 = new Libro();
-        Libro libro2 = new Libro();
-        Libro libro3 = new Libro();
-        Libro libro4 = new Libro();
-        Libro libro5 = new Libro();
+        Libro libro1 = new Libro(1L,"martin fierro");
+        Libro libro2 = new Libro(2L,"principito");
+        Libro libro3 = new Libro(3L,"Don Quijote de la Mancha");
+        Libro libro4 = new Libro(4L,"El Jardín Secreto");
+        Libro libro5 = new Libro(5L,"Los Miserables");
 
         when(repositorioLibro.buscarLibroPorId(1L)).thenReturn(libro1);
         when(repositorioLibro.buscarLibroPorId(2L)).thenReturn(libro2);
@@ -146,7 +142,7 @@ public class PlanServiceTest {
         verify(planService).beneficioCuponPlan(usuario, 30);
         verify(repositorioUsuario).modificar(usuario);
 
-       // assertEquals(5, usuario.getLibrosPlan().size()); No Agrega bien los libros
+        assertEquals(5, usuario.getLibrosPlan().size());
         assertTrue(usuario.getLibrosPlan().contains(libro1));
         assertTrue(usuario.getLibrosPlan().contains(libro2));
         assertTrue(usuario.getLibrosPlan().contains(libro3));

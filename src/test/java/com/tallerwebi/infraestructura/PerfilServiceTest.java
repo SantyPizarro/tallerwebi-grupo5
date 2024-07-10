@@ -4,6 +4,7 @@ import com.tallerwebi.dominio.*;
 import com.tallerwebi.dominio.excepcion.LibroExistente;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
@@ -93,19 +94,20 @@ public class PerfilServiceTest {
         when(foto.getBytes()).thenReturn("foto data".getBytes());
 
         Path mockPath = mock(Path.class);
-        mockStatic(Files.class);
-        when(Files.createDirectories(any(Path.class))).thenReturn(mockPath);
-        when(Files.write(any(Path.class), any(byte[].class))).thenReturn(mockPath);
+        try (MockedStatic<Files> mockedFiles = mockStatic(Files.class)) {
+            mockedFiles.when(() -> Files.createDirectories(any(Path.class))).thenReturn(mockPath);
+            mockedFiles.when(() -> Files.write(any(Path.class), any(byte[].class))).thenReturn(mockPath);
 
-        perfilService.editarPerfilCompleto(usuarioExistente, usuario, foto);
+            perfilService.editarPerfilCompleto(usuarioExistente, usuario, foto);
 
-        assertEquals("Nueva descripcion", usuarioExistente.getDescripcion());
-        assertEquals("NuevoNombre", usuarioExistente.getNombreDeUsuario());
-        assertEquals("Genero1", usuarioExistente.getGeneroFav1());
-        assertEquals("Genero2", usuarioExistente.getGeneroFav2());
-        assertEquals("nueva_foto.jpg", usuarioExistente.getFoto());
+            assertEquals("Nueva descripcion", usuarioExistente.getDescripcion());
+            assertEquals("NuevoNombre", usuarioExistente.getNombreDeUsuario());
+            assertEquals("Genero1", usuarioExistente.getGeneroFav1());
+            assertEquals("Genero2", usuarioExistente.getGeneroFav2());
+            assertEquals("nueva_foto.jpg", usuarioExistente.getFoto());
 
-        verify(repositorioUsuario, times(2)).modificar(usuarioExistente);
+            verify(repositorioUsuario, times(2)).modificar(usuarioExistente);
+        }
     }
 
     @Test

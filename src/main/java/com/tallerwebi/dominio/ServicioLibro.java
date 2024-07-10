@@ -2,6 +2,7 @@ package com.tallerwebi.dominio;
 
 import com.tallerwebi.dominio.excepcion.LibroExistente;
 import com.tallerwebi.dominio.excepcion.LibroNoExiste;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,12 +20,20 @@ public class ServicioLibro {
 
     private final RepositorioLibro repositorioLibro;
     private final List<Libro> librosDestacados = new ArrayList<>();
+    private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
 
 
     @Autowired
     public ServicioLibro(RepositorioLibro repositorioLibro) {
         this.repositorioLibro = repositorioLibro;
     }
+
+
 
     public List<Libro> obtenerTodosLosLibros(){
         return repositorioLibro.obtenerTodosLosLibros();
@@ -116,4 +125,6 @@ public class ServicioLibro {
     public void eliminarLibroDeLibrosDestacados(Long id) {
         librosDestacados.removeIf(libro -> libro.getId().equals(id));
     }
+
+
 }

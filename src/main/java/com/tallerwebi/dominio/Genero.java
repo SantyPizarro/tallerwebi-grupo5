@@ -26,6 +26,10 @@ public class Genero {
 
     }
 
+    public Genero(String nombre) {
+        this.nombre = nombre;
+    }
+
 
     public Long getId() {
         return id;

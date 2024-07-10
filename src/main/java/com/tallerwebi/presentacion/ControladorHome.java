@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class ControladorHome {
@@ -40,22 +43,34 @@ public class ControladorHome {
         Usuario usuario = (Usuario) sesion.getAttribute("USUARIO");
         if (usuario != null) {
             ModelAndView modelAndView = new ModelAndView("home");
-            modelAndView.addObject("libros", servicioLibro.obtenerTodosLosLibros());
-            modelAndView.addObject("librosOrdenados", servicioLibro.ordenarPorFechaAgregado());
-            modelAndView.addObject("librosDestacados", servicioLibro.getLibrosDestacados());
-            modelAndView.addObject("sliderHeroes", servicioSliderHero.getAllSliderHeroes());
+            List<Libro> libros = servicioLibro.obtenerTodosLosLibros();
+            List<Libro> librosOrdenados = servicioLibro.ordenarPorFechaAgregado();
+            List<Libro> librosDestacados = servicioLibro.getLibrosDestacados();
+            List<SliderHero> sliderHeroes = servicioSliderHero.getAllSliderHeroes();
+            Set<Libro> librosUsuario = usuario.getLibrosComprados();
+
+            // Agrega información de si el usuario ya compró el libro
+            Map<Long, Boolean> librosCompradosMap = new HashMap<>();
+            for (Libro libro : libros) {
+                librosCompradosMap.put(libro.getId(), librosUsuario.contains(libro));
+            }
 
             Preferencias preferencias = new Preferencias(usuario);
-
             List<Libro> librosRecomendados = servicioPreferencias.recomendarLibros(preferencias);
 
+            modelAndView.addObject("libros", libros);
+            modelAndView.addObject("librosOrdenados", librosOrdenados);
+            modelAndView.addObject("librosDestacados", librosDestacados);
+            modelAndView.addObject("sliderHeroes", sliderHeroes);
+            modelAndView.addObject("librosUsuario", librosUsuario);
             modelAndView.addObject("librosRecomendados", librosRecomendados);
             modelAndView.addObject("cantidadNotificaciones", notificacionService.cantidadDeNotificaciones(usuario));
+            modelAndView.addObject("librosCompradosMap", librosCompradosMap);
+
             return modelAndView;
         }
 
         return new ModelAndView("redirect:/login");
-
     }
 
     @PostMapping("/suscribirse")

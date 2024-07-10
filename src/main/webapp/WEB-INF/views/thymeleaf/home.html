@@ -38,22 +38,27 @@
   <h3 class="colorLetra">Libros Destacados:</h3>
   <section class="libros owl-carousel owl-theme" id="carousel-libros">
     <div th:each="libro : ${#lists.isEmpty(librosDestacados) ? libros : librosDestacados}" class="tarjeta-libro">
-        <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="" width="286px" height="410px">
-        <div class="contenido-tarjeta-libro">
-          <h3 class="titulo-libro colorLetra" th:text="${libro.titulo}">titulo del Libro</h3>
-          <p class="precio-libro" th:text="${libro.precio}">$</p>
-          <div class="botones-libro">
-            <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
-              <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
-              <a class="detalles"><button type="submit">Detalles</button></a>
-            </form>
+      <img th:src="${libro.ruta}" th:alt-title="${libro.titulo}" alt="" width="286px" height="410px">
+      <div class="contenido-tarjeta-libro">
+        <h3 class="titulo-libro colorLetra" th:text="${libro.titulo}">titulo del Libro</h3>
+        <p class="precio-libro" th:text="${libro.precio}">$</p>
+        <div class="botones-libro">
+          <form accept-charset="UTF-8" th:action="@{/detalle-libro}" method="post">
+            <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
+            <a class="detalles"><button type="submit">Detalles</button></a>
+          </form>
+          <div th:if="${librosCompradosMap[libro.id]} == false">
             <form accept-charset="UTF-8" th:action="@{/carrito}" method="post">
               <input type="hidden" th:name="id" th:value="${libro.id}">
               <a class="comprar boton-compra"><button type="submit">Comprar</button></a>
             </form>
           </div>
+          <div th:if="${librosCompradosMap[libro.id]} == true">
+            <a class="comprar boton-compra"><button style="background-color: #b7b9b7;" disabled>Comprado</button></a>
+          </div>
         </div>
       </div>
+    </div>
   </section>
 
   <h3 th:if="${librosRecomendados.size() > 0}" class="colorLetra">Libros recomendados para ti:</h3>
@@ -68,14 +73,20 @@
             <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
             <a class="detalles"><button type="submit">Detalles</button></a>
           </form>
-          <form accept-charset="UTF-8" th:action="@{/carrito}" method="post">
-            <input type="hidden" th:name="id" th:value="${libro.id}">
-            <a class="comprar boton-compra"><button type="submit">Comprar</button></a>
-          </form>
+          <div th:if="${librosCompradosMap[libro.id]} == false">
+            <form accept-charset="UTF-8" th:action="@{/carrito}" method="post">
+              <input type="hidden" th:name="id" th:value="${libro.id}">
+              <a class="comprar boton-compra"><button type="submit">Comprar</button></a>
+            </form>
+          </div>
+          <div th:if="${librosCompradosMap[libro.id]} == true">
+            <a class="comprar boton-compra"><button style="background-color: #b7b9b7;" disabled>Comprado</button></a>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
 
   <h3 class="colorLetra">Libros añadidos recientemente:</h3>
   <section class="libros owl-carousel owl-theme" id="carousel-libros-ordenados">
@@ -89,14 +100,20 @@
             <input type="hidden" th:name="titulo" th:value="${libro.titulo}">
             <a class="detalles"><button type="submit">Detalles</button></a>
           </form>
-          <form accept-charset="UTF-8" th:action="@{/carrito}" method="post">
-            <input type="hidden" th:name="id" th:value="${libro.id}">
-            <a class="comprar boton-compra"><button type="submit">Comprar</button></a>
-          </form>
+          <div th:if="${librosCompradosMap[libro.id]} == false">
+            <form accept-charset="UTF-8" th:action="@{/carrito}" method="post">
+              <input type="hidden" th:name="id" th:value="${libro.id}">
+              <a class="comprar boton-compra"><button type="submit">Comprar</button></a>
+            </form>
+          </div>
+          <div th:if="${librosCompradosMap[libro.id]} == true">
+            <a class="comprar boton-compra"><button style="background-color: #b7b9b7;" disabled>Comprado</button></a>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
 
   <section class="newsletter">
 

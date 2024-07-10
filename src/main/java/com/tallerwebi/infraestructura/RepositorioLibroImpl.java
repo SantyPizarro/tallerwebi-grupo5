@@ -16,8 +16,11 @@ import java.util.List;
 @Transactional
 public class RepositorioLibroImpl implements RepositorioLibro {
 
+    private SessionFactory sessionFactory;
 
-    final private SessionFactory sessionFactory;
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Autowired
     public RepositorioLibroImpl(SessionFactory sessionFactory) {
@@ -103,7 +106,7 @@ public class RepositorioLibroImpl implements RepositorioLibro {
     public List<Libro> ordenarPorFechaAgregado() {
 
         Session session = sessionFactory.getCurrentSession();
-        String hql = "FROM Libro ORDER BY STR_TO_DATE(fechaAgregado, '%Y-%m-%d') DESC";
+        String hql = "FROM Libro ORDER BY fechaAgregado DESC";
         Query query = session.createQuery(hql);
         return query.getResultList();
     }

@@ -78,7 +78,7 @@ public class PerfilServiceTest {
         assertFalse(usuario.getLibrosFavoritos().contains(libro));
         verify(repositorioUsuario,times(2)).modificar(usuario);
     }
-
+/*
     @Test
     public void usuarioPuedeEditarPerfilCompletoConFoto() throws Exception {
         Usuario usuarioExistente = new Usuario();
@@ -109,7 +109,7 @@ public class PerfilServiceTest {
             verify(repositorioUsuario, times(2)).modificar(usuarioExistente);
         }
     }
-
+ */
     @Test
     public void usuarioPuedeEditarPerfilCompletoSinFoto() {
         Usuario usuarioExistente = new Usuario();

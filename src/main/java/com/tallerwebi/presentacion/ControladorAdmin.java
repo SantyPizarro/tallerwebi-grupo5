@@ -1,9 +1,9 @@
 package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.*;
+import com.tallerwebi.dominio.excepcion.LibroDuplicado;
 import com.tallerwebi.dominio.excepcion.LibroExistente;
 import com.tallerwebi.dominio.excepcion.LibroNoExiste;
-import com.tallerwebi.infraestructura.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,7 +91,11 @@ public class ControladorAdmin {
     }
 
     @PostMapping("/agregarLibroDestacado")
-    public String agregarLibro(@RequestParam Long libroId) {
+    public String agregarLibro(@RequestParam Long libroId) throws LibroDuplicado {
+        if (servicioLibro.esLibroDestacado(libroId)) {
+            throw new LibroDuplicado("El libro ya está en la lista de libros destacados.");
+        }
+
         servicioLibro.agregarLibroALibrosDestacados(libroId);
         return "redirect:/perfilAdmin";
     }

@@ -138,19 +138,19 @@
 
         <section class="tablas lightblue" id="amigos" style="display:none;">
 
-            <div th:each="usuario : ${amigosUsuario}" class="contenedor">
+            <div th:each="usuarioAmigo : ${amigosUsuario}" class="contenedor">
                 <div>
                     <div class="avatar-perfil">
-                        <img th:src="@{'/images/' + ${usuario.foto}}" th:alt="${usuario.foto}">
+                        <img th:src="@{'/images/' + ${usuarioAmigo.foto}}" th:alt="${usuarioAmigo.foto}">
                     </div>
                     <div class="nombre">
-                        <h2 th:text="${usuario.nombreDeUsuario}"></h2>
+                        <h2 th:text="${usuarioAmigo.nombreDeUsuario}"></h2>
                     </div>
                 </div>
                 <div class="descripcion">
                     <h4>Descripción:</h4>
-                    <p th:text="${usuario.descripcion}"></p>
-                    <div th:if="${planUsuario==true}"> <!-- AGREGAR VALIDACION QUE SI NO TIENE PLAN NO APAREZCA EL BOTON -->
+                    <p th:text="${usuarioAmigo.descripcion}"></p>
+                    <div th:if="${usuario.plan!=null && usuario.plan.tipoPlan.nombre !='free'}"> <!-- AGREGAR VALIDACION QUE SI NO TIENE PLAN NO APAREZCA EL BOTON -->
                         <form th:action="@{/traerDatosAmigoAIntercambiar}" method="post">
                             <input type="hidden" name="usuarioAmigo" th:value="${usuario.id}">
                             <button  type="submit" class="btn btn-primary favbutton" id="botonIntercambiar" data-bs-toggle="modal"

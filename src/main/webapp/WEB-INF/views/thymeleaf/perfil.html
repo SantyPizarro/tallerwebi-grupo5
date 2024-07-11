@@ -152,7 +152,7 @@
                     <p th:text="${usuarioAmigo.descripcion}"></p>
                     <div th:if="${usuario.plan!=null && usuario.plan.tipoPlan.nombre !='free'}"> <!-- AGREGAR VALIDACION QUE SI NO TIENE PLAN NO APAREZCA EL BOTON -->
                         <form th:action="@{/traerDatosAmigoAIntercambiar}" method="post">
-                            <input type="hidden" name="usuarioAmigo" th:value="${usuario.id}">
+                            <input type="hidden" name="usuarioAmigo" th:value="${usuarioAmigo.id}">
                             <button  type="submit" class="btn btn-primary favbutton" id="botonIntercambiar" data-bs-toggle="modal"
                                      data-bs-target="#exampleModal3">
                                 <span class="material-symbols-outlined">sync_alt</span>
@@ -160,8 +160,8 @@
                         </form>
                     </div>
                     <div class="preferencias">
-                        <span class="etiqueta" th:text="${usuario.generoFav1}"></span>
-                        <span class="etiqueta" th:text="${usuario.generoFav2}"></span>
+                        <span class="etiqueta" th:text="${usuarioAmigo.generoFav1}"></span>
+                        <span class="etiqueta" th:text="${usuarioAmigo.generoFav2}"></span>
                     </div>
                 </div>
             </div>

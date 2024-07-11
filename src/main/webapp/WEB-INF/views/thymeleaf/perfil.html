@@ -388,7 +388,7 @@
                         </ul>
                         <section class="tablas lightblue" id="librosComprados">
                             <div th:if="${usuario.librosComprados}">
-                                <div th:each="libro : ${usuario.librosComprados}" class="d-flex align-items-center mb-1">
+                                <div th:each="libro : ${librosUsuario}" class="d-flex align-items-center mb-1">
                                     <input class="form-check-input" type="hidden" name="flexRadioDefault" th:name="usuario" th:value="${usuario.id}">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" th:name="libroADar" th:value="${libro.id}">
                                     <img th:src="${libro.ruta}" th:alt="${libro.titulo}" width="143px" height="180px" style="margin: 0 2rem">

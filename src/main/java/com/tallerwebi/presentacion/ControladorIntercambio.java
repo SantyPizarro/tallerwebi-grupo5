@@ -24,7 +24,7 @@ public class ControladorIntercambio {
     }
 
     @PostMapping("/intercambiar-libro")
-    public ModelAndView intercambiarLibro(HttpServletRequest request, @RequestParam("usuario") Long idUsuario, @RequestParam("libroADar") Long idLibroADar,@RequestParam("usuarioAmigo") Long idAmigo, @RequestParam("libroPedido") Long idLibroPedido) {
+    public ModelAndView intercambiarLibro(HttpServletRequest request, @RequestParam("usuario") Long idUsuario, @RequestParam("libroADar") Long idLibroADar, @RequestParam("usuarioAmigo") Long idAmigo, @RequestParam("libroPedido") Long idLibroPedido) {
         Usuario usuario = perfilService.buscarUsuarioPorId(idUsuario);
         Usuario amigo = perfilService.buscarUsuarioPorId(idAmigo);
         Libro libroADar = servicioLibro.buscarLibroPorId(idLibroADar);
@@ -34,8 +34,11 @@ public class ControladorIntercambio {
             intercambioService.enviarOfertaIntercambio(usuario, libroADar, amigo, libroPedido);
         }
 
-        return new ModelAndView("redirect:/perfil");
+        ModelAndView modelAndView = new ModelAndView("redirect:/perfil");
+        modelAndView.addObject("amigo", amigo);
+        return modelAndView;
     }
+
 
 
 }

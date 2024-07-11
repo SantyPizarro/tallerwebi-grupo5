@@ -26,15 +26,17 @@ public class ControladorHome {
     private final SolicitudAmistadService solicitudAmistadService;
     private final NotificacionService notificacionService;
     private final ServicioSliderHero servicioSliderHero;
+    private PerfilService perfilService;
 
     @Autowired
-    public ControladorHome(ServicioLibro servicioLibro, ServicioSuscriptor servicioSuscriptor, ServicioPreferencias servicioPreferencias, SolicitudAmistadService solicitudAmistadService, NotificacionService notificacionService, ServicioSliderHero servicioSliderHero) {
+    public ControladorHome(ServicioLibro servicioLibro,PerfilService perfilService, ServicioSuscriptor servicioSuscriptor, ServicioPreferencias servicioPreferencias, SolicitudAmistadService solicitudAmistadService, NotificacionService notificacionService, ServicioSliderHero servicioSliderHero) {
         this.servicioLibro = servicioLibro;
         this.servicioSuscriptor = servicioSuscriptor;
         this.servicioPreferencias = servicioPreferencias;
         this.solicitudAmistadService = solicitudAmistadService;
         this.notificacionService = notificacionService;
         this.servicioSliderHero = servicioSliderHero;
+        this.perfilService = perfilService;
     }
 
     @GetMapping("/home")
@@ -47,7 +49,7 @@ public class ControladorHome {
             List<Libro> librosOrdenados = servicioLibro.ordenarPorFechaAgregado();
             List<Libro> librosDestacados = servicioLibro.getLibrosDestacados();
             List<SliderHero> sliderHeroes = servicioSliderHero.getAllSliderHeroes();
-            Set<Libro> librosUsuario = usuario.getLibrosComprados();
+            Set<Libro> librosUsuario = perfilService.buscarMisLibros(usuario);
 
             // Agrega información de si el usuario ya compró el libro
             Map<Long, Boolean> librosCompradosMap = new HashMap<>();

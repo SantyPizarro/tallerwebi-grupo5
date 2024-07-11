@@ -16,7 +16,6 @@ public class Preferencias {
         contarGeneros(usuario.getLibrosFavoritos(), 3);
         contarGeneros(usuario.getLibrosComprados(), 2);
         contarGeneros(usuario.getLibrosDeseados(), 1);
-
     }
 
     private void contarGeneros(Set<Libro> libros, int peso) {
@@ -32,5 +31,10 @@ public class Preferencias {
                 .limit(topN)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
+    }
+
+    // Método para obtener el puntaje de un género específico
+    public int getPuntajeGenero(Genero genero) {
+        return puntuacionesGeneros.getOrDefault(genero, 0);
     }
 }

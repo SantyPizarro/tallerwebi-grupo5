@@ -1,10 +1,9 @@
-package com.tallerwebi.integracion;
+package com.tallerwebi.presentacion;
 
 import com.tallerwebi.dominio.RepositorioSuscriptor;
 import com.tallerwebi.dominio.ServicioCorreo;
 import com.tallerwebi.dominio.ServicioSuscriptor;
 import com.tallerwebi.dominio.Suscriptor;
-import com.tallerwebi.presentacion.ControladorNewsletter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,7 +47,7 @@ public class ControladorNewsletterTest {
     @Test
     public void testEnviarNewsletter() {
 
-        Suscriptor suscriptor1 = new Suscriptor("juan1@test.com", "juan");
+        Suscriptor suscriptor1 = new Suscriptor("juan1@test.com", "juan1");
         Suscriptor suscriptor2 = new Suscriptor("juan2@test.com", "juan2");
         List<Suscriptor> suscriptores = Arrays.asList(suscriptor1, suscriptor2);
 

@@ -127,4 +127,12 @@ public class ServicioLibro {
     }
 
 
+    public boolean esLibroDestacado(Long libroId) {
+        for (Libro libro : librosDestacados) {
+            if (libro.getId().equals(libroId)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
